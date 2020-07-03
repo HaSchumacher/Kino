@@ -1,6 +1,6 @@
 package Events;
 
-import findLibrary.DESSheduler;
+import shedulerAndMainClass.DESSheduler;
 
 public class Abbruch implements Event{
 	private int istimestampfull = 0;
@@ -30,9 +30,5 @@ public class Abbruch implements Event{
 		return this.istimestampfull;
 	}
 
-	@Override
-	public String getName() {
-		return this.name;
-	}
 
 }

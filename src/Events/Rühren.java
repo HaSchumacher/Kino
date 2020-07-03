@@ -3,7 +3,7 @@ package Events;
 import org.apache.commons.math3.distribution.ExponentialDistribution;
 import org.apache.commons.math3.distribution.NormalDistribution;
 
-import findLibrary.DESSheduler;
+import shedulerAndMainClass.DESSheduler;
 
 public class Rühren implements Event{
 	private String name = "Rühren";

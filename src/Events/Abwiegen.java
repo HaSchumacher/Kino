@@ -2,7 +2,7 @@ package Events;
 
 import org.apache.commons.math3.distribution.UniformIntegerDistribution;
 
-import findLibrary.DESSheduler;
+import shedulerAndMainClass.DESSheduler;
 
 public class Abwiegen implements Event{
 
@@ -47,12 +47,5 @@ public class Abwiegen implements Event{
 	@Override
 	public String toString() {
 		return this.name + timeStamp ;
-	}
-
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
+	}	
 }

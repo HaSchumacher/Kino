@@ -2,7 +2,7 @@ package Events;
 
 import org.apache.commons.math3.distribution.ExponentialDistribution;
 
-import findLibrary.DESSheduler;
+import shedulerAndMainClass.DESSheduler;
 
 public class Einkauf implements Event{
 	private long timeStamp;

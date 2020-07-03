@@ -3,7 +3,7 @@ package Events;
 
 import org.apache.commons.math3.distribution.NormalDistribution;
 
-import findLibrary.DESSheduler;
+import shedulerAndMainClass.DESSheduler;
 
 public class Rezept implements Event{
 	
@@ -36,11 +36,6 @@ public class Rezept implements Event{
 			return 1;
 		}
 		return 0;
-	}
-
-	@Override
-	public String getName() {
-		return this.name;
 	}
 
 	@Override

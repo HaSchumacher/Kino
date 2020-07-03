@@ -1,6 +1,6 @@
 package Events;
 
-import findLibrary.DESSheduler;
+import shedulerAndMainClass.DESSheduler;
 
 public class Kuchen implements Event  {
 
