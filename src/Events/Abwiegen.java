@@ -31,9 +31,6 @@ public class Abwiegen implements Event{
 		
 	}
 
-	public String getName() {
-		return this.name;
-	}
 	
 	public long getTimeStamp() {
 		return timeStamp;
