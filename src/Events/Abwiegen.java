@@ -48,5 +48,11 @@ public class Abwiegen implements Event{
 	public String toString() {
 		return this.name + timeStamp ;
 	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
