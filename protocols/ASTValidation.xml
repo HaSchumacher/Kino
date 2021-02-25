@@ -1,0 +1,313 @@
+<JService>
+  <name>Validation</name>
+  <relationTypes class="list">
+    <metaModel.JClass>
+      <name>State</name>
+      <singleton>false</singleton>
+      <attributes>
+        <metaModel.JAttributeConnector>
+          <role>name</role>
+          <targetType class="metaModel.primitives.JString" defined-in="metaModel.JTargetConnector">
+            <name>String</name>
+          </targetType>
+          <constraint class="metaModel.enumerations.JTotalMap"/>
+          <targetType class="metaModel.primitives.JString" reference="../targetType"/>
+        </metaModel.JAttributeConnector>
+        <metaModel.JAttributeConnector>
+          <role>isFinal</role>
+          <targetType class="metaModel.primitives.JBoolean" defined-in="metaModel.JTargetConnector">
+            <name>Boolean</name>
+          </targetType>
+          <constraint class="metaModel.enumerations.JTotalMap" reference="../../metaModel.JAttributeConnector/constraint"/>
+          <targetType class="metaModel.primitives.JBoolean" reference="../targetType"/>
+        </metaModel.JAttributeConnector>
+      </attributes>
+      <operations/>
+    </metaModel.JClass>
+    <metaModel.JClass>
+      <name>Event</name>
+      <singleton>false</singleton>
+      <attributes>
+        <metaModel.JAttributeConnector>
+          <role>label</role>
+          <targetType class="metaModel.primitives.JString" defined-in="metaModel.JTargetConnector" reference="../../../../metaModel.JClass/attributes/metaModel.JAttributeConnector/targetType"/>
+          <constraint class="metaModel.enumerations.JTotalMap" reference="../../../../metaModel.JClass/attributes/metaModel.JAttributeConnector/constraint"/>
+          <targetType class="metaModel.primitives.JString" reference="../../../../metaModel.JClass/attributes/metaModel.JAttributeConnector/targetType"/>
+        </metaModel.JAttributeConnector>
+      </attributes>
+      <operations/>
+    </metaModel.JClass>
+    <metaModel.JClass>
+      <name>Transition</name>
+      <singleton>false</singleton>
+      <attributes/>
+      <operations/>
+    </metaModel.JClass>
+    <metaModel.JAssociation>
+      <name>Tr_StateFrom</name>
+      <owner class="metaModel.JUnidirectional">
+        <ownerType>
+          <name>Transition</name>
+          <state class="metaModel.JClassLinkStateLocallyAssigned">
+            <target reference="../../../../../metaModel.JClass[3]"/>
+          </state>
+        </ownerType>
+      </owner>
+      <target class="metaModel.JConstrainedTargetConnector">
+        <role>from</role>
+        <targetType class="metaModel.JClassLink">
+          <name>State</name>
+          <state class="metaModel.JClassLinkStateLocallyAssigned">
+            <target reference="../../../../../metaModel.JClass"/>
+          </state>
+        </targetType>
+        <constraint class="metaModel.enumerations.JTotalMap" reference="../../../metaModel.JClass/attributes/metaModel.JAttributeConnector/constraint"/>
+      </target>
+      <derived>false</derived>
+    </metaModel.JAssociation>
+    <metaModel.JAssociation>
+      <name>Tr_StateTo</name>
+      <owner class="metaModel.JUnidirectional">
+        <ownerType>
+          <name>Transition</name>
+          <state class="metaModel.JClassLinkStateLocallyAssigned">
+            <target reference="../../../../../metaModel.JClass[3]"/>
+          </state>
+        </ownerType>
+      </owner>
+      <target class="metaModel.JConstrainedTargetConnector">
+        <role>to</role>
+        <targetType class="metaModel.JClassLink">
+          <name>State</name>
+          <state class="metaModel.JClassLinkStateLocallyAssigned">
+            <target reference="../../../../../metaModel.JClass"/>
+          </state>
+        </targetType>
+        <constraint class="metaModel.enumerations.JTotalMap" reference="../../../metaModel.JClass/attributes/metaModel.JAttributeConnector/constraint"/>
+      </target>
+      <derived>false</derived>
+    </metaModel.JAssociation>
+    <metaModel.JAssociation>
+      <name>Tr_Event</name>
+      <owner class="metaModel.JUnidirectional">
+        <ownerType>
+          <name>Transition</name>
+          <state class="metaModel.JClassLinkStateLocallyAssigned">
+            <target reference="../../../../../metaModel.JClass[3]"/>
+          </state>
+        </ownerType>
+      </owner>
+      <target class="metaModel.JConstrainedTargetConnector">
+        <role>event</role>
+        <targetType class="metaModel.JClassLink">
+          <name>Event</name>
+          <state class="metaModel.JClassLinkStateLocallyAssigned">
+            <target reference="../../../../../metaModel.JClass[2]"/>
+          </state>
+        </targetType>
+        <constraint class="metaModel.enumerations.JTotalMap" reference="../../../metaModel.JClass/attributes/metaModel.JAttributeConnector/constraint"/>
+      </target>
+      <derived>false</derived>
+    </metaModel.JAssociation>
+    <metaModel.JClass>
+      <name>StateMachine</name>
+      <singleton>false</singleton>
+      <attributes/>
+      <operations>
+        <metaModel.JOperation>
+          <techName>addTransition</techName>
+          <readableName>addTransition</readableName>
+          <documentation>Fuegt eine Transition von &lt;from&gt; nach &lt;to&gt; mit Ereignis &lt;e&gt; hinzu</documentation>
+          <abstrakt>false</abstrakt>
+          <formalParameters>
+            <metaModel.JParameter>
+              <name>from</name>
+              <type>
+                <type class="metaModel.JClassLink">
+                  <name>State</name>
+                  <state class="metaModel.JClassLinkStateLocallyAssigned">
+                    <target reference="../../../../../../../../../metaModel.JClass"/>
+                  </state>
+                </type>
+                <isMany>false</isMany>
+              </type>
+            </metaModel.JParameter>
+            <metaModel.JParameter>
+              <name>to</name>
+              <type>
+                <type class="metaModel.JClassLink">
+                  <name>State</name>
+                  <state class="metaModel.JClassLinkStateLocallyAssigned">
+                    <target reference="../../../../../../../../../metaModel.JClass"/>
+                  </state>
+                </type>
+                <isMany>false</isMany>
+              </type>
+            </metaModel.JParameter>
+            <metaModel.JParameter>
+              <name>e</name>
+              <type>
+                <type class="metaModel.JClassLink">
+                  <name>Event</name>
+                  <state class="metaModel.JClassLinkStateLocallyAssigned">
+                    <target reference="../../../../../../../../../metaModel.JClass[2]"/>
+                  </state>
+                </type>
+                <isMany>false</isMany>
+              </type>
+            </metaModel.JParameter>
+          </formalParameters>
+          <returnType/>
+          <exception reference="../returnType"/>
+        </metaModel.JOperation>
+        <metaModel.JOperation>
+          <techName>isDeterministic</techName>
+          <readableName>ist deterministisch?</readableName>
+          <documentation>Liefert true genau dann, wenn dieser Automat deterministisch ist</documentation>
+          <abstrakt>false</abstrakt>
+          <formalParameters/>
+          <returnType>
+            <value class="metaModel.JTypeAdapter">
+              <type class="metaModel.primitives.JBoolean" reference="../../../../../../metaModel.JClass/attributes/metaModel.JAttributeConnector[2]/targetType"/>
+              <isMany>false</isMany>
+            </value>
+          </returnType>
+          <exception reference="../../metaModel.JOperation/returnType"/>
+        </metaModel.JOperation>
+      </operations>
+    </metaModel.JClass>
+    <metaModel.JAssociation>
+      <name>SM_StartState</name>
+      <owner class="metaModel.JUnidirectional">
+        <ownerType>
+          <name>StateMachine</name>
+          <state class="metaModel.JClassLinkStateLocallyAssigned">
+            <target reference="../../../../../metaModel.JClass[4]"/>
+          </state>
+        </ownerType>
+      </owner>
+      <target class="metaModel.JConstrainedTargetConnector">
+        <role>startState</role>
+        <targetType class="metaModel.JClassLink">
+          <name>State</name>
+          <state class="metaModel.JClassLinkStateLocallyAssigned">
+            <target reference="../../../../../metaModel.JClass"/>
+          </state>
+        </targetType>
+        <constraint class="metaModel.enumerations.JTotalMap" reference="../../../metaModel.JClass/attributes/metaModel.JAttributeConnector/constraint"/>
+      </target>
+      <derived>false</derived>
+    </metaModel.JAssociation>
+    <metaModel.JAssociation>
+      <name>SM_States</name>
+      <owner class="metaModel.JUnidirectional">
+        <ownerType>
+          <name>StateMachine</name>
+          <state class="metaModel.JClassLinkStateLocallyAssigned">
+            <target reference="../../../../../metaModel.JClass[4]"/>
+          </state>
+        </ownerType>
+      </owner>
+      <target class="metaModel.JConstrainedTargetConnector">
+        <role>states</role>
+        <targetType class="metaModel.JClassLink">
+          <name>State</name>
+          <state class="metaModel.JClassLinkStateLocallyAssigned">
+            <target reference="../../../../../metaModel.JClass"/>
+          </state>
+        </targetType>
+        <constraint class="metaModel.enumerations.JSet"/>
+      </target>
+      <derived>false</derived>
+    </metaModel.JAssociation>
+    <metaModel.JAssociation>
+      <name>SM_Transitions</name>
+      <owner class="metaModel.JUnidirectional">
+        <ownerType>
+          <name>StateMachine</name>
+          <state class="metaModel.JClassLinkStateLocallyAssigned">
+            <target reference="../../../../../metaModel.JClass[4]"/>
+          </state>
+        </ownerType>
+      </owner>
+      <target class="metaModel.JConstrainedTargetConnector">
+        <role>transitions</role>
+        <targetType class="metaModel.JClassLink">
+          <name>Transition</name>
+          <state class="metaModel.JClassLinkStateLocallyAssigned">
+            <target reference="../../../../../metaModel.JClass[3]"/>
+          </state>
+        </targetType>
+        <constraint class="metaModel.enumerations.JSet" reference="../../../metaModel.JAssociation[5]/target/constraint"/>
+      </target>
+      <derived>false</derived>
+    </metaModel.JAssociation>
+    <metaModel.JAssociation>
+      <name>SM_Events</name>
+      <owner class="metaModel.JUnidirectional">
+        <ownerType>
+          <name>StateMachine</name>
+          <state class="metaModel.JClassLinkStateLocallyAssigned">
+            <target reference="../../../../../metaModel.JClass[4]"/>
+          </state>
+        </ownerType>
+      </owner>
+      <target class="metaModel.JConstrainedTargetConnector">
+        <role>events</role>
+        <targetType class="metaModel.JClassLink">
+          <name>Event</name>
+          <state class="metaModel.JClassLinkStateLocallyAssigned">
+            <target reference="../../../../../metaModel.JClass[2]"/>
+          </state>
+        </targetType>
+        <constraint class="metaModel.enumerations.JSet" reference="../../../metaModel.JAssociation[5]/target/constraint"/>
+      </target>
+      <derived>false</derived>
+    </metaModel.JAssociation>
+  </relationTypes>
+  <generalisations class="set"/>
+  <operations class="set">
+    <metaModel.JOperation>
+      <techName>validate</techName>
+      <readableName>validiere </readableName>
+      <documentation>Prueft, ob die Event-Folge w vom Automaten sm erkannt wird, wirft Exception, wenn nicht</documentation>
+      <abstrakt>false</abstrakt>
+      <formalParameters>
+        <metaModel.JParameter>
+          <name>sm</name>
+          <type>
+            <type class="metaModel.JClassLink">
+              <name>StateMachine</name>
+              <state class="metaModel.JClassLinkStateLocallyAssigned">
+                <target reference="../../../../../../../../relationTypes/metaModel.JClass[4]"/>
+              </state>
+            </type>
+            <isMany>false</isMany>
+          </type>
+        </metaModel.JParameter>
+        <metaModel.JParameter>
+          <name>w</name>
+          <type>
+            <type class="metaModel.JClassLink">
+              <name>Event</name>
+              <state class="metaModel.JClassLinkStateLocallyAssigned">
+                <target reference="../../../../../../../../relationTypes/metaModel.JClass[2]"/>
+              </state>
+            </type>
+            <isMany>true</isMany>
+          </type>
+        </metaModel.JParameter>
+      </formalParameters>
+      <returnType reference="../../../relationTypes/metaModel.JClass[4]/operations/metaModel.JOperation/returnType"/>
+      <exception>
+        <value class="metaModel.JException">
+          <name>NotValidException</name>
+          <errorText>Event Sequence was not recognized!</errorText>
+        </value>
+      </exception>
+    </metaModel.JOperation>
+  </operations>
+  <exceptions class="set">
+    <metaModel.JException reference="../../operations/metaModel.JOperation/exception/value"/>
+  </exceptions>
+</JService>

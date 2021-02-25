@@ -26,5 +26,4 @@ public class FileManager {
 		String absolutePath = virtualFile.getAbsolutePath();
 		return new BufferedReader(new java.io.FileReader(new File(absolutePath)));
 	}
-
 }

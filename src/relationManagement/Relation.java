@@ -1,16 +1,25 @@
 package relationManagement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
+
+import baseTypes.Texts;
+import db.connection.NoConnectionException;
+import db.executer.DBDMLExecuter;
+import db.executer.PersistenceExecuterFactory;
+import exceptions.ConstraintViolation;
+import db.executer.PersistenceException;
+import idManagement.Identifiable;
+import utilities.ListUtilities;
 /**
  * Represents the elements of a binary relation \subseteq S x T 
  * It is a multi-set to enable lists, e.g,. in an association A->^theBList B  
  */
-public class Relation<S,T> {
+public class Relation<S extends Identifiable,T extends Identifiable> {
 /**	
  * Redundant storage of relation: Symmetric, indexed over S, indexed over T
  * Class invariants in consistent states:
@@ -23,35 +32,17 @@ public class Relation<S,T> {
  *     change
  *     addElement
  *     removeElement
- *     removeElementRevertible->removeElementCommit
- *     removeElementRevertible->removeElementRollback
  */
 	private List<RelElement<S, T>> elements;
 	private Map<S,List<T>> SIndex;
 	private Map<T,List<S>> TIndex;
-	public Relation() {
+	private String relationname;
+	private DBDMLExecuter dmlExecuter = PersistenceExecuterFactory.getConfiguredFactory().getDBDMLExecuter();
+	public Relation(String relationname) {
 		this.elements = new ArrayList<>();
 		this.SIndex = new HashMap<S,List<T>>();
 		this.TIndex = new HashMap<T,List<S>>();
-	}
-/**
- * Unchecked and unrestricted addition of a relation element - null references are not added
- */
-	public void addElement(S s, T t) {
-		if(s==null || t==null) return;
-		this.elements.add(new RelElement<S,T>(s, t));
-		this.indexAdd(s, t, SIndex);
-		this.indexAdd(t, s, TIndex);
-		this.invariantCheck();
-	}
-/**	
- * Sets the new target @param newT for @param s
- * If s was related to @param oldT before, one of these relations is removed
- */
-	public void change(S s, T oldT, T newT) {
-		this.addElement(s, newT);
-		this.removeElement(s, oldT);
-		this.invariantCheck();
+		this.relationname = relationname;
 	}
 	public List<T> getRelatedTargets(S s){
 		if(!this.SIndex.containsKey(s)) return new ArrayList<T>();
@@ -61,22 +52,72 @@ public class Relation<S,T> {
 		if(!this.TIndex.containsKey(t)) return new ArrayList<S>();
 		return this.TIndex.get(t);
 	}	
-// ======================= Remove Handling =============================== 
-// 1. Irrevertible Remove	
+ 
+/**
+ * Unchecked and unrestricted addition of a relation element - null references are not added
+ * Two versions depending on whether caller knows that the pair is already persistent or not
+ */
+	public void addElementAlreadyPersistent(S s, T t) {
+		if(s==null || t==null) return;
+		this.elements.add(new RelElement<S,T>(s, t));
+		this.indexAdd(s, t, SIndex);
+		this.indexAdd(t, s, TIndex);
+		this.invariantCheck();
+	}
+/**	
+ * Adds (s,t) to this relation consistently with the database 
+ * @throws PersistenceException, e.g. if foreign key constraint are violated
+ */
+	public void addElement(S s, T t) throws PersistenceException{
+		if(t==null) throw new PersistenceException("Cannot write a null value in a relation table!!");
+		try {
+			this.dmlExecuter.insertInto(relationname, "id, p1, p2", this.dmlExecuter.getNextId().toString() + ", " + s.getId().toString() + ", " + t.getId().toString());
+		}catch(SQLException | NoConnectionException e) {
+			throw new PersistenceException(e.getMessage());
+		}
+		this.addElementAlreadyPersistent(s, t);
+	}
+/**	
+ * Sets the new target @param newT for @param s
+ * If s was related to @param oldT before, one of these relations is removed
+ * If oldT = null, only add (s, newT)
+ * @throws PersistenceException 
+ */
+	public void change(S s, T oldT, T newT) throws PersistenceException {
+		this.addElement(s, newT);
+		this.removeElement(s, oldT);  
+		this.invariantCheck();
+	}
+/**	
+ * If (s,t) is not present, inserts (s,t) without persisting it 
+ */
+	public void setAlreadyPersistent(S s, T t) {
+		if(this.SIndex.containsKey(s) && this.SIndex.get(s).contains(t)) return;
+		this.addElementAlreadyPersistent(s, t);
+		this.invariantCheck();
+	}
 /**
  * Unchecked and unrestricted removal of a relation element
- * Returns false, 																	 if (s,t) \not\in R
- * Returns true and removes THE LAST relation element with the given projections, otherwise
+ * Returns false, 																	if (s,t) \not\in R
+ * Returns true and removes THE LAST relation element with the given projections, 	otherwise
+ * Deletes exactly one entry from the database
  * 
  * To enforce remove o add = id, <remove> must remove beginning from the end
+ * @throws PersistenceException 
  */
-	public boolean removeElement(S s, T t) {
+	public boolean removeElement(S s, T t) throws PersistenceException {
+		if(s==null || t == null) return false; 
 		boolean result = false;
 		ListIterator<RelElement<S, T>> listIterator = this.elements.listIterator(this.elements.size());
 		while(listIterator.hasPrevious()) {
 			RelElement<S, T> current = listIterator.previous();
-			if(current.getFirstProjection().equals(s)&&current.getSecondProjection().equals(t)) {
+			if(current.getFirstProjection().getId().equals(s.getId()) && current.getSecondProjection().getId().equals(t.getId())) {
 				listIterator.remove();
+				try {
+					this.dmlExecuter.deleteFromRelationTable(relationname, s.getId(), t.getId());
+				}catch(SQLException | NoConnectionException e) {
+					throw new PersistenceException(e.getMessage());
+				}
 				result = true;
 				this.indexRemove(s, t, SIndex);
 				this.indexRemove(t, s, TIndex);
@@ -86,96 +127,37 @@ public class Relation<S,T> {
 		this.invariantCheck();
 		return result;
 	}
+
+// Constraint Violation Checks after adding (s,tNew) or removing (s,tOld) or both
 /**	
- * Removes the last occurence of x from list, only used from outside by tests
+ * If tNew is already in the relation ( (s',tNew) \in R ) and if s'!=s , then injectivity will be violated, if (s,tNew) is added 
  */
-	public <X> void removeLastElementOf(List<X> list, X x) {
-		ListIterator<X> listIterator = list.listIterator(list.size());
-		while (listIterator.hasPrevious()) {
-			X current = listIterator.previous();
-			if(x==current) {
-				listIterator.remove();
-				break;
-			}
+	public void willViolateInjectivity(S s, T tNew) throws ConstraintViolation {
+		if(TIndex.keySet().contains(tNew) && !TIndex.get(tNew).contains(s)) 
+			throw new ConstraintViolation(Texts.injectivityConstraintViolated);
+	}
+/**	
+ * If tOld is in the relation and R^{-1}(tOld} = {s}, then surjectivity will be violated, if (s,tOld) is removed 
+ */	
+	public void willViolateSurjectivity(S s, T tOld) throws ConstraintViolation {
+		if(TIndex.keySet().contains(tOld) && TIndex.get(tOld).size() == 1 && TIndex.get(tOld).get(0).getId().equals(s.getId()))
+			throw new ConstraintViolation(Texts.surjectivityConstraintViolated);
+	}
+/**	
+ * If tOld is contained in s, then the constraint will be violated, if (s,tOld) will be replaced by (s,tNew) and tNew!=tOld 
+ */		
+	public void willViolateContainment(S s, T tOld, T tNew) throws ConstraintViolation {
+		if(tOld==tNew) return;
+		try {
+			this.willViolateSurjectivity(s, tOld);
+			this.willViolateInjectivity(s, tNew);
+		}catch(ConstraintViolation cv) {
+			throw new ConstraintViolation(Texts.containmentConstraintViolated);
 		}
-	}
-
-// 2. Revertible removal of (s,t) :
-// 2.1. Replace removee by (null,null) and leave indices unchanged (invariant is violated now!)	
-	public boolean removeElementRevertible(S s, T t) {
-		boolean result = false;
-		ListIterator<RelElement<S, T>> listIterator = this.elements.listIterator(this.elements.size());
-		while(listIterator.hasPrevious()) {
-			RelElement<S, T> current = listIterator.previous();
-			if(current.getFirstProjection().equals(s)&&current.getSecondProjection().equals(t)) {
-				listIterator.set(new RelElement<S,T>(null,null));
-				result = true;
-				break;
-			}
-		}
-		return result;
-	}
-// 2.2. remove (null,null)	and adjust indices -> invariants hold
-	public void removeElementCommit(S s, T t) {
-		this.indexRemove(s, t, SIndex);
-		this.indexRemove(t, s, TIndex);
-		this.removeNullPairFromElements();
-		this.invariantCheck();
-	}
-/**
- * Removes the last element (null,null) from elements
- * REQUIRES at most one such pair
- */
-	private void removeNullPairFromElements() {
-		ListIterator<RelElement<S, T>> listIterator = this.elements.listIterator(this.elements.size());
-		while(listIterator.hasPrevious()) {
-			RelElement<S, T> rel = listIterator.previous();
-			if(rel.getFirstProjection()==null && rel.getSecondProjection()==null) {
-				listIterator.remove();
-				break;
-			}
-		}
-	}
-// 2.3. Replace (null,null) by original contents, leave indices unchanged -> invariants hold	
-	public void removeElementRollback(S s, T t) {
-		this.replaceNullPairBy(s, t);
-		this.invariantCheck();
-	}
-	private void replaceNullPairBy(S s, T t) {
-		ListIterator<RelElement<S, T>> listIterator = this.elements.listIterator(this.elements.size());
-		while(listIterator.hasPrevious()) {
-			RelElement<S, T> rel = listIterator.previous();
-			if(rel.getFirstProjection()==null && rel.getSecondProjection()==null) {
-				listIterator.set(new RelElement<S,T>(s,t));
-				break;
-			}
-		}
-	}
-
-// ============= Constraints ======================================
-// --> They are all based on elements structure, ==================
-//	   because they may be tested after a removeRevertible and ====
-// 	   before the commit / rollback	
-	public boolean isTotalMapAt(S s) {
-		return this.elements.stream().filter(r->r.getFirstProjection()==s).collect(Collectors.toList()).size()==1;
-	}
-	public boolean isPartialMapAt(S s) {
-		return this.elements.stream().filter(r->r.getFirstProjection()==s).collect(Collectors.toList()).size()<=1;
-	}
-	public boolean isSurjectiveAt(T t) {
-		return this.elements.stream().filter(r->r.getSecondProjection()==t).collect(Collectors.toList()).size()>=1;
-	}
-	public boolean isInjectiveAt(T t) {
-		return this.elements.stream().filter(r->r.getSecondProjection()==t).collect(Collectors.toList()).size()<=1;
-	}
-	public boolean isContainment() {
-		for (T containedTarget : TIndex.keySet()) 
-			if(containedTarget!=null && (!this.isInjectiveAt(containedTarget) || !this.isSurjectiveAt(containedTarget))) return false;
-		return true;		
 	}
 	
 // ============= Private Part ========================== 	
-	private <A,B> void indexAdd(A a, B b, Map<A,List<B>> index){
+	private <A extends Identifiable,B extends Identifiable> void indexAdd(A a, B b, Map<A,List<B>> index){
 		if(index.containsKey(a)) 
 			index.get(a).add(b);
 		else {
@@ -188,16 +170,22 @@ public class Relation<S,T> {
  * REQUIRES (a,b)\in R	
  * Removes the LAST element x with x==b in XIndex.get(a) 
  */
-	private <A,B> void indexRemove(A a, B b, Map<A,List<B>> index){
+	private <A extends Identifiable,B extends Identifiable> void indexRemove(A a, B b, Map<A,List<B>> index){
 		this.removeLastElementOf(index.get(a),b);
 		if(index.get(a).isEmpty()) index.remove(a);		
 	}
-//================= Target retrieval ===========================
-/**
- * REQUIRES no key to be equal to null
+/**	
+ * Removes the last occurence of x from list, only used from outside by tests
  */
-	private Set<T> getAllTargets(){
-		return this.TIndex.keySet();
+	public <X extends Identifiable> void removeLastElementOf(List<X> list, X x) {
+		ListIterator<X> listIterator = list.listIterator(list.size());
+		while (listIterator.hasPrevious()) {
+			X current = listIterator.previous();
+			if(x.getId().equals(current.getId())) {
+				listIterator.remove();
+				break;
+			}
+		}
 	}
 	
 // ==================== Invariant assertion ==========================
@@ -211,10 +199,10 @@ public class Relation<S,T> {
 		assert noNullValue() : "Fatal error: Null Values in elements of relation";
 	}
 	private List<T> retrieveTargetsFromElementsFor(S s){
-		return this.elements.stream().filter(r -> (r.getFirstProjection()==s)).map(r->r.getSecondProjection()).collect(Collectors.toList());
+		return this.elements.stream().filter(r -> (r.getFirstProjection().getId().equals(s.getId()))).map(r->r.getSecondProjection()).collect(Collectors.toList());
 	}
 	private List<S> retrieveSourcesFromElementsFor(T t){
-		return this.elements.stream().filter(r -> (r.getSecondProjection()==t)).map(r->r.getFirstProjection()).collect(Collectors.toList());
+		return this.elements.stream().filter(r -> (r.getSecondProjection().getId().equals(t.getId()))).map(r->r.getFirstProjection()).collect(Collectors.toList());
 	}
 	private boolean noNullValue() {
 		return this.elements.stream().allMatch(r->r.getFirstProjection()!=null && r.getSecondProjection()!=null);

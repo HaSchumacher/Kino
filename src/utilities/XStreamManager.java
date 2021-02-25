@@ -13,11 +13,11 @@ public class XStreamManager<T> {
 		this.fm = new FileManager();
 	}
 	public void write(String fileNamePostfix, T object) throws IOException {
-		XStream xstream = XStreamSetup.getXStreamObject();
-		this.fm.createFile(new File(XStreamSetup.assembleFileName(fileNamePostfix)),xstream.toXML(object));
+		XStream xstream = XStreamGenSetup.getXStreamObject();
+		this.fm.createFile(new File(XStreamGenSetup.assembleFileName(fileNamePostfix)),xstream.toXML(object));
 	}
 	public T read(String fileNamePostfix) throws IOException {
-		XStream xstream = XStreamSetup.getXStreamObject();
-		return (T)xstream.fromXML(this.fm.readAsString(XStreamSetup.assembleFileName(fileNamePostfix)));
+		XStream xstream = XStreamGenSetup.getXStreamObject();
+		return (T)xstream.fromXML(this.fm.readAsString(XStreamGenSetup.assembleFileName(fileNamePostfix)));
 	}
 }

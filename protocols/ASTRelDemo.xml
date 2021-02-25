@@ -1,0 +1,192 @@
+<JService>
+  <name>RelDemo</name>
+  <relationTypes class="list">
+    <metaModel.JClass>
+      <name>StateMachine</name>
+      <singleton>false</singleton>
+      <attributes>
+        <metaModel.JAttributeConnector>
+          <role>text</role>
+          <targetType class="metaModel.primitives.JString" defined-in="metaModel.JTargetConnector">
+            <name>String</name>
+          </targetType>
+          <constraint class="metaModel.enumerations.JTotalMap"/>
+          <targetType class="metaModel.primitives.JString" reference="../targetType"/>
+        </metaModel.JAttributeConnector>
+      </attributes>
+      <operations/>
+    </metaModel.JClass>
+    <metaModel.JClass>
+      <name>State</name>
+      <singleton>false</singleton>
+      <attributes>
+        <metaModel.JAttributeConnector>
+          <role>name</role>
+          <targetType class="metaModel.primitives.JString" defined-in="metaModel.JTargetConnector" reference="../../../../metaModel.JClass/attributes/metaModel.JAttributeConnector/targetType"/>
+          <constraint class="metaModel.enumerations.JTotalMap" reference="../../../../metaModel.JClass/attributes/metaModel.JAttributeConnector/constraint"/>
+          <targetType class="metaModel.primitives.JString" reference="../../../../metaModel.JClass/attributes/metaModel.JAttributeConnector/targetType"/>
+        </metaModel.JAttributeConnector>
+        <metaModel.JAttributeConnector>
+          <role>isFinal</role>
+          <targetType class="metaModel.primitives.JBoolean" defined-in="metaModel.JTargetConnector">
+            <name>Boolean</name>
+          </targetType>
+          <constraint class="metaModel.enumerations.JTotalMap" reference="../../../../metaModel.JClass/attributes/metaModel.JAttributeConnector/constraint"/>
+          <targetType class="metaModel.primitives.JBoolean" reference="../targetType"/>
+        </metaModel.JAttributeConnector>
+      </attributes>
+      <operations/>
+    </metaModel.JClass>
+    <metaModel.JAssociation>
+      <name>SM_StartState</name>
+      <owner class="metaModel.JUnidirectional">
+        <ownerType>
+          <name>StateMachine</name>
+          <state class="metaModel.JClassLinkStateLocallyAssigned">
+            <target reference="../../../../../metaModel.JClass"/>
+          </state>
+        </ownerType>
+      </owner>
+      <target class="metaModel.JConstrainedTargetConnector">
+        <role>startState</role>
+        <targetType class="metaModel.JClassLink">
+          <name>State</name>
+          <state class="metaModel.JClassLinkStateLocallyAssigned">
+            <target reference="../../../../../metaModel.JClass[2]"/>
+          </state>
+        </targetType>
+        <constraint class="metaModel.enumerations.JTotalMap" reference="../../../metaModel.JClass/attributes/metaModel.JAttributeConnector/constraint"/>
+      </target>
+      <derived>false</derived>
+    </metaModel.JAssociation>
+    <metaModel.JAssociation>
+      <name>SM_States</name>
+      <owner class="metaModel.JUnidirectional">
+        <ownerType>
+          <name>StateMachine</name>
+          <state class="metaModel.JClassLinkStateLocallyAssigned">
+            <target reference="../../../../../metaModel.JClass"/>
+          </state>
+        </ownerType>
+      </owner>
+      <target class="metaModel.JConstrainedTargetConnector">
+        <role>states</role>
+        <targetType class="metaModel.JClassLink">
+          <name>State</name>
+          <state class="metaModel.JClassLinkStateLocallyAssigned">
+            <target reference="../../../../../metaModel.JClass[2]"/>
+          </state>
+        </targetType>
+        <constraint class="metaModel.enumerations.JSet"/>
+      </target>
+      <derived>false</derived>
+    </metaModel.JAssociation>
+    <metaModel.JClass>
+      <name>StatemachineSub1</name>
+      <singleton>false</singleton>
+      <attributes>
+        <metaModel.JAttributeConnector>
+          <role>attr1</role>
+          <targetType class="metaModel.primitives.JString" defined-in="metaModel.JTargetConnector" reference="../../../../metaModel.JClass/attributes/metaModel.JAttributeConnector/targetType"/>
+          <constraint class="metaModel.enumerations.JTotalMap" reference="../../../../metaModel.JClass/attributes/metaModel.JAttributeConnector/constraint"/>
+          <targetType class="metaModel.primitives.JString" reference="../../../../metaModel.JClass/attributes/metaModel.JAttributeConnector/targetType"/>
+        </metaModel.JAttributeConnector>
+      </attributes>
+      <operations/>
+    </metaModel.JClass>
+    <metaModel.JClass>
+      <name>StateMachineSub2</name>
+      <singleton>false</singleton>
+      <attributes>
+        <metaModel.JAttributeConnector>
+          <role>attr2</role>
+          <targetType class="metaModel.primitives.JInteger" defined-in="metaModel.JTargetConnector">
+            <name>Integer</name>
+          </targetType>
+          <constraint class="metaModel.enumerations.JTotalMap" reference="../../../../metaModel.JClass/attributes/metaModel.JAttributeConnector/constraint"/>
+          <targetType class="metaModel.primitives.JInteger" reference="../targetType"/>
+        </metaModel.JAttributeConnector>
+      </attributes>
+      <operations/>
+    </metaModel.JClass>
+    <metaModel.JClass>
+      <name>StateSub1</name>
+      <singleton>false</singleton>
+      <attributes>
+        <metaModel.JAttributeConnector>
+          <role>attr3</role>
+          <targetType class="metaModel.primitives.JBoolean" defined-in="metaModel.JTargetConnector" reference="../../../../metaModel.JClass[2]/attributes/metaModel.JAttributeConnector[2]/targetType"/>
+          <constraint class="metaModel.enumerations.JTotalMap" reference="../../../../metaModel.JClass/attributes/metaModel.JAttributeConnector/constraint"/>
+          <targetType class="metaModel.primitives.JBoolean" reference="../../../../metaModel.JClass[2]/attributes/metaModel.JAttributeConnector[2]/targetType"/>
+        </metaModel.JAttributeConnector>
+      </attributes>
+      <operations/>
+    </metaModel.JClass>
+    <metaModel.JClass>
+      <name>StateSub2</name>
+      <singleton>false</singleton>
+      <attributes/>
+      <operations/>
+    </metaModel.JClass>
+  </relationTypes>
+  <generalisations class="set">
+    <metaModel.JGeneralisation>
+      <general>
+        <name>StateMachine</name>
+        <state class="metaModel.JClassLinkStateLocallyAssigned">
+          <target reference="../../../../../relationTypes/metaModel.JClass"/>
+        </state>
+      </general>
+      <specific>
+        <name>StatemachineSub1</name>
+        <state class="metaModel.JClassLinkStateLocallyAssigned">
+          <target reference="../../../../../relationTypes/metaModel.JClass[3]"/>
+        </state>
+      </specific>
+    </metaModel.JGeneralisation>
+    <metaModel.JGeneralisation>
+      <general>
+        <name>State</name>
+        <state class="metaModel.JClassLinkStateLocallyAssigned">
+          <target reference="../../../../../relationTypes/metaModel.JClass[2]"/>
+        </state>
+      </general>
+      <specific>
+        <name>StateSub2</name>
+        <state class="metaModel.JClassLinkStateLocallyAssigned">
+          <target reference="../../../../../relationTypes/metaModel.JClass[6]"/>
+        </state>
+      </specific>
+    </metaModel.JGeneralisation>
+    <metaModel.JGeneralisation>
+      <general>
+        <name>State</name>
+        <state class="metaModel.JClassLinkStateLocallyAssigned">
+          <target reference="../../../../../relationTypes/metaModel.JClass[2]"/>
+        </state>
+      </general>
+      <specific>
+        <name>StateSub1</name>
+        <state class="metaModel.JClassLinkStateLocallyAssigned">
+          <target reference="../../../../../relationTypes/metaModel.JClass[5]"/>
+        </state>
+      </specific>
+    </metaModel.JGeneralisation>
+    <metaModel.JGeneralisation>
+      <general>
+        <name>StateMachine</name>
+        <state class="metaModel.JClassLinkStateLocallyAssigned">
+          <target reference="../../../../../relationTypes/metaModel.JClass"/>
+        </state>
+      </general>
+      <specific>
+        <name>StateMachineSub2</name>
+        <state class="metaModel.JClassLinkStateLocallyAssigned">
+          <target reference="../../../../../relationTypes/metaModel.JClass[4]"/>
+        </state>
+      </specific>
+    </metaModel.JGeneralisation>
+  </generalisations>
+  <operations class="set"/>
+  <exceptions class="set"/>
+</JService>

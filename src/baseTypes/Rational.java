@@ -18,7 +18,24 @@ public class Rational {
 		this(new BigInteger(enumerator.toString()),new BigInteger(denominator.toString()));
 	}
 	public Rational(Integer x){
-		this(new Long(x),new Long(1));
+		this(Integer.toUnsignedLong(x),Integer.toUnsignedLong(1));
+	}
+/**
+ * Creates a rational from a string which must be of the form enum/denom with enum, denom successfully convertible to a BigInteger via BigInteger's constructor	
+ */
+	public Rational(String s) throws NumberFormatException{
+		if(s==null) s = "0/1";  // Default 
+		String[] decomp = s.split("/");
+		if(!(decomp.length==2)) throw new NumberFormatException(s + " is no a valid Rational representation!");
+		this.enumerator = new BigInteger(decomp[0]);
+		this.denominator = new BigInteger(decomp[1]);
+	}
+	
+	public BigInteger getEnumerator() {
+		return this.enumerator;
+	}
+	public BigInteger getDenominator() {
+		return this.denominator;
 	}
 /**
  * Kürzen!	
