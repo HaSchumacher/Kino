@@ -1,4 +1,4 @@
-/**--- Generated at Thu Feb 25 15:23:56 CET 2021 
+/**--- Generated at Thu Feb 25 17:02:38 CET 2021 
  * --- Change only in Editable Sections!  
  * --- Do not touch section numbering!   
  */
@@ -208,7 +208,6 @@ public class OwnerService extends Observable implements java.io.Serializable, IO
 		   cinema.addToCinemahalls(hall1);
 		   cinema.addToCinemahalls(hall2);
 		   
-		   cinema.setOpen(true);
 	} catch (PersistenceException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

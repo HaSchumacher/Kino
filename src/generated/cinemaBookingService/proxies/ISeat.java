@@ -1,4 +1,4 @@
-/**--- Generated at Thu Feb 25 15:23:55 CET 2021 
+/**--- Generated at Thu Feb 25 17:02:37 CET 2021 
  * --- No Change Allowed!  
  */
 package generated.cinemaBookingService.proxies;

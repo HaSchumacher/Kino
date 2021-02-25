@@ -1,11 +1,11 @@
-/**--- Generated at Thu Feb 25 15:23:56 CET 2021 
+/**--- Generated at Thu Feb 25 17:02:37 CET 2021 
  * --- No Change Allowed!  
  */
 package generated.cinemaBookingService.commands;
 import generated.cinemaBookingService.*;
 import commands.*;
 public class Reservation_constructor_Command extends ServiceCommand<Reservation>{
-   private static final long serialVersionUID = 920129157L;
+   private static final long serialVersionUID = 856124150L;
    private Seat mySeat;
    private FilmProjection myfilmprojection;
    public Reservation_constructor_Command(Seat mySeat, FilmProjection myfilmprojection){

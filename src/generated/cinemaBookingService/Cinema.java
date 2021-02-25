@@ -1,4 +1,4 @@
-/**--- Generated at Thu Feb 25 15:23:55 CET 2021 
+/**--- Generated at Thu Feb 25 17:02:37 CET 2021 
  * --- Change only in Editable Sections!  
  * --- Do not touch section numbering!   
  */
@@ -49,7 +49,7 @@ public class Cinema extends Observable implements java.io.Serializable, ICinema
    private static Cinema load() throws PersistenceException {
       try{
          Integer typeKey = TypeKeyManager.getTheInstance().getTypeKey("CinemaBookingService", "Cinema");
-         ResultSet rs = DBExecuterFactory.getConfiguredFactory().getDBDMLExecuter().selectIdsOfEntriesOfTable("Cinema", typeKey);
+         ResultSet rs = DBExecuterFactory.getConfiguredFactory().getDBDMLExecuter().selectEntriesOfTable("Cinema", typeKey);
          rs.next();
          return Cinema.createAlreadyPersistent(rs.getInt("id"));
       } catch (SQLException | NoConnectionException e) {

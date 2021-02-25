@@ -1,5 +1,5 @@
 
-STARTING JAVA AST CREATION @ Thu Feb 25 15:23:55 CET 2021
+STARTING JAVA AST CREATION @ Thu Feb 25 17:02:35 CET 2021
 Start Transforming CinemaBookingService
 Information: --> Starting Transformation Phase 1
 Start Transforming notAuthorized
@@ -1051,7 +1051,7 @@ Information: Construction of constructor-parameter-value for isMany:java.lang.Bo
 Information: Transforming value null of property isMany
 Information: --> Starting Transformation Phase 2 
 Information: --> Finished Transformation Phase 2 (assigning all unassigned references) with no Errors.
-Information: Successfully Finished Java AST Creation @ Thu Feb 25 15:23:55 CET 2021
+Information: Successfully Finished Java AST Creation @ Thu Feb 25 17:02:35 CET 2021
        ---->Error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'rows (id INT NOT NULL, p1 INT NOT NULL, p2 INT NOT NULL, PRIMARY KEY(id), FOR...' at line 1
 Information: Carried out Code Generation for CinemaBookingService. Watch out for Syntax Errors in Generated Code!!!
-Information: Created XML File at C:\Users\admin\eclipse-workspace\MDEGen\protocols\ASTCinemaBookingService.xml
+Information: Created XML File at C:\Users\admin\git\Kino\protocols\ASTCinemaBookingService.xml
