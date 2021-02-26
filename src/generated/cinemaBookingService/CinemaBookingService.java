@@ -1,4 +1,4 @@
-/**--- Generated at Thu Feb 25 17:02:37 CET 2021 
+/**--- Generated at Thu Feb 25 17:10:42 CET 2021 
  * --- Change only in Editable Sections!  
  * --- Do not touch section numbering!   
  */
@@ -35,7 +35,7 @@ public class CinemaBookingService extends Observable{
    private Map<Integer,OwnerServiceProxy> ownerServiceCache;
    private Map<Integer,MainStartCinemaProxy> mainStartCinemaCache;
    private static CinemaBookingService theInstance = new CinemaBookingService();
-   CinemaBookingService(){
+   private CinemaBookingService(){
       try{DBConnectionManager.getTheInstance().openDBConnection(new DBConnectionData("jdbc:mysql://localhost:3306", "CinemaBookingService", "root" , ""));
          TypeKeyManager.getTheInstance().initializeFor("CinemaBookingService");
          this.loadProxies();

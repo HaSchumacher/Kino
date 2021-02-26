@@ -126,9 +126,9 @@
               </attributes>
               <operations>
                 <metaModel.JOperation>
-                  <techName>deleteSeat</techName>
-                  <readableName>deleteSeat</readableName>
-                  <documentation>Delete the given Seat of Row</documentation>
+                  <techName>addSeat</techName>
+                  <readableName>add_seat_to_Row</readableName>
+                  <documentation>adding a Seat to this row</documentation>
                   <abstrakt>true</abstrakt>
                   <formalParameters>
                     <metaModel.JParameter>
@@ -164,18 +164,13 @@
                       </type>
                     </metaModel.JParameter>
                   </formalParameters>
-                  <returnType>
-                    <value class="metaModel.JTypeAdapter">
-                      <type class="metaModel.primitives.JBoolean" reference="../../../../../../../../../../metaModel.JClass[2]/attributes/metaModel.JAttributeConnector/targetType"/>
-                      <isMany>false</isMany>
-                    </value>
-                  </returnType>
+                  <returnType reference="../../../../../../../../metaModel.JAssociation[2]/target/targetType/state/target/operations/metaModel.JOperation/exception"/>
                   <exception reference="../../../../../../../../metaModel.JAssociation[2]/target/targetType/state/target/operations/metaModel.JOperation/exception"/>
                 </metaModel.JOperation>
                 <metaModel.JOperation>
-                  <techName>addSeat</techName>
-                  <readableName>add_seat_to_Row</readableName>
-                  <documentation>adding a Seat to this row</documentation>
+                  <techName>deleteSeat</techName>
+                  <readableName>deleteSeat</readableName>
+                  <documentation>Delete the given Seat of Row</documentation>
                   <abstrakt>true</abstrakt>
                   <formalParameters>
                     <metaModel.JParameter>
@@ -191,7 +186,12 @@
                       </type>
                     </metaModel.JParameter>
                   </formalParameters>
-                  <returnType reference="../../../../../../../../metaModel.JAssociation[2]/target/targetType/state/target/operations/metaModel.JOperation/exception"/>
+                  <returnType>
+                    <value class="metaModel.JTypeAdapter">
+                      <type class="metaModel.primitives.JBoolean" reference="../../../../../../../../../../metaModel.JClass[2]/attributes/metaModel.JAttributeConnector/targetType"/>
+                      <isMany>false</isMany>
+                    </value>
+                  </returnType>
                   <exception reference="../../../../../../../../metaModel.JAssociation[2]/target/targetType/state/target/operations/metaModel.JOperation/exception"/>
                 </metaModel.JOperation>
               </operations>
@@ -413,6 +413,38 @@
       <attributes/>
       <operations>
         <metaModel.JOperation>
+          <techName>calculateOutcome</techName>
+          <readableName>calculateOutcomeforaMovie</readableName>
+          <documentation>Calculate the Outcome for one Movie</documentation>
+          <abstrakt>false</abstrakt>
+          <formalParameters>
+            <metaModel.JParameter>
+              <name>ofFilm</name>
+              <type>
+                <type class="metaModel.JClassLink">
+                  <name>FilmProjection</name>
+                  <state class="metaModel.JClassLinkStateLocallyAssigned">
+                    <target reference="../../../../../../../../../metaModel.JAssociation[2]/target/targetType/state/target"/>
+                  </state>
+                </type>
+                <isMany>false</isMany>
+              </type>
+            </metaModel.JParameter>
+          </formalParameters>
+          <returnType>
+            <value class="metaModel.JTypeAdapter">
+              <type class="metaModel.primitives.JInteger" reference="../../../../../../metaModel.JAssociation[2]/target/targetType/state/target/operations/metaModel.JOperation/returnType/value/type"/>
+              <isMany>false</isMany>
+            </value>
+          </returnType>
+          <exception>
+            <value class="metaModel.JException">
+              <name>MovieNotFoundInCinema</name>
+              <errorText>The Movie you search is not in the current filmprojections of the Cinema.</errorText>
+            </value>
+          </exception>
+        </metaModel.JOperation>
+        <metaModel.JOperation>
           <techName>addFilmprojection</techName>
           <readableName>addFilmprojection</readableName>
           <documentation>Add Film Projection to Cinema</documentation>
@@ -453,47 +485,6 @@
             <value class="metaModel.JException">
               <name>MovieAlreadyinCinemahall</name>
               <errorText>You cannot add this Movie, becaus it is in this Cinemahall already.</errorText>
-            </value>
-          </exception>
-        </metaModel.JOperation>
-        <metaModel.JOperation>
-          <techName>buildCinema</techName>
-          <readableName>buildCinema</readableName>
-          <documentation>Build the Cinema</documentation>
-          <abstrakt>false</abstrakt>
-          <formalParameters/>
-          <returnType reference="../../../../metaModel.JAssociation[2]/target/targetType/state/target/operations/metaModel.JOperation/exception"/>
-          <exception reference="../../../../metaModel.JAssociation[2]/target/targetType/state/target/operations/metaModel.JOperation/exception"/>
-        </metaModel.JOperation>
-        <metaModel.JOperation>
-          <techName>calculateOutcome</techName>
-          <readableName>calculateOutcomeforaMovie</readableName>
-          <documentation>Calculate the Outcome for one Movie</documentation>
-          <abstrakt>false</abstrakt>
-          <formalParameters>
-            <metaModel.JParameter>
-              <name>ofFilm</name>
-              <type>
-                <type class="metaModel.JClassLink">
-                  <name>FilmProjection</name>
-                  <state class="metaModel.JClassLinkStateLocallyAssigned">
-                    <target reference="../../../../../../../../../metaModel.JAssociation[2]/target/targetType/state/target"/>
-                  </state>
-                </type>
-                <isMany>false</isMany>
-              </type>
-            </metaModel.JParameter>
-          </formalParameters>
-          <returnType>
-            <value class="metaModel.JTypeAdapter">
-              <type class="metaModel.primitives.JInteger" reference="../../../../../../metaModel.JAssociation[2]/target/targetType/state/target/operations/metaModel.JOperation/returnType/value/type"/>
-              <isMany>false</isMany>
-            </value>
-          </returnType>
-          <exception>
-            <value class="metaModel.JException">
-              <name>MovieNotFoundInCinema</name>
-              <errorText>The Movie you search is not in the current filmprojections of the Cinema.</errorText>
             </value>
           </exception>
         </metaModel.JOperation>
@@ -542,8 +533,17 @@
             </value>
           </returnType>
           <exception>
-            <value class="metaModel.JException" reference="../../../metaModel.JOperation[3]/exception/value"/>
+            <value class="metaModel.JException" reference="../../../metaModel.JOperation/exception/value"/>
           </exception>
+        </metaModel.JOperation>
+        <metaModel.JOperation>
+          <techName>buildCinema</techName>
+          <readableName>buildCinema</readableName>
+          <documentation>Build the Cinema</documentation>
+          <abstrakt>false</abstrakt>
+          <formalParameters/>
+          <returnType reference="../../../../metaModel.JAssociation[2]/target/targetType/state/target/operations/metaModel.JOperation/exception"/>
+          <exception reference="../../../../metaModel.JAssociation[2]/target/targetType/state/target/operations/metaModel.JOperation/exception"/>
         </metaModel.JOperation>
       </operations>
     </metaModel.JClass>
@@ -622,40 +622,6 @@
   </generalisations>
   <operations class="set">
     <metaModel.JOperation>
-      <techName>login</techName>
-      <readableName>userlogin</readableName>
-      <documentation>the User can Login in the Cinema Boocking Server</documentation>
-      <abstrakt>false</abstrakt>
-      <formalParameters>
-        <metaModel.JParameter>
-          <name>username</name>
-          <type>
-            <type class="metaModel.primitives.JString" reference="../../../../../../relationTypes/metaModel.JClass[8]/attributes/metaModel.JAttributeConnector/targetType"/>
-            <isMany>false</isMany>
-          </type>
-        </metaModel.JParameter>
-        <metaModel.JParameter>
-          <name>password</name>
-          <type>
-            <type class="metaModel.primitives.JString" reference="../../../../../../relationTypes/metaModel.JClass[8]/attributes/metaModel.JAttributeConnector/targetType"/>
-            <isMany>false</isMany>
-          </type>
-        </metaModel.JParameter>
-      </formalParameters>
-      <returnType>
-        <value class="metaModel.JTypeAdapter">
-          <type class="metaModel.primitives.JBoolean" reference="../../../../../relationTypes/metaModel.JClass[2]/attributes/metaModel.JAttributeConnector/targetType"/>
-          <isMany>false</isMany>
-        </value>
-      </returnType>
-      <exception>
-        <value class="metaModel.JException">
-          <name>wrongCredentials</name>
-          <errorText>your Credentials seems to be wrong. if you cannot remember you password or Username, please refer for the mentioned Sections.</errorText>
-        </value>
-      </exception>
-    </metaModel.JOperation>
-    <metaModel.JOperation>
       <techName>reserve</techName>
       <readableName>reserve_a_seat_to_movie</readableName>
       <documentation>Reservation for a Seat in a given Movie.</documentation>
@@ -714,6 +680,40 @@
       </exception>
     </metaModel.JOperation>
     <metaModel.JOperation>
+      <techName>login</techName>
+      <readableName>userlogin</readableName>
+      <documentation>the User can Login in the Cinema Boocking Server</documentation>
+      <abstrakt>false</abstrakt>
+      <formalParameters>
+        <metaModel.JParameter>
+          <name>username</name>
+          <type>
+            <type class="metaModel.primitives.JString" reference="../../../../../../relationTypes/metaModel.JClass[8]/attributes/metaModel.JAttributeConnector/targetType"/>
+            <isMany>false</isMany>
+          </type>
+        </metaModel.JParameter>
+        <metaModel.JParameter>
+          <name>password</name>
+          <type>
+            <type class="metaModel.primitives.JString" reference="../../../../../../relationTypes/metaModel.JClass[8]/attributes/metaModel.JAttributeConnector/targetType"/>
+            <isMany>false</isMany>
+          </type>
+        </metaModel.JParameter>
+      </formalParameters>
+      <returnType>
+        <value class="metaModel.JTypeAdapter">
+          <type class="metaModel.primitives.JBoolean" reference="../../../../../relationTypes/metaModel.JClass[2]/attributes/metaModel.JAttributeConnector/targetType"/>
+          <isMany>false</isMany>
+        </value>
+      </returnType>
+      <exception>
+        <value class="metaModel.JException">
+          <name>wrongCredentials</name>
+          <errorText>your Credentials seems to be wrong. if you cannot remember you password or Username, please refer for the mentioned Sections.</errorText>
+        </value>
+      </exception>
+    </metaModel.JOperation>
+    <metaModel.JOperation>
       <techName>logout</techName>
       <readableName>UserLogout</readableName>
       <documentation>logout the given user.</documentation>
@@ -766,16 +766,16 @@
   <exceptions class="set">
     <metaModel.JException reference="../../relationTypes/metaModel.JClass[13]/operations/metaModel.JOperation[3]/exception/value"/>
     <metaModel.JException>
-      <name>notyourReservation</name>
-      <errorText>Were Sorry but you cannot book a Reservation hold by another User. If you can&apos;t remember your Reservations, just click on My Reservations.</errorText>
-    </metaModel.JException>
-    <metaModel.JException reference="../../operations/metaModel.JOperation/exception/value"/>
-    <metaModel.JException>
       <name>notAuthorized</name>
       <errorText>You cannot do this task, you have to authorize you. You were redirected to the Login page</errorText>
     </metaModel.JException>
-    <metaModel.JException reference="../../relationTypes/metaModel.JClass[13]/operations/metaModel.JOperation[4]/exception/value"/>
     <metaModel.JException reference="../../relationTypes/metaModel.JClass[13]/operations/metaModel.JOperation/exception/value"/>
     <metaModel.JException reference="../../operations/metaModel.JOperation[2]/exception/value"/>
+    <metaModel.JException>
+      <name>notyourReservation</name>
+      <errorText>Were Sorry but you cannot book a Reservation hold by another User. If you can&apos;t remember your Reservations, just click on My Reservations.</errorText>
+    </metaModel.JException>
+    <metaModel.JException reference="../../relationTypes/metaModel.JClass[13]/operations/metaModel.JOperation[2]/exception/value"/>
+    <metaModel.JException reference="../../operations/metaModel.JOperation/exception/value"/>
   </exceptions>
 </JService>
