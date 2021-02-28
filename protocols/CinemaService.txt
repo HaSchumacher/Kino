@@ -1,0 +1,1395 @@
+
+STARTING JAVA AST CREATION @ Sun Feb 28 15:38:45 CET 2021
+Start Transforming CinemaService
+Information: --> Starting Transformation Phase 1
+Start Transforming BookingError
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value BookingError of property name
+Information: Construction of constructor-parameter-value for errorText:java.lang.String
+Information: Transforming value An error occured during booking. Ether there is already booking or the given Reservation is wrong. of property errorText
+Start Transforming ReservationError
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value ReservationError of property name
+Information: Construction of constructor-parameter-value for errorText:java.lang.String
+Information: Transforming value The Reservation didn't pass. The given Category is full for this Filmprojection. of property errorText
+Start Transforming DeleteError
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value DeleteError of property name
+Information: Construction of constructor-parameter-value for errorText:java.lang.String
+Information: Transforming value The Deletion was canceled due to an error. of property errorText
+Start Transforming RegisterError
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value RegisterError of property name
+Information: Construction of constructor-parameter-value for errorText:java.lang.String
+Information: Transforming value The User you want to register is already in the System. If you forget your Password please follow the instructions in the given Section. of property errorText
+Start Transforming LoginError
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value LoginError of property name
+Information: Construction of constructor-parameter-value for errorText:java.lang.String
+Information: Transforming value Something went wrong. Please Check your Credentials. of property errorText
+Start Transforming CinemaHallCreation
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value CinemaHallCreation of property name
+Information: Construction of constructor-parameter-value for errorText:java.lang.String
+Information: Transforming value The Cinemahall is already given. of property errorText
+Start Transforming Cinemahall
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value Cinemahall of property name
+Information: Construction of constructor-parameter-value for singleton:java.lang.Boolean
+Information: Transforming value null of property singleton
+Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
+Start Transforming AttributeConnector
+Information: Construction of constructor-parameter-value for role:java.lang.String
+Information: Transforming value open of property role
+Information: Construction of constructor-parameter-value for targetType:metaModel.primitives.JPrimitiveType
+Information: Fetching already created Java Node for referenced node Boolean of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: Boolean
+Information: Construction of constructor-parameter-value for constraint:metaModel.enumerations.JMultiplicity
+Information: Transforming value null of property constraint
+Information: Retrieving enumeration value of type JTotalMap for property constraint
+Start Transforming AttributeConnector
+Information: Construction of constructor-parameter-value for role:java.lang.String
+Information: Transforming value name of property role
+Information: Construction of constructor-parameter-value for targetType:metaModel.primitives.JPrimitiveType
+Information: Fetching already created Java Node for referenced node String of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: String
+Information: Construction of constructor-parameter-value for constraint:metaModel.enumerations.JMultiplicity
+Information: Transforming value null of property constraint
+Information: Retrieving enumeration value of type JTotalMap for property constraint
+Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
+Start Transforming Cinemahall_CinemaRow
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value Cinemahall_CinemaRow of property name
+Information: Construction of constructor-parameter-value for derived:java.lang.Boolean
+Information: Transforming value null of property derived
+Information: Construction of constructor-parameter-value for owner:metaModel.JManagement
+Start Transforming Unidirectional
+Information: Construction of constructor-parameter-value for ownerType:metaModel.JClassLink
+Information: Fetching already created Java Node for referenced node Cinemahall of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: Cinemahall
+Information: Creating JClassLink-Instance to JClass Cinemahall
+Information: Construction of constructor-parameter-value for target:metaModel.JTargetConnector
+Start Transforming ConstrainedTargetConnector
+Information: Construction of constructor-parameter-value for role:java.lang.String
+Information: Transforming value myRows of property role
+Information: Construction of constructor-parameter-value for targetType:metaModel.JRelationType
+Information: Fetching already created Java Node for referenced node CinemaRow of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: CinemaRow
+Information: Creating JClassLink-Instance to JClass CinemaRow
+Information: Construction of constructor-parameter-value for constraint:metaModel.enumerations.JMultiplicity
+Information: Transforming value 5H4ykBYL_dN/List of property constraint
+Information: Retrieving enumeration value of type JList for property constraint
+Start Transforming CinemaRow
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value CinemaRow of property name
+Information: Construction of constructor-parameter-value for singleton:java.lang.Boolean
+Information: Transforming value null of property singleton
+Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
+Start Transforming AttributeConnector
+Information: Construction of constructor-parameter-value for role:java.lang.String
+Information: Transforming value number of property role
+Information: Construction of constructor-parameter-value for targetType:metaModel.primitives.JPrimitiveType
+Information: Fetching already created Java Node for referenced node Integer of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: Integer
+Information: Construction of constructor-parameter-value for constraint:metaModel.enumerations.JMultiplicity
+Information: Transforming value null of property constraint
+Information: Retrieving enumeration value of type JTotalMap for property constraint
+Start Transforming AttributeConnector
+Information: Construction of constructor-parameter-value for role:java.lang.String
+Information: Transforming value bookedUp of property role
+Information: Construction of constructor-parameter-value for targetType:metaModel.primitives.JPrimitiveType
+Information: Fetching already created Java Node for referenced node Boolean of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: Boolean
+Information: Construction of constructor-parameter-value for constraint:metaModel.enumerations.JMultiplicity
+Information: Transforming value null of property constraint
+Information: Retrieving enumeration value of type JTotalMap for property constraint
+Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
+Start Transforming CinemaRow_Seats
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value CinemaRow_Seats of property name
+Information: Construction of constructor-parameter-value for derived:java.lang.Boolean
+Information: Transforming value null of property derived
+Information: Construction of constructor-parameter-value for owner:metaModel.JManagement
+Start Transforming Bidirectional
+Information: Construction of constructor-parameter-value for connector:metaModel.JOwnerConnector
+Start Transforming OwnerConnector
+Information: Construction of constructor-parameter-value for role:java.lang.String
+Information: Transforming value myRow of property role
+Information: Construction of constructor-parameter-value for ownerType:metaModel.JClassLink
+Information: Fetching already created Java Node for referenced node CinemaRow of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: CinemaRow
+Information: Creating JClassLink-Instance to JClass CinemaRow
+Information: Construction of constructor-parameter-value for domainEndSpecification:metaModel.enumerations.JFunctionProperty
+Information: Transforming value 1axOPyL0tmr/Containment of property domainEndSpecification
+Information: Retrieving enumeration value of type JContainment for property domainEndSpecification
+Information: Construction of constructor-parameter-value for target:metaModel.JTargetConnector
+Start Transforming ConstrainedTargetConnector
+Information: Construction of constructor-parameter-value for role:java.lang.String
+Information: Transforming value mySeats of property role
+Information: Construction of constructor-parameter-value for targetType:metaModel.JRelationType
+Information: Fetching already created Java Node for referenced node Seat of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: Seat
+Information: Creating JClassLink-Instance to JClass Seat
+Information: Construction of constructor-parameter-value for constraint:metaModel.enumerations.JMultiplicity
+Information: Transforming value 5H4ykBYL_dN/List of property constraint
+Information: Retrieving enumeration value of type JList for property constraint
+Start Transforming CinemaRow_PriceCategory
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value CinemaRow_PriceCategory of property name
+Information: Construction of constructor-parameter-value for derived:java.lang.Boolean
+Information: Transforming value null of property derived
+Information: Construction of constructor-parameter-value for owner:metaModel.JManagement
+Start Transforming Unidirectional
+Information: Construction of constructor-parameter-value for ownerType:metaModel.JClassLink
+Information: Fetching already created Java Node for referenced node CinemaRow of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: CinemaRow
+Information: Creating JClassLink-Instance to JClass CinemaRow
+Information: Construction of constructor-parameter-value for target:metaModel.JTargetConnector
+Start Transforming ConstrainedTargetConnector
+Information: Construction of constructor-parameter-value for role:java.lang.String
+Information: Transforming value priceCategory of property role
+Information: Construction of constructor-parameter-value for targetType:metaModel.JRelationType
+Information: Fetching already created Java Node for referenced node PriceCategory of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: PriceCategory
+Information: Creating JClassLink-Instance to JClass PriceCategory
+Information: Construction of constructor-parameter-value for constraint:metaModel.enumerations.JMultiplicity
+Information: Transforming value null of property constraint
+Information: Retrieving enumeration value of type JTotalMap for property constraint
+Start Transforming Seat
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value Seat of property name
+Information: Construction of constructor-parameter-value for singleton:java.lang.Boolean
+Information: Transforming value null of property singleton
+Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
+Start Transforming AttributeConnector
+Information: Construction of constructor-parameter-value for role:java.lang.String
+Information: Transforming value number of property role
+Information: Construction of constructor-parameter-value for targetType:metaModel.primitives.JPrimitiveType
+Information: Fetching already created Java Node for referenced node Integer of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: Integer
+Information: Construction of constructor-parameter-value for constraint:metaModel.enumerations.JMultiplicity
+Information: Transforming value null of property constraint
+Information: Retrieving enumeration value of type JTotalMap for property constraint
+Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
+Start Transforming Reservation_Seat
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value Reservation_Seat of property name
+Information: Construction of constructor-parameter-value for derived:java.lang.Boolean
+Information: Transforming value null of property derived
+Information: Construction of constructor-parameter-value for owner:metaModel.JManagement
+Start Transforming Bidirectional
+Information: Construction of constructor-parameter-value for connector:metaModel.JOwnerConnector
+Start Transforming OwnerConnector
+Information: Construction of constructor-parameter-value for role:java.lang.String
+Information: Transforming value myReservation of property role
+Information: Construction of constructor-parameter-value for ownerType:metaModel.JClassLink
+Information: Fetching already created Java Node for referenced node Reservation of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: Reservation
+Information: Creating JClassLink-Instance to JClass Reservation
+Information: Construction of constructor-parameter-value for domainEndSpecification:metaModel.enumerations.JFunctionProperty
+Information: Transforming value null of property domainEndSpecification
+Information: Retrieving enumeration value of type JDefault for property domainEndSpecification
+Information: Construction of constructor-parameter-value for target:metaModel.JTargetConnector
+Start Transforming ConstrainedTargetConnector
+Information: Construction of constructor-parameter-value for role:java.lang.String
+Information: Transforming value mySeat of property role
+Information: Construction of constructor-parameter-value for targetType:metaModel.JRelationType
+Information: Fetching already created Java Node for referenced node Seat of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: Seat
+Information: Creating JClassLink-Instance to JClass Seat
+Information: Construction of constructor-parameter-value for constraint:metaModel.enumerations.JMultiplicity
+Information: Transforming value null of property constraint
+Information: Retrieving enumeration value of type JTotalMap for property constraint
+Start Transforming PriceCategory
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value PriceCategory of property name
+Information: Construction of constructor-parameter-value for singleton:java.lang.Boolean
+Information: Transforming value null of property singleton
+Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
+Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
+Start Transforming Front
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value Front of property name
+Information: Construction of constructor-parameter-value for singleton:java.lang.Boolean
+Information: Transforming value true of property singleton
+Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
+Start Transforming AttributeConnector
+Information: Construction of constructor-parameter-value for role:java.lang.String
+Information: Transforming value frontprice of property role
+Information: Construction of constructor-parameter-value for targetType:metaModel.primitives.JPrimitiveType
+Information: Fetching already created Java Node for referenced node Integer of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: Integer
+Information: Construction of constructor-parameter-value for constraint:metaModel.enumerations.JMultiplicity
+Information: Transforming value 1axOPyL0vao/PartialMap of property constraint
+Information: Retrieving enumeration value of type JPartialMap for property constraint
+Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
+Start Transforming Middle
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value Middle of property name
+Information: Construction of constructor-parameter-value for singleton:java.lang.Boolean
+Information: Transforming value true of property singleton
+Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
+Start Transforming AttributeConnector
+Information: Construction of constructor-parameter-value for role:java.lang.String
+Information: Transforming value middleprice of property role
+Information: Construction of constructor-parameter-value for targetType:metaModel.primitives.JPrimitiveType
+Information: Fetching already created Java Node for referenced node Integer of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: Integer
+Information: Construction of constructor-parameter-value for constraint:metaModel.enumerations.JMultiplicity
+Information: Transforming value 1axOPyL0vao/PartialMap of property constraint
+Information: Retrieving enumeration value of type JPartialMap for property constraint
+Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
+Start Transforming Back
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value Back of property name
+Information: Construction of constructor-parameter-value for singleton:java.lang.Boolean
+Information: Transforming value true of property singleton
+Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
+Start Transforming AttributeConnector
+Information: Construction of constructor-parameter-value for role:java.lang.String
+Information: Transforming value backprice of property role
+Information: Construction of constructor-parameter-value for targetType:metaModel.primitives.JPrimitiveType
+Information: Fetching already created Java Node for referenced node Integer of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: Integer
+Information: Construction of constructor-parameter-value for constraint:metaModel.enumerations.JMultiplicity
+Information: Transforming value 1axOPyL0vao/PartialMap of property constraint
+Information: Retrieving enumeration value of type JPartialMap for property constraint
+Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
+Start Transforming Filmprojection
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value Filmprojection of property name
+Information: Construction of constructor-parameter-value for singleton:java.lang.Boolean
+Information: Transforming value null of property singleton
+Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
+Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
+Start Transforming Operation
+Information: Construction of constructor-parameter-value for techName:java.lang.String
+Information: Transforming value calculateProfit of property techName
+Information: Construction of constructor-parameter-value for readableName:java.lang.String
+Information: Transforming value CalculateProfit of property readableName
+Information: Construction of constructor-parameter-value for documentation:java.lang.String
+Information: Transforming value Calculate the Profit on this Filmprojection of property documentation
+Information: Construction of constructor-parameter-value for abstrakt:java.lang.Boolean
+Information: Transforming value null of property abstrakt
+Information: Construction of constructor-parameter-value for returnType:metaModel.JTypeAdapter
+Start Transforming Integer
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node Integer of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: Integer
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Information: Construction of constructor-parameter-value for exception:metaModel.JException
+Information: No Value found for  Reference exception. That's ok, because its optionality Value is true
+Information: Adding children according to addFormalParameter(Feature formalParameters) in Java Class class metaModel.JOperation
+Start Transforming fp_Cinemahall
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value fp_Cinemahall of property name
+Information: Construction of constructor-parameter-value for derived:java.lang.Boolean
+Information: Transforming value null of property derived
+Information: Construction of constructor-parameter-value for owner:metaModel.JManagement
+Start Transforming Unidirectional
+Information: Construction of constructor-parameter-value for ownerType:metaModel.JClassLink
+Information: Fetching already created Java Node for referenced node Filmprojection of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: Filmprojection
+Information: Creating JClassLink-Instance to JClass Filmprojection
+Information: Construction of constructor-parameter-value for target:metaModel.JTargetConnector
+Start Transforming ConstrainedTargetConnector
+Information: Construction of constructor-parameter-value for role:java.lang.String
+Information: Transforming value myHall of property role
+Information: Construction of constructor-parameter-value for targetType:metaModel.JRelationType
+Information: Fetching already created Java Node for referenced node Cinemahall of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: Cinemahall
+Information: Creating JClassLink-Instance to JClass Cinemahall
+Information: Construction of constructor-parameter-value for constraint:metaModel.enumerations.JMultiplicity
+Information: Transforming value null of property constraint
+Information: Retrieving enumeration value of type JTotalMap for property constraint
+Start Transforming fp_movie
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value fp_movie of property name
+Information: Construction of constructor-parameter-value for derived:java.lang.Boolean
+Information: Transforming value null of property derived
+Information: Construction of constructor-parameter-value for owner:metaModel.JManagement
+Start Transforming Unidirectional
+Information: Construction of constructor-parameter-value for ownerType:metaModel.JClassLink
+Information: Fetching already created Java Node for referenced node Filmprojection of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: Filmprojection
+Information: Creating JClassLink-Instance to JClass Filmprojection
+Information: Construction of constructor-parameter-value for target:metaModel.JTargetConnector
+Start Transforming ConstrainedTargetConnector
+Information: Construction of constructor-parameter-value for role:java.lang.String
+Information: Transforming value myMovie of property role
+Information: Construction of constructor-parameter-value for targetType:metaModel.JRelationType
+Information: Fetching already created Java Node for referenced node Movie of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: Movie
+Information: Creating JClassLink-Instance to JClass Movie
+Information: Construction of constructor-parameter-value for constraint:metaModel.enumerations.JMultiplicity
+Information: Transforming value null of property constraint
+Information: Retrieving enumeration value of type JTotalMap for property constraint
+Start Transforming Movie
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value Movie of property name
+Information: Construction of constructor-parameter-value for singleton:java.lang.Boolean
+Information: Transforming value null of property singleton
+Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
+Start Transforming AttributeConnector
+Information: Construction of constructor-parameter-value for role:java.lang.String
+Information: Transforming value title of property role
+Information: Construction of constructor-parameter-value for targetType:metaModel.primitives.JPrimitiveType
+Information: Fetching already created Java Node for referenced node String of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: String
+Information: Construction of constructor-parameter-value for constraint:metaModel.enumerations.JMultiplicity
+Information: Transforming value null of property constraint
+Information: Retrieving enumeration value of type JTotalMap for property constraint
+Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
+Start Transforming Reservation
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value Reservation of property name
+Information: Construction of constructor-parameter-value for singleton:java.lang.Boolean
+Information: Transforming value null of property singleton
+Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
+Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
+Start Transforming Reservation_Fp
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value Reservation_Fp of property name
+Information: Construction of constructor-parameter-value for derived:java.lang.Boolean
+Information: Transforming value null of property derived
+Information: Construction of constructor-parameter-value for owner:metaModel.JManagement
+Start Transforming Unidirectional
+Information: Construction of constructor-parameter-value for ownerType:metaModel.JClassLink
+Information: Fetching already created Java Node for referenced node Reservation of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: Reservation
+Information: Creating JClassLink-Instance to JClass Reservation
+Information: Construction of constructor-parameter-value for target:metaModel.JTargetConnector
+Start Transforming ConstrainedTargetConnector
+Information: Construction of constructor-parameter-value for role:java.lang.String
+Information: Transforming value myFilmprojection of property role
+Information: Construction of constructor-parameter-value for targetType:metaModel.JRelationType
+Information: Fetching already created Java Node for referenced node Filmprojection of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: Filmprojection
+Information: Creating JClassLink-Instance to JClass Filmprojection
+Information: Construction of constructor-parameter-value for constraint:metaModel.enumerations.JMultiplicity
+Information: Transforming value null of property constraint
+Information: Retrieving enumeration value of type JTotalMap for property constraint
+Start Transforming Reservation_User
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value Reservation_User of property name
+Information: Construction of constructor-parameter-value for derived:java.lang.Boolean
+Information: Transforming value null of property derived
+Information: Construction of constructor-parameter-value for owner:metaModel.JManagement
+Start Transforming Unidirectional
+Information: Construction of constructor-parameter-value for ownerType:metaModel.JClassLink
+Information: Fetching already created Java Node for referenced node Reservation of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: Reservation
+Information: Creating JClassLink-Instance to JClass Reservation
+Information: Construction of constructor-parameter-value for target:metaModel.JTargetConnector
+Start Transforming ConstrainedTargetConnector
+Information: Construction of constructor-parameter-value for role:java.lang.String
+Information: Transforming value myCustomer of property role
+Information: Construction of constructor-parameter-value for targetType:metaModel.JRelationType
+Information: Fetching already created Java Node for referenced node User of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: User
+Information: Creating JClassLink-Instance to JClass User
+Information: Construction of constructor-parameter-value for constraint:metaModel.enumerations.JMultiplicity
+Information: Transforming value null of property constraint
+Information: Retrieving enumeration value of type JTotalMap for property constraint
+Start Transforming Booking
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value Booking of property name
+Information: Construction of constructor-parameter-value for singleton:java.lang.Boolean
+Information: Transforming value null of property singleton
+Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
+Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
+Start Transforming Booking_Reservation
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value Booking_Reservation of property name
+Information: Construction of constructor-parameter-value for derived:java.lang.Boolean
+Information: Transforming value null of property derived
+Information: Construction of constructor-parameter-value for owner:metaModel.JManagement
+Start Transforming Bidirectional
+Information: Construction of constructor-parameter-value for connector:metaModel.JOwnerConnector
+Start Transforming OwnerConnector
+Information: Construction of constructor-parameter-value for role:java.lang.String
+Information: Transforming value myBooking of property role
+Information: Construction of constructor-parameter-value for ownerType:metaModel.JClassLink
+Information: Fetching already created Java Node for referenced node Booking of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: Booking
+Information: Creating JClassLink-Instance to JClass Booking
+Information: Construction of constructor-parameter-value for domainEndSpecification:metaModel.enumerations.JFunctionProperty
+Information: Transforming value null of property domainEndSpecification
+Information: Retrieving enumeration value of type JDefault for property domainEndSpecification
+Information: Construction of constructor-parameter-value for target:metaModel.JTargetConnector
+Start Transforming ConstrainedTargetConnector
+Information: Construction of constructor-parameter-value for role:java.lang.String
+Information: Transforming value myReservation of property role
+Information: Construction of constructor-parameter-value for targetType:metaModel.JRelationType
+Information: Fetching already created Java Node for referenced node Reservation of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: Reservation
+Information: Creating JClassLink-Instance to JClass Reservation
+Information: Construction of constructor-parameter-value for constraint:metaModel.enumerations.JMultiplicity
+Information: Transforming value null of property constraint
+Information: Retrieving enumeration value of type JTotalMap for property constraint
+Start Transforming User
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value User of property name
+Information: Construction of constructor-parameter-value for singleton:java.lang.Boolean
+Information: Transforming value null of property singleton
+Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
+Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
+Start Transforming User_Role
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value User_Role of property name
+Information: Construction of constructor-parameter-value for derived:java.lang.Boolean
+Information: Transforming value null of property derived
+Information: Construction of constructor-parameter-value for owner:metaModel.JManagement
+Start Transforming Unidirectional
+Information: Construction of constructor-parameter-value for ownerType:metaModel.JClassLink
+Information: Fetching already created Java Node for referenced node User of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: User
+Information: Creating JClassLink-Instance to JClass User
+Information: Construction of constructor-parameter-value for target:metaModel.JTargetConnector
+Start Transforming ConstrainedTargetConnector
+Information: Construction of constructor-parameter-value for role:java.lang.String
+Information: Transforming value myRoles of property role
+Information: Construction of constructor-parameter-value for targetType:metaModel.JRelationType
+Information: Fetching already created Java Node for referenced node Role of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: Role
+Information: Creating JClassLink-Instance to JClass Role
+Information: Construction of constructor-parameter-value for constraint:metaModel.enumerations.JMultiplicity
+Information: Transforming value 1axOPyL0vaw/Set of property constraint
+Information: Retrieving enumeration value of type JSet for property constraint
+Start Transforming Role
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value Role of property name
+Information: Construction of constructor-parameter-value for singleton:java.lang.Boolean
+Information: Transforming value null of property singleton
+Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
+Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
+Start Transforming Customer
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value Customer of property name
+Information: Construction of constructor-parameter-value for singleton:java.lang.Boolean
+Information: Transforming value true of property singleton
+Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
+Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
+Start Transforming Admin
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value Admin of property name
+Information: Construction of constructor-parameter-value for singleton:java.lang.Boolean
+Information: Transforming value true of property singleton
+Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
+Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
+Start Transforming Generalisation
+Information: Construction of constructor-parameter-value for general:metaModel.JClassLink
+Information: Fetching already created Java Node for referenced node PriceCategory of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: PriceCategory
+Information: Creating JClassLink-Instance to JClass PriceCategory
+Information: Construction of constructor-parameter-value for specific:metaModel.JClassLink
+Information: Fetching already created Java Node for referenced node Front of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: Front
+Information: Creating JClassLink-Instance to JClass Front
+Start Transforming Generalisation
+Information: Construction of constructor-parameter-value for general:metaModel.JClassLink
+Information: Fetching already created Java Node for referenced node PriceCategory of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: PriceCategory
+Information: Creating JClassLink-Instance to JClass PriceCategory
+Information: Construction of constructor-parameter-value for specific:metaModel.JClassLink
+Information: Fetching already created Java Node for referenced node Middle of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: Middle
+Information: Creating JClassLink-Instance to JClass Middle
+Start Transforming Generalisation
+Information: Construction of constructor-parameter-value for general:metaModel.JClassLink
+Information: Fetching already created Java Node for referenced node PriceCategory of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: PriceCategory
+Information: Creating JClassLink-Instance to JClass PriceCategory
+Information: Construction of constructor-parameter-value for specific:metaModel.JClassLink
+Information: Fetching already created Java Node for referenced node Back of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: Back
+Information: Creating JClassLink-Instance to JClass Back
+Start Transforming Generalisation
+Information: Construction of constructor-parameter-value for general:metaModel.JClassLink
+Information: Fetching already created Java Node for referenced node Role of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: Role
+Information: Creating JClassLink-Instance to JClass Role
+Information: Construction of constructor-parameter-value for specific:metaModel.JClassLink
+Information: Fetching already created Java Node for referenced node Admin of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: Admin
+Information: Creating JClassLink-Instance to JClass Admin
+Start Transforming Generalisation
+Information: Construction of constructor-parameter-value for general:metaModel.JClassLink
+Information: Fetching already created Java Node for referenced node Role of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: Role
+Information: Creating JClassLink-Instance to JClass Role
+Information: Construction of constructor-parameter-value for specific:metaModel.JClassLink
+Information: Fetching already created Java Node for referenced node Customer of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: Customer
+Information: Creating JClassLink-Instance to JClass Customer
+Start Transforming Operation
+Information: Construction of constructor-parameter-value for techName:java.lang.String
+Information: Transforming value book of property techName
+Information: Construction of constructor-parameter-value for readableName:java.lang.String
+Information: Transforming value book of property readableName
+Information: Construction of constructor-parameter-value for documentation:java.lang.String
+Information: Transforming value book a given reservation of property documentation
+Information: Construction of constructor-parameter-value for abstrakt:java.lang.Boolean
+Information: Transforming value null of property abstrakt
+Information: Construction of constructor-parameter-value for returnType:metaModel.JTypeAdapter
+Information: No value found for  child returnType. That's ok, because its optionality value is true
+Information: Construction of constructor-parameter-value for exception:metaModel.JException
+Information: Fetching already created Java Node for referenced node BookingError of concept Exception
+Information: Searching for method getException
+Information: Invoking method public metaModel.JException metaModel.JService.getException(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: BookingError
+Information: Adding children according to addFormalParameter(Feature formalParameters) in Java Class class metaModel.JOperation
+Start Transforming r
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value r of property name
+Information: Construction of constructor-parameter-value for type:metaModel.JTypeAdapter
+Start Transforming Reservation
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node Reservation of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: Reservation
+Information: Creating JClassLink-Instance to JClass Reservation
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Start Transforming Operation
+Information: Construction of constructor-parameter-value for techName:java.lang.String
+Information: Transforming value reserve of property techName
+Information: Construction of constructor-parameter-value for readableName:java.lang.String
+Information: Transforming value reservation of property readableName
+Information: Construction of constructor-parameter-value for documentation:java.lang.String
+Information: Transforming value reservate a Seat in given Fp for user. of property documentation
+Information: Construction of constructor-parameter-value for abstrakt:java.lang.Boolean
+Information: Transforming value null of property abstrakt
+Information: Construction of constructor-parameter-value for returnType:metaModel.JTypeAdapter
+Information: No value found for  child returnType. That's ok, because its optionality value is true
+Information: Construction of constructor-parameter-value for exception:metaModel.JException
+Information: Fetching already created Java Node for referenced node ReservationError of concept Exception
+Information: Searching for method getException
+Information: Invoking method public metaModel.JException metaModel.JService.getException(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: ReservationError
+Information: Adding children according to addFormalParameter(Feature formalParameters) in Java Class class metaModel.JOperation
+Start Transforming u
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value u of property name
+Information: Construction of constructor-parameter-value for type:metaModel.JTypeAdapter
+Start Transforming User
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node User of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: User
+Information: Creating JClassLink-Instance to JClass User
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Start Transforming fp
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value fp of property name
+Information: Construction of constructor-parameter-value for type:metaModel.JTypeAdapter
+Start Transforming Filmprojection
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node Filmprojection of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: Filmprojection
+Information: Creating JClassLink-Instance to JClass Filmprojection
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Start Transforming c
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value c of property name
+Information: Construction of constructor-parameter-value for type:metaModel.JTypeAdapter
+Start Transforming PriceCategory
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node PriceCategory of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: PriceCategory
+Information: Creating JClassLink-Instance to JClass PriceCategory
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Start Transforming Operation
+Information: Construction of constructor-parameter-value for techName:java.lang.String
+Information: Transforming value cancelReservation of property techName
+Information: Construction of constructor-parameter-value for readableName:java.lang.String
+Information: Transforming value cancelReservation of property readableName
+Information: Construction of constructor-parameter-value for documentation:java.lang.String
+Information: Transforming value Cancel the given Reservation. of property documentation
+Information: Construction of constructor-parameter-value for abstrakt:java.lang.Boolean
+Information: Transforming value null of property abstrakt
+Information: Construction of constructor-parameter-value for returnType:metaModel.JTypeAdapter
+Start Transforming Boolean
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node Boolean of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: Boolean
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Information: Construction of constructor-parameter-value for exception:metaModel.JException
+Information: Fetching already created Java Node for referenced node DeleteError of concept Exception
+Information: Searching for method getException
+Information: Invoking method public metaModel.JException metaModel.JService.getException(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: DeleteError
+Information: Adding children according to addFormalParameter(Feature formalParameters) in Java Class class metaModel.JOperation
+Start Transforming r
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value r of property name
+Information: Construction of constructor-parameter-value for type:metaModel.JTypeAdapter
+Start Transforming Reservation
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node Reservation of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: Reservation
+Information: Creating JClassLink-Instance to JClass Reservation
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Start Transforming Operation
+Information: Construction of constructor-parameter-value for techName:java.lang.String
+Information: Transforming value register of property techName
+Information: Construction of constructor-parameter-value for readableName:java.lang.String
+Information: Transforming value registerAUserInSystem of property readableName
+Information: Construction of constructor-parameter-value for documentation:java.lang.String
+Information: Transforming value registerAUserInSystem of property documentation
+Information: Construction of constructor-parameter-value for abstrakt:java.lang.Boolean
+Information: Transforming value null of property abstrakt
+Information: Construction of constructor-parameter-value for returnType:metaModel.JTypeAdapter
+Information: No value found for  child returnType. That's ok, because its optionality value is true
+Information: Construction of constructor-parameter-value for exception:metaModel.JException
+Information: Fetching already created Java Node for referenced node RegisterError of concept Exception
+Information: Searching for method getException
+Information: Invoking method public metaModel.JException metaModel.JService.getException(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: RegisterError
+Information: Adding children according to addFormalParameter(Feature formalParameters) in Java Class class metaModel.JOperation
+Start Transforming name
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value name of property name
+Information: Construction of constructor-parameter-value for type:metaModel.JTypeAdapter
+Start Transforming String
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node String of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: String
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Start Transforming mail
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value mail of property name
+Information: Construction of constructor-parameter-value for type:metaModel.JTypeAdapter
+Start Transforming String
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node String of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: String
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Start Transforming username
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value username of property name
+Information: Construction of constructor-parameter-value for type:metaModel.JTypeAdapter
+Start Transforming String
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node String of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: String
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Start Transforming passwort
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value passwort of property name
+Information: Construction of constructor-parameter-value for type:metaModel.JTypeAdapter
+Start Transforming String
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node String of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: String
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Start Transforming Operation
+Information: Construction of constructor-parameter-value for techName:java.lang.String
+Information: Transforming value login of property techName
+Information: Construction of constructor-parameter-value for readableName:java.lang.String
+Information: Transforming value login of property readableName
+Information: Construction of constructor-parameter-value for documentation:java.lang.String
+Information: Transforming value Login a User in CinemaService. of property documentation
+Information: Construction of constructor-parameter-value for abstrakt:java.lang.Boolean
+Information: Transforming value null of property abstrakt
+Information: Construction of constructor-parameter-value for returnType:metaModel.JTypeAdapter
+Information: No value found for  child returnType. That's ok, because its optionality value is true
+Information: Construction of constructor-parameter-value for exception:metaModel.JException
+Information: Fetching already created Java Node for referenced node LoginError of concept Exception
+Information: Searching for method getException
+Information: Invoking method public metaModel.JException metaModel.JService.getException(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: LoginError
+Information: Adding children according to addFormalParameter(Feature formalParameters) in Java Class class metaModel.JOperation
+Start Transforming username
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value username of property name
+Information: Construction of constructor-parameter-value for type:metaModel.JTypeAdapter
+Start Transforming String
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node String of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: String
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Start Transforming password
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value password of property name
+Information: Construction of constructor-parameter-value for type:metaModel.JTypeAdapter
+Start Transforming String
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node String of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: String
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Start Transforming Operation
+Information: Construction of constructor-parameter-value for techName:java.lang.String
+Information: Transforming value logout of property techName
+Information: Construction of constructor-parameter-value for readableName:java.lang.String
+Information: Transforming value logout of property readableName
+Information: Construction of constructor-parameter-value for documentation:java.lang.String
+Information: Transforming value Logout the given User from Cinema Service. of property documentation
+Information: Construction of constructor-parameter-value for abstrakt:java.lang.Boolean
+Information: Transforming value null of property abstrakt
+Information: Construction of constructor-parameter-value for returnType:metaModel.JTypeAdapter
+Start Transforming Boolean
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node Boolean of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: Boolean
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Information: Construction of constructor-parameter-value for exception:metaModel.JException
+Information: No Value found for  Reference exception. That's ok, because its optionality Value is true
+Information: Adding children according to addFormalParameter(Feature formalParameters) in Java Class class metaModel.JOperation
+Start Transforming user
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value user of property name
+Information: Construction of constructor-parameter-value for type:metaModel.JTypeAdapter
+Start Transforming User
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node User of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: User
+Information: Creating JClassLink-Instance to JClass User
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Start Transforming Operation
+Information: Construction of constructor-parameter-value for techName:java.lang.String
+Information: Transforming value addMovie of property techName
+Information: Construction of constructor-parameter-value for readableName:java.lang.String
+Information: Transforming value addingMovie of property readableName
+Information: Construction of constructor-parameter-value for documentation:java.lang.String
+Information: Transforming value Add a Movie to the Cinema. of property documentation
+Information: Construction of constructor-parameter-value for abstrakt:java.lang.Boolean
+Information: Transforming value null of property abstrakt
+Information: Construction of constructor-parameter-value for returnType:metaModel.JTypeAdapter
+Information: No value found for  child returnType. That's ok, because its optionality value is true
+Information: Construction of constructor-parameter-value for exception:metaModel.JException
+Information: No Value found for  Reference exception. That's ok, because its optionality Value is true
+Information: Adding children according to addFormalParameter(Feature formalParameters) in Java Class class metaModel.JOperation
+Start Transforming title
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value title of property name
+Information: Construction of constructor-parameter-value for type:metaModel.JTypeAdapter
+Start Transforming String
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node String of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: String
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Start Transforming Operation
+Information: Construction of constructor-parameter-value for techName:java.lang.String
+Information: Transforming value deleteMovie of property techName
+Information: Construction of constructor-parameter-value for readableName:java.lang.String
+Information: Transforming value deleteMovie of property readableName
+Information: Construction of constructor-parameter-value for documentation:java.lang.String
+Information: Transforming value Delete the Movie form the Cinema. of property documentation
+Information: Construction of constructor-parameter-value for abstrakt:java.lang.Boolean
+Information: Transforming value null of property abstrakt
+Information: Construction of constructor-parameter-value for returnType:metaModel.JTypeAdapter
+Start Transforming Boolean
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node Boolean of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: Boolean
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Information: Construction of constructor-parameter-value for exception:metaModel.JException
+Information: Fetching already created Java Node for referenced node DeleteError of concept Exception
+Information: Searching for method getException
+Information: Invoking method public metaModel.JException metaModel.JService.getException(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: DeleteError
+Information: Adding children according to addFormalParameter(Feature formalParameters) in Java Class class metaModel.JOperation
+Start Transforming m
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value m of property name
+Information: Construction of constructor-parameter-value for type:metaModel.JTypeAdapter
+Start Transforming Movie
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node Movie of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: Movie
+Information: Creating JClassLink-Instance to JClass Movie
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Start Transforming Operation
+Information: Construction of constructor-parameter-value for techName:java.lang.String
+Information: Transforming value addFilmprojection of property techName
+Information: Construction of constructor-parameter-value for readableName:java.lang.String
+Information: Transforming value addFilmprojection of property readableName
+Information: Construction of constructor-parameter-value for documentation:java.lang.String
+Information: Transforming value Adding a Filmprojection to the CinemaService. of property documentation
+Information: Construction of constructor-parameter-value for abstrakt:java.lang.Boolean
+Information: Transforming value null of property abstrakt
+Information: Construction of constructor-parameter-value for returnType:metaModel.JTypeAdapter
+Information: No value found for  child returnType. That's ok, because its optionality value is true
+Information: Construction of constructor-parameter-value for exception:metaModel.JException
+Information: No Value found for  Reference exception. That's ok, because its optionality Value is true
+Information: Adding children according to addFormalParameter(Feature formalParameters) in Java Class class metaModel.JOperation
+Start Transforming c
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value c of property name
+Information: Construction of constructor-parameter-value for type:metaModel.JTypeAdapter
+Start Transforming Cinemahall
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node Cinemahall of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: Cinemahall
+Information: Creating JClassLink-Instance to JClass Cinemahall
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Start Transforming m
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value m of property name
+Information: Construction of constructor-parameter-value for type:metaModel.JTypeAdapter
+Start Transforming Movie
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node Movie of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: Movie
+Information: Creating JClassLink-Instance to JClass Movie
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Start Transforming Operation
+Information: Construction of constructor-parameter-value for techName:java.lang.String
+Information: Transforming value deleteFilmprojection of property techName
+Information: Construction of constructor-parameter-value for readableName:java.lang.String
+Information: Transforming value delFp of property readableName
+Information: Construction of constructor-parameter-value for documentation:java.lang.String
+Information: Transforming value Delete the given Filmprojection from CinemaService. of property documentation
+Information: Construction of constructor-parameter-value for abstrakt:java.lang.Boolean
+Information: Transforming value null of property abstrakt
+Information: Construction of constructor-parameter-value for returnType:metaModel.JTypeAdapter
+Start Transforming Boolean
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node Boolean of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: Boolean
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Information: Construction of constructor-parameter-value for exception:metaModel.JException
+Information: Fetching already created Java Node for referenced node DeleteError of concept Exception
+Information: Searching for method getException
+Information: Invoking method public metaModel.JException metaModel.JService.getException(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: DeleteError
+Information: Adding children according to addFormalParameter(Feature formalParameters) in Java Class class metaModel.JOperation
+Start Transforming fp
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value fp of property name
+Information: Construction of constructor-parameter-value for type:metaModel.JTypeAdapter
+Start Transforming Filmprojection
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node Filmprojection of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: Filmprojection
+Information: Creating JClassLink-Instance to JClass Filmprojection
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Start Transforming Operation
+Information: Construction of constructor-parameter-value for techName:java.lang.String
+Information: Transforming value addCinemahall of property techName
+Information: Construction of constructor-parameter-value for readableName:java.lang.String
+Information: Transforming value addCinemahall of property readableName
+Information: Construction of constructor-parameter-value for documentation:java.lang.String
+Information: Transforming value Add a Cinemahall to the CinemaService. of property documentation
+Information: Construction of constructor-parameter-value for abstrakt:java.lang.Boolean
+Information: Transforming value null of property abstrakt
+Information: Construction of constructor-parameter-value for returnType:metaModel.JTypeAdapter
+Information: No value found for  child returnType. That's ok, because its optionality value is true
+Information: Construction of constructor-parameter-value for exception:metaModel.JException
+Information: Fetching already created Java Node for referenced node CinemaHallCreation of concept Exception
+Information: Searching for method getException
+Information: Invoking method public metaModel.JException metaModel.JService.getException(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: CinemaHallCreation
+Information: Adding children according to addFormalParameter(Feature formalParameters) in Java Class class metaModel.JOperation
+Start Transforming name
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value name of property name
+Information: Construction of constructor-parameter-value for type:metaModel.JTypeAdapter
+Start Transforming String
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node String of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: String
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Start Transforming rows
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value rows of property name
+Information: Construction of constructor-parameter-value for type:metaModel.JTypeAdapter
+Start Transforming Integer
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node Integer of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: Integer
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Start Transforming Seats
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value Seats of property name
+Information: Construction of constructor-parameter-value for type:metaModel.JTypeAdapter
+Start Transforming Integer
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node Integer of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: Integer
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Start Transforming Operation
+Information: Construction of constructor-parameter-value for techName:java.lang.String
+Information: Transforming value deleteCinemahall of property techName
+Information: Construction of constructor-parameter-value for readableName:java.lang.String
+Information: Transforming value deleteCinemahall of property readableName
+Information: Construction of constructor-parameter-value for documentation:java.lang.String
+Information: Transforming value Delete the given Cinemahall from CinemaService. of property documentation
+Information: Construction of constructor-parameter-value for abstrakt:java.lang.Boolean
+Information: Transforming value null of property abstrakt
+Information: Construction of constructor-parameter-value for returnType:metaModel.JTypeAdapter
+Start Transforming Boolean
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node Boolean of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: Boolean
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Information: Construction of constructor-parameter-value for exception:metaModel.JException
+Information: Fetching already created Java Node for referenced node DeleteError of concept Exception
+Information: Searching for method getException
+Information: Invoking method public metaModel.JException metaModel.JService.getException(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: DeleteError
+Information: Adding children according to addFormalParameter(Feature formalParameters) in Java Class class metaModel.JOperation
+Start Transforming c
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value c of property name
+Information: Construction of constructor-parameter-value for type:metaModel.JTypeAdapter
+Start Transforming Cinemahall
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node Cinemahall of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: Cinemahall
+Information: Creating JClassLink-Instance to JClass Cinemahall
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Start Transforming Operation
+Information: Construction of constructor-parameter-value for techName:java.lang.String
+Information: Transforming value changePriceCategory of property techName
+Information: Construction of constructor-parameter-value for readableName:java.lang.String
+Information: Transforming value cPriceC of property readableName
+Information: Construction of constructor-parameter-value for documentation:java.lang.String
+Information: Transforming value Change Price on Pricecategory. of property documentation
+Information: Construction of constructor-parameter-value for abstrakt:java.lang.Boolean
+Information: Transforming value null of property abstrakt
+Information: Construction of constructor-parameter-value for returnType:metaModel.JTypeAdapter
+Information: No value found for  child returnType. That's ok, because its optionality value is true
+Information: Construction of constructor-parameter-value for exception:metaModel.JException
+Information: No Value found for  Reference exception. That's ok, because its optionality Value is true
+Information: Adding children according to addFormalParameter(Feature formalParameters) in Java Class class metaModel.JOperation
+Start Transforming c
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value c of property name
+Information: Construction of constructor-parameter-value for type:metaModel.JTypeAdapter
+Start Transforming PriceCategory
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node PriceCategory of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: PriceCategory
+Information: Creating JClassLink-Instance to JClass PriceCategory
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Start Transforming price
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value price of property name
+Information: Construction of constructor-parameter-value for type:metaModel.JTypeAdapter
+Start Transforming Integer
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node Integer of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: Integer
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Start Transforming Operation
+Information: Construction of constructor-parameter-value for techName:java.lang.String
+Information: Transforming value calulateProfit of property techName
+Information: Construction of constructor-parameter-value for readableName:java.lang.String
+Information: Transforming value calculateProfit of property readableName
+Information: Construction of constructor-parameter-value for documentation:java.lang.String
+Information: Transforming value Calculate the Profit from one Filmprojection or more or all. of property documentation
+Information: Construction of constructor-parameter-value for abstrakt:java.lang.Boolean
+Information: Transforming value null of property abstrakt
+Information: Construction of constructor-parameter-value for returnType:metaModel.JTypeAdapter
+Start Transforming Integer
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node Integer of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: Integer
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Information: Construction of constructor-parameter-value for exception:metaModel.JException
+Information: No Value found for  Reference exception. That's ok, because its optionality Value is true
+Information: Adding children according to addFormalParameter(Feature formalParameters) in Java Class class metaModel.JOperation
+Start Transforming fp
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value fp of property name
+Information: Construction of constructor-parameter-value for type:metaModel.JTypeAdapter
+Start Transforming Filmprojection
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node Filmprojection of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: Filmprojection
+Information: Creating JClassLink-Instance to JClass Filmprojection
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value true of property isMany
+Start Transforming Operation
+Information: Construction of constructor-parameter-value for techName:java.lang.String
+Information: Transforming value calculateTotalProfit of property techName
+Information: Construction of constructor-parameter-value for readableName:java.lang.String
+Information: Transforming value calculateTotalProfit of property readableName
+Information: Construction of constructor-parameter-value for documentation:java.lang.String
+Information: Transforming value Calculate the Total Profit of the Cinema. of property documentation
+Information: Construction of constructor-parameter-value for abstrakt:java.lang.Boolean
+Information: Transforming value null of property abstrakt
+Information: Construction of constructor-parameter-value for returnType:metaModel.JTypeAdapter
+Start Transforming Integer
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node Integer of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: Integer
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Information: Construction of constructor-parameter-value for exception:metaModel.JException
+Information: No Value found for  Reference exception. That's ok, because its optionality Value is true
+Information: Adding children according to addFormalParameter(Feature formalParameters) in Java Class class metaModel.JOperation
+Start Transforming Operation
+Information: Construction of constructor-parameter-value for techName:java.lang.String
+Information: Transforming value addRoleToUser of property techName
+Information: Construction of constructor-parameter-value for readableName:java.lang.String
+Information: Transforming value addRTU of property readableName
+Information: Construction of constructor-parameter-value for documentation:java.lang.String
+Information: Transforming value add role to User. of property documentation
+Information: Construction of constructor-parameter-value for abstrakt:java.lang.Boolean
+Information: Transforming value null of property abstrakt
+Information: Construction of constructor-parameter-value for returnType:metaModel.JTypeAdapter
+Start Transforming Boolean
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node Boolean of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: Boolean
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Information: Construction of constructor-parameter-value for exception:metaModel.JException
+Information: No Value found for  Reference exception. That's ok, because its optionality Value is true
+Information: Adding children according to addFormalParameter(Feature formalParameters) in Java Class class metaModel.JOperation
+Start Transforming u
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value u of property name
+Information: Construction of constructor-parameter-value for type:metaModel.JTypeAdapter
+Start Transforming User
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node User of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: User
+Information: Creating JClassLink-Instance to JClass User
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Start Transforming r
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value r of property name
+Information: Construction of constructor-parameter-value for type:metaModel.JTypeAdapter
+Start Transforming Role
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node Role of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: Role
+Information: Creating JClassLink-Instance to JClass Role
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Start Transforming Operation
+Information: Construction of constructor-parameter-value for techName:java.lang.String
+Information: Transforming value deleteRoleFromUser of property techName
+Information: Construction of constructor-parameter-value for readableName:java.lang.String
+Information: Transforming value deleteRTU of property readableName
+Information: Construction of constructor-parameter-value for documentation:java.lang.String
+Information: Transforming value delete Role from User. of property documentation
+Information: Construction of constructor-parameter-value for abstrakt:java.lang.Boolean
+Information: Transforming value null of property abstrakt
+Information: Construction of constructor-parameter-value for returnType:metaModel.JTypeAdapter
+Start Transforming Boolean
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node Boolean of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: Boolean
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Information: Construction of constructor-parameter-value for exception:metaModel.JException
+Information: Fetching already created Java Node for referenced node DeleteError of concept Exception
+Information: Searching for method getException
+Information: Invoking method public metaModel.JException metaModel.JService.getException(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: DeleteError
+Information: Adding children according to addFormalParameter(Feature formalParameters) in Java Class class metaModel.JOperation
+Start Transforming u
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value u of property name
+Information: Construction of constructor-parameter-value for type:metaModel.JTypeAdapter
+Start Transforming User
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node User of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: User
+Information: Creating JClassLink-Instance to JClass User
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Start Transforming r
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value r of property name
+Information: Construction of constructor-parameter-value for type:metaModel.JTypeAdapter
+Start Transforming Role
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node Role of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: Role
+Information: Creating JClassLink-Instance to JClass Role
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
+Information: --> Starting Transformation Phase 2 
+Information: --> Finished Transformation Phase 2 (assigning all unassigned references) with no Errors.
+Information: Successfully Finished Java AST Creation @ Sun Feb 28 15:38:45 CET 2021
+Information: Carried out Code Generation for CinemaService. Watch out for Syntax Errors in Generated Code!!!
+Information: Created XML File at C:\Users\admin\git\Kino\protocols\ASTCinemaService.xml

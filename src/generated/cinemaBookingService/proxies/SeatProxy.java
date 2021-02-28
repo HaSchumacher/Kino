@@ -1,4 +1,4 @@
-/**--- Generated at Thu Feb 25 17:10:43 CET 2021 
+/**--- Generated at Sun Feb 28 15:53:01 CET 2021 
  * --- No Change Allowed!  
  */
 package generated.cinemaBookingService.proxies;
@@ -50,5 +50,8 @@ public class SeatProxy implements ISeat{
    }
    public Set<Reservation> getMyReservation() throws PersistenceException{
       return this.getTheObject().getMyReservation();
+   }
+   public Integer getPrice(){
+      return this.getTheObject().getPrice();
    }
 }

@@ -1,11 +1,11 @@
-/**--- Generated at Thu Feb 25 15:08:56 CET 2021 
+/**--- Generated at Sun Feb 28 15:53:01 CET 2021 
  * --- No Change Allowed!  
  */
 package generated.cinemaBookingService.commands;
 import generated.cinemaBookingService.*;
 import commands.*;
 public class FilmProjection_calculateOutcome_Command extends ObjectCommand<FilmProjection, Integer>{
-   private static final long serialVersionUID = 2032985303L;
+   private static final long serialVersionUID = 98889440L;
    public FilmProjection_calculateOutcome_Command(FilmProjection receiver){
       super(receiver);
    }

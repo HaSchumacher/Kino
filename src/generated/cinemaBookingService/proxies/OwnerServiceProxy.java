@@ -1,4 +1,4 @@
-/**--- Generated at Thu Feb 25 17:10:43 CET 2021 
+/**--- Generated at Sun Feb 28 15:53:02 CET 2021 
  * --- No Change Allowed!  
  */
 package generated.cinemaBookingService.proxies;
@@ -9,6 +9,12 @@ import generated.cinemaBookingService.OwnerService;
 import java.sql.ResultSet;
 import generated.cinemaBookingService.Cinema;
 import generated.cinemaBookingService.relationControl.cinemaSupervisor;
+import generated.cinemaBookingService.FilmProjection;
+import generated.cinemaBookingService.MovieNotFoundInCinema;
+import generated.cinemaBookingService.Movie;
+import generated.cinemaBookingService.Cinemahall;
+import generated.cinemaBookingService.MovieAlreadyinCinemahall;
+import generated.cinemaBookingService.MovieCouldNotBeDeleated;
 public class OwnerServiceProxy implements IOwnerService{
    private Integer id;
    private Optional<OwnerService> theObject;
@@ -50,5 +56,20 @@ public class OwnerServiceProxy implements IOwnerService{
    }
    public void setCinema(Cinema newCinema)throws PersistenceException{
       this.getTheObject().setCinema(newCinema);
+   }
+   public void buildCinema(){
+      this.getTheObject().buildCinema();
+   }
+   public Integer calculateOutcome(FilmProjection ofFilm)throws MovieNotFoundInCinema{
+      return this.getTheObject().calculateOutcome(ofFilm);
+   }
+   public Integer calculateFullOutcome()throws MovieNotFoundInCinema{
+      return this.getTheObject().calculateFullOutcome();
+   }
+   public String addFilmprojection(Movie movie, Cinemahall cinemahall)throws MovieAlreadyinCinemahall{
+      return this.getTheObject().addFilmprojection(movie, cinemahall);
+   }
+   public Boolean deleteGivenFilmFromCinemahall(Movie movie)throws MovieCouldNotBeDeleated{
+      return this.getTheObject().deleteGivenFilmFromCinemahall(movie);
    }
 }

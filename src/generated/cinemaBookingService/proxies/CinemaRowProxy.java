@@ -1,4 +1,4 @@
-/**--- Generated at Thu Feb 25 17:10:43 CET 2021 
+/**--- Generated at Sun Feb 28 15:53:01 CET 2021 
  * --- No Change Allowed!  
  */
 package generated.cinemaBookingService.proxies;
@@ -39,4 +39,6 @@ public abstract class CinemaRowProxy implements ICinemaRow{
    public Set<Cinemahall> getMyHall() throws PersistenceException{
       return this.getTheObject().getMyHall();
    }
+   public abstract void addSeat(Seat seat);
+   public abstract Boolean deleteSeat(Seat seat);
 }

@@ -1,11 +1,11 @@
-/**--- Generated at Thu Feb 25 17:10:43 CET 2021 
+/**--- Generated at Sun Feb 28 15:53:01 CET 2021 
  * --- No Change Allowed!  
  */
 package generated.cinemaBookingService.commands;
 import generated.cinemaBookingService.*;
 import commands.*;
 public class MiddleRow_constructor_Command extends ServiceCommand<MiddleRow>{
-   private static final long serialVersionUID = -1767588391L;
+   private static final long serialVersionUID = 1204409536L;
    private Integer  price;
    private Boolean  bookedUp;
    public MiddleRow_constructor_Command(Integer  price, Boolean  bookedUp){

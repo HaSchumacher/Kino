@@ -1,4 +1,4 @@
-/**--- Generated at Thu Feb 25 17:10:42 CET 2021 
+/**--- Generated at Sun Feb 28 15:53:01 CET 2021 
  * --- Change only in Editable Sections!  
  * --- Do not touch section numbering!   
  */
@@ -288,20 +288,6 @@ public class CinemaBookingService extends Observable{
    }
    //80 ===== Editable : Your Operations =============
 /**
- * logout the given user.
- */
-   public Boolean logout(String username){
-      // TODO: Implement Operation logout
-      return null;
-   }
-/**
- * Reservation for a Seat in a given Movie.
- */
-   public Reservation reserve(String name, Movie movie, Integer seats, String categorie)throws CinemarowIsFull{
-      // TODO: Implement Operation reserve
-      return null;
-   }
-/**
  * Book the Reservation from the current User
  */
    public Booking book(Integer reservation_id){
@@ -313,6 +299,20 @@ public class CinemaBookingService extends Observable{
  */
    public Boolean login(String username, String password)throws wrongCredentials{
       // TODO: Implement Operation login
+      return null;
+   }
+/**
+ * logout the given user.
+ */
+   public Boolean logout(String username){
+      // TODO: Implement Operation logout
+      return null;
+   }
+/**
+ * Reservation for a Seat in a given Movie.
+ */
+   public Reservation reserve(String name, Movie movie, Integer seats, String categorie)throws CinemarowIsFull{
+      // TODO: Implement Operation reserve
       return null;
    }
 //90 ===== GENERATED: End of Your Operations ======

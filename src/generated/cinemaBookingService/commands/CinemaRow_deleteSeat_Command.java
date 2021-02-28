@@ -1,11 +1,11 @@
-/**--- Generated at Thu Feb 25 15:08:56 CET 2021 
+/**--- Generated at Sun Feb 28 15:53:01 CET 2021 
  * --- No Change Allowed!  
  */
 package generated.cinemaBookingService.commands;
 import generated.cinemaBookingService.*;
 import commands.*;
 public class CinemaRow_deleteSeat_Command extends ObjectCommand<CinemaRow, Boolean>{
-   private static final long serialVersionUID = -1389710893L;
+   private static final long serialVersionUID = -5353964L;
    private Seat seat;
    public CinemaRow_deleteSeat_Command(CinemaRow receiver, Seat seat){
       super(receiver);

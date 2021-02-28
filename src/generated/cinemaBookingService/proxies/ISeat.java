@@ -1,4 +1,4 @@
-/**--- Generated at Thu Feb 25 17:10:43 CET 2021 
+/**--- Generated at Sun Feb 28 15:53:01 CET 2021 
  * --- No Change Allowed!  
  */
 package generated.cinemaBookingService.proxies;
@@ -13,4 +13,5 @@ public interface ISeat extends Identifiable{
    public Integer getId();
    public Set<CinemaRow> getMyRow() throws PersistenceException;
    public Set<Reservation> getMyReservation() throws PersistenceException;
+   public Integer getPrice();
 }

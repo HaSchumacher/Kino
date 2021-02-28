@@ -413,6 +413,15 @@
       <attributes/>
       <operations>
         <metaModel.JOperation>
+          <techName>buildCinema</techName>
+          <readableName>buildCinema</readableName>
+          <documentation>Build the Cinema</documentation>
+          <abstrakt>false</abstrakt>
+          <formalParameters/>
+          <returnType reference="../../../../metaModel.JAssociation[2]/target/targetType/state/target/operations/metaModel.JOperation/exception"/>
+          <exception reference="../../../../metaModel.JAssociation[2]/target/targetType/state/target/operations/metaModel.JOperation/exception"/>
+        </metaModel.JOperation>
+        <metaModel.JOperation>
           <techName>calculateOutcome</techName>
           <readableName>calculateOutcomeforaMovie</readableName>
           <documentation>Calculate the Outcome for one Movie</documentation>
@@ -442,6 +451,22 @@
               <name>MovieNotFoundInCinema</name>
               <errorText>The Movie you search is not in the current filmprojections of the Cinema.</errorText>
             </value>
+          </exception>
+        </metaModel.JOperation>
+        <metaModel.JOperation>
+          <techName>calculateFullOutcome</techName>
+          <readableName>calculateFullOutome</readableName>
+          <documentation>Calculate the Outcome of all Filmprojections</documentation>
+          <abstrakt>false</abstrakt>
+          <formalParameters/>
+          <returnType>
+            <value class="metaModel.JTypeAdapter">
+              <type class="metaModel.primitives.JInteger" reference="../../../../../../metaModel.JAssociation[2]/target/targetType/state/target/operations/metaModel.JOperation/returnType/value/type"/>
+              <isMany>false</isMany>
+            </value>
+          </returnType>
+          <exception>
+            <value class="metaModel.JException" reference="../../../metaModel.JOperation[2]/exception/value"/>
           </exception>
         </metaModel.JOperation>
         <metaModel.JOperation>
@@ -520,31 +545,6 @@
             </value>
           </exception>
         </metaModel.JOperation>
-        <metaModel.JOperation>
-          <techName>calculateFullOutcome</techName>
-          <readableName>calculateFullOutome</readableName>
-          <documentation>Calculate the Outcome of all Filmprojections</documentation>
-          <abstrakt>false</abstrakt>
-          <formalParameters/>
-          <returnType>
-            <value class="metaModel.JTypeAdapter">
-              <type class="metaModel.primitives.JInteger" reference="../../../../../../metaModel.JAssociation[2]/target/targetType/state/target/operations/metaModel.JOperation/returnType/value/type"/>
-              <isMany>false</isMany>
-            </value>
-          </returnType>
-          <exception>
-            <value class="metaModel.JException" reference="../../../metaModel.JOperation/exception/value"/>
-          </exception>
-        </metaModel.JOperation>
-        <metaModel.JOperation>
-          <techName>buildCinema</techName>
-          <readableName>buildCinema</readableName>
-          <documentation>Build the Cinema</documentation>
-          <abstrakt>false</abstrakt>
-          <formalParameters/>
-          <returnType reference="../../../../metaModel.JAssociation[2]/target/targetType/state/target/operations/metaModel.JOperation/exception"/>
-          <exception reference="../../../../metaModel.JAssociation[2]/target/targetType/state/target/operations/metaModel.JOperation/exception"/>
-        </metaModel.JOperation>
       </operations>
     </metaModel.JClass>
     <metaModel.JAssociation>
@@ -599,9 +599,9 @@
         </state>
       </general>
       <specific>
-        <name>FrontRow</name>
+        <name>MiddleRow</name>
         <state class="metaModel.JClassLinkStateLocallyAssigned">
-          <target reference="../../../../../relationTypes/metaModel.JClass[5]"/>
+          <target reference="../../../../../relationTypes/metaModel.JClass[6]"/>
         </state>
       </specific>
     </metaModel.JGeneralisation>
@@ -613,50 +613,24 @@
         </state>
       </general>
       <specific>
-        <name>MiddleRow</name>
+        <name>FrontRow</name>
         <state class="metaModel.JClassLinkStateLocallyAssigned">
-          <target reference="../../../../../relationTypes/metaModel.JClass[6]"/>
+          <target reference="../../../../../relationTypes/metaModel.JClass[5]"/>
         </state>
       </specific>
     </metaModel.JGeneralisation>
   </generalisations>
   <operations class="set">
     <metaModel.JOperation>
-      <techName>reserve</techName>
-      <readableName>reserve_a_seat_to_movie</readableName>
-      <documentation>Reservation for a Seat in a given Movie.</documentation>
+      <techName>book</techName>
+      <readableName>book_the_Reservation</readableName>
+      <documentation>Book the Reservation from the current User</documentation>
       <abstrakt>false</abstrakt>
       <formalParameters>
         <metaModel.JParameter>
-          <name>name</name>
-          <type>
-            <type class="metaModel.primitives.JString" reference="../../../../../../relationTypes/metaModel.JClass[8]/attributes/metaModel.JAttributeConnector/targetType"/>
-            <isMany>false</isMany>
-          </type>
-        </metaModel.JParameter>
-        <metaModel.JParameter>
-          <name>movie</name>
-          <type>
-            <type class="metaModel.JClassLink">
-              <name>Movie</name>
-              <state class="metaModel.JClassLinkStateLocallyAssigned">
-                <target reference="../../../../../../../../relationTypes/metaModel.JClass[8]"/>
-              </state>
-            </type>
-            <isMany>false</isMany>
-          </type>
-        </metaModel.JParameter>
-        <metaModel.JParameter>
-          <name>seats</name>
+          <name>reservation_id</name>
           <type>
             <type class="metaModel.primitives.JInteger" reference="../../../../../../relationTypes/metaModel.JAssociation[2]/target/targetType/state/target/operations/metaModel.JOperation/returnType/value/type"/>
-            <isMany>false</isMany>
-          </type>
-        </metaModel.JParameter>
-        <metaModel.JParameter>
-          <name>categorie</name>
-          <type>
-            <type class="metaModel.primitives.JString" reference="../../../../../../relationTypes/metaModel.JClass[8]/attributes/metaModel.JAttributeConnector/targetType"/>
             <isMany>false</isMany>
           </type>
         </metaModel.JParameter>
@@ -664,20 +638,15 @@
       <returnType>
         <value class="metaModel.JTypeAdapter">
           <type class="metaModel.JClassLink">
-            <name>Reservation</name>
+            <name>Booking</name>
             <state class="metaModel.JClassLinkStateLocallyAssigned">
-              <target reference="../../../../../../../relationTypes/metaModel.JClass[10]"/>
+              <target reference="../../../../../../../relationTypes/metaModel.JClass[12]"/>
             </state>
           </type>
           <isMany>false</isMany>
         </value>
       </returnType>
-      <exception>
-        <value class="metaModel.JException">
-          <name>CinemarowIsFull</name>
-          <errorText>We&apos;re Sorry but you cannot reserve a Seat in this the Category given. Please select another Categorie</errorText>
-        </value>
-      </exception>
+      <exception reference="../../../relationTypes/metaModel.JAssociation[2]/target/targetType/state/target/operations/metaModel.JOperation/exception"/>
     </metaModel.JOperation>
     <metaModel.JOperation>
       <techName>login</techName>
@@ -736,15 +705,41 @@
       <exception reference="../../../relationTypes/metaModel.JAssociation[2]/target/targetType/state/target/operations/metaModel.JOperation/exception"/>
     </metaModel.JOperation>
     <metaModel.JOperation>
-      <techName>book</techName>
-      <readableName>book_the_Reservation</readableName>
-      <documentation>Book the Reservation from the current User</documentation>
+      <techName>reserve</techName>
+      <readableName>reserve_a_seat_to_movie</readableName>
+      <documentation>Reservation for a Seat in a given Movie.</documentation>
       <abstrakt>false</abstrakt>
       <formalParameters>
         <metaModel.JParameter>
-          <name>reservation_id</name>
+          <name>name</name>
+          <type>
+            <type class="metaModel.primitives.JString" reference="../../../../../../relationTypes/metaModel.JClass[8]/attributes/metaModel.JAttributeConnector/targetType"/>
+            <isMany>false</isMany>
+          </type>
+        </metaModel.JParameter>
+        <metaModel.JParameter>
+          <name>movie</name>
+          <type>
+            <type class="metaModel.JClassLink">
+              <name>Movie</name>
+              <state class="metaModel.JClassLinkStateLocallyAssigned">
+                <target reference="../../../../../../../../relationTypes/metaModel.JClass[8]"/>
+              </state>
+            </type>
+            <isMany>false</isMany>
+          </type>
+        </metaModel.JParameter>
+        <metaModel.JParameter>
+          <name>seats</name>
           <type>
             <type class="metaModel.primitives.JInteger" reference="../../../../../../relationTypes/metaModel.JAssociation[2]/target/targetType/state/target/operations/metaModel.JOperation/returnType/value/type"/>
+            <isMany>false</isMany>
+          </type>
+        </metaModel.JParameter>
+        <metaModel.JParameter>
+          <name>categorie</name>
+          <type>
+            <type class="metaModel.primitives.JString" reference="../../../../../../relationTypes/metaModel.JClass[8]/attributes/metaModel.JAttributeConnector/targetType"/>
             <isMany>false</isMany>
           </type>
         </metaModel.JParameter>
@@ -752,30 +747,35 @@
       <returnType>
         <value class="metaModel.JTypeAdapter">
           <type class="metaModel.JClassLink">
-            <name>Booking</name>
+            <name>Reservation</name>
             <state class="metaModel.JClassLinkStateLocallyAssigned">
-              <target reference="../../../../../../../relationTypes/metaModel.JClass[12]"/>
+              <target reference="../../../../../../../relationTypes/metaModel.JClass[10]"/>
             </state>
           </type>
           <isMany>false</isMany>
         </value>
       </returnType>
-      <exception reference="../../../relationTypes/metaModel.JAssociation[2]/target/targetType/state/target/operations/metaModel.JOperation/exception"/>
+      <exception>
+        <value class="metaModel.JException">
+          <name>CinemarowIsFull</name>
+          <errorText>We&apos;re Sorry but you cannot reserve a Seat in this the Category given. Please select another Categorie</errorText>
+        </value>
+      </exception>
     </metaModel.JOperation>
   </operations>
   <exceptions class="set">
-    <metaModel.JException reference="../../relationTypes/metaModel.JClass[13]/operations/metaModel.JOperation[3]/exception/value"/>
-    <metaModel.JException>
-      <name>notAuthorized</name>
-      <errorText>You cannot do this task, you have to authorize you. You were redirected to the Login page</errorText>
-    </metaModel.JException>
-    <metaModel.JException reference="../../relationTypes/metaModel.JClass[13]/operations/metaModel.JOperation/exception/value"/>
-    <metaModel.JException reference="../../operations/metaModel.JOperation[2]/exception/value"/>
+    <metaModel.JException reference="../../relationTypes/metaModel.JClass[13]/operations/metaModel.JOperation[2]/exception/value"/>
+    <metaModel.JException reference="../../relationTypes/metaModel.JClass[13]/operations/metaModel.JOperation[5]/exception/value"/>
     <metaModel.JException>
       <name>notyourReservation</name>
       <errorText>Were Sorry but you cannot book a Reservation hold by another User. If you can&apos;t remember your Reservations, just click on My Reservations.</errorText>
     </metaModel.JException>
-    <metaModel.JException reference="../../relationTypes/metaModel.JClass[13]/operations/metaModel.JOperation[2]/exception/value"/>
-    <metaModel.JException reference="../../operations/metaModel.JOperation/exception/value"/>
+    <metaModel.JException reference="../../operations/metaModel.JOperation[2]/exception/value"/>
+    <metaModel.JException reference="../../operations/metaModel.JOperation[4]/exception/value"/>
+    <metaModel.JException>
+      <name>notAuthorized</name>
+      <errorText>You cannot do this task, you have to authorize you. You were redirected to the Login page</errorText>
+    </metaModel.JException>
+    <metaModel.JException reference="../../relationTypes/metaModel.JClass[13]/operations/metaModel.JOperation[4]/exception/value"/>
   </exceptions>
 </JService>

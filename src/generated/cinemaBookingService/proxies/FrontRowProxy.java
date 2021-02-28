@@ -1,4 +1,4 @@
-/**--- Generated at Thu Feb 25 17:10:43 CET 2021 
+/**--- Generated at Sun Feb 28 15:53:01 CET 2021 
  * --- No Change Allowed!  
  */
 package generated.cinemaBookingService.proxies;
@@ -7,6 +7,7 @@ import java.util.Optional;
 import db.executer.*;
 import generated.cinemaBookingService.FrontRow;
 import java.sql.ResultSet;
+import generated.cinemaBookingService.Seat;
 public class FrontRowProxy extends CinemaRowProxy implements IFrontRow{
    private Integer id;
    private Optional<FrontRow> theObject;
@@ -43,5 +44,11 @@ public class FrontRowProxy extends CinemaRowProxy implements IFrontRow{
          Boolean bookedUp = rs.getBoolean("bookedUp");
          return FrontRow.createAlreadyPersistent(this, price, bookedUp);
       } catch (Exception e) {throw new PersistenceException(e.getMessage());}
+   }
+   public void addSeat(Seat seat){
+      this.getTheObject().addSeat(seat);
+   }
+   public Boolean deleteSeat(Seat seat){
+      return this.getTheObject().deleteSeat(seat);
    }
 }

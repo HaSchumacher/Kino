@@ -1,4 +1,4 @@
-/**--- Generated at Thu Feb 25 17:10:43 CET 2021 
+/**--- Generated at Sun Feb 28 15:53:02 CET 2021 
  * --- Change only in Editable Sections!  
  * --- Do not touch section numbering!   
  */
@@ -63,18 +63,5 @@ public class MainStartCinema extends Observable implements java.io.Serializable,
    }
    public int hashCode() {return this.getId().hashCode();}
    //80 ===== Editable : Your Operations =============
-   public static void main(String[] args) {
-		try {
-			CinemaBookingService cinemaService = new CinemaBookingService();
-			Cinema cinema = Cinema.getInstance();
-			OwnerService ownerService = OwnerService.createFresh(cinema);
-			
-			System.out.println(cinema.getFilmProjections().toString());
-		} catch (PersistenceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
 //90 ===== GENERATED: End of Your Operations ======
 }

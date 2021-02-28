@@ -1,11 +1,11 @@
-/**--- Generated at Thu Feb 25 15:08:56 CET 2021 
+/**--- Generated at Sun Feb 28 15:53:02 CET 2021 
  * --- No Change Allowed!  
  */
 package generated.cinemaBookingService.commands;
 import generated.cinemaBookingService.*;
 import commands.*;
 public class OwnerService_deleteGivenFilmFromCinemahall_Command extends ObjectCommand<OwnerService, Boolean>{
-   private static final long serialVersionUID = 1014369879L;
+   private static final long serialVersionUID = -134453204L;
    private Movie movie;
    public OwnerService_deleteGivenFilmFromCinemahall_Command(OwnerService receiver, Movie movie){
       super(receiver);
