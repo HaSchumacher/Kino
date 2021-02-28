@@ -1,11 +1,11 @@
-/**--- Generated at Sun Feb 28 15:10:31 CET 2021 
+/**--- Generated at Sun Feb 28 16:02:00 CET 2021 
  * --- No Change Allowed!  
  */
 package generated.cinemaService.commands;
 import generated.cinemaService.*;
 import commands.*;
 public class changePriceCategory_Command extends ServiceCommand<Void>{
-   private static final long serialVersionUID = -1231369488L;
+   private static final long serialVersionUID = -517623625L;
    private PriceCategory c;
    private Integer price;
    public changePriceCategory_Command(PriceCategory c, Integer price){

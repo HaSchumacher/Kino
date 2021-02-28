@@ -1,11 +1,11 @@
-/**--- Generated at Sun Feb 28 15:10:31 CET 2021 
+/**--- Generated at Sun Feb 28 16:02:00 CET 2021 
  * --- No Change Allowed!  
  */
 package generated.cinemaService.commands;
 import generated.cinemaService.*;
 import commands.*;
 public class reserve_Command extends ServiceCommand<Void>{
-   private static final long serialVersionUID = -533588634L;
+   private static final long serialVersionUID = -852314899L;
    private User u;
    private Filmprojection fp;
    private PriceCategory c;

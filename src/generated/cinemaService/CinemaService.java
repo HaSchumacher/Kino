@@ -1,4 +1,4 @@
-/**--- Generated at Sun Feb 28 15:38:46 CET 2021 
+/**--- Generated at Sun Feb 28 16:02:00 CET 2021 
  * --- Change only in Editable Sections!  
  * --- Do not touch section numbering!   
  */
@@ -396,7 +396,5 @@ public class CinemaService extends Observable{
       // TODO: Implement Operation reserve
       return;
    }
-
-  
 //90 ===== GENERATED: End of Your Operations ======
 }
