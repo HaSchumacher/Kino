@@ -1,11 +1,11 @@
-/**--- Generated at Sun Feb 28 16:02:00 CET 2021 
+/**--- Generated at Mon Mar 01 12:40:20 CET 2021 
  * --- No Change Allowed!  
  */
 package generated.cinemaService.commands;
 import generated.cinemaService.*;
 import commands.*;
 public class book_Command extends ServiceCommand<Void>{
-   private static final long serialVersionUID = 2013921729L;
+   private static final long serialVersionUID = 1346987422L;
    private Reservation r;
    public book_Command(Reservation r){
       super();

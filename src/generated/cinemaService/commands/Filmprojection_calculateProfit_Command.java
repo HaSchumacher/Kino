@@ -1,11 +1,11 @@
-/**--- Generated at Sun Feb 28 16:02:00 CET 2021 
+/**--- Generated at Mon Mar 01 12:40:21 CET 2021 
  * --- No Change Allowed!  
  */
 package generated.cinemaService.commands;
 import generated.cinemaService.*;
 import commands.*;
 public class Filmprojection_calculateProfit_Command extends ObjectCommand<Filmprojection, Integer>{
-   private static final long serialVersionUID = 460788376L;
+   private static final long serialVersionUID = 2072793473L;
    public Filmprojection_calculateProfit_Command(Filmprojection receiver){
       super(receiver);
    }

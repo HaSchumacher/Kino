@@ -1,11 +1,11 @@
-/**--- Generated at Sun Feb 28 16:02:00 CET 2021 
+/**--- Generated at Mon Mar 01 12:40:20 CET 2021 
  * --- No Change Allowed!  
  */
 package generated.cinemaService.commands;
 import generated.cinemaService.*;
 import commands.*;
 public class addCinemahall_Command extends ServiceCommand<Void>{
-   private static final long serialVersionUID = -2044455756L;
+   private static final long serialVersionUID = -2074977447L;
    private String name;
    private Integer rows;
    private Integer Seats;

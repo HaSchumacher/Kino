@@ -4,15 +4,15 @@
 package generated.cinemaService.commands;
 import generated.cinemaService.*;
 import commands.*;
-public class deleteCinemahall_Command extends ServiceCommand<Boolean>{
-   private static final long serialVersionUID = -1160469336L;
-   private Cinemahall c;
-   public deleteCinemahall_Command(Cinemahall c){
+public class getOptions_Command extends ServiceCommand<Void>{
+   private static final long serialVersionUID = -542779545L;
+   private User u;
+   public getOptions_Command(User u){
       super();
-      this.c = c;
+      this.u = u;
    }
    public void execute(){
-      try{this.result = CinemaService.getInstance().deleteCinemahall(c);
+      try{CinemaService.getInstance().getOptions(u);
       }catch(Exception e){this.e = e;
       }finally{CinemaService.getInstance().notifyObservers(this);}
    }

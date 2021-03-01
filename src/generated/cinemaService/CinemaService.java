@@ -1,4 +1,4 @@
-/**--- Generated at Sun Feb 28 16:02:00 CET 2021 
+/**--- Generated at Mon Mar 01 12:40:20 CET 2021 
  * --- Change only in Editable Sections!  
  * --- Do not touch section numbering!   
  */
@@ -242,159 +242,204 @@ public class CinemaService extends Observable{
    public void closeDBConnection() throws java.sql.SQLException{
       db.connection.DBConnectionManager.getTheInstance().close();
    }
-   //80 ===== Editable : Your Operations =============
-   /**--- Generated at Sun Feb 28 14:35:57 CET 2021 
-   //80 ===== Editable : Your Operations =============
-/**
- * Change Price on Pricecategory.
- */
-   public void changePriceCategory(PriceCategory c, Integer price){
-      // TODO: Implement Operation changePriceCategory
-      return;
-   }
-/**
- * Login a User in CinemaService.
- */
-   public void login(String username, String password)throws LoginError{
-      // TODO: Implement Operation login
-      return;
-   }
-/**
- * Add a Cinemahall to the CinemaService.
- * @throws PersistenceException 
- * @throws ConstraintViolation 
- */
-   public void addCinemahall(String name, Integer rows, Integer Seats)throws CinemaHallCreation, PersistenceException, ConstraintViolation{
-	   Cinemahall hall = Cinemahall.createFresh(false, name);
-	   Integer getEqualRows = rows/3;
-	   if (getEqualRows *3 == rows) {
-	      
-	   for (int i = 1; i <= getEqualRows; i++) { 
-		CinemaRow currentRow = CinemaRow.createFresh(Front.getInstance(), i, false);
-		for (int j = 1; j <= Seats; j++) {
-			currentRow.addToMySeats(Seat.createFresh(j, currentRow));
+   /**
+	 * --- Generated at Sun Feb 28 14:35:57 CET 2021 //80 ===== Editable : Your
+	 * Operations ============= /** Change Price on Pricecategory.
+	 */
+	public void changePriceCategory(PriceCategory c, Integer price) {
+		// TODO: Implement Operation changePriceCategory
+		return;
+	}
+
+	/**
+	 * Login a User in CinemaService.
+	 */
+	public void login(String username, String password) throws LoginError {
+		// TODO: Implement Operation login
+		return;
+	}
+
+	/**
+	 * Add a Cinemahall to the CinemaService.
+	 * 
+	 * @throws PersistenceException
+	 * @throws ConstraintViolation
+	 */
+	public void addCinemahall(String name, Integer rows, Integer Seats)
+			throws CinemaHallCreation, PersistenceException, ConstraintViolation {
+		Cinemahall hall = Cinemahall.createFresh(false, name);
+		Integer getEqualRows = rows / 3;
+		if (getEqualRows * 3 == rows) {
+
+			for (int i = 1; i <= getEqualRows; i++) {
+				CinemaRow currentRow = CinemaRow.createFresh(Front.getInstance(), i, false);
+				for (int j = 1; j <= Seats; j++) {
+					currentRow.addToMySeats(Seat.createFresh(j, currentRow));
+				}
+				hall.addToMyRows(currentRow);
+			}
+			for (int i = 1; i <= getEqualRows; i++) {
+				CinemaRow currentRow = CinemaRow.createFresh(Middle.getInstance(), getEqualRows + i, false);
+				for (int j = 1; j <= Seats; j++) {
+					currentRow.addToMySeats(Seat.createFresh(j, currentRow));
+				}
+				hall.addToMyRows(currentRow);
+			}
+			for (int i = 1; i <= getEqualRows; i++) {
+				CinemaRow currentRow = CinemaRow.createFresh(Back.getInstance(), getEqualRows * 2 + i, false);
+				for (int j = 1; j <= Seats; j++) {
+					currentRow.addToMySeats(Seat.createFresh(j, currentRow));
+				}
+				hall.addToMyRows(currentRow);
+			}
+
+		} else {
+			throw new CinemaHallCreation();
 		}
-		hall.addToMyRows(currentRow);
-	   }
-	   for (int i = 1; i <= getEqualRows; i++) {
-		   CinemaRow currentRow = CinemaRow.createFresh(Middle.getInstance(), getEqualRows + i, false);
-		   for (int j = 1; j <= Seats; j++) {
-			   currentRow.addToMySeats(Seat.createFresh(j, currentRow));
-			}
-		   hall.addToMyRows(currentRow);
-		   }
-	   for (int i = 1; i <= getEqualRows; i++) {
-		   CinemaRow currentRow = CinemaRow.createFresh(Back.getInstance(), getEqualRows*2 + i, false);
-		   for (int j = 1; j <= Seats; j++) {
-			   currentRow.addToMySeats(Seat.createFresh(j, currentRow));
-			}
-		   hall.addToMyRows(currentRow);
-		   }
-	   
-	   }
-	   else {
-		   throw new CinemaHallCreation();
-	   }
-   }
-/**
- * Delete the given Cinemahall from CinemaService.
- */
-   public Boolean deleteCinemahall(Cinemahall c)throws DeleteError{
-	   if (this.cinemahallCache.containsKey(c.getId())) {
-	    	  this.cinemahallCache.remove(c.getId()); 
-	    	  return true;
-	      }
-	      return false;
-   }
-/**
- * add role to User.
- */
-   public Boolean addRoleToUser(User u, Role r){
-      // TODO: Implement Operation addRoleToUser
-      return null;
-   }
-/**
- * registerAUserInSystem
- */
-   public void register(String name, String mail, String username, String passwort)throws RegisterError{
-      // TODO: Implement Operation register
-      return;
-   }
-/**
- * book a given reservation
- */
-   public void book(Reservation r)throws BookingError{
-      // TODO: Implement Operation book
-      return;
-   }
-/**
- * Calculate the Total Profit of the Cinema.
- */
-   public Integer calculateTotalProfit(){
-      // TODO: Implement Operation calculateTotalProfit
-      return null;
-   }
-/**
- * Adding a Filmprojection to the CinemaService.
- */
-   public void addFilmprojection(Cinemahall c, Movie m) throws PersistenceException{
-		  Filmprojection.createFresh(c, m);
-   }
-/**
- * Delete the Movie form the Cinema.
- */
-   public Boolean deleteMovie(Movie m)throws DeleteError{
-      // TODO: Implement Operation deleteMovie
-      return null;
-   }
-/**
- * Add a Movie to the Cinema.
- * @throws PersistenceException 
- */
-   public void addMovie(String title) throws PersistenceException{
-	   Movie m = Movie.createFresh(title);
-   }
-/**
- * Logout the given User from Cinema Service.
- */
-   public Boolean logout(User user){
-      // TODO: Implement Operation logout
-      return null;
-   }
-/**
- * Delete the given Filmprojection from CinemaService.
- */
-   public Boolean deleteFilmprojection(Filmprojection fp)throws DeleteError{
-      // TODO: Implement Operation deleteFilmprojection
-      return null;
-   }
-/**
- * delete Role from User.
- */
-   public Boolean deleteRoleFromUser(User u, Role r)throws DeleteError{
-      // TODO: Implement Operation deleteRoleFromUser
-      return null;
-   }
-/**
- * Cancel the given Reservation.
- */
-   public Boolean cancelReservation(Reservation r)throws DeleteError{
-      // TODO: Implement Operation cancelReservation
-      return null;
-   }
-/**
- * Calculate the Profit from one Filmprojection or more or all.
- */
-   public Integer calulateProfit(Collection<Filmprojection> fp){
-      // TODO: Implement Operation calulateProfit
-      return null;
-   }
-/**
- * reservate a Seat in given Fp for user.
- */
-   public void reserve(User u, Filmprojection fp, PriceCategory c)throws ReservationError{
-      // TODO: Implement Operation reserve
-      return;
-   }
+	}
+
+	/**
+	 * Delete the given Cinemahall from CinemaService.
+	 */
+	public Boolean deleteCinemahall(Cinemahall c) throws DeleteError {
+		if (this.cinemahallCache.containsKey(c.getId())) {
+			this.cinemahallCache.remove(c.getId());
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * add role to User.
+	 */
+	public Boolean addRoleToUser(User u, Role r) {
+		// TODO: Implement Operation addRoleToUser
+		return null;
+	}
+
+	/**
+	 * registerAUserInSystem
+	 */
+	public void register(String name, String mail, String username, String passwort) throws RegisterError {
+		// TODO: Implement Operation register
+		return;
+	}
+
+	/**
+	 * book a given reservation
+	 */
+	public void book(Reservation r) throws BookingError {
+		// TODO: Implement Operation book
+		return;
+	}
+
+	/**
+	 * Calculate the Total Profit of the Cinema.
+	 */
+	public Integer calculateTotalProfit() {
+		// TODO: Implement Operation calculateTotalProfit
+		return null;
+	}
+
+	/**
+	 * Adding a Filmprojection to the CinemaService.
+	 */
+	public void addFilmprojection(Cinemahall c, Movie m) throws PersistenceException {
+		Filmprojection.createFresh(c, m);
+	}
+
+	/**
+	 * Delete the Movie form the Cinema.
+	 */
+	public Boolean deleteMovie(Movie m) throws DeleteError {
+		// TODO: Implement Operation deleteMovie
+		return null;
+	}
+
+	/**
+	 * Add a Movie to the Cinema.
+	 * 
+	 * @throws PersistenceException
+	 */
+	public void addMovie(String title) throws PersistenceException {
+		Movie m = Movie.createFresh(title);
+	}
+
+	/**
+	 * Logout the given User from Cinema Service.
+	 */
+	public Boolean logout(User user) {
+		// TODO: Implement Operation logout
+		return null;
+	}
+
+	/**
+	 * Delete the given Filmprojection from CinemaService.
+	 */
+	public Boolean deleteFilmprojection(Filmprojection fp) throws DeleteError {
+		// TODO: Implement Operation deleteFilmprojection
+		return null;
+	}
+
+	/**
+	 * delete Role from User.
+	 */
+	public Boolean deleteRoleFromUser(User u, Role r) throws DeleteError {
+		// TODO: Implement Operation deleteRoleFromUser
+		return null;
+	}
+
+	/**
+	 * Cancel the given Reservation.
+	 */
+	public Boolean cancelReservation(Reservation r) throws DeleteError {
+		// TODO: Implement Operation cancelReservation
+		return null;
+	}
+
+	/**
+	 * Calculate the Profit from one Filmprojection or more or all.
+	 */
+	public Integer calulateProfit(Collection<Filmprojection> fp) {
+		// TODO: Implement Operation calulateProfit
+		return null;
+	}
+
+	/**
+	 * reservate a Seat in given Fp for user.
+	 */
+	public void reserve(User u, Filmprojection fp, PriceCategory c) throws ReservationError {
+		// TODO: Implement Operation reserve
+		return;
+	}
+
+	/**
+	 * get the options for a user. what can i do in the cinemaservice.
+	 * 
+	 * @throws PersistenceException
+	 */
+	public String getOptions(User u) throws PersistenceException {
+		String result = "";
+		if (u.getMyRoles().contains(Admin.getInstance())) {
+			result = result + 
+					"As Admin you can do:"+
+					"\n1: Cinema options." +
+					"\n2: Filmprojection and Movie options."+
+					"\n3: Profit options"+
+					"\n4: User Management"+
+					"\n************************* ";
+			
+		} else if (u.getMyRoles().contains(Customer.getInstance())) {
+			result = result +
+			"As Customer you can do:"+
+			"\n1: Reservation"+
+			"\n2: Book your Reservation"+
+			"\n3: Get your Reservation"+
+			"\n4: Get your Booking"+
+			"\n************************* "+
+			"\n0:Logout";
+		}
+			return result;
+	}
 //90 ===== GENERATED: End of Your Operations ======
 }

@@ -1,11 +1,11 @@
-/**--- Generated at Sun Feb 28 16:02:00 CET 2021 
+/**--- Generated at Mon Mar 01 12:40:21 CET 2021 
  * --- No Change Allowed!  
  */
 package generated.cinemaService.commands;
 import generated.cinemaService.*;
 import commands.*;
 public class Cinemahall_constructor_Command extends ServiceCommand<Cinemahall>{
-   private static final long serialVersionUID = 776242132L;
+   private static final long serialVersionUID = 112869745L;
    private Boolean  open;
    private String  name;
    public Cinemahall_constructor_Command(Boolean  open, String  name){

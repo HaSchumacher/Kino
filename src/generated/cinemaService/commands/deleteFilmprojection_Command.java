@@ -1,11 +1,11 @@
-/**--- Generated at Sun Feb 28 16:02:00 CET 2021 
+/**--- Generated at Mon Mar 01 12:40:21 CET 2021 
  * --- No Change Allowed!  
  */
 package generated.cinemaService.commands;
 import generated.cinemaService.*;
 import commands.*;
 public class deleteFilmprojection_Command extends ServiceCommand<Boolean>{
-   private static final long serialVersionUID = 399635469L;
+   private static final long serialVersionUID = -1049926773L;
    private Filmprojection fp;
    public deleteFilmprojection_Command(Filmprojection fp){
       super();

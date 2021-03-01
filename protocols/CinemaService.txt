@@ -1,5 +1,5 @@
 
-STARTING JAVA AST CREATION @ Sun Feb 28 16:01:59 CET 2021
+STARTING JAVA AST CREATION @ Mon Mar 01 12:40:20 CET 2021
 Start Transforming CinemaService
 Information: --> Starting Transformation Phase 1
 Start Transforming BookingError
@@ -1388,8 +1388,38 @@ Information: Invoking method public metaModel.JRelationType metaModel.JService.g
 Information: Creating JClassLink-Instance to JClass Role
 Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
 Information: Transforming value null of property isMany
+Start Transforming Operation
+Information: Construction of constructor-parameter-value for techName:java.lang.String
+Information: Transforming value getOptions of property techName
+Information: Construction of constructor-parameter-value for readableName:java.lang.String
+Information: Transforming value options of property readableName
+Information: Construction of constructor-parameter-value for documentation:java.lang.String
+Information: Transforming value Get the Options for a User. of property documentation
+Information: Construction of constructor-parameter-value for abstrakt:java.lang.Boolean
+Information: Transforming value null of property abstrakt
+Information: Construction of constructor-parameter-value for returnType:metaModel.JTypeAdapter
+Information: No value found for  child returnType. That's ok, because its optionality value is true
+Information: Construction of constructor-parameter-value for exception:metaModel.JException
+Information: No Value found for  Reference exception. That's ok, because its optionality Value is true
+Information: Adding children according to addFormalParameter(Feature formalParameters) in Java Class class metaModel.JOperation
+Start Transforming u
+Information: Construction of constructor-parameter-value for name:java.lang.String
+Information: Transforming value u of property name
+Information: Construction of constructor-parameter-value for type:metaModel.JTypeAdapter
+Start Transforming User
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node User of concept Class
+Information: Searching for method getClass
+Information: Not found! Try getType
+Information: Searching for method getType
+Information: Not found! Try getX with X the implemented interface
+Information: Searching for method getRelationType
+Information: Invoking method public metaModel.JRelationType metaModel.JService.getRelationType(java.lang.String) throws javaASTTraversals.MDEException with actual parameter: User
+Information: Creating JClassLink-Instance to JClass User
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
 Information: --> Starting Transformation Phase 2 
 Information: --> Finished Transformation Phase 2 (assigning all unassigned references) with no Errors.
-Information: Successfully Finished Java AST Creation @ Sun Feb 28 16:01:59 CET 2021
+Information: Successfully Finished Java AST Creation @ Mon Mar 01 12:40:20 CET 2021
 Information: Carried out Code Generation for CinemaService. Watch out for Syntax Errors in Generated Code!!!
 Information: Created XML File at C:\Users\admin\git\Kino\protocols\ASTCinemaService.xml
