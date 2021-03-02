@@ -1,4 +1,4 @@
-/**--- Generated at Mon Mar 01 12:40:23 CET 2021 
+/**--- Generated at Tue Mar 02 12:07:24 CET 2021 
  * --- Change only in Editable Sections!  
  * --- Do not touch section numbering!   
  */
@@ -14,7 +14,7 @@ public class LoginError extends Exception
    
    //50 ===== GENERATED:      Constructor ============
    public LoginError(){
-      super("Something went wrong. Please Check your Credentials.");
+      super("Something went wrong. Please check your credentials.");
    }
    //60 ===== Editable : Your Constructors ===========
    

@@ -1,11 +1,11 @@
-/**--- Generated at Mon Mar 01 12:40:21 CET 2021 
+/**--- Generated at Tue Mar 02 12:07:23 CET 2021 
  * --- No Change Allowed!  
  */
 package generated.cinemaService.commands;
 import generated.cinemaService.*;
 import commands.*;
 public class Filmprojection_constructor_Command extends ServiceCommand<Filmprojection>{
-   private static final long serialVersionUID = 171996681L;
+   private static final long serialVersionUID = 821775453L;
    private Cinemahall myHall;
    private Movie myMovie;
    public Filmprojection_constructor_Command(Cinemahall myHall, Movie myMovie){

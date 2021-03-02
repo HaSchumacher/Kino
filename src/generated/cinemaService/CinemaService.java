@@ -1,4 +1,4 @@
-/**--- Generated at Mon Mar 01 12:40:20 CET 2021 
+/**--- Generated at Tue Mar 02 12:07:22 CET 2021 
  * --- Change only in Editable Sections!  
  * --- Do not touch section numbering!   
  */
@@ -18,7 +18,10 @@ import db.connection.TypeKeyManager;
 import db.connection.DBConnectionManager;
 import db.connection.DBConnectionData;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 //20 ===== Editable : Your import section =========
 //30 ===== GENERATED: Main Section ================
 public class CinemaService extends Observable{
@@ -242,21 +245,30 @@ public class CinemaService extends Observable{
    public void closeDBConnection() throws java.sql.SQLException{
       db.connection.DBConnectionManager.getTheInstance().close();
    }
-   /**
+	/**
 	 * --- Generated at Sun Feb 28 14:35:57 CET 2021 //80 ===== Editable : Your
 	 * Operations ============= /** Change Price on Pricecategory.
+	 * @throws PersistenceException 
 	 */
-	public void changePriceCategory(PriceCategory c, Integer price) {
-		// TODO: Implement Operation changePriceCategory
-		return;
+	public void changePriceCategory(PriceCategory c, Integer price) throws PersistenceException {
+		Integer oldprice = c.getPrice();
+		if(! (oldprice == price)) {
+			Front.getInstance().setprice(price);
+		}
 	}
 
 	/**
 	 * Login a User in CinemaService.
 	 */
 	public void login(String username, String password) throws LoginError {
-		// TODO: Implement Operation login
-		return;
+		// TODO: Security commands
+		UserProxy loginuser = null;
+		for (Entry<Integer, UserProxy> user : this.userCache.entrySet()) {
+			UserProxy userEntry = user.getValue();
+			if(userEntry.getUsername() == username && userEntry.getPassword() == password ) {
+				loginuser = (UserProxy) user;
+			}
+		}
 	}
 
 	/**
@@ -311,26 +323,29 @@ public class CinemaService extends Observable{
 
 	/**
 	 * add role to User.
+	 * @throws PersistenceException 
 	 */
-	public Boolean addRoleToUser(User u, Role r) {
-		// TODO: Implement Operation addRoleToUser
-		return null;
+	public void addRoleToUser(User u, Role r) throws PersistenceException {
+		u.addToMyRoles(r);
 	}
 
 	/**
 	 * registerAUserInSystem
+	 * @throws PersistenceException 
 	 */
-	public void register(String name, String mail, String username, String passwort) throws RegisterError {
-		// TODO: Implement Operation register
-		return;
+	public void register(String name, String mail, String username, String passwort) throws RegisterError, PersistenceException {
+		//TODO HASHING PW decrypt
+		User.createFresh(name, mail, username, passwort);
 	}
 
 	/**
 	 * book a given reservation
+	 * @throws PersistenceException 
 	 */
-	public void book(Reservation r) throws BookingError {
-		// TODO: Implement Operation book
-		return;
+	public void book(Reservation r) throws BookingError, PersistenceException {
+		if(r.getMyBooking().isEmpty()) {
+			Booking.createFresh(r);
+		}
 	}
 
 	/**
@@ -351,9 +366,11 @@ public class CinemaService extends Observable{
 	/**
 	 * Delete the Movie form the Cinema.
 	 */
-	public Boolean deleteMovie(Movie m) throws DeleteError {
-		// TODO: Implement Operation deleteMovie
-		return null;
+	public void deleteMovie(Movie m) throws DeleteError {
+		Integer mid = m.getId();
+		if (this.movieCache.containsKey(mid)) {
+			this.movieCache.remove(mid);
+		} else { throw new DeleteError();}
 	}
 
 	/**
@@ -369,48 +386,69 @@ public class CinemaService extends Observable{
 	 * Logout the given User from Cinema Service.
 	 */
 	public Boolean logout(User user) {
-		// TODO: Implement Operation logout
+		// TODO: Ansicht Entziehen ?!
 		return null;
 	}
 
 	/**
 	 * Delete the given Filmprojection from CinemaService.
 	 */
-	public Boolean deleteFilmprojection(Filmprojection fp) throws DeleteError {
-		// TODO: Implement Operation deleteFilmprojection
-		return null;
+	public void deleteFilmprojection(Filmprojection fp) throws DeleteError {
+		if(this.filmprojectionCache.containsKey(fp.getId())) {
+			this.filmprojectionCache.remove(fp.getId());
+		} else throw new DeleteError();
 	}
 
 	/**
 	 * delete Role from User.
+	 * @throws PersistenceException 
 	 */
-	public Boolean deleteRoleFromUser(User u, Role r) throws DeleteError {
-		// TODO: Implement Operation deleteRoleFromUser
-		return null;
+	public void deleteRoleFromUser(User u, Role r) throws DeleteError, PersistenceException {
+		if(u.getMyRoles().contains(r)) {u.getMyRoles().remove(r);}
 	}
 
 	/**
 	 * Cancel the given Reservation.
 	 */
-	public Boolean cancelReservation(Reservation r) throws DeleteError {
-		// TODO: Implement Operation cancelReservation
-		return null;
+	public void cancelReservation(Reservation r) throws DeleteError {
+		if ( this.getReservationCache().containsKey(r.getId())) {
+			this.getReservationCache().remove(r.getId());
+		}
 	}
 
 	/**
 	 * Calculate the Profit from one Filmprojection or more or all.
 	 */
 	public Integer calulateProfit(Collection<Filmprojection> fp) {
-		// TODO: Implement Operation calulateProfit
-		return null;
+		Integer sum = 0;
+		for (Iterator<Filmprojection> iterator = fp.iterator(); iterator.hasNext();) {
+			sum += iterator.next().calculateProfit(); 
+		}
+		return sum;
 	}
 
 	/**
 	 * reservate a Seat in given Fp for user.
+	 * @throws PersistenceException 
 	 */
-	public void reserve(User u, Filmprojection fp, PriceCategory c) throws ReservationError {
-		// TODO: Implement Operation reserve
-		return;
+	public void reserve(User u, Filmprojection fp, PriceCategory c) throws ReservationError, PersistenceException {
+		List<CinemaRow> currRowlist = fp.getMyHall().getMyRows();
+		for (int i = 0; i < currRowlist.size(); i++) {
+			CinemaRow currRow = currRowlist.get(i);
+			if (currRow.getPriceCategory().getId() == c.getId()) {
+				if (!currRow.getBookedUp()) {
+					List<Seat> currSeatList = currRow.getMySeats();
+					for (int j = 0; j < currSeatList.size(); j++) {
+						Seat currSeat = currSeatList.get(j);
+						if(currSeat.getMyReservation().isEmpty()) {
+							Reservation.createFresh(currSeat, fp, u);
+							return;
+						}
+					}
+				}
+			}
+		}
+		throw new ReservationError();
 	}
 
 	/**

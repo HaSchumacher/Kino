@@ -1,4 +1,4 @@
-/**--- Generated at Mon Mar 01 12:40:21 CET 2021 
+/**--- Generated at Tue Mar 02 12:07:23 CET 2021 
  * --- No Change Allowed!  
  */
 package generated.cinemaService.proxies;
@@ -13,4 +13,12 @@ public interface IUser extends Identifiable{
    public Set<Role> getMyRoles() throws PersistenceException;
    public void addToMyRoles(Role arg) throws PersistenceException;
    public boolean removeFromMyRoles(Role arg) throws PersistenceException;
+   public String getName() ;
+   public void setName(String newName) throws PersistenceException;
+   public String getEmail() ;
+   public void setEmail(String newEmail) throws PersistenceException;
+   public String getUsername() ;
+   public void setUsername(String newUsername) throws PersistenceException;
+   public String getPassword() ;
+   public void setPassword(String newPassword) throws PersistenceException;
 }

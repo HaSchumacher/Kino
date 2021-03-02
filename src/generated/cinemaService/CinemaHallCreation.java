@@ -1,4 +1,4 @@
-/**--- Generated at Mon Mar 01 12:40:23 CET 2021 
+/**--- Generated at Tue Mar 02 12:07:24 CET 2021 
  * --- Change only in Editable Sections!  
  * --- Do not touch section numbering!   
  */
@@ -14,7 +14,7 @@ public class CinemaHallCreation extends Exception
    
    //50 ===== GENERATED:      Constructor ============
    public CinemaHallCreation(){
-      super("The Cinemahall is already given.");
+      super("The Cinemahall you tried to create is already given.");
    }
    //60 ===== Editable : Your Constructors ===========
    

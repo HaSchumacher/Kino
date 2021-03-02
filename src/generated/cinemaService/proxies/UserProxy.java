@@ -1,4 +1,4 @@
-/**--- Generated at Mon Mar 01 12:40:21 CET 2021 
+/**--- Generated at Tue Mar 02 12:07:23 CET 2021 
  * --- No Change Allowed!  
  */
 package generated.cinemaService.proxies;
@@ -41,7 +41,11 @@ public class UserProxy implements IUser{
       ResultSet rs = null;
       try {
          rs = DBExecuterFactory.getConfiguredFactory().getDBDMLExecuter().selectIdSpecifiedCursorAleadyAtFirstRow("User", this.id);
-         return User.createAlreadyPersistent(this);
+         String name = rs.getString("name");
+         String email = rs.getString("email");
+         String username = rs.getString("username");
+         String password = rs.getString("password");
+         return User.createAlreadyPersistent(this, name, email, username, password);
       } catch (Exception e) {throw new PersistenceException(e.getMessage());}
    }
    public Set<Role> getMyRoles() throws PersistenceException{
@@ -52,5 +56,29 @@ public class UserProxy implements IUser{
    }
    public boolean removeFromMyRoles(Role arg) throws PersistenceException{
       return this.getTheObject().removeFromMyRoles(arg);
+   }
+   public String getName() {
+      return this.getTheObject().getName();
+   }
+   public void setName(String newName) throws PersistenceException{
+      this.getTheObject().setName(newName);
+   }
+   public String getEmail() {
+      return this.getTheObject().getEmail();
+   }
+   public void setEmail(String newEmail) throws PersistenceException{
+      this.getTheObject().setEmail(newEmail);
+   }
+   public String getUsername() {
+      return this.getTheObject().getUsername();
+   }
+   public void setUsername(String newUsername) throws PersistenceException{
+      this.getTheObject().setUsername(newUsername);
+   }
+   public String getPassword() {
+      return this.getTheObject().getPassword();
+   }
+   public void setPassword(String newPassword) throws PersistenceException{
+      this.getTheObject().setPassword(newPassword);
    }
 }

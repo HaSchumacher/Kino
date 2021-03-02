@@ -1,4 +1,4 @@
-/**--- Generated at Mon Mar 01 12:40:21 CET 2021 
+/**--- Generated at Tue Mar 02 12:07:22 CET 2021 
  * --- No Change Allowed!  
  */
 package generated.cinemaService.commands;
@@ -6,7 +6,7 @@ import generated.cinemaService.*;
 import commands.*;
 import java.util.Collection;
 public class calulateProfit_Command extends ServiceCommand<Integer>{
-   private static final long serialVersionUID = -2146855297L;
+   private static final long serialVersionUID = 1967694172L;
    private Collection<Filmprojection> fp;
    public calulateProfit_Command(Collection<Filmprojection> fp){
       super();

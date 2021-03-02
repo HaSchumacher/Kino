@@ -1,4 +1,4 @@
-/**--- Generated at Mon Mar 01 12:40:21 CET 2021 
+/**--- Generated at Tue Mar 02 12:07:23 CET 2021 
  * --- Change only in Editable Sections!  
  * --- Do not touch section numbering!   
  */
@@ -24,28 +24,36 @@ public class User extends Observable implements java.io.Serializable, IUser
 {
    //30 ===== GENERATED:      Attribute Section ======
    private Integer id;
+   private String name;
+   private String email;
+   private String username;
+   private String password;
    //40 ===== Editable : Your Attribute Section ======
    
    //50 ===== GENERATED:      Constructor ============
-   private User(Integer id, boolean objectOnly)
+   private User(Integer id, String name, String email, String username, String password, boolean objectOnly)
    {
       super();
       this.setId(id);
+      this.name = name;
+      this.email = email;
+      this.username = username;
+      this.password = password;
       if(objectOnly) return;
    }
    /** Caution: A Call to this Method Requires to add any newly instantiated Object to its Cache! */
-   public static User createAlreadyPersistent(UserProxy proxy){
+   public static User createAlreadyPersistent(UserProxy proxy, String name, String email, String username, String password){
       if(proxy.isObjectPresent()) return proxy.getTheObject();
-      return new User(proxy.getId(), true);
+      return new User(proxy.getId(), name, email, username, password, true);
    }
-   public static User createFresh()throws PersistenceException{
+   public static User createFresh(String name, String email, String username, String password)throws PersistenceException{
       db.executer.DBDMLExecuter dmlExecuter = PersistenceExecuterFactory.getConfiguredFactory().getDBDMLExecuter();
       Integer id = dmlExecuter.getNextId();
       try{
-         dmlExecuter.insertInto("User", "id, typeKey", 
-         id.toString() + ", " + TypeKeyManager.getTheInstance().getTypeKey("CinemaService", "User").toString());
+         dmlExecuter.insertInto("User", "id, typeKey, name, email, username, password", 
+         id.toString() + ", " + TypeKeyManager.getTheInstance().getTypeKey("CinemaService", "User").toString() + ", " + "'" + name + "'" + ", " + "'" + email + "'" + ", " + "'" + username + "'" + ", " + "'" + password + "'");
       }catch(SQLException|NoConnectionException e){throw new PersistenceException(e.getMessage());}
-      User me = new User(id, false);
+      User me = new User(id, name, email, username, password, false);
       CinemaService.getInstance().addUserProxy(new UserProxy(me));
       return me;
    }
@@ -76,6 +84,38 @@ public class User extends Observable implements java.io.Serializable, IUser
    }
    public boolean removeFromMyRoles(Role arg) throws PersistenceException{
       return User_RoleSupervisor.getInstance().remove(this, arg);
+   }
+   public String getName() {
+      return this.name;
+   }
+   public void setName(String newName) throws PersistenceException{
+      this.name = newName;
+      try{PersistenceExecuterFactory.getConfiguredFactory().getDBDMLExecuter().update("User", "name", "'" + newName + "'", this.getId());
+      }catch(SQLException|NoConnectionException e){throw new PersistenceException(e.getMessage());}
+   }
+   public String getEmail() {
+      return this.email;
+   }
+   public void setEmail(String newEmail) throws PersistenceException{
+      this.email = newEmail;
+      try{PersistenceExecuterFactory.getConfiguredFactory().getDBDMLExecuter().update("User", "email", "'" + newEmail + "'", this.getId());
+      }catch(SQLException|NoConnectionException e){throw new PersistenceException(e.getMessage());}
+   }
+   public String getUsername() {
+      return this.username;
+   }
+   public void setUsername(String newUsername) throws PersistenceException{
+      this.username = newUsername;
+      try{PersistenceExecuterFactory.getConfiguredFactory().getDBDMLExecuter().update("User", "username", "'" + newUsername + "'", this.getId());
+      }catch(SQLException|NoConnectionException e){throw new PersistenceException(e.getMessage());}
+   }
+   public String getPassword() {
+      return this.password;
+   }
+   public void setPassword(String newPassword) throws PersistenceException{
+      this.password = newPassword;
+      try{PersistenceExecuterFactory.getConfiguredFactory().getDBDMLExecuter().update("User", "password", "'" + newPassword + "'", this.getId());
+      }catch(SQLException|NoConnectionException e){throw new PersistenceException(e.getMessage());}
    }
    //80 ===== Editable : Your Operations =============
 //90 ===== GENERATED: End of Your Operations ======

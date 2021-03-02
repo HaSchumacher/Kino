@@ -1,4 +1,4 @@
-/**--- Generated at Mon Mar 01 12:40:23 CET 2021 
+/**--- Generated at Tue Mar 02 12:07:24 CET 2021 
  * --- Change only in Editable Sections!  
  * --- Do not touch section numbering!   
  */
@@ -14,7 +14,7 @@ public class BookingError extends Exception
    
    //50 ===== GENERATED:      Constructor ============
    public BookingError(){
-      super("An error occured during booking. Ether there is already booking or the given Reservation is wrong.");
+      super("An error occured during booking. Either there is already a booking or the given reservation is wrong.");
    }
    //60 ===== Editable : Your Constructors ===========
    

@@ -1,4 +1,4 @@
-/**--- Generated at Mon Mar 01 12:40:23 CET 2021 
+/**--- Generated at Tue Mar 02 12:07:24 CET 2021 
  * --- Change only in Editable Sections!  
  * --- Do not touch section numbering!   
  */
@@ -14,7 +14,7 @@ public class RegisterError extends Exception
    
    //50 ===== GENERATED:      Constructor ============
    public RegisterError(){
-      super("The User you want to register is already in the System. If you forget your Password please follow the instructions in the given Section.");
+      super("The user you want to register is already in the System. If you forgot your password please follow the instructions in the given section.");
    }
    //60 ===== Editable : Your Constructors ===========
    

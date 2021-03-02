@@ -1,17 +1,17 @@
 
-STARTING JAVA AST CREATION @ Mon Mar 01 12:40:20 CET 2021
+STARTING JAVA AST CREATION @ Tue Mar 02 12:07:21 CET 2021
 Start Transforming CinemaService
 Information: --> Starting Transformation Phase 1
 Start Transforming BookingError
 Information: Construction of constructor-parameter-value for name:java.lang.String
 Information: Transforming value BookingError of property name
 Information: Construction of constructor-parameter-value for errorText:java.lang.String
-Information: Transforming value An error occured during booking. Ether there is already booking or the given Reservation is wrong. of property errorText
+Information: Transforming value An error occured during booking. Either there is already a booking or the given reservation is wrong. of property errorText
 Start Transforming ReservationError
 Information: Construction of constructor-parameter-value for name:java.lang.String
 Information: Transforming value ReservationError of property name
 Information: Construction of constructor-parameter-value for errorText:java.lang.String
-Information: Transforming value The Reservation didn't pass. The given Category is full for this Filmprojection. of property errorText
+Information: Transforming value The reservation was not possible. The given category is full for this filmprojection. of property errorText
 Start Transforming DeleteError
 Information: Construction of constructor-parameter-value for name:java.lang.String
 Information: Transforming value DeleteError of property name
@@ -21,17 +21,17 @@ Start Transforming RegisterError
 Information: Construction of constructor-parameter-value for name:java.lang.String
 Information: Transforming value RegisterError of property name
 Information: Construction of constructor-parameter-value for errorText:java.lang.String
-Information: Transforming value The User you want to register is already in the System. If you forget your Password please follow the instructions in the given Section. of property errorText
+Information: Transforming value The user you want to register is already in the System. If you forgot your password please follow the instructions in the given section. of property errorText
 Start Transforming LoginError
 Information: Construction of constructor-parameter-value for name:java.lang.String
 Information: Transforming value LoginError of property name
 Information: Construction of constructor-parameter-value for errorText:java.lang.String
-Information: Transforming value Something went wrong. Please Check your Credentials. of property errorText
+Information: Transforming value Something went wrong. Please check your credentials. of property errorText
 Start Transforming CinemaHallCreation
 Information: Construction of constructor-parameter-value for name:java.lang.String
 Information: Transforming value CinemaHallCreation of property name
 Information: Construction of constructor-parameter-value for errorText:java.lang.String
-Information: Transforming value The Cinemahall is already given. of property errorText
+Information: Transforming value The Cinemahall you tried to create is already given. of property errorText
 Start Transforming Cinemahall
 Information: Construction of constructor-parameter-value for name:java.lang.String
 Information: Transforming value Cinemahall of property name
@@ -534,6 +534,46 @@ Information: Transforming value User of property name
 Information: Construction of constructor-parameter-value for singleton:java.lang.Boolean
 Information: Transforming value null of property singleton
 Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
+Start Transforming AttributeConnector
+Information: Construction of constructor-parameter-value for role:java.lang.String
+Information: Transforming value name of property role
+Information: Construction of constructor-parameter-value for targetType:metaModel.primitives.JPrimitiveType
+Information: Fetching already created Java Node for referenced node String of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: String
+Information: Construction of constructor-parameter-value for constraint:metaModel.enumerations.JMultiplicity
+Information: Transforming value null of property constraint
+Information: Retrieving enumeration value of type JTotalMap for property constraint
+Start Transforming AttributeConnector
+Information: Construction of constructor-parameter-value for role:java.lang.String
+Information: Transforming value email of property role
+Information: Construction of constructor-parameter-value for targetType:metaModel.primitives.JPrimitiveType
+Information: Fetching already created Java Node for referenced node String of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: String
+Information: Construction of constructor-parameter-value for constraint:metaModel.enumerations.JMultiplicity
+Information: Transforming value null of property constraint
+Information: Retrieving enumeration value of type JTotalMap for property constraint
+Start Transforming AttributeConnector
+Information: Construction of constructor-parameter-value for role:java.lang.String
+Information: Transforming value username of property role
+Information: Construction of constructor-parameter-value for targetType:metaModel.primitives.JPrimitiveType
+Information: Fetching already created Java Node for referenced node String of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: String
+Information: Construction of constructor-parameter-value for constraint:metaModel.enumerations.JMultiplicity
+Information: Transforming value null of property constraint
+Information: Retrieving enumeration value of type JTotalMap for property constraint
+Start Transforming AttributeConnector
+Information: Construction of constructor-parameter-value for role:java.lang.String
+Information: Transforming value password of property role
+Information: Construction of constructor-parameter-value for targetType:metaModel.primitives.JPrimitiveType
+Information: Fetching already created Java Node for referenced node String of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: String
+Information: Construction of constructor-parameter-value for constraint:metaModel.enumerations.JMultiplicity
+Information: Transforming value null of property constraint
+Information: Retrieving enumeration value of type JTotalMap for property constraint
 Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
 Start Transforming User_Role
 Information: Construction of constructor-parameter-value for name:java.lang.String
@@ -789,13 +829,7 @@ Information: Transforming value Cancel the given Reservation. of property docume
 Information: Construction of constructor-parameter-value for abstrakt:java.lang.Boolean
 Information: Transforming value null of property abstrakt
 Information: Construction of constructor-parameter-value for returnType:metaModel.JTypeAdapter
-Start Transforming Boolean
-Information: Construction of constructor-parameter-value for type:metaModel.JType
-Information: Fetching already created Java Node for referenced node Boolean of concept PrimitiveType
-Information: Searching for method getPrimitiveType
-Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: Boolean
-Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
-Information: Transforming value null of property isMany
+Information: No value found for  child returnType. That's ok, because its optionality value is true
 Information: Construction of constructor-parameter-value for exception:metaModel.JException
 Information: Fetching already created Java Node for referenced node DeleteError of concept Exception
 Information: Searching for method getException
@@ -1070,13 +1104,7 @@ Information: Transforming value Delete the given Filmprojection from CinemaServi
 Information: Construction of constructor-parameter-value for abstrakt:java.lang.Boolean
 Information: Transforming value null of property abstrakt
 Information: Construction of constructor-parameter-value for returnType:metaModel.JTypeAdapter
-Start Transforming Boolean
-Information: Construction of constructor-parameter-value for type:metaModel.JType
-Information: Fetching already created Java Node for referenced node Boolean of concept PrimitiveType
-Information: Searching for method getPrimitiveType
-Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: Boolean
-Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
-Information: Transforming value null of property isMany
+Information: No value found for  child returnType. That's ok, because its optionality value is true
 Information: Construction of constructor-parameter-value for exception:metaModel.JException
 Information: Fetching already created Java Node for referenced node DeleteError of concept Exception
 Information: Searching for method getException
@@ -1157,13 +1185,7 @@ Information: Transforming value Delete the given Cinemahall from CinemaService. 
 Information: Construction of constructor-parameter-value for abstrakt:java.lang.Boolean
 Information: Transforming value null of property abstrakt
 Information: Construction of constructor-parameter-value for returnType:metaModel.JTypeAdapter
-Start Transforming Boolean
-Information: Construction of constructor-parameter-value for type:metaModel.JType
-Information: Fetching already created Java Node for referenced node Boolean of concept PrimitiveType
-Information: Searching for method getPrimitiveType
-Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: Boolean
-Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
-Information: Transforming value null of property isMany
+Information: No value found for  child returnType. That's ok, because its optionality value is true
 Information: Construction of constructor-parameter-value for exception:metaModel.JException
 Information: Fetching already created Java Node for referenced node DeleteError of concept Exception
 Information: Searching for method getException
@@ -1292,13 +1314,7 @@ Information: Transforming value add role to User. of property documentation
 Information: Construction of constructor-parameter-value for abstrakt:java.lang.Boolean
 Information: Transforming value null of property abstrakt
 Information: Construction of constructor-parameter-value for returnType:metaModel.JTypeAdapter
-Start Transforming Boolean
-Information: Construction of constructor-parameter-value for type:metaModel.JType
-Information: Fetching already created Java Node for referenced node Boolean of concept PrimitiveType
-Information: Searching for method getPrimitiveType
-Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: Boolean
-Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
-Information: Transforming value null of property isMany
+Information: No value found for  child returnType. That's ok, because its optionality value is true
 Information: Construction of constructor-parameter-value for exception:metaModel.JException
 Information: No Value found for  Reference exception. That's ok, because its optionality Value is true
 Information: Adding children according to addFormalParameter(Feature formalParameters) in Java Class class metaModel.JOperation
@@ -1344,13 +1360,7 @@ Information: Transforming value delete Role from User. of property documentation
 Information: Construction of constructor-parameter-value for abstrakt:java.lang.Boolean
 Information: Transforming value null of property abstrakt
 Information: Construction of constructor-parameter-value for returnType:metaModel.JTypeAdapter
-Start Transforming Boolean
-Information: Construction of constructor-parameter-value for type:metaModel.JType
-Information: Fetching already created Java Node for referenced node Boolean of concept PrimitiveType
-Information: Searching for method getPrimitiveType
-Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: Boolean
-Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
-Information: Transforming value null of property isMany
+Information: No value found for  child returnType. That's ok, because its optionality value is true
 Information: Construction of constructor-parameter-value for exception:metaModel.JException
 Information: Fetching already created Java Node for referenced node DeleteError of concept Exception
 Information: Searching for method getException
@@ -1398,7 +1408,13 @@ Information: Transforming value Get the Options for a User. of property document
 Information: Construction of constructor-parameter-value for abstrakt:java.lang.Boolean
 Information: Transforming value null of property abstrakt
 Information: Construction of constructor-parameter-value for returnType:metaModel.JTypeAdapter
-Information: No value found for  child returnType. That's ok, because its optionality value is true
+Start Transforming String
+Information: Construction of constructor-parameter-value for type:metaModel.JType
+Information: Fetching already created Java Node for referenced node String of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: String
+Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
+Information: Transforming value null of property isMany
 Information: Construction of constructor-parameter-value for exception:metaModel.JException
 Information: No Value found for  Reference exception. That's ok, because its optionality Value is true
 Information: Adding children according to addFormalParameter(Feature formalParameters) in Java Class class metaModel.JOperation
@@ -1420,6 +1436,6 @@ Information: Construction of constructor-parameter-value for isMany:java.lang.Bo
 Information: Transforming value null of property isMany
 Information: --> Starting Transformation Phase 2 
 Information: --> Finished Transformation Phase 2 (assigning all unassigned references) with no Errors.
-Information: Successfully Finished Java AST Creation @ Mon Mar 01 12:40:20 CET 2021
+Information: Successfully Finished Java AST Creation @ Tue Mar 02 12:07:21 CET 2021
 Information: Carried out Code Generation for CinemaService. Watch out for Syntax Errors in Generated Code!!!
 Information: Created XML File at C:\Users\admin\git\Kino\protocols\ASTCinemaService.xml

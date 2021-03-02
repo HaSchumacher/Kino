@@ -1,4 +1,4 @@
-/**--- Generated at Mon Mar 01 12:40:23 CET 2021 
+/**--- Generated at Tue Mar 02 12:07:24 CET 2021 
  * --- Change only in Editable Sections!  
  * --- Do not touch section numbering!   
  */
@@ -14,7 +14,7 @@ public class ReservationError extends Exception
    
    //50 ===== GENERATED:      Constructor ============
    public ReservationError(){
-      super("The Reservation didn't pass. The given Category is full for this Filmprojection.");
+      super("The reservation was not possible. The given category is full for this filmprojection.");
    }
    //60 ===== Editable : Your Constructors ===========
    
