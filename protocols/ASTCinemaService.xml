@@ -123,7 +123,14 @@
             <target>
               <name>PriceCategory</name>
               <singleton>false</singleton>
-              <attributes/>
+              <attributes>
+                <metaModel.JAttributeConnector>
+                  <role>price</role>
+                  <targetType class="metaModel.primitives.JInteger" defined-in="metaModel.JTargetConnector" reference="../../../../../../../../metaModel.JAssociation/target/targetType/state/target/attributes/metaModel.JAttributeConnector/targetType"/>
+                  <constraint class="metaModel.enumerations.JPartialMap"/>
+                  <targetType class="metaModel.primitives.JInteger" reference="../../../../../../../../metaModel.JAssociation/target/targetType/state/target/attributes/metaModel.JAttributeConnector/targetType"/>
+                </metaModel.JAttributeConnector>
+              </attributes>
               <operations/>
             </target>
           </state>
@@ -168,40 +175,19 @@
     <metaModel.JClass>
       <name>Front</name>
       <singleton>true</singleton>
-      <attributes>
-        <metaModel.JAttributeConnector>
-          <role>frontprice</role>
-          <targetType class="metaModel.primitives.JInteger" defined-in="metaModel.JTargetConnector" reference="../../../../metaModel.JAssociation/target/targetType/state/target/attributes/metaModel.JAttributeConnector/targetType"/>
-          <constraint class="metaModel.enumerations.JPartialMap"/>
-          <targetType class="metaModel.primitives.JInteger" reference="../../../../metaModel.JAssociation/target/targetType/state/target/attributes/metaModel.JAttributeConnector/targetType"/>
-        </metaModel.JAttributeConnector>
-      </attributes>
+      <attributes/>
       <operations/>
     </metaModel.JClass>
     <metaModel.JClass>
       <name>Middle</name>
       <singleton>true</singleton>
-      <attributes>
-        <metaModel.JAttributeConnector>
-          <role>middleprice</role>
-          <targetType class="metaModel.primitives.JInteger" defined-in="metaModel.JTargetConnector" reference="../../../../metaModel.JAssociation/target/targetType/state/target/attributes/metaModel.JAttributeConnector/targetType"/>
-          <constraint class="metaModel.enumerations.JPartialMap" reference="../../../../metaModel.JClass[5]/attributes/metaModel.JAttributeConnector/constraint"/>
-          <targetType class="metaModel.primitives.JInteger" reference="../../../../metaModel.JAssociation/target/targetType/state/target/attributes/metaModel.JAttributeConnector/targetType"/>
-        </metaModel.JAttributeConnector>
-      </attributes>
+      <attributes/>
       <operations/>
     </metaModel.JClass>
     <metaModel.JClass>
       <name>Back</name>
       <singleton>true</singleton>
-      <attributes>
-        <metaModel.JAttributeConnector>
-          <role>backprice</role>
-          <targetType class="metaModel.primitives.JInteger" defined-in="metaModel.JTargetConnector" reference="../../../../metaModel.JAssociation/target/targetType/state/target/attributes/metaModel.JAttributeConnector/targetType"/>
-          <constraint class="metaModel.enumerations.JPartialMap" reference="../../../../metaModel.JClass[5]/attributes/metaModel.JAttributeConnector/constraint"/>
-          <targetType class="metaModel.primitives.JInteger" reference="../../../../metaModel.JAssociation/target/targetType/state/target/attributes/metaModel.JAttributeConnector/targetType"/>
-        </metaModel.JAttributeConnector>
-      </attributes>
+      <attributes/>
       <operations/>
     </metaModel.JClass>
     <metaModel.JClass>
@@ -434,15 +420,15 @@
   <generalisations class="set">
     <metaModel.JGeneralisation>
       <general>
-        <name>Role</name>
+        <name>PriceCategory</name>
         <state class="metaModel.JClassLinkStateLocallyAssigned">
-          <target reference="../../../../../relationTypes/metaModel.JAssociation[10]/target/targetType/state/target"/>
+          <target reference="../../../../../relationTypes/metaModel.JAssociation[3]/target/targetType/state/target"/>
         </state>
       </general>
       <specific>
-        <name>Admin</name>
+        <name>Middle</name>
         <state class="metaModel.JClassLinkStateLocallyAssigned">
-          <target reference="../../../../../relationTypes/metaModel.JClass[15]"/>
+          <target reference="../../../../../relationTypes/metaModel.JClass[6]"/>
         </state>
       </specific>
     </metaModel.JGeneralisation>
@@ -476,15 +462,15 @@
     </metaModel.JGeneralisation>
     <metaModel.JGeneralisation>
       <general>
-        <name>PriceCategory</name>
+        <name>Role</name>
         <state class="metaModel.JClassLinkStateLocallyAssigned">
-          <target reference="../../../../../relationTypes/metaModel.JAssociation[3]/target/targetType/state/target"/>
+          <target reference="../../../../../relationTypes/metaModel.JAssociation[10]/target/targetType/state/target"/>
         </state>
       </general>
       <specific>
-        <name>Middle</name>
+        <name>Admin</name>
         <state class="metaModel.JClassLinkStateLocallyAssigned">
-          <target reference="../../../../../relationTypes/metaModel.JClass[6]"/>
+          <target reference="../../../../../relationTypes/metaModel.JClass[15]"/>
         </state>
       </specific>
     </metaModel.JGeneralisation>
@@ -505,127 +491,6 @@
   </generalisations>
   <operations class="set">
     <metaModel.JOperation>
-      <techName>login</techName>
-      <readableName>login</readableName>
-      <documentation>Login a User in CinemaService.</documentation>
-      <abstrakt>false</abstrakt>
-      <formalParameters>
-        <metaModel.JParameter>
-          <name>username</name>
-          <type>
-            <type class="metaModel.primitives.JString" reference="../../../../../../relationTypes/metaModel.JClass/attributes/metaModel.JAttributeConnector[2]/targetType"/>
-            <isMany>false</isMany>
-          </type>
-        </metaModel.JParameter>
-        <metaModel.JParameter>
-          <name>password</name>
-          <type>
-            <type class="metaModel.primitives.JString" reference="../../../../../../relationTypes/metaModel.JClass/attributes/metaModel.JAttributeConnector[2]/targetType"/>
-            <isMany>false</isMany>
-          </type>
-        </metaModel.JParameter>
-      </formalParameters>
-      <returnType reference="../../../relationTypes/metaModel.JClass[8]/operations/metaModel.JOperation/exception"/>
-      <exception>
-        <value class="metaModel.JException">
-          <name>LoginError</name>
-          <errorText>Something went wrong. Please check your credentials.</errorText>
-        </value>
-      </exception>
-    </metaModel.JOperation>
-    <metaModel.JOperation>
-      <techName>getOptions</techName>
-      <readableName>options</readableName>
-      <documentation>Get the Options for a User.</documentation>
-      <abstrakt>false</abstrakt>
-      <formalParameters>
-        <metaModel.JParameter>
-          <name>u</name>
-          <type>
-            <type class="metaModel.JClassLink">
-              <name>User</name>
-              <state class="metaModel.JClassLinkStateLocallyAssigned">
-                <target reference="../../../../../../../../relationTypes/metaModel.JAssociation[8]/target/targetType/state/target"/>
-              </state>
-            </type>
-            <isMany>false</isMany>
-          </type>
-        </metaModel.JParameter>
-      </formalParameters>
-      <returnType>
-        <value class="metaModel.JTypeAdapter">
-          <type class="metaModel.primitives.JString" reference="../../../../../relationTypes/metaModel.JClass/attributes/metaModel.JAttributeConnector[2]/targetType"/>
-          <isMany>false</isMany>
-        </value>
-      </returnType>
-      <exception reference="../../../relationTypes/metaModel.JClass[8]/operations/metaModel.JOperation/exception"/>
-    </metaModel.JOperation>
-    <metaModel.JOperation>
-      <techName>addRoleToUser</techName>
-      <readableName>addRTU</readableName>
-      <documentation>add role to User.</documentation>
-      <abstrakt>false</abstrakt>
-      <formalParameters>
-        <metaModel.JParameter>
-          <name>u</name>
-          <type>
-            <type class="metaModel.JClassLink">
-              <name>User</name>
-              <state class="metaModel.JClassLinkStateLocallyAssigned">
-                <target reference="../../../../../../../../relationTypes/metaModel.JAssociation[8]/target/targetType/state/target"/>
-              </state>
-            </type>
-            <isMany>false</isMany>
-          </type>
-        </metaModel.JParameter>
-        <metaModel.JParameter>
-          <name>r</name>
-          <type>
-            <type class="metaModel.JClassLink">
-              <name>Role</name>
-              <state class="metaModel.JClassLinkStateLocallyAssigned">
-                <target reference="../../../../../../../../relationTypes/metaModel.JAssociation[10]/target/targetType/state/target"/>
-              </state>
-            </type>
-            <isMany>false</isMany>
-          </type>
-        </metaModel.JParameter>
-      </formalParameters>
-      <returnType reference="../../../relationTypes/metaModel.JClass[8]/operations/metaModel.JOperation/exception"/>
-      <exception reference="../../../relationTypes/metaModel.JClass[8]/operations/metaModel.JOperation/exception"/>
-    </metaModel.JOperation>
-    <metaModel.JOperation>
-      <techName>addMovie</techName>
-      <readableName>addingMovie</readableName>
-      <documentation>Add a Movie to the Cinema.</documentation>
-      <abstrakt>false</abstrakt>
-      <formalParameters>
-        <metaModel.JParameter>
-          <name>title</name>
-          <type>
-            <type class="metaModel.primitives.JString" reference="../../../../../../relationTypes/metaModel.JClass/attributes/metaModel.JAttributeConnector[2]/targetType"/>
-            <isMany>false</isMany>
-          </type>
-        </metaModel.JParameter>
-      </formalParameters>
-      <returnType reference="../../../relationTypes/metaModel.JClass[8]/operations/metaModel.JOperation/exception"/>
-      <exception reference="../../../relationTypes/metaModel.JClass[8]/operations/metaModel.JOperation/exception"/>
-    </metaModel.JOperation>
-    <metaModel.JOperation>
-      <techName>calculateTotalProfit</techName>
-      <readableName>calculateTotalProfit</readableName>
-      <documentation>Calculate the Total Profit of the Cinema.</documentation>
-      <abstrakt>false</abstrakt>
-      <formalParameters/>
-      <returnType>
-        <value class="metaModel.JTypeAdapter">
-          <type class="metaModel.primitives.JInteger" reference="../../../../../relationTypes/metaModel.JAssociation/target/targetType/state/target/attributes/metaModel.JAttributeConnector/targetType"/>
-          <isMany>false</isMany>
-        </value>
-      </returnType>
-      <exception reference="../../../relationTypes/metaModel.JClass[8]/operations/metaModel.JOperation/exception"/>
-    </metaModel.JOperation>
-    <metaModel.JOperation>
       <techName>deleteMovie</techName>
       <readableName>deleteMovie</readableName>
       <documentation>Delete the Movie form the Cinema.</documentation>
@@ -644,12 +509,7 @@
           </type>
         </metaModel.JParameter>
       </formalParameters>
-      <returnType>
-        <value class="metaModel.JTypeAdapter">
-          <type class="metaModel.primitives.JBoolean" reference="../../../../../relationTypes/metaModel.JClass/attributes/metaModel.JAttributeConnector/targetType"/>
-          <isMany>false</isMany>
-        </value>
-      </returnType>
+      <returnType reference="../../../relationTypes/metaModel.JClass[8]/operations/metaModel.JOperation/exception"/>
       <exception>
         <value class="metaModel.JException">
           <name>DeleteError</name>
@@ -678,51 +538,59 @@
       </formalParameters>
       <returnType reference="../../../relationTypes/metaModel.JClass[8]/operations/metaModel.JOperation/exception"/>
       <exception>
-        <value class="metaModel.JException" reference="../../../metaModel.JOperation[6]/exception/value"/>
+        <value class="metaModel.JException" reference="../../../metaModel.JOperation/exception/value"/>
       </exception>
     </metaModel.JOperation>
     <metaModel.JOperation>
-      <techName>register</techName>
-      <readableName>registerAUserInSystem</readableName>
-      <documentation>registerAUserInSystem</documentation>
+      <techName>cancelReservation</techName>
+      <readableName>cancelReservation</readableName>
+      <documentation>Cancel the given Reservation.</documentation>
       <abstrakt>false</abstrakt>
       <formalParameters>
         <metaModel.JParameter>
-          <name>name</name>
+          <name>r</name>
           <type>
-            <type class="metaModel.primitives.JString" reference="../../../../../../relationTypes/metaModel.JClass/attributes/metaModel.JAttributeConnector[2]/targetType"/>
-            <isMany>false</isMany>
-          </type>
-        </metaModel.JParameter>
-        <metaModel.JParameter>
-          <name>mail</name>
-          <type>
-            <type class="metaModel.primitives.JString" reference="../../../../../../relationTypes/metaModel.JClass/attributes/metaModel.JAttributeConnector[2]/targetType"/>
-            <isMany>false</isMany>
-          </type>
-        </metaModel.JParameter>
-        <metaModel.JParameter>
-          <name>username</name>
-          <type>
-            <type class="metaModel.primitives.JString" reference="../../../../../../relationTypes/metaModel.JClass/attributes/metaModel.JAttributeConnector[2]/targetType"/>
-            <isMany>false</isMany>
-          </type>
-        </metaModel.JParameter>
-        <metaModel.JParameter>
-          <name>passwort</name>
-          <type>
-            <type class="metaModel.primitives.JString" reference="../../../../../../relationTypes/metaModel.JClass/attributes/metaModel.JAttributeConnector[2]/targetType"/>
+            <type class="metaModel.JClassLink">
+              <name>Reservation</name>
+              <state class="metaModel.JClassLinkStateLocallyAssigned">
+                <target reference="../../../../../../../../relationTypes/metaModel.JAssociation[4]/owner/connector/ownerType/state/target"/>
+              </state>
+            </type>
             <isMany>false</isMany>
           </type>
         </metaModel.JParameter>
       </formalParameters>
       <returnType reference="../../../relationTypes/metaModel.JClass[8]/operations/metaModel.JOperation/exception"/>
       <exception>
-        <value class="metaModel.JException">
-          <name>RegisterError</name>
-          <errorText>The user you want to register is already in the System. If you forgot your password please follow the instructions in the given section.</errorText>
-        </value>
+        <value class="metaModel.JException" reference="../../../metaModel.JOperation/exception/value"/>
       </exception>
+    </metaModel.JOperation>
+    <metaModel.JOperation>
+      <techName>getOptions</techName>
+      <readableName>options</readableName>
+      <documentation>Get the Options for a User.</documentation>
+      <abstrakt>false</abstrakt>
+      <formalParameters>
+        <metaModel.JParameter>
+          <name>u</name>
+          <type>
+            <type class="metaModel.JClassLink">
+              <name>User</name>
+              <state class="metaModel.JClassLinkStateLocallyAssigned">
+                <target reference="../../../../../../../../relationTypes/metaModel.JAssociation[8]/target/targetType/state/target"/>
+              </state>
+            </type>
+            <isMany>false</isMany>
+          </type>
+        </metaModel.JParameter>
+      </formalParameters>
+      <returnType>
+        <value class="metaModel.JTypeAdapter">
+          <type class="metaModel.primitives.JString" reference="../../../../../relationTypes/metaModel.JClass/attributes/metaModel.JAttributeConnector[2]/targetType"/>
+          <isMany>false</isMany>
+        </value>
+      </returnType>
+      <exception reference="../../../relationTypes/metaModel.JClass[8]/operations/metaModel.JOperation/exception"/>
     </metaModel.JOperation>
     <metaModel.JOperation>
       <techName>reserve</techName>
@@ -776,6 +644,141 @@
       </exception>
     </metaModel.JOperation>
     <metaModel.JOperation>
+      <techName>login</techName>
+      <readableName>login</readableName>
+      <documentation>Login a User in CinemaService.</documentation>
+      <abstrakt>false</abstrakt>
+      <formalParameters>
+        <metaModel.JParameter>
+          <name>username</name>
+          <type>
+            <type class="metaModel.primitives.JString" reference="../../../../../../relationTypes/metaModel.JClass/attributes/metaModel.JAttributeConnector[2]/targetType"/>
+            <isMany>false</isMany>
+          </type>
+        </metaModel.JParameter>
+        <metaModel.JParameter>
+          <name>password</name>
+          <type>
+            <type class="metaModel.primitives.JString" reference="../../../../../../relationTypes/metaModel.JClass/attributes/metaModel.JAttributeConnector[2]/targetType"/>
+            <isMany>false</isMany>
+          </type>
+        </metaModel.JParameter>
+      </formalParameters>
+      <returnType reference="../../../relationTypes/metaModel.JClass[8]/operations/metaModel.JOperation/exception"/>
+      <exception>
+        <value class="metaModel.JException">
+          <name>LoginError</name>
+          <errorText>Something went wrong. Please check your credentials.</errorText>
+        </value>
+      </exception>
+    </metaModel.JOperation>
+    <metaModel.JOperation>
+      <techName>addRoleToUser</techName>
+      <readableName>addRTU</readableName>
+      <documentation>add role to User.</documentation>
+      <abstrakt>false</abstrakt>
+      <formalParameters>
+        <metaModel.JParameter>
+          <name>u</name>
+          <type>
+            <type class="metaModel.JClassLink">
+              <name>User</name>
+              <state class="metaModel.JClassLinkStateLocallyAssigned">
+                <target reference="../../../../../../../../relationTypes/metaModel.JAssociation[8]/target/targetType/state/target"/>
+              </state>
+            </type>
+            <isMany>false</isMany>
+          </type>
+        </metaModel.JParameter>
+        <metaModel.JParameter>
+          <name>r</name>
+          <type>
+            <type class="metaModel.JClassLink">
+              <name>Role</name>
+              <state class="metaModel.JClassLinkStateLocallyAssigned">
+                <target reference="../../../../../../../../relationTypes/metaModel.JAssociation[10]/target/targetType/state/target"/>
+              </state>
+            </type>
+            <isMany>false</isMany>
+          </type>
+        </metaModel.JParameter>
+      </formalParameters>
+      <returnType reference="../../../relationTypes/metaModel.JClass[8]/operations/metaModel.JOperation/exception"/>
+      <exception reference="../../../relationTypes/metaModel.JClass[8]/operations/metaModel.JOperation/exception"/>
+    </metaModel.JOperation>
+    <metaModel.JOperation>
+      <techName>register</techName>
+      <readableName>registerAUserInSystem</readableName>
+      <documentation>registerAUserInSystem</documentation>
+      <abstrakt>false</abstrakt>
+      <formalParameters>
+        <metaModel.JParameter>
+          <name>name</name>
+          <type>
+            <type class="metaModel.primitives.JString" reference="../../../../../../relationTypes/metaModel.JClass/attributes/metaModel.JAttributeConnector[2]/targetType"/>
+            <isMany>false</isMany>
+          </type>
+        </metaModel.JParameter>
+        <metaModel.JParameter>
+          <name>mail</name>
+          <type>
+            <type class="metaModel.primitives.JString" reference="../../../../../../relationTypes/metaModel.JClass/attributes/metaModel.JAttributeConnector[2]/targetType"/>
+            <isMany>false</isMany>
+          </type>
+        </metaModel.JParameter>
+        <metaModel.JParameter>
+          <name>username</name>
+          <type>
+            <type class="metaModel.primitives.JString" reference="../../../../../../relationTypes/metaModel.JClass/attributes/metaModel.JAttributeConnector[2]/targetType"/>
+            <isMany>false</isMany>
+          </type>
+        </metaModel.JParameter>
+        <metaModel.JParameter>
+          <name>passwort</name>
+          <type>
+            <type class="metaModel.primitives.JString" reference="../../../../../../relationTypes/metaModel.JClass/attributes/metaModel.JAttributeConnector[2]/targetType"/>
+            <isMany>false</isMany>
+          </type>
+        </metaModel.JParameter>
+      </formalParameters>
+      <returnType reference="../../../relationTypes/metaModel.JClass[8]/operations/metaModel.JOperation/exception"/>
+      <exception>
+        <value class="metaModel.JException">
+          <name>RegisterError</name>
+          <errorText>The user you want to register is already in the System. If you forgot your password please follow the instructions in the given section.</errorText>
+        </value>
+      </exception>
+    </metaModel.JOperation>
+    <metaModel.JOperation>
+      <techName>changePriceCategory</techName>
+      <readableName>cPriceC</readableName>
+      <documentation>Change Price on Pricecategory.</documentation>
+      <abstrakt>false</abstrakt>
+      <formalParameters>
+        <metaModel.JParameter>
+          <name>c</name>
+          <type>
+            <type class="metaModel.JClassLink">
+              <name>PriceCategory</name>
+              <state class="metaModel.JClassLinkStateLocallyAssigned">
+                <target reference="../../../../../../../../relationTypes/metaModel.JAssociation[3]/target/targetType/state/target"/>
+              </state>
+            </type>
+            <isMany>false</isMany>
+          </type>
+        </metaModel.JParameter>
+        <metaModel.JParameter>
+          <name>price</name>
+          <type>
+            <type class="metaModel.primitives.JInteger" reference="../../../../../../relationTypes/metaModel.JAssociation/target/targetType/state/target/attributes/metaModel.JAttributeConnector/targetType"/>
+            <isMany>false</isMany>
+          </type>
+        </metaModel.JParameter>
+      </formalParameters>
+      <returnType reference="../../../relationTypes/metaModel.JClass[8]/operations/metaModel.JOperation/exception"/>
+      <exception reference="../../../relationTypes/metaModel.JClass[8]/operations/metaModel.JOperation/exception"/>
+    </metaModel.JOperation>
+    <metaModel.JOperation>
       <techName>logout</techName>
       <readableName>logout</readableName>
       <documentation>Logout the given User from Cinema Service.</documentation>
@@ -800,6 +803,40 @@
           <isMany>false</isMany>
         </value>
       </returnType>
+      <exception reference="../../../relationTypes/metaModel.JClass[8]/operations/metaModel.JOperation/exception"/>
+    </metaModel.JOperation>
+    <metaModel.JOperation>
+      <techName>addFilmprojection</techName>
+      <readableName>addFilmprojection</readableName>
+      <documentation>Adding a Filmprojection to the CinemaService.</documentation>
+      <abstrakt>false</abstrakt>
+      <formalParameters>
+        <metaModel.JParameter>
+          <name>c</name>
+          <type>
+            <type class="metaModel.JClassLink">
+              <name>Cinemahall</name>
+              <state class="metaModel.JClassLinkStateLocallyAssigned">
+                <target reference="../../../../../../../../relationTypes/metaModel.JClass"/>
+              </state>
+            </type>
+            <isMany>false</isMany>
+          </type>
+        </metaModel.JParameter>
+        <metaModel.JParameter>
+          <name>m</name>
+          <type>
+            <type class="metaModel.JClassLink">
+              <name>Movie</name>
+              <state class="metaModel.JClassLinkStateLocallyAssigned">
+                <target reference="../../../../../../../../relationTypes/metaModel.JAssociation[6]/target/targetType/state/target"/>
+              </state>
+            </type>
+            <isMany>false</isMany>
+          </type>
+        </metaModel.JParameter>
+      </formalParameters>
+      <returnType reference="../../../relationTypes/metaModel.JClass[8]/operations/metaModel.JOperation/exception"/>
       <exception reference="../../../relationTypes/metaModel.JClass[8]/operations/metaModel.JOperation/exception"/>
     </metaModel.JOperation>
     <metaModel.JOperation>
@@ -866,62 +903,18 @@
       </exception>
     </metaModel.JOperation>
     <metaModel.JOperation>
-      <techName>addFilmprojection</techName>
-      <readableName>addFilmprojection</readableName>
-      <documentation>Adding a Filmprojection to the CinemaService.</documentation>
+      <techName>calculateTotalProfit</techName>
+      <readableName>calculateTotalProfit</readableName>
+      <documentation>Calculate the Total Profit of the Cinema.</documentation>
       <abstrakt>false</abstrakt>
-      <formalParameters>
-        <metaModel.JParameter>
-          <name>c</name>
-          <type>
-            <type class="metaModel.JClassLink">
-              <name>Cinemahall</name>
-              <state class="metaModel.JClassLinkStateLocallyAssigned">
-                <target reference="../../../../../../../../relationTypes/metaModel.JClass"/>
-              </state>
-            </type>
-            <isMany>false</isMany>
-          </type>
-        </metaModel.JParameter>
-        <metaModel.JParameter>
-          <name>m</name>
-          <type>
-            <type class="metaModel.JClassLink">
-              <name>Movie</name>
-              <state class="metaModel.JClassLinkStateLocallyAssigned">
-                <target reference="../../../../../../../../relationTypes/metaModel.JAssociation[6]/target/targetType/state/target"/>
-              </state>
-            </type>
-            <isMany>false</isMany>
-          </type>
-        </metaModel.JParameter>
-      </formalParameters>
-      <returnType reference="../../../relationTypes/metaModel.JClass[8]/operations/metaModel.JOperation/exception"/>
+      <formalParameters/>
+      <returnType>
+        <value class="metaModel.JTypeAdapter">
+          <type class="metaModel.primitives.JInteger" reference="../../../../../relationTypes/metaModel.JAssociation/target/targetType/state/target/attributes/metaModel.JAttributeConnector/targetType"/>
+          <isMany>false</isMany>
+        </value>
+      </returnType>
       <exception reference="../../../relationTypes/metaModel.JClass[8]/operations/metaModel.JOperation/exception"/>
-    </metaModel.JOperation>
-    <metaModel.JOperation>
-      <techName>cancelReservation</techName>
-      <readableName>cancelReservation</readableName>
-      <documentation>Cancel the given Reservation.</documentation>
-      <abstrakt>false</abstrakt>
-      <formalParameters>
-        <metaModel.JParameter>
-          <name>r</name>
-          <type>
-            <type class="metaModel.JClassLink">
-              <name>Reservation</name>
-              <state class="metaModel.JClassLinkStateLocallyAssigned">
-                <target reference="../../../../../../../../relationTypes/metaModel.JAssociation[4]/owner/connector/ownerType/state/target"/>
-              </state>
-            </type>
-            <isMany>false</isMany>
-          </type>
-        </metaModel.JParameter>
-      </formalParameters>
-      <returnType reference="../../../relationTypes/metaModel.JClass[8]/operations/metaModel.JOperation/exception"/>
-      <exception>
-        <value class="metaModel.JException" reference="../../../metaModel.JOperation[6]/exception/value"/>
-      </exception>
     </metaModel.JOperation>
     <metaModel.JOperation>
       <techName>book</techName>
@@ -949,59 +942,6 @@
           <errorText>An error occured during booking. Either there is already a booking or the given reservation is wrong.</errorText>
         </value>
       </exception>
-    </metaModel.JOperation>
-    <metaModel.JOperation>
-      <techName>deleteFilmprojection</techName>
-      <readableName>delFp</readableName>
-      <documentation>Delete the given Filmprojection from CinemaService.</documentation>
-      <abstrakt>false</abstrakt>
-      <formalParameters>
-        <metaModel.JParameter>
-          <name>fp</name>
-          <type>
-            <type class="metaModel.JClassLink">
-              <name>Filmprojection</name>
-              <state class="metaModel.JClassLinkStateLocallyAssigned">
-                <target reference="../../../../../../../../relationTypes/metaModel.JClass[8]"/>
-              </state>
-            </type>
-            <isMany>false</isMany>
-          </type>
-        </metaModel.JParameter>
-      </formalParameters>
-      <returnType reference="../../../relationTypes/metaModel.JClass[8]/operations/metaModel.JOperation/exception"/>
-      <exception>
-        <value class="metaModel.JException" reference="../../../metaModel.JOperation[6]/exception/value"/>
-      </exception>
-    </metaModel.JOperation>
-    <metaModel.JOperation>
-      <techName>changePriceCategory</techName>
-      <readableName>cPriceC</readableName>
-      <documentation>Change Price on Pricecategory.</documentation>
-      <abstrakt>false</abstrakt>
-      <formalParameters>
-        <metaModel.JParameter>
-          <name>c</name>
-          <type>
-            <type class="metaModel.JClassLink">
-              <name>PriceCategory</name>
-              <state class="metaModel.JClassLinkStateLocallyAssigned">
-                <target reference="../../../../../../../../relationTypes/metaModel.JAssociation[3]/target/targetType/state/target"/>
-              </state>
-            </type>
-            <isMany>false</isMany>
-          </type>
-        </metaModel.JParameter>
-        <metaModel.JParameter>
-          <name>price</name>
-          <type>
-            <type class="metaModel.primitives.JInteger" reference="../../../../../../relationTypes/metaModel.JAssociation/target/targetType/state/target/attributes/metaModel.JAttributeConnector/targetType"/>
-            <isMany>false</isMany>
-          </type>
-        </metaModel.JParameter>
-      </formalParameters>
-      <returnType reference="../../../relationTypes/metaModel.JClass[8]/operations/metaModel.JOperation/exception"/>
-      <exception reference="../../../relationTypes/metaModel.JClass[8]/operations/metaModel.JOperation/exception"/>
     </metaModel.JOperation>
     <metaModel.JOperation>
       <techName>deleteRoleFromUser</techName>
@@ -1036,16 +976,57 @@
       </formalParameters>
       <returnType reference="../../../relationTypes/metaModel.JClass[8]/operations/metaModel.JOperation/exception"/>
       <exception>
-        <value class="metaModel.JException" reference="../../../metaModel.JOperation[6]/exception/value"/>
+        <value class="metaModel.JException" reference="../../../metaModel.JOperation/exception/value"/>
+      </exception>
+    </metaModel.JOperation>
+    <metaModel.JOperation>
+      <techName>addMovie</techName>
+      <readableName>addingMovie</readableName>
+      <documentation>Add a Movie to the Cinema.</documentation>
+      <abstrakt>false</abstrakt>
+      <formalParameters>
+        <metaModel.JParameter>
+          <name>title</name>
+          <type>
+            <type class="metaModel.primitives.JString" reference="../../../../../../relationTypes/metaModel.JClass/attributes/metaModel.JAttributeConnector[2]/targetType"/>
+            <isMany>false</isMany>
+          </type>
+        </metaModel.JParameter>
+      </formalParameters>
+      <returnType reference="../../../relationTypes/metaModel.JClass[8]/operations/metaModel.JOperation/exception"/>
+      <exception reference="../../../relationTypes/metaModel.JClass[8]/operations/metaModel.JOperation/exception"/>
+    </metaModel.JOperation>
+    <metaModel.JOperation>
+      <techName>deleteFilmprojection</techName>
+      <readableName>delFp</readableName>
+      <documentation>Delete the given Filmprojection from CinemaService.</documentation>
+      <abstrakt>false</abstrakt>
+      <formalParameters>
+        <metaModel.JParameter>
+          <name>fp</name>
+          <type>
+            <type class="metaModel.JClassLink">
+              <name>Filmprojection</name>
+              <state class="metaModel.JClassLinkStateLocallyAssigned">
+                <target reference="../../../../../../../../relationTypes/metaModel.JClass[8]"/>
+              </state>
+            </type>
+            <isMany>false</isMany>
+          </type>
+        </metaModel.JParameter>
+      </formalParameters>
+      <returnType reference="../../../relationTypes/metaModel.JClass[8]/operations/metaModel.JOperation/exception"/>
+      <exception>
+        <value class="metaModel.JException" reference="../../../metaModel.JOperation/exception/value"/>
       </exception>
     </metaModel.JOperation>
   </operations>
   <exceptions class="set">
-    <metaModel.JException reference="../../operations/metaModel.JOperation[8]/exception/value"/>
-    <metaModel.JException reference="../../operations/metaModel.JOperation[9]/exception/value"/>
-    <metaModel.JException reference="../../operations/metaModel.JOperation[12]/exception/value"/>
+    <metaModel.JException reference="../../operations/metaModel.JOperation[15]/exception/value"/>
     <metaModel.JException reference="../../operations/metaModel.JOperation[6]/exception/value"/>
     <metaModel.JException reference="../../operations/metaModel.JOperation/exception/value"/>
-    <metaModel.JException reference="../../operations/metaModel.JOperation[15]/exception/value"/>
+    <metaModel.JException reference="../../operations/metaModel.JOperation[5]/exception/value"/>
+    <metaModel.JException reference="../../operations/metaModel.JOperation[8]/exception/value"/>
+    <metaModel.JException reference="../../operations/metaModel.JOperation[13]/exception/value"/>
   </exceptions>
 </JService>

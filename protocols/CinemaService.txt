@@ -1,5 +1,5 @@
 
-STARTING JAVA AST CREATION @ Tue Mar 02 12:07:21 CET 2021
+STARTING JAVA AST CREATION @ Tue Mar 02 17:45:30 CET 2021
 Start Transforming CinemaService
 Information: --> Starting Transformation Phase 1
 Start Transforming BookingError
@@ -37,6 +37,7 @@ Information: Construction of constructor-parameter-value for name:java.lang.Stri
 Information: Transforming value Cinemahall of property name
 Information: Construction of constructor-parameter-value for singleton:java.lang.Boolean
 Information: Transforming value null of property singleton
+Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
 Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
 Start Transforming AttributeConnector
 Information: Construction of constructor-parameter-value for role:java.lang.String
@@ -58,7 +59,6 @@ Information: Invoking method public metaModel.primitives.JPrimitiveType metaMode
 Information: Construction of constructor-parameter-value for constraint:metaModel.enumerations.JMultiplicity
 Information: Transforming value null of property constraint
 Information: Retrieving enumeration value of type JTotalMap for property constraint
-Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
 Start Transforming Cinemahall_CinemaRow
 Information: Construction of constructor-parameter-value for name:java.lang.String
 Information: Transforming value Cinemahall_CinemaRow of property name
@@ -96,6 +96,7 @@ Information: Construction of constructor-parameter-value for name:java.lang.Stri
 Information: Transforming value CinemaRow of property name
 Information: Construction of constructor-parameter-value for singleton:java.lang.Boolean
 Information: Transforming value null of property singleton
+Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
 Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
 Start Transforming AttributeConnector
 Information: Construction of constructor-parameter-value for role:java.lang.String
@@ -117,7 +118,6 @@ Information: Invoking method public metaModel.primitives.JPrimitiveType metaMode
 Information: Construction of constructor-parameter-value for constraint:metaModel.enumerations.JMultiplicity
 Information: Transforming value null of property constraint
 Information: Retrieving enumeration value of type JTotalMap for property constraint
-Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
 Start Transforming CinemaRow_Seats
 Information: Construction of constructor-parameter-value for name:java.lang.String
 Information: Transforming value CinemaRow_Seats of property name
@@ -194,6 +194,7 @@ Information: Construction of constructor-parameter-value for name:java.lang.Stri
 Information: Transforming value Seat of property name
 Information: Construction of constructor-parameter-value for singleton:java.lang.Boolean
 Information: Transforming value null of property singleton
+Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
 Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
 Start Transforming AttributeConnector
 Information: Construction of constructor-parameter-value for role:java.lang.String
@@ -205,7 +206,6 @@ Information: Invoking method public metaModel.primitives.JPrimitiveType metaMode
 Information: Construction of constructor-parameter-value for constraint:metaModel.enumerations.JMultiplicity
 Information: Transforming value null of property constraint
 Information: Retrieving enumeration value of type JTotalMap for property constraint
-Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
 Start Transforming Reservation_Seat
 Information: Construction of constructor-parameter-value for name:java.lang.String
 Information: Transforming value Reservation_Seat of property name
@@ -250,65 +250,44 @@ Information: Construction of constructor-parameter-value for name:java.lang.Stri
 Information: Transforming value PriceCategory of property name
 Information: Construction of constructor-parameter-value for singleton:java.lang.Boolean
 Information: Transforming value null of property singleton
-Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
 Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
+Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
+Start Transforming AttributeConnector
+Information: Construction of constructor-parameter-value for role:java.lang.String
+Information: Transforming value price of property role
+Information: Construction of constructor-parameter-value for targetType:metaModel.primitives.JPrimitiveType
+Information: Fetching already created Java Node for referenced node Integer of concept PrimitiveType
+Information: Searching for method getPrimitiveType
+Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: Integer
+Information: Construction of constructor-parameter-value for constraint:metaModel.enumerations.JMultiplicity
+Information: Transforming value 1axOPyL0vao/PartialMap of property constraint
+Information: Retrieving enumeration value of type JPartialMap for property constraint
 Start Transforming Front
 Information: Construction of constructor-parameter-value for name:java.lang.String
 Information: Transforming value Front of property name
 Information: Construction of constructor-parameter-value for singleton:java.lang.Boolean
 Information: Transforming value true of property singleton
-Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
-Start Transforming AttributeConnector
-Information: Construction of constructor-parameter-value for role:java.lang.String
-Information: Transforming value frontprice of property role
-Information: Construction of constructor-parameter-value for targetType:metaModel.primitives.JPrimitiveType
-Information: Fetching already created Java Node for referenced node Integer of concept PrimitiveType
-Information: Searching for method getPrimitiveType
-Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: Integer
-Information: Construction of constructor-parameter-value for constraint:metaModel.enumerations.JMultiplicity
-Information: Transforming value 1axOPyL0vao/PartialMap of property constraint
-Information: Retrieving enumeration value of type JPartialMap for property constraint
 Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
+Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
 Start Transforming Middle
 Information: Construction of constructor-parameter-value for name:java.lang.String
 Information: Transforming value Middle of property name
 Information: Construction of constructor-parameter-value for singleton:java.lang.Boolean
 Information: Transforming value true of property singleton
-Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
-Start Transforming AttributeConnector
-Information: Construction of constructor-parameter-value for role:java.lang.String
-Information: Transforming value middleprice of property role
-Information: Construction of constructor-parameter-value for targetType:metaModel.primitives.JPrimitiveType
-Information: Fetching already created Java Node for referenced node Integer of concept PrimitiveType
-Information: Searching for method getPrimitiveType
-Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: Integer
-Information: Construction of constructor-parameter-value for constraint:metaModel.enumerations.JMultiplicity
-Information: Transforming value 1axOPyL0vao/PartialMap of property constraint
-Information: Retrieving enumeration value of type JPartialMap for property constraint
 Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
+Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
 Start Transforming Back
 Information: Construction of constructor-parameter-value for name:java.lang.String
 Information: Transforming value Back of property name
 Information: Construction of constructor-parameter-value for singleton:java.lang.Boolean
 Information: Transforming value true of property singleton
-Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
-Start Transforming AttributeConnector
-Information: Construction of constructor-parameter-value for role:java.lang.String
-Information: Transforming value backprice of property role
-Information: Construction of constructor-parameter-value for targetType:metaModel.primitives.JPrimitiveType
-Information: Fetching already created Java Node for referenced node Integer of concept PrimitiveType
-Information: Searching for method getPrimitiveType
-Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: Integer
-Information: Construction of constructor-parameter-value for constraint:metaModel.enumerations.JMultiplicity
-Information: Transforming value 1axOPyL0vao/PartialMap of property constraint
-Information: Retrieving enumeration value of type JPartialMap for property constraint
 Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
+Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
 Start Transforming Filmprojection
 Information: Construction of constructor-parameter-value for name:java.lang.String
 Information: Transforming value Filmprojection of property name
 Information: Construction of constructor-parameter-value for singleton:java.lang.Boolean
 Information: Transforming value null of property singleton
-Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
 Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
 Start Transforming Operation
 Information: Construction of constructor-parameter-value for techName:java.lang.String
@@ -330,6 +309,7 @@ Information: Transforming value null of property isMany
 Information: Construction of constructor-parameter-value for exception:metaModel.JException
 Information: No Value found for  Reference exception. That's ok, because its optionality Value is true
 Information: Adding children according to addFormalParameter(Feature formalParameters) in Java Class class metaModel.JOperation
+Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
 Start Transforming fp_Cinemahall
 Information: Construction of constructor-parameter-value for name:java.lang.String
 Information: Transforming value fp_Cinemahall of property name
@@ -399,6 +379,7 @@ Information: Construction of constructor-parameter-value for name:java.lang.Stri
 Information: Transforming value Movie of property name
 Information: Construction of constructor-parameter-value for singleton:java.lang.Boolean
 Information: Transforming value null of property singleton
+Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
 Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
 Start Transforming AttributeConnector
 Information: Construction of constructor-parameter-value for role:java.lang.String
@@ -410,14 +391,13 @@ Information: Invoking method public metaModel.primitives.JPrimitiveType metaMode
 Information: Construction of constructor-parameter-value for constraint:metaModel.enumerations.JMultiplicity
 Information: Transforming value null of property constraint
 Information: Retrieving enumeration value of type JTotalMap for property constraint
-Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
 Start Transforming Reservation
 Information: Construction of constructor-parameter-value for name:java.lang.String
 Information: Transforming value Reservation of property name
 Information: Construction of constructor-parameter-value for singleton:java.lang.Boolean
 Information: Transforming value null of property singleton
-Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
 Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
+Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
 Start Transforming Reservation_Fp
 Information: Construction of constructor-parameter-value for name:java.lang.String
 Information: Transforming value Reservation_Fp of property name
@@ -487,8 +467,8 @@ Information: Construction of constructor-parameter-value for name:java.lang.Stri
 Information: Transforming value Booking of property name
 Information: Construction of constructor-parameter-value for singleton:java.lang.Boolean
 Information: Transforming value null of property singleton
-Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
 Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
+Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
 Start Transforming Booking_Reservation
 Information: Construction of constructor-parameter-value for name:java.lang.String
 Information: Transforming value Booking_Reservation of property name
@@ -533,6 +513,7 @@ Information: Construction of constructor-parameter-value for name:java.lang.Stri
 Information: Transforming value User of property name
 Information: Construction of constructor-parameter-value for singleton:java.lang.Boolean
 Information: Transforming value null of property singleton
+Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
 Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
 Start Transforming AttributeConnector
 Information: Construction of constructor-parameter-value for role:java.lang.String
@@ -574,7 +555,6 @@ Information: Invoking method public metaModel.primitives.JPrimitiveType metaMode
 Information: Construction of constructor-parameter-value for constraint:metaModel.enumerations.JMultiplicity
 Information: Transforming value null of property constraint
 Information: Retrieving enumeration value of type JTotalMap for property constraint
-Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
 Start Transforming User_Role
 Information: Construction of constructor-parameter-value for name:java.lang.String
 Information: Transforming value User_Role of property name
@@ -612,22 +592,22 @@ Information: Construction of constructor-parameter-value for name:java.lang.Stri
 Information: Transforming value Role of property name
 Information: Construction of constructor-parameter-value for singleton:java.lang.Boolean
 Information: Transforming value null of property singleton
-Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
 Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
+Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
 Start Transforming Customer
 Information: Construction of constructor-parameter-value for name:java.lang.String
 Information: Transforming value Customer of property name
 Information: Construction of constructor-parameter-value for singleton:java.lang.Boolean
 Information: Transforming value true of property singleton
-Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
 Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
+Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
 Start Transforming Admin
 Information: Construction of constructor-parameter-value for name:java.lang.String
 Information: Transforming value Admin of property name
 Information: Construction of constructor-parameter-value for singleton:java.lang.Boolean
 Information: Transforming value true of property singleton
-Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
 Information: Adding children according to addOperation(Feature operations) in Java Class class metaModel.JClass
+Information: Adding children according to addAttribute(Feature attributes) in Java Class class metaModel.JClass
 Start Transforming Generalisation
 Information: Construction of constructor-parameter-value for general:metaModel.JClassLink
 Information: Fetching already created Java Node for referenced node PriceCategory of concept Class
@@ -1020,13 +1000,7 @@ Information: Transforming value Delete the Movie form the Cinema. of property do
 Information: Construction of constructor-parameter-value for abstrakt:java.lang.Boolean
 Information: Transforming value null of property abstrakt
 Information: Construction of constructor-parameter-value for returnType:metaModel.JTypeAdapter
-Start Transforming Boolean
-Information: Construction of constructor-parameter-value for type:metaModel.JType
-Information: Fetching already created Java Node for referenced node Boolean of concept PrimitiveType
-Information: Searching for method getPrimitiveType
-Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: Boolean
-Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
-Information: Transforming value null of property isMany
+Information: No value found for  child returnType. That's ok, because its optionality value is true
 Information: Construction of constructor-parameter-value for exception:metaModel.JException
 Information: Fetching already created Java Node for referenced node DeleteError of concept Exception
 Information: Searching for method getException
@@ -1436,6 +1410,6 @@ Information: Construction of constructor-parameter-value for isMany:java.lang.Bo
 Information: Transforming value null of property isMany
 Information: --> Starting Transformation Phase 2 
 Information: --> Finished Transformation Phase 2 (assigning all unassigned references) with no Errors.
-Information: Successfully Finished Java AST Creation @ Tue Mar 02 12:07:21 CET 2021
+Information: Successfully Finished Java AST Creation @ Tue Mar 02 17:45:30 CET 2021
 Information: Carried out Code Generation for CinemaService. Watch out for Syntax Errors in Generated Code!!!
-Information: Created XML File at C:\Users\admin\git\Kino\protocols\ASTCinemaService.xml
+Information: Created XML File at D:\eclipse workspaces\informationsinfrastrukturen\Kino\protocols\ASTCinemaService.xml

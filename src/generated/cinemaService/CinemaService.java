@@ -1,4 +1,4 @@
-/**--- Generated at Tue Mar 02 17:34:35 CET 2021 
+/**--- Generated at Tue Mar 02 17:45:31 CET 2021 
  * --- Change only in Editable Sections!  
  * --- Do not touch section numbering!   
  */
@@ -272,8 +272,7 @@ public class CinemaService extends Observable{
    public void closeDBConnection() throws java.sql.SQLException{
       db.connection.DBConnectionManager.getTheInstance().close();
    }
-   /**
-	 * --- Generated at Sun Feb 28 14:35:57 CET 2021 //80 ===== Editable : Your
+	 /* --- Generated at Sun Feb 28 14:35:57 CET 2021 //80 ===== Editable : Your
 	 * Operations ============= /** Change Price on Pricecategory.
 	 * @throws PersistenceException 
 	 */

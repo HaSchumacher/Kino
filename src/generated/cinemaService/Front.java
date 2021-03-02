@@ -1,4 +1,4 @@
-/**--- Generated at Tue Mar 02 12:07:23 CET 2021 
+/**--- Generated at Tue Mar 02 17:45:31 CET 2021 
  * --- Change only in Editable Sections!  
  * --- Do not touch section numbering!   
  */
@@ -21,18 +21,16 @@ public class Front extends PriceCategory implements java.io.Serializable, IFront
 {
    //30 ===== GENERATED:      Attribute Section ======
    private static Optional<Front> theInstance = Optional.empty();
-   private Optional<Integer> frontprice;
    //40 ===== Editable : Your Attribute Section ======
    
    //50 ===== GENERATED:      Constructor ============
-   private Front(Integer id, Optional<Integer> frontprice, boolean objectOnly)
+   private Front(Integer id, Optional<Integer> price, boolean objectOnly)
    {
-      super(id, objectOnly);
-      this.frontprice = frontprice;
+      super(id, price, objectOnly);
       if(objectOnly) return;
    }
-   private static Front createAlreadyPersistent(Integer id, Optional<Integer> frontprice){
-      return new Front(id, frontprice, true);
+   private static Front createAlreadyPersistent(Integer id, Optional<Integer> price){
+      return new Front(id, price, true);
    }
    //60 ===== Editable : Your Constructors ===========
    
@@ -46,22 +44,14 @@ public class Front extends PriceCategory implements java.io.Serializable, IFront
          Integer typeKey = TypeKeyManager.getTheInstance().getTypeKey("CinemaService", "Front");
          ResultSet rs = DBExecuterFactory.getConfiguredFactory().getDBDMLExecuter().selectEntriesOfTable("PriceCategory", typeKey);
          rs.next();
-         Optional<Integer> frontprice = (rs.getObject("frontprice") == null ? Optional.empty() : Optional.of(rs.getInt("frontprice")));
-         return Front.createAlreadyPersistent(rs.getInt("id"), frontprice);
+         Optional<Integer> price = (rs.getObject("price") == null ? Optional.empty() : Optional.of(rs.getInt("price")));
+         return Front.createAlreadyPersistent(rs.getInt("id"), price);
       } catch (SQLException | NoConnectionException e) {
          throw new PersistenceException(e.getMessage());
       }
    }
    public Front getTheObject(){
       return this;
-   }
-   public Optional<Integer> getFrontprice() {
-      return this.frontprice;
-   }
-   public void setFrontprice(Integer newFrontprice) throws PersistenceException{
-      this.frontprice = Optional.of(newFrontprice);
-      try{PersistenceExecuterFactory.getConfiguredFactory().getDBDMLExecuter().update("PriceCategory", "frontprice", newFrontprice.toString(), this.getId());
-      }catch(SQLException|NoConnectionException e){throw new PersistenceException(e.getMessage());}
    }
    //80 ===== Editable : Your Operations =============
 //90 ===== GENERATED: End of Your Operations ======

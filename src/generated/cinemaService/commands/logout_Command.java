@@ -1,11 +1,11 @@
-/**--- Generated at Tue Mar 02 12:07:22 CET 2021 
+/**--- Generated at Tue Mar 02 17:45:31 CET 2021 
  * --- No Change Allowed!  
  */
 package generated.cinemaService.commands;
 import generated.cinemaService.*;
 import commands.*;
 public class logout_Command extends ServiceCommand<Boolean>{
-   private static final long serialVersionUID = 227229581L;
+   private static final long serialVersionUID = 272123760L;
    private User user;
    public logout_Command(User user){
       super();

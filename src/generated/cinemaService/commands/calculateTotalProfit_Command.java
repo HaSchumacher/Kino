@@ -1,11 +1,11 @@
-/**--- Generated at Tue Mar 02 12:07:22 CET 2021 
+/**--- Generated at Tue Mar 02 17:45:31 CET 2021 
  * --- No Change Allowed!  
  */
 package generated.cinemaService.commands;
 import generated.cinemaService.*;
 import commands.*;
 public class calculateTotalProfit_Command extends ServiceCommand<Integer>{
-   private static final long serialVersionUID = 859145026L;
+   private static final long serialVersionUID = -352481900L;
    public calculateTotalProfit_Command(){
       super();
    }

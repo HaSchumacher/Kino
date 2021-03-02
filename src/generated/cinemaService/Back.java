@@ -1,4 +1,4 @@
-/**--- Generated at Tue Mar 02 12:07:23 CET 2021 
+/**--- Generated at Tue Mar 02 17:45:31 CET 2021 
  * --- Change only in Editable Sections!  
  * --- Do not touch section numbering!   
  */
@@ -21,18 +21,16 @@ public class Back extends PriceCategory implements java.io.Serializable, IBack
 {
    //30 ===== GENERATED:      Attribute Section ======
    private static Optional<Back> theInstance = Optional.empty();
-   private Optional<Integer> backprice;
    //40 ===== Editable : Your Attribute Section ======
    
    //50 ===== GENERATED:      Constructor ============
-   private Back(Integer id, Optional<Integer> backprice, boolean objectOnly)
+   private Back(Integer id, Optional<Integer> price, boolean objectOnly)
    {
-      super(id, objectOnly);
-      this.backprice = backprice;
+      super(id, price, objectOnly);
       if(objectOnly) return;
    }
-   private static Back createAlreadyPersistent(Integer id, Optional<Integer> backprice){
-      return new Back(id, backprice, true);
+   private static Back createAlreadyPersistent(Integer id, Optional<Integer> price){
+      return new Back(id, price, true);
    }
    //60 ===== Editable : Your Constructors ===========
    
@@ -46,22 +44,14 @@ public class Back extends PriceCategory implements java.io.Serializable, IBack
          Integer typeKey = TypeKeyManager.getTheInstance().getTypeKey("CinemaService", "Back");
          ResultSet rs = DBExecuterFactory.getConfiguredFactory().getDBDMLExecuter().selectEntriesOfTable("PriceCategory", typeKey);
          rs.next();
-         Optional<Integer> backprice = (rs.getObject("backprice") == null ? Optional.empty() : Optional.of(rs.getInt("backprice")));
-         return Back.createAlreadyPersistent(rs.getInt("id"), backprice);
+         Optional<Integer> price = (rs.getObject("price") == null ? Optional.empty() : Optional.of(rs.getInt("price")));
+         return Back.createAlreadyPersistent(rs.getInt("id"), price);
       } catch (SQLException | NoConnectionException e) {
          throw new PersistenceException(e.getMessage());
       }
    }
    public Back getTheObject(){
       return this;
-   }
-   public Optional<Integer> getBackprice() {
-      return this.backprice;
-   }
-   public void setBackprice(Integer newBackprice) throws PersistenceException{
-      this.backprice = Optional.of(newBackprice);
-      try{PersistenceExecuterFactory.getConfiguredFactory().getDBDMLExecuter().update("PriceCategory", "backprice", newBackprice.toString(), this.getId());
-      }catch(SQLException|NoConnectionException e){throw new PersistenceException(e.getMessage());}
    }
    //80 ===== Editable : Your Operations =============
 //90 ===== GENERATED: End of Your Operations ======

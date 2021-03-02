@@ -1,4 +1,4 @@
-/**--- Generated at Tue Mar 02 12:07:23 CET 2021 
+/**--- Generated at Tue Mar 02 17:45:31 CET 2021 
  * --- Change only in Editable Sections!  
  * --- Do not touch section numbering!   
  */
@@ -9,6 +9,8 @@ import db.connection.NoConnectionException;
 import db.connection.TypeKeyManager;
 import observation.Observable;
 import generated.cinemaService.proxies.IPriceCategory;
+import java.util.Optional;
+import db.executer.PersistenceExecuterFactory;
 import db.executer.PersistenceException;
 import exceptions.ConstraintViolation;
 //20 ===== Editable : Your Import Section =========
@@ -18,13 +20,15 @@ public abstract class PriceCategory extends Observable implements java.io.Serial
 {
    //30 ===== GENERATED:      Attribute Section ======
    private Integer id;
+   private Optional<Integer> price;
    //40 ===== Editable : Your Attribute Section ======
    
    //50 ===== GENERATED:      Constructor ============
-   public PriceCategory(Integer id, boolean objectOnly)
+   public PriceCategory(Integer id, Optional<Integer> price, boolean objectOnly)
    {
       super();
       this.setId(id);
+      this.price = price;
       if(objectOnly) return;
    }
    //60 ===== Editable : Your Constructors ===========
@@ -44,6 +48,14 @@ public abstract class PriceCategory extends Observable implements java.io.Serial
       return ((IPriceCategory)o).getId().equals(this.getId());
    }
    public int hashCode() {return this.getId().hashCode();}
+   public Optional<Integer> getPrice() {
+      return this.price;
+   }
+   public void setPrice(Integer newPrice) throws PersistenceException{
+      this.price = Optional.of(newPrice);
+      try{PersistenceExecuterFactory.getConfiguredFactory().getDBDMLExecuter().update("PriceCategory", "price", newPrice.toString(), this.getId());
+      }catch(SQLException|NoConnectionException e){throw new PersistenceException(e.getMessage());}
+   }
    //80 ===== Editable : Your Operations =============
 //90 ===== GENERATED: End of Your Operations ======
 }
