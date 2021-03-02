@@ -1,27 +1,54 @@
-/**--- Generated at Tue Mar 02 12:07:22 CET 2021 
+/**--- Generated at Tue Mar 02 17:34:35 CET 2021 
  * --- Change only in Editable Sections!  
  * --- Do not touch section numbering!   
  */
 package generated.cinemaService;
-//10 ===== GENERATED: Import Section ==============
-import db.executer.PersistenceException;
-import generated.cinemaService.relationControl.*;
-import utilities.InitialProxyLoader;
-import utilities.InitialRelationLoader;
-import utilities.InitialRelationLoader.IntegerPair;
-import exceptions.ConstraintViolation;
-import generated.cinemaService.proxies.*;
-import observation.Observable;
-import db.executer.PersistenceExecuterFactory;
-import db.executer.DBDMLExecuter;
-import db.connection.TypeKeyManager;
-import db.connection.DBConnectionManager;
-import db.connection.DBConnectionData;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import db.connection.DBConnectionData;
+import db.connection.DBConnectionManager;
+import db.connection.TypeKeyManager;
+import db.executer.DBDMLExecuter;
+//10 ===== GENERATED: Import Section ==============
+import db.executer.PersistenceException;
+import db.executer.PersistenceExecuterFactory;
+import exceptions.ConstraintViolation;
+import generated.cinemaService.proxies.BookingProxy;
+import generated.cinemaService.proxies.CinemaRowProxy;
+import generated.cinemaService.proxies.CinemahallProxy;
+import generated.cinemaService.proxies.FilmprojectionProxy;
+import generated.cinemaService.proxies.IBooking;
+import generated.cinemaService.proxies.ICinemaRow;
+import generated.cinemaService.proxies.ICinemahall;
+import generated.cinemaService.proxies.IFilmprojection;
+import generated.cinemaService.proxies.IMovie;
+import generated.cinemaService.proxies.IPriceCategory;
+import generated.cinemaService.proxies.IReservation;
+import generated.cinemaService.proxies.IRole;
+import generated.cinemaService.proxies.ISeat;
+import generated.cinemaService.proxies.IUser;
+import generated.cinemaService.proxies.MovieProxy;
+import generated.cinemaService.proxies.ReservationProxy;
+import generated.cinemaService.proxies.SeatProxy;
+import generated.cinemaService.proxies.UserProxy;
+import generated.cinemaService.relationControl.Booking_ReservationSupervisor;
+import generated.cinemaService.relationControl.CinemaRow_PriceCategorySupervisor;
+import generated.cinemaService.relationControl.CinemaRow_SeatsSupervisor;
+import generated.cinemaService.relationControl.Cinemahall_CinemaRowSupervisor;
+import generated.cinemaService.relationControl.Reservation_FpSupervisor;
+import generated.cinemaService.relationControl.Reservation_SeatSupervisor;
+import generated.cinemaService.relationControl.Reservation_UserSupervisor;
+import generated.cinemaService.relationControl.User_RoleSupervisor;
+import generated.cinemaService.relationControl.fp_CinemahallSupervisor;
+import generated.cinemaService.relationControl.fp_movieSupervisor;
+import observation.Observable;
+import utilities.InitialProxyLoader;
+import utilities.InitialRelationLoader;
+import utilities.InitialRelationLoader.IntegerPair;
 //20 ===== Editable : Your import section =========
 //30 ===== GENERATED: Main Section ================
 public class CinemaService extends Observable{
@@ -245,16 +272,13 @@ public class CinemaService extends Observable{
    public void closeDBConnection() throws java.sql.SQLException{
       db.connection.DBConnectionManager.getTheInstance().close();
    }
-	/**
+   /**
 	 * --- Generated at Sun Feb 28 14:35:57 CET 2021 //80 ===== Editable : Your
 	 * Operations ============= /** Change Price on Pricecategory.
 	 * @throws PersistenceException 
 	 */
 	public void changePriceCategory(PriceCategory c, Integer price) throws PersistenceException {
-		Integer oldprice = c.getPrice();
-		if(! (oldprice == price)) {
-			Front.getInstance().setprice(price);
-		}
+		c.setPrice(price);
 	}
 
 	/**
