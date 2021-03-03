@@ -60,7 +60,7 @@ public class FilmprojectionProxy implements IFilmprojection{
    public void setMyMovie(Movie newMyMovie)throws PersistenceException{
       this.getTheObject().setMyMovie(newMyMovie);
    }
-   public Integer calculateProfit(){
+   public Integer calculateProfit() throws PersistenceException{
       return this.getTheObject().calculateProfit();
    }
 }

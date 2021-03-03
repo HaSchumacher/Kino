@@ -1,17 +1,33 @@
+import java.util.Iterator;
 import java.util.Scanner;
 
 import db.executer.PersistenceException;
 import exceptions.ConstraintViolation;
+import generated.cinemaService.Back;
 import generated.cinemaService.CinemaHallCreation;
 import generated.cinemaService.CinemaService;
+import generated.cinemaService.Cinemahall;
+import generated.cinemaService.Front;
 import generated.cinemaService.LoginError;
+import generated.cinemaService.Middle;
+import generated.cinemaService.PriceCategory;
+import generated.cinemaService.User;
+import generated.cinemaService.proxies.CinemahallProxy;
 
 public class StartCinemaService {
 
 	public static void main(String[] args) throws CinemaHallCreation, PersistenceException, ConstraintViolation, LoginError {
 		CinemaService service = CinemaService.getInstance();
-		//service.addCinemahall("hunululu", 6, 2);
 		
+		service.addCinemahall("test", 6, 4);
+		
+		for(Iterator<CinemahallProxy> iterator = service.getCinemahallCache().values().iterator(); iterator.hasNext();) {
+			String name = iterator.next().getTheObject().getName();
+			System.out.println(name);
+		}
+		
+		System.out.println("finished");
+		/**
 		Scanner choose = new Scanner(System.in);
 	    String choice= null;
 	    int j = 0;
@@ -47,6 +63,7 @@ public class StartCinemaService {
 	        }
 	    }
 	    choose.close();
+	    **/
 	}
 
 }

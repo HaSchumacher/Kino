@@ -14,5 +14,5 @@ public interface IFilmprojection extends Identifiable{
    public void setMyHall(Cinemahall newMyHall)throws PersistenceException;
    public Movie getMyMovie() throws PersistenceException;
    public void setMyMovie(Movie newMyMovie)throws PersistenceException;
-   public Integer calculateProfit();
+   public Integer calculateProfit() throws PersistenceException;
 }

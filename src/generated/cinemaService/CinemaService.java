@@ -441,8 +441,9 @@ public class CinemaService extends Observable{
 
 	/**
 	 * Calculate the Profit from one Filmprojection or more or all.
+	 * @throws PersistenceException 
 	 */
-	public Integer calulateProfit(Collection<Filmprojection> fp) {
+	public Integer calulateProfit(Collection<Filmprojection> fp) throws PersistenceException {
 		Integer sum = 0;
 		for (Iterator<Filmprojection> iterator = fp.iterator(); iterator.hasNext();) {
 			sum += iterator.next().calculateProfit(); 
