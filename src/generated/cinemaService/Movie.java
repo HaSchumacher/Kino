@@ -73,5 +73,11 @@ public class Movie extends Observable implements java.io.Serializable, IMovie
       }catch(SQLException|NoConnectionException e){throw new PersistenceException(e.getMessage());}
    }
    //80 ===== Editable : Your Operations =============
+   
+   @Override
+   public String toString() {
+	   return this.title;
+   }
+   
 //90 ===== GENERATED: End of Your Operations ======
 }

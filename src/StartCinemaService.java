@@ -1,3 +1,4 @@
+import java.awt.EventQueue;
 import java.util.Iterator;
 import java.util.Scanner;
 
@@ -17,6 +18,26 @@ import generated.cinemaService.proxies.CinemahallProxy;
 public class StartCinemaService {
 
 	public static void main(String[] args) throws CinemaHallCreation, PersistenceException, ConstraintViolation, LoginError {
+		
+		/**
+		 * Launch the application.
+		 */
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Model m = new Model();
+					View frame = new View();
+					frame.setVisible(true);
+					Controller c = new Controller(m, frame);
+					c.initController();
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+			
+		/**
 		CinemaService service = CinemaService.getInstance();
 		
 		service.addCinemahall("test", 6, 4);
@@ -27,7 +48,7 @@ public class StartCinemaService {
 		}
 		
 		System.out.println("finished");
-		/**
+		
 		Scanner choose = new Scanner(System.in);
 	    String choice= null;
 	    int j = 0;
