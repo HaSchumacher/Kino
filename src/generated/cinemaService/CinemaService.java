@@ -399,7 +399,7 @@ public class CinemaService extends Observable{
 		Integer mid = m.getId();
 		if (this.movieCache.containsKey(mid)) {
 			this.movieCache.remove(mid);
-		} else { throw new DeleteError();}
+		} else { throw new DeleteError(); }
 	}
 
 	/**
@@ -408,7 +408,7 @@ public class CinemaService extends Observable{
 	 * @throws PersistenceException
 	 */
 	public void addMovie(String title) throws PersistenceException {
-		Movie m = Movie.createFresh(title);
+		Movie.createFresh(title);
 	}
 
 	/**
@@ -433,7 +433,11 @@ public class CinemaService extends Observable{
 	 * @throws PersistenceException 
 	 */
 	public void deleteRoleFromUser(User u, Role r) throws DeleteError, PersistenceException {
-		if(u.getMyRoles().contains(r)) {u.getMyRoles().remove(r);}
+		if(u.getMyRoles().contains(r)) {
+			u.getMyRoles().remove(r);
+		} else {
+			throw new DeleteError();
+		}
 	}
 
 	/**
@@ -442,6 +446,8 @@ public class CinemaService extends Observable{
 	public void cancelReservation(Reservation r) throws DeleteError {
 		if ( this.getReservationCache().containsKey(r.getId())) {
 			this.getReservationCache().remove(r.getId());
+		} else {
+			throw new DeleteError();
 		}
 	}
 
