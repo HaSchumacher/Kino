@@ -374,10 +374,15 @@ public class CinemaService extends Observable{
 
 	/**
 	 * Calculate the Total Profit of the Cinema.
+	 * @throws PersistenceException 
 	 */
-	public Integer calculateTotalProfit() {
-		// TODO: Implement Operation calculateTotalProfit
-		return null;
+	public Integer calculateTotalProfit() throws PersistenceException {
+		Integer sum = 0;
+		for(Iterator<FilmprojectionProxy> iterator = this.filmprojectionCache.values().iterator(); iterator.hasNext();) {
+			Filmprojection currentFP = iterator.next().getTheObject();
+			sum =+ currentFP.calculateProfit();
+		}
+		return sum;
 	}
 
 	/**
