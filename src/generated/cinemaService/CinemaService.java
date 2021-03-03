@@ -335,13 +335,14 @@ public class CinemaService extends Observable{
 
 	/**
 	 * Delete the given Cinemahall from CinemaService.
+	 * @return 
 	 */
-	public Boolean deleteCinemahall(Cinemahall c) throws DeleteError {
+	public void deleteCinemahall(Cinemahall c) throws DeleteError {
 		if (this.cinemahallCache.containsKey(c.getId())) {
 			this.cinemahallCache.remove(c.getId());
-			return true;
+		} else {
+			throw new DeleteError();	
 		}
-		return false;
 	}
 
 	/**
