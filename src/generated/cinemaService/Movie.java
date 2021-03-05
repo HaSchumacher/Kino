@@ -1,4 +1,4 @@
-/**--- Generated at Fri Mar 05 15:44:03 CET 2021 
+/**--- Generated at Fri Mar 05 17:39:16 CET 2021 
  * --- Change only in Editable Sections!  
  * --- Do not touch section numbering!   
  */
@@ -73,5 +73,9 @@ public class Movie extends Observable implements java.io.Serializable, IMovie
       }catch(SQLException|NoConnectionException e){throw new PersistenceException(e.getMessage());}
    }
    //80 ===== Editable : Your Operations =============
+@Override
+public String toString() {
+	return this.title;
+}
 //90 ===== GENERATED: End of Your Operations ======
 }

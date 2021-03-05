@@ -1,5 +1,5 @@
 
-STARTING JAVA AST CREATION @ Fri Mar 05 15:44:02 CET 2021
+STARTING JAVA AST CREATION @ Fri Mar 05 17:39:16 CET 2021
 Start Transforming CinemaService
 Information: --> Starting Transformation Phase 1
 Start Transforming BookingError
@@ -1660,12 +1660,12 @@ Information: Fetching already created Java Node for referenced node String of co
 Information: Searching for method getPrimitiveType
 Information: Invoking method public metaModel.primitives.JPrimitiveType metaModel.JService.getPrimitiveType(java.lang.String) throws java.lang.Exception with actual parameter: String
 Information: Construction of constructor-parameter-value for isMany:java.lang.Boolean
-Information: Transforming value null of property isMany
+Information: Transforming value true of property isMany
 Information: Construction of constructor-parameter-value for exception:metaModel.JException
 Information: No Value found for  Reference exception. That's ok, because its optionality Value is true
 Information: Adding children according to addFormalParameter(Feature formalParameters) in Java Class class metaModel.JOperation
 Information: --> Starting Transformation Phase 2 
 Information: --> Finished Transformation Phase 2 (assigning all unassigned references) with no Errors.
-Information: Successfully Finished Java AST Creation @ Fri Mar 05 15:44:02 CET 2021
+Information: Successfully Finished Java AST Creation @ Fri Mar 05 17:39:16 CET 2021
 Information: Carried out Code Generation for CinemaService. Watch out for Syntax Errors in Generated Code!!!
 Information: Created XML File at C:\Users\admin\git\Kino\protocols\ASTCinemaService.xml

@@ -1,4 +1,4 @@
-/**--- Generated at Fri Mar 05 15:48:47 CET 2021 
+/**--- Generated at Fri Mar 05 17:39:16 CET 2021 
  * --- No Change Allowed!  
  */
 package generated.cinemaService.commands;
@@ -6,7 +6,7 @@ import generated.cinemaService.*;
 import commands.*;
 import java.util.Collection;
 public class generatePublicKey_Command extends ServiceCommand<Collection<String>>{
-   private static final long serialVersionUID = 553828758L;
+   private static final long serialVersionUID = 1625899470L;
    public generatePublicKey_Command(){
       super();
    }

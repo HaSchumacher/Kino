@@ -54,7 +54,7 @@ public class KeyPair extends Observable implements java.io.Serializable, IKeyPai
    //60 ===== Editable : Your Constructors ===========
    public KeyPair() throws NoSuchAlgorithmException, PersistenceException {
 	   db.executer.DBDMLExecuter dmlExecuter = PersistenceExecuterFactory.getConfiguredFactory().getDBDMLExecuter();
-	   Integer id = dmlExecuter.getNextId();
+	   int id = dmlExecuter.getNextId();
 	   KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
        keyGen.initialize(1024);
        java.security.KeyPair pair = keyGen.generateKeyPair();

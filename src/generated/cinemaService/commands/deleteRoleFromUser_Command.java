@@ -1,11 +1,11 @@
-/**--- Generated at Fri Mar 05 15:44:03 CET 2021 
+/**--- Generated at Fri Mar 05 17:39:16 CET 2021 
  * --- No Change Allowed!  
  */
 package generated.cinemaService.commands;
 import generated.cinemaService.*;
 import commands.*;
 public class deleteRoleFromUser_Command extends ServiceCommand<Boolean>{
-   private static final long serialVersionUID = -1860250614L;
+   private static final long serialVersionUID = -455291460L;
    private User u;
    private Role r;
    public deleteRoleFromUser_Command(User u, Role r){

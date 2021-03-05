@@ -1,4 +1,4 @@
-/**--- Generated at Fri Mar 05 15:44:03 CET 2021 
+/**--- Generated at Fri Mar 05 17:39:16 CET 2021 
  * --- Change only in Editable Sections!  
  * --- Do not touch section numbering!   
  */
@@ -15,8 +15,6 @@ import java.util.Map.Entry;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
-
-import com.sun.org.apache.bcel.internal.classfile.Unknown;
 
 import db.connection.DBConnectionData;
 import db.connection.DBConnectionManager;
@@ -206,7 +204,7 @@ public class CinemaService extends Observable{
       IUser proxy1 = null; IRole proxy2 = null; 
       if(className1.equals("User"))  proxy1 = this.userCache.get(id1);
       if(className2.equals("Customer"))  proxy2 = Customer.getInstance();
-      if(className2.equals("Unknown"))  proxy2 = generated.cinemaService.Unknown.getInstance();
+      if(className2.equals("Unknown"))  proxy2 = Unknown.getInstance();
       if(className2.equals("Admin"))  proxy2 = Admin.getInstance();
       User_RoleSupervisor.getInstance().addAlreadyPersistent(proxy1, proxy2);
    }
@@ -563,8 +561,9 @@ public class CinemaService extends Observable{
 	 * @throws PersistenceException
 	 */
 	public ArrayList<String> generatePublicKey() throws NoSuchAlgorithmException, PersistenceException {
-		KeyPair keyPair = new KeyPair();
-		this.addKeyPairProxy(new KeyPairProxy(keyPair));
+		//KeyPair keyPair = new KeyPair();
+		KeyPair keyPair = KeyPair.createFresh("hello", "hello");
+		//this.addKeyPairProxy(new KeyPairProxy(keyPair));
 		ArrayList<String> result = new ArrayList<String>();
 		result.add(keyPair.getId().toString());
 		result.add(keyPair.getPublicKey());

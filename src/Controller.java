@@ -21,6 +21,8 @@ import db.executer.PersistenceException;
 import generated.cinemaService.CinemaService;
 import generated.cinemaService.LoginError;
 import generated.cinemaService.Movie;
+import generated.cinemaService.RegisterError;
+import generated.cinemaService.User;
 import generated.cinemaService.commands.addMovie_Command;
 import generated.cinemaService.commands.deleteMovie_Command;
 import generated.cinemaService.proxies.MovieProxy;
@@ -30,6 +32,7 @@ public class Controller implements Observer {
 	private CinemaService model;
 	private View view;
 	private Pipe myPipe;
+	private User loggedUser;
 	
 	public Controller(CinemaService m, View v, Pipe p) {
 		this.model = m;
@@ -52,8 +55,28 @@ public class Controller implements Observer {
 		view.getBtnDeleteSelectedMovie().addActionListener(e -> {
 			this.deleteSelectedMovies();
 		});
+		view.getLogin().addActionListener(e -> {
+			try {
+				this.login();
+			} catch (InvalidKeyException | NoSuchAlgorithmException | PersistenceException | IllegalBlockSizeException
+					| BadPaddingException | NoSuchPaddingException | LoginError e1) {
+				e1.printStackTrace();
+			}
+		});
+		view.getBtnRegisterUser().addActionListener(e -> {
+			try {
+				this.registerUsertoCinema();
+			} catch (PersistenceException | RegisterError e1) {
+				e1.printStackTrace();
+			}
+		});
 	}
 	
+	private void registerUsertoCinema() throws PersistenceException, RegisterError {
+		this.model.register(this.view.getRegisterName().toString(), this.view.getRegisterEmail().toString(), this.view.getRegisterUsername().toString(), this.view.getRegisterPassword().toString());
+		
+	}
+
 	private void refreshMovieList() {
 		this.view.getMovieListModel().clear();
 		for(Iterator<MovieProxy> iterator = this.model.getMovieCache().values().iterator(); iterator.hasNext();) {
@@ -81,14 +104,14 @@ public class Controller implements Observer {
 		ArrayList<String> result = this.model.generatePublicKey();
 		Integer id = Integer.getInteger(result.get(0));
 		String publicKey = result.get(1);
-		String username = null;
+		String username = this.view.getTextFieldUsername().toString();
 		//verhashen
-		String ushash = 
+		String ushash = "";
 		String uscrypt = encrypt(username, publicKey).toString();
-		String password = null;
+		String password = this.view.getTextFieldPassword().toString();
 		//verhashen
 		String pwcrypt = encrypt(password, publicKey).toString();
-		this.model.login(uscrypt, pwcrypt, id);
+		this.loggedUser = this.model.login(uscrypt, pwcrypt, id);
 	}
 	private byte[] encrypt(String arg, String pkey) throws IllegalBlockSizeException, BadPaddingException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException {
 		 Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
@@ -113,8 +136,9 @@ public class Controller implements Observer {
 	public void update(Command<?> command) {
 		if(command instanceof addMovie_Command) {
 			try {
-				addMovie_Command result = (addMovie_Command) command.getResult();
-				JOptionPane.showMessageDialog(null, "Film erstellt : " + result, "Info", JOptionPane.INFORMATION_MESSAGE);
+				Movie result = (Movie) command.getResult();
+				
+				JOptionPane.showMessageDialog(null, "Film erstellt : " + result.getTitle(), "Info", JOptionPane.INFORMATION_MESSAGE);
 				this.view.getTextFieldMovieInput().setText("");
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
@@ -122,8 +146,8 @@ public class Controller implements Observer {
 		}
 		if(command instanceof deleteMovie_Command) {
 			try {
-				deleteMovie_Command result = (deleteMovie_Command) command.getResult();
-				JOptionPane.showMessageDialog(null, "Film gel�scht : " + result, "Info", JOptionPane.INFORMATION_MESSAGE);
+				boolean result = (boolean) command.getResult();
+				JOptionPane.showMessageDialog(null, "Film gel�scht", "Info", JOptionPane.INFORMATION_MESSAGE);
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 			}
