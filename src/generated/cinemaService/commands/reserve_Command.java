@@ -1,11 +1,11 @@
-/**--- Generated at Tue Mar 02 17:45:31 CET 2021 
+/**--- Generated at Fri Mar 05 15:44:03 CET 2021 
  * --- No Change Allowed!  
  */
 package generated.cinemaService.commands;
 import generated.cinemaService.*;
 import commands.*;
-public class reserve_Command extends ServiceCommand<Void>{
-   private static final long serialVersionUID = -1746948767L;
+public class reserve_Command extends ServiceCommand<Reservation>{
+   private static final long serialVersionUID = 1052325461L;
    private User u;
    private Filmprojection fp;
    private PriceCategory c;
@@ -16,7 +16,7 @@ public class reserve_Command extends ServiceCommand<Void>{
       this.c = c;
    }
    public void execute(){
-      try{CinemaService.getInstance().reserve(u, fp, c);
+      try{this.result = CinemaService.getInstance().reserve(u, fp, c);
       }catch(Exception e){this.e = e;
       }finally{CinemaService.getInstance().notifyObservers(this);}
    }

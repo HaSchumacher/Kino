@@ -1,11 +1,11 @@
-/**--- Generated at Tue Mar 02 17:45:31 CET 2021 
+/**--- Generated at Fri Mar 05 15:44:03 CET 2021 
  * --- No Change Allowed!  
  */
 package generated.cinemaService.commands;
 import generated.cinemaService.*;
 import commands.*;
-public class addCinemahall_Command extends ServiceCommand<Void>{
-   private static final long serialVersionUID = -777436698L;
+public class addCinemahall_Command extends ServiceCommand<Cinemahall>{
+   private static final long serialVersionUID = -502792790L;
    private String name;
    private Integer rows;
    private Integer Seats;
@@ -16,7 +16,7 @@ public class addCinemahall_Command extends ServiceCommand<Void>{
       this.Seats = Seats;
    }
    public void execute(){
-      try{CinemaService.getInstance().addCinemahall(name, rows, Seats);
+      try{this.result = CinemaService.getInstance().addCinemahall(name, rows, Seats);
       }catch(Exception e){this.e = e;
       }finally{CinemaService.getInstance().notifyObservers(this);}
    }

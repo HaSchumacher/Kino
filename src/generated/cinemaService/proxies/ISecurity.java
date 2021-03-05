@@ -4,9 +4,11 @@
 package generated.cinemaService.proxies;
 import idManagement.Identifiable;
 import db.executer.PersistenceException;
-import generated.cinemaService.Back;
+import generated.cinemaService.Security;
 import java.util.Optional;
-public interface IBack extends IPriceCategory{
-   public Back getTheObject();
+public interface ISecurity extends Identifiable{
+   public Security getTheObject();
    public Integer getId();
+   public Optional<String> getSecurityMap() ;
+   public void setSecurityMap(String newSecurityMap) throws PersistenceException;
 }

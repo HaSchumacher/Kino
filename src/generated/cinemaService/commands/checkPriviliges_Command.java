@@ -4,15 +4,15 @@
 package generated.cinemaService.commands;
 import generated.cinemaService.*;
 import commands.*;
-public class Movie_constructor_Command extends ServiceCommand<Movie>{
-   private static final long serialVersionUID = 422003522L;
-   private String  title;
-   public Movie_constructor_Command(String  title){
+public class checkPriviliges_Command extends ServiceCommand<Boolean>{
+   private static final long serialVersionUID = 552630648L;
+   private User u;
+   public checkPriviliges_Command(User u){
       super();
-      this.title = title;
+      this.u = u;
    }
    public void execute(){
-      try{this.result = Movie.createFresh(title);
+      try{this.result = CinemaService.getInstance().checkPriviliges(u);
       }catch(Exception e){this.e = e;
       }finally{CinemaService.getInstance().notifyObservers(this);}
    }

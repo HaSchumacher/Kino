@@ -1,4 +1,4 @@
-/**--- Generated at Tue Mar 02 17:45:31 CET 2021 
+/**--- Generated at Fri Mar 05 15:44:03 CET 2021 
  * --- No Change Allowed!  
  */
 package generated.cinemaService.proxies;
@@ -60,7 +60,7 @@ public class FilmprojectionProxy implements IFilmprojection{
    public void setMyMovie(Movie newMyMovie)throws PersistenceException{
       this.getTheObject().setMyMovie(newMyMovie);
    }
-   public Integer calculateProfit() throws PersistenceException{
+   public Integer calculateProfit(){
       return this.getTheObject().calculateProfit();
    }
 }

@@ -1,11 +1,11 @@
-/**--- Generated at Tue Mar 02 17:45:31 CET 2021 
+/**--- Generated at Fri Mar 05 15:44:03 CET 2021 
  * --- No Change Allowed!  
  */
 package generated.cinemaService.commands;
 import generated.cinemaService.*;
 import commands.*;
-public class addRoleToUser_Command extends ServiceCommand<Void>{
-   private static final long serialVersionUID = -1991209483L;
+public class addRoleToUser_Command extends ServiceCommand<Boolean>{
+   private static final long serialVersionUID = -1859845355L;
    private User u;
    private Role r;
    public addRoleToUser_Command(User u, Role r){
@@ -14,7 +14,7 @@ public class addRoleToUser_Command extends ServiceCommand<Void>{
       this.r = r;
    }
    public void execute(){
-      try{CinemaService.getInstance().addRoleToUser(u, r);
+      try{this.result = CinemaService.getInstance().addRoleToUser(u, r);
       }catch(Exception e){this.e = e;
       }finally{CinemaService.getInstance().notifyObservers(this);}
    }

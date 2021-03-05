@@ -1,4 +1,4 @@
-/**--- Generated at Tue Mar 02 17:45:31 CET 2021 
+/**--- Generated at Fri Mar 05 15:44:03 CET 2021 
  * --- No Change Allowed!  
  */
 package generated.cinemaService.proxies;
@@ -14,5 +14,5 @@ public interface IFilmprojection extends Identifiable{
    public void setMyHall(Cinemahall newMyHall)throws PersistenceException;
    public Movie getMyMovie() throws PersistenceException;
    public void setMyMovie(Movie newMyMovie)throws PersistenceException;
-   public Integer calculateProfit() throws PersistenceException;
+   public Integer calculateProfit();
 }

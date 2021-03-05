@@ -1,11 +1,11 @@
-/**--- Generated at Tue Mar 02 17:45:31 CET 2021 
+/**--- Generated at Fri Mar 05 15:44:03 CET 2021 
  * --- No Change Allowed!  
  */
 package generated.cinemaService.commands;
 import generated.cinemaService.*;
 import commands.*;
 public class CinemaRow_constructor_Command extends ServiceCommand<CinemaRow>{
-   private static final long serialVersionUID = 1967574417L;
+   private static final long serialVersionUID = 1089739270L;
    private PriceCategory priceCategory;
    private Integer  number;
    private Boolean  bookedUp;
