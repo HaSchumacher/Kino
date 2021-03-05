@@ -1,13 +1,22 @@
-/**--- Generated at Tue Mar 02 17:45:31 CET 2021 
+/**--- Generated at Fri Mar 05 15:44:03 CET 2021 
  * --- Change only in Editable Sections!  
  * --- Do not touch section numbering!   
  */
 package generated.cinemaService;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+
+import com.sun.org.apache.bcel.internal.classfile.Unknown;
 
 import db.connection.DBConnectionData;
 import db.connection.DBConnectionManager;
@@ -31,6 +40,7 @@ import generated.cinemaService.proxies.IReservation;
 import generated.cinemaService.proxies.IRole;
 import generated.cinemaService.proxies.ISeat;
 import generated.cinemaService.proxies.IUser;
+import generated.cinemaService.proxies.KeyPairProxy;
 import generated.cinemaService.proxies.MovieProxy;
 import generated.cinemaService.proxies.ReservationProxy;
 import generated.cinemaService.proxies.SeatProxy;
@@ -61,6 +71,7 @@ public class CinemaService extends Observable{
    private Map<Integer,ReservationProxy> reservationCache;
    private Map<Integer,BookingProxy> bookingCache;
    private Map<Integer,UserProxy> userCache;
+   private Map<Integer,KeyPairProxy> keyPairCache;
    private static CinemaService theInstance = new CinemaService();
    private CinemaService(){
       try{DBConnectionManager.getTheInstance().openDBConnection(new DBConnectionData("jdbc:mysql://localhost:3306", "CinemaService", "root" , ""));
@@ -81,6 +92,7 @@ public class CinemaService extends Observable{
       this.reservationCache = new InitialProxyLoader<ReservationProxy>("generated", "CinemaService", "cinemaService", "Reservation", "Reservation").perform();
       this.bookingCache = new InitialProxyLoader<BookingProxy>("generated", "CinemaService", "cinemaService", "Booking", "Booking").perform();
       this.userCache = new InitialProxyLoader<UserProxy>("generated", "CinemaService", "cinemaService", "User", "User").perform();
+      this.keyPairCache = new InitialProxyLoader<KeyPairProxy>("generated", "CinemaService", "cinemaService", "KeyPair", "KeyPair").perform();
    }
    private void loadRelations() throws PersistenceException{
       for(IntegerPair pair : new InitialRelationLoader("Cinemahall_CinemaRow").perform().values()){
@@ -194,6 +206,7 @@ public class CinemaService extends Observable{
       IUser proxy1 = null; IRole proxy2 = null; 
       if(className1.equals("User"))  proxy1 = this.userCache.get(id1);
       if(className2.equals("Customer"))  proxy2 = Customer.getInstance();
+      if(className2.equals("Unknown"))  proxy2 = generated.cinemaService.Unknown.getInstance();
       if(className2.equals("Admin"))  proxy2 = Admin.getInstance();
       User_RoleSupervisor.getInstance().addAlreadyPersistent(proxy1, proxy2);
    }
@@ -269,29 +282,193 @@ public class CinemaService extends Observable{
    public Map<Integer,UserProxy> getUserCache(){
       return this.userCache;
    }
+   public KeyPair getKeyPair(Integer id){
+      return this.keyPairCache.get(id).getTheObject();
+   }
+   public void addKeyPairProxy(KeyPairProxy p) throws PersistenceException{
+      this.keyPairCache.put(p.getId(), p);
+   }
+   public Map<Integer,KeyPairProxy> getKeyPairCache(){
+      return this.keyPairCache;
+   }
    public void closeDBConnection() throws java.sql.SQLException{
       db.connection.DBConnectionManager.getTheInstance().close();
    }
-	 /* --- Generated at Sun Feb 28 14:35:57 CET 2021 //80 ===== Editable : Your
-	 * Operations ============= /** Change Price on Pricecategory.
-	 * @throws PersistenceException 
+// 80 ===== Editable : Your Operations =============
+	/**
+	 * Change Price on Pricecategory.
+	 * 
+	 * @throws PersistenceException
 	 */
-	public void changePriceCategory(PriceCategory c, Integer price) throws PersistenceException {
+	public Boolean changePriceCategory(PriceCategory c, Integer price) throws PersistenceException {
 		c.setPrice(price);
+		return true;
+	}
+
+	/**
+	 * Delete the Movie form the Cinema.
+	 */
+	public Boolean deleteMovie(Movie m) throws DeleteError {
+		Integer mid = m.getId();
+		if (this.movieCache.containsKey(mid)) {
+			this.movieCache.remove(mid);
+			return true;
+		} else {
+			throw new DeleteError();
+		}
 	}
 
 	/**
 	 * Login a User in CinemaService.
+	 * 
+	 * @throws NoSuchPaddingException
+	 * @throws NoSuchAlgorithmException
+	 * @throws BadPaddingException
+	 * @throws IllegalBlockSizeException
+	 * @throws InvalidKeyException
 	 */
-	public void login(String username, String password) throws LoginError {
-		// TODO: Security commands
+	public User login(String usercrypt, String pwcrypt, Integer id) throws LoginError, InvalidKeyException,
+			IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException {
+		KeyPairProxy keyPair = this.keyPairCache.get(id);
+		String pkey = keyPair.getPrivateKey();
 		UserProxy loginuser = null;
+		String username = Security.decrypt(usercrypt, pkey);
+		String password = Security.decrypt(pwcrypt, pkey);
 		for (Entry<Integer, UserProxy> user : this.userCache.entrySet()) {
 			UserProxy userEntry = user.getValue();
-			if(userEntry.getUsername() == username && userEntry.getPassword() == password ) {
+			if (userEntry.getUsername() == username && userEntry.getPassword() == password) {
 				loginuser = (UserProxy) user;
+				return loginuser.getTheObject();
 			}
 		}
+		throw new LoginError();
+	}
+
+	/**
+	 * reservate a Seat in given Fp for user.
+	 * 
+	 * @throws PersistenceException
+	 */
+	public Reservation reserve(User u, Filmprojection fp, PriceCategory c)
+			throws ReservationError, PersistenceException {
+		List<CinemaRow> currRowlist = fp.getMyHall().getMyRows();
+		for (int i = 0; i < currRowlist.size(); i++) {
+			CinemaRow currRow = currRowlist.get(i);
+			if (currRow.getPriceCategory().getId() == c.getId()) {
+				if (!currRow.getBookedUp()) {
+					List<Seat> currSeatList = currRow.getMySeats();
+					for (int j = 0; j < currSeatList.size(); j++) {
+						Seat currSeat = currSeatList.get(j);
+						if (currSeat.getMyReservation().isEmpty()) {
+							return Reservation.createFresh(currSeat, fp, u);
+						}
+					}
+				}
+			}
+		}
+		throw new ReservationError();
+	}
+
+	/**
+	 * add role to User.
+	 * 
+	 * @throws PersistenceException
+	 */
+	public Boolean addRoleToUser(User u, Role r) throws PersistenceException {
+		u.addToMyRoles(r);
+		return true;
+	}
+
+	/**
+	 * book a given reservation
+	 * 
+	 * @throws PersistenceException
+	 */
+	public Booking book(Reservation r) throws BookingError, PersistenceException {
+		if (r.getMyBooking().isEmpty()) {
+			return Booking.createFresh(r);
+		}
+		return null;
+	}
+
+	/**
+	 * Get the Options for a User.
+	 */
+	public Collection<String> getOptions(Role r) {
+		List<String> result = new ArrayList<String>();
+		return result;
+	}
+
+	/**
+	 * Check if the User has the role to use the Command.
+	 */
+	public Boolean checkPriviliges(User u) {
+		// TODO: Implement Operation checkPriviliges
+		return null;
+	}
+
+	/**
+	 * Adding a Filmprojection to the CinemaService.
+	 * 
+	 * @throws PersistenceException
+	 */
+	public Filmprojection addFilmprojection(Cinemahall c, Movie m) throws PersistenceException {
+		return Filmprojection.createFresh(c, m);
+	}
+
+	/**
+	 * Calculate the Total Profit of the Cinema.
+	 */
+	public Integer calculateTotalProfit() {
+		Integer sum = 0;
+		for (Iterator<FilmprojectionProxy> iterator = this.filmprojectionCache.values().iterator(); iterator
+				.hasNext();) {
+			Filmprojection currentFP = iterator.next().getTheObject();
+			sum = +currentFP.calculateProfit();
+		}
+		return sum;
+	}
+
+	/**
+	 * Calculate the Profit from one Filmprojection or more or all.
+	 */
+	public Integer calulateProfit(Collection<Filmprojection> fp) {
+		Integer sum = 0;
+		for (Iterator<Filmprojection> iterator = fp.iterator(); iterator.hasNext();) {
+			sum += iterator.next().calculateProfit();
+		}
+		return sum;
+	}
+
+	/**
+	 * Cancel the given Reservation.
+	 */
+	public Boolean cancelReservation(Reservation r) throws DeleteError {
+		if (this.getReservationCache().containsKey(r.getId())) {
+			this.getReservationCache().remove(r.getId());
+			return true;
+		} else {
+			throw new DeleteError();
+		}
+	}
+
+	/**
+	 * Delete the given Filmprojection from CinemaService.
+	 */
+	public Boolean deleteFilmprojection(Filmprojection fp) throws DeleteError {
+		if (this.filmprojectionCache.containsKey(fp.getId())) {
+			this.filmprojectionCache.remove(fp.getId());
+			return true;
+		} else
+			throw new DeleteError();
+	}
+
+	/**
+	 * Logout the given User from Cinema Service.
+	 */
+	public Boolean logout(User user) {
+		// TODO: Logout - REferenz Keypair...
+		return null;
 	}
 
 	/**
@@ -300,7 +477,7 @@ public class CinemaService extends Observable{
 	 * @throws PersistenceException
 	 * @throws ConstraintViolation
 	 */
-	public void addCinemahall(String name, Integer rows, Integer Seats)
+	public Cinemahall addCinemahall(String name, Integer rows, Integer Seats)
 			throws CinemaHallCreation, PersistenceException, ConstraintViolation {
 		Cinemahall hall = Cinemahall.createFresh(false, name);
 		Integer getEqualRows = rows / 3;
@@ -327,79 +504,33 @@ public class CinemaService extends Observable{
 				}
 				hall.addToMyRows(currentRow);
 			}
-
+			return hall;
 		} else {
 			throw new CinemaHallCreation();
 		}
-	}
 
-	/**
-	 * Delete the given Cinemahall from CinemaService.
-	 * @return 
-	 */
-	public void deleteCinemahall(Cinemahall c) throws DeleteError {
-		if (this.cinemahallCache.containsKey(c.getId())) {
-			this.cinemahallCache.remove(c.getId());
-		} else {
-			throw new DeleteError();	
-		}
-	}
-
-	/**
-	 * add role to User.
-	 * @throws PersistenceException 
-	 */
-	public void addRoleToUser(User u, Role r) throws PersistenceException {
-		u.addToMyRoles(r);
 	}
 
 	/**
 	 * registerAUserInSystem
-	 * @throws PersistenceException 
+	 * 
+	 * @throws PersistenceException
 	 */
-	public void register(String name, String mail, String username, String passwort) throws RegisterError, PersistenceException {
-		//TODO HASHING PW decrypt
-		User.createFresh(name, mail, username, passwort);
+	public User register(String name, String email, String username, String passwort)
+			throws RegisterError, PersistenceException {
+		return User.createFresh(name, email, username, passwort);
 	}
 
 	/**
-	 * book a given reservation
-	 * @throws PersistenceException 
+	 * Delete the given Cinemahall from CinemaService.
 	 */
-	public void book(Reservation r) throws BookingError, PersistenceException {
-		if(r.getMyBooking().isEmpty()) {
-			Booking.createFresh(r);
+	public Boolean deleteCinemahall(Cinemahall c) throws DeleteError {
+		if (this.cinemahallCache.containsKey(c.getId())) {
+			this.cinemahallCache.remove(c.getId());
+			return true;
+		} else {
+			return false;
 		}
-	}
-
-	/**
-	 * Calculate the Total Profit of the Cinema.
-	 * @throws PersistenceException 
-	 */
-	public Integer calculateTotalProfit() throws PersistenceException {
-		Integer sum = 0;
-		for(Iterator<FilmprojectionProxy> iterator = this.filmprojectionCache.values().iterator(); iterator.hasNext();) {
-			Filmprojection currentFP = iterator.next().getTheObject();
-			sum =+ currentFP.calculateProfit();
-		}
-		return sum;
-	}
-
-	/**
-	 * Adding a Filmprojection to the CinemaService.
-	 */
-	public void addFilmprojection(Cinemahall c, Movie m) throws PersistenceException {
-		Filmprojection.createFresh(c, m);
-	}
-
-	/**
-	 * Delete the Movie form the Cinema.
-	 */
-	public void deleteMovie(Movie m) throws DeleteError {
-		Integer mid = m.getId();
-		if (this.movieCache.containsKey(mid)) {
-			this.movieCache.remove(mid);
-		} else { throw new DeleteError(); }
 	}
 
 	/**
@@ -407,113 +538,37 @@ public class CinemaService extends Observable{
 	 * 
 	 * @throws PersistenceException
 	 */
-	public void addMovie(String title) throws PersistenceException {
-		Movie.createFresh(title);
-	}
-
-	/**
-	 * Logout the given User from Cinema Service.
-	 */
-	public Boolean logout(User user) {
-		// TODO: Ansicht Entziehen ?!
-		return null;
-	}
-
-	/**
-	 * Delete the given Filmprojection from CinemaService.
-	 */
-	public void deleteFilmprojection(Filmprojection fp) throws DeleteError {
-		if(this.filmprojectionCache.containsKey(fp.getId())) {
-			this.filmprojectionCache.remove(fp.getId());
-		} else throw new DeleteError();
+	public Movie addMovie(String title) throws PersistenceException {
+		return Movie.createFresh(title);
 	}
 
 	/**
 	 * delete Role from User.
-	 * @throws PersistenceException 
-	 */
-	public void deleteRoleFromUser(User u, Role r) throws DeleteError, PersistenceException {
-		if(u.getMyRoles().contains(r)) {
-			u.getMyRoles().remove(r);
-		} else {
-			throw new DeleteError();
-		}
-	}
-
-	/**
-	 * Cancel the given Reservation.
-	 */
-	public void cancelReservation(Reservation r) throws DeleteError {
-		if ( this.getReservationCache().containsKey(r.getId())) {
-			this.getReservationCache().remove(r.getId());
-		} else {
-			throw new DeleteError();
-		}
-	}
-
-	/**
-	 * Calculate the Profit from one Filmprojection or more or all.
-	 * @throws PersistenceException 
-	 */
-	public Integer calulateProfit(Collection<Filmprojection> fp) throws PersistenceException {
-		Integer sum = 0;
-		for (Iterator<Filmprojection> iterator = fp.iterator(); iterator.hasNext();) {
-			sum += iterator.next().calculateProfit(); 
-		}
-		return sum;
-	}
-
-	/**
-	 * reservate a Seat in given Fp for user.
-	 * @throws PersistenceException 
-	 */
-	public void reserve(User u, Filmprojection fp, PriceCategory c) throws ReservationError, PersistenceException {
-		List<CinemaRow> currRowlist = fp.getMyHall().getMyRows();
-		for (int i = 0; i < currRowlist.size(); i++) {
-			CinemaRow currRow = currRowlist.get(i);
-			if (currRow.getPriceCategory().getId() == c.getId()) {
-				if (!currRow.getBookedUp()) {
-					List<Seat> currSeatList = currRow.getMySeats();
-					for (int j = 0; j < currSeatList.size(); j++) {
-						Seat currSeat = currSeatList.get(j);
-						if(currSeat.getMyReservation().isEmpty()) {
-							Reservation.createFresh(currSeat, fp, u);
-							return;
-						}
-					}
-				}
-			}
-		}
-		throw new ReservationError();
-	}
-
-	/**
-	 * get the options for a user. what can i do in the cinemaservice.
 	 * 
 	 * @throws PersistenceException
 	 */
-	public String getOptions(User u) throws PersistenceException {
-		String result = "";
-		if (u.getMyRoles().contains(Admin.getInstance())) {
-			result = result + 
-					"As Admin you can do:"+
-					"\n1: Cinema options." +
-					"\n2: Filmprojection and Movie options."+
-					"\n3: Profit options"+
-					"\n4: User Management"+
-					"\n************************* ";
-			
-		} else if (u.getMyRoles().contains(Customer.getInstance())) {
-			result = result +
-			"As Customer you can do:"+
-			"\n1: Reservation"+
-			"\n2: Book your Reservation"+
-			"\n3: Get your Reservation"+
-			"\n4: Get your Booking"+
-			"\n************************* "+
-			"\n0:Logout";
+	public Boolean deleteRoleFromUser(User u, Role r) throws DeleteError, PersistenceException {
+		if (u.getMyRoles().contains(r)) {
+			u.getMyRoles().remove(r);
+			return true;
+		} else {
+			throw new DeleteError();
 		}
-			return result;
+	}
+
+	/**
+	 * get for login or register a public key.
+	 * 
+	 * @throws NoSuchAlgorithmException
+	 * @throws PersistenceException
+	 */
+	public ArrayList<String> generatePublicKey() throws NoSuchAlgorithmException, PersistenceException {
+		KeyPair keyPair = new KeyPair();
+		this.addKeyPairProxy(new KeyPairProxy(keyPair));
+		ArrayList<String> result = new ArrayList<String>();
+		result.add(keyPair.getId().toString());
+		result.add(keyPair.getPublicKey());
+		return result;
 	}
 //90 ===== GENERATED: End of Your Operations ======
 }
