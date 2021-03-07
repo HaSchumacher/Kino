@@ -14,8 +14,6 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.swing.JOptionPane;
 
-import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
-
 import commands.Command;
 import db.executer.PersistenceException;
 import generated.cinemaService.CinemaService;
@@ -55,26 +53,29 @@ public class Controller implements Observer {
 		view.getBtnDeleteSelectedMovie().addActionListener(e -> {
 			this.deleteSelectedMovies();
 		});
-		view.getLogin().addActionListener(e -> {
+		view.getBtnLogin().addActionListener(e -> {
 			try {
 				this.login();
 			} catch (InvalidKeyException | NoSuchAlgorithmException | PersistenceException | IllegalBlockSizeException
 					| BadPaddingException | NoSuchPaddingException | LoginError e1) {
-				e1.printStackTrace();
+				System.out.println(e1);
 			}
 		});
-		view.getBtnRegisterUser().addActionListener(e -> {
+		view.getBtnRegister().addActionListener(e -> {
 			try {
 				this.registerUsertoCinema();
 			} catch (PersistenceException | RegisterError e1) {
-				e1.printStackTrace();
+				System.out.println(e1);
 			}
 		});
 	}
 	
 	private void registerUsertoCinema() throws PersistenceException, RegisterError {
-		this.model.register(this.view.getRegisterName().toString(), this.view.getRegisterEmail().toString(), this.view.getRegisterUsername().toString(), this.view.getRegisterPassword().toString());
-		
+		this.model.register(
+			this.view.getTextFieldRegisterName().getText(),
+			this.view.getTextFieldRegisterEmail().getText(),
+			this.view.getTextFieldRegisterUsername().getText(),
+			this.view.getTextFieldRegisterPassword().getText());
 	}
 
 	private void refreshMovieList() {
@@ -104,11 +105,10 @@ public class Controller implements Observer {
 		ArrayList<String> result = this.model.generatePublicKey();
 		Integer id = Integer.getInteger(result.get(0));
 		String publicKey = result.get(1);
-		String username = this.view.getTextFieldUsername().toString();
+		String username = this.view.getTextFieldLoginUsername().getText();
 		//verhashen
-		String ushash = "";
 		String uscrypt = encrypt(username, publicKey).toString();
-		String password = this.view.getTextFieldPassword().toString();
+		String password = this.view.getTextFieldLoginPassword().getText();
 		//verhashen
 		String pwcrypt = encrypt(password, publicKey).toString();
 		this.loggedUser = this.model.login(uscrypt, pwcrypt, id);
@@ -146,8 +146,8 @@ public class Controller implements Observer {
 		}
 		if(command instanceof deleteMovie_Command) {
 			try {
-				boolean result = (boolean) command.getResult();
-				JOptionPane.showMessageDialog(null, "Film gel�scht", "Info", JOptionPane.INFORMATION_MESSAGE);
+				command.getResult();
+				JOptionPane.showMessageDialog(null, "Film gelöscht", "Info", JOptionPane.INFORMATION_MESSAGE);
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 			}
