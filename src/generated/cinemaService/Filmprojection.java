@@ -5,6 +5,9 @@
 package generated.cinemaService;
 //10 ===== GENERATED:      Import Section =========
 import java.sql.SQLException;
+import java.util.Iterator;
+import java.util.Optional;
+
 import db.connection.NoConnectionException;
 import db.connection.TypeKeyManager;
 import db.executer.PersistenceExecuterFactory;
@@ -81,10 +84,21 @@ public class Filmprojection extends Observable implements java.io.Serializable, 
    //80 ===== Editable : Your Operations =============
 /**
  * Calculate the Profit on this Filmprojection
+ * @throws PersistenceException 
  */
-   public Integer calculateProfit(){
-      // TODO: Implement Operation calculateProfit
-      return null;
+   public Integer calculateProfit() throws PersistenceException{
+	      Integer sum = 0;
+	      for(Iterator<CinemaRow> rowIterator = this.getMyHall().getMyRows().iterator(); rowIterator.hasNext();) {
+	    	  for(Iterator<Seat> seatIterator = rowIterator.next().getMySeats().iterator(); seatIterator.hasNext();) {
+	    		  if(seatIterator.next().getMyReservation() != null) {
+	    			  Optional<Integer> opPrice = seatIterator.next().getMyRow().getPriceCategory().getPrice();
+	    			  if(opPrice.isPresent()) {
+	    				  sum += opPrice.get();
+	    			  }
+	    		  }
+	    	  }
+	      }
+	      return sum;
    }
 //90 ===== GENERATED: End of Your Operations ======
 }
