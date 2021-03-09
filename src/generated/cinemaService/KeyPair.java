@@ -4,26 +4,25 @@
  */
 package generated.cinemaService;
 
-//10 ===== GENERATED:      Import Section =========
-import java.sql.SQLException;
-import db.connection.NoConnectionException;
-import db.connection.TypeKeyManager;
-import db.executer.PersistenceExecuterFactory;
-import generated.cinemaService.proxies.KeyPairProxy;
-import observation.Observable;
-import generated.cinemaService.proxies.IKeyPair;
-import db.executer.PersistenceException;
-import exceptions.ConstraintViolation;
 //20 ===== Editable : Your Import Section =========
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
-import java.security.PublicKey;
 import java.security.SecureRandom;
+//10 ===== GENERATED:      Import Section =========
+import java.sql.SQLException;
+
+import db.connection.NoConnectionException;
+import db.connection.TypeKeyManager;
+import db.executer.PersistenceException;
+import db.executer.PersistenceExecuterFactory;
+import generated.cinemaService.proxies.IKeyPair;
+import generated.cinemaService.proxies.KeyPairProxy;
+import observation.Observable;
 //25 ===== GENERATED:      Header Section =========
 public class KeyPair extends Observable implements java.io.Serializable, IKeyPair
 {
-   //30 ===== GENERATED:      Attribute Section ======
+  private static final long serialVersionUID = -6143873089378186377L;
+//30 ===== GENERATED:      Attribute Section ======
    private Integer id;
    private String privateKey;
    private String publicKey;

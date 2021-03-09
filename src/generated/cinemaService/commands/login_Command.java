@@ -6,10 +6,10 @@ import generated.cinemaService.*;
 import commands.*;
 public class login_Command extends ServiceCommand<User>{
    private static final long serialVersionUID = 1350021763L;
-   private String username;
-   private String password;
+   private byte[] username;
+   private byte[] password;
    private Integer id;
-   public login_Command(String username, String password, Integer id){
+   public login_Command(byte[] username, byte[] password, Integer id){
       super();
       this.username = username;
       this.password = password;

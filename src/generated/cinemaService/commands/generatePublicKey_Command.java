@@ -5,7 +5,7 @@ package generated.cinemaService.commands;
 import generated.cinemaService.*;
 import commands.*;
 import java.util.Collection;
-public class generatePublicKey_Command extends ServiceCommand<Collection<String>>{
+public class generatePublicKey_Command extends ServiceCommand<Collection<Object>>{
    private static final long serialVersionUID = 1625899470L;
    public generatePublicKey_Command(){
       super();

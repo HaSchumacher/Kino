@@ -65,19 +65,14 @@ public class Controller implements Observer {
 			try {
 				this.login();
 			} catch (InvalidKeyException | NoSuchAlgorithmException | PersistenceException | IllegalBlockSizeException
-					| BadPaddingException | NoSuchPaddingException | LoginError e1) {
+					| BadPaddingException | NoSuchPaddingException | LoginError | UnsupportedEncodingException e1) {
 				System.out.println(e1);
-			} catch (UnsupportedEncodingException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			} 
 		});
 		view.getBtnRegister().addActionListener(e -> {
 			try {
 				this.registerUsertoCinema();
-			} catch (PersistenceException | RegisterError e1) {
-				System.out.println(e1);
-			} catch (NoSuchAlgorithmException e1) {
+			} catch (PersistenceException | RegisterError | NoSuchAlgorithmException e1) {
 				e1.printStackTrace();
 			}
 		});
@@ -125,14 +120,11 @@ public class Controller implements Observer {
 		String username = this.view.getTextFieldLoginUsername().getText();
 		String userhash = createHashValue(username);
 		byte[] uscrypt = encrypt(userhash, publicKey);
-
-		System.out.println("username login: " + uscrypt);
 		String password = this.view.getTextFieldLoginPassword().getText();
 		String passwordhash = createHashValue(password);
-		
 		byte[] pwcrypt = encrypt(passwordhash, publicKey);
-		System.out.println("password login: " + pwcrypt);
 		this.loggedUser = this.model.login(uscrypt, pwcrypt, id);
+		//TODO neue View Laden.... anhand der Roles !
 	}
 	public static String createHashValue(String tohash) throws NoSuchAlgorithmException {
 		MessageDigest md = MessageDigest.getInstance("SHA");
@@ -149,16 +141,13 @@ public class Controller implements Observer {
 
 	    return hexString.toString();
 		}
+	
 	public static byte[] encrypt(String message, PublicKey pk) {
 		Cipher cipher = null;
 		try {
 			cipher = Cipher.getInstance("RSA");
 			cipher.init(Cipher.ENCRYPT_MODE, pk);
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		} catch (NoSuchPaddingException e) {
-			e.printStackTrace();
-		} catch (InvalidKeyException e) {
+		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
 			e.printStackTrace();
 		}
 		byte[] chiffrat = null;
@@ -169,7 +158,6 @@ public class Controller implements Observer {
 		return chiffrat;
 	}
 	
-
 	@Override
 	public void update(Command<?> command) {
 		if (command instanceof addMovie_Command) {
@@ -191,7 +179,5 @@ public class Controller implements Observer {
 				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-
 	}
-
 }

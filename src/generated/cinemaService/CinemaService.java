@@ -4,11 +4,9 @@
  */
 package generated.cinemaService;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -299,7 +297,7 @@ public class CinemaService extends Observable{
 // 80 ===== Editable : Your Operations =============
 	/**
 	 * Change Price on Pricecategory.
-	 * 
+	 * Can only used by Admin.
 	 * @throws PersistenceException
 	 */
 	public Boolean changePriceCategory(PriceCategory c, Integer price) throws PersistenceException {
@@ -309,6 +307,7 @@ public class CinemaService extends Observable{
 
 	/**
 	 * Delete the Movie form the Cinema.
+	 * only cache do not infect Database!
 	 */
 	public Boolean deleteMovie(Movie m) throws DeleteError {
 		Integer mid = m.getId();
@@ -323,7 +322,6 @@ public class CinemaService extends Observable{
 	/**
 	 * Login a User in CinemaService.
 	 * @throws LoginError 
-	 * 
 	 * @throws NoSuchPaddingException
 	 * @throws NoSuchAlgorithmException
 	 * @throws BadPaddingException
@@ -447,6 +445,7 @@ public class CinemaService extends Observable{
 
 	/**
 	 * Cancel the given Reservation.
+	 * only cache do not infect Database!
 	 */
 	public Boolean cancelReservation(Reservation r) throws DeleteError {
 		if (this.getReservationCache().containsKey(r.getId())) {
@@ -459,6 +458,7 @@ public class CinemaService extends Observable{
 
 	/**
 	 * Delete the given Filmprojection from CinemaService.
+	 * only cache do not infect Database!
 	 */
 	public Boolean deleteFilmprojection(Filmprojection fp) throws DeleteError {
 		if (this.filmprojectionCache.containsKey(fp.getId())) {
@@ -478,6 +478,7 @@ public class CinemaService extends Observable{
 
 	/**
 	 * Add a Cinemahall to the CinemaService.
+	 * create only squared Rooms with the same amount of rows for each category.
 	 * 
 	 * @throws PersistenceException
 	 * @throws ConstraintViolation
@@ -518,7 +519,7 @@ public class CinemaService extends Observable{
 
 	/**
 	 * registerAUserInSystem
-	 * 
+	 * get a hashed username and password from client.
 	 * @throws PersistenceException
 	 */
 	public User register(String name, String email, String username, String passwort)
@@ -549,7 +550,6 @@ public class CinemaService extends Observable{
 
 	/**
 	 * delete Role from User.
-	 * 
 	 * @throws PersistenceException
 	 */
 	public Boolean deleteRoleFromUser(User u, Role r) throws DeleteError, PersistenceException {
@@ -563,7 +563,8 @@ public class CinemaService extends Observable{
 
 	/**
 	 * get for login or register a public key.
-	 * 
+	 * give an Array with id and Keypair.
+	 * The Object and given Array will not be persisted in database and will only life in Cache.
 	 * @throws NoSuchAlgorithmException
 	 * @throws PersistenceException
 	 */
