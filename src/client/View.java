@@ -1,6 +1,7 @@
 package client;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 
 import generated.cinemaService.Booking;
@@ -17,6 +18,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.List;
+import javax.swing.UIManager;
 
 public class View extends JFrame {
 
@@ -32,10 +34,10 @@ public class View extends JFrame {
 	private JList<Movie> list_movies;
 	private DefaultListModel<Movie> movieListModel;
 	private JTextField textField_loginUsername;
-	private JTextField textField_loginPassword;
+	private JPasswordField textField_loginPassword;
 	private JButton btn_login;
 	private JTextField textField_registerUsername;
-	private JTextField textField_registerPassword;
+	private JPasswordField textField_registerPassword;
 	private JTextField textField_registerEmail;
 	private JTextField textField_registerName;
 	private JButton btn_register;
@@ -77,7 +79,7 @@ public class View extends JFrame {
 		label_loginPassword.setBounds(10, 64, 81, 32);
 		label_loginPassword.setHorizontalAlignment(SwingConstants.LEFT);
 		
-		this.textField_loginPassword = new JTextField();
+		this.textField_loginPassword = new JPasswordField(10);
 		this.textField_loginPassword.setBounds(95, 65, 102, 32);
 		this.textField_loginPassword.setHorizontalAlignment(SwingConstants.LEFT);
 		this.textField_loginPassword.setToolTipText("Please Insert your Password here.");
@@ -106,7 +108,8 @@ public class View extends JFrame {
 		label_registerPassword.setBounds(10, 250, 75, 30);
 		panel_users.add(label_registerPassword);
 		
-		this.textField_registerPassword = new JTextField();
+		this.textField_registerPassword = new JPasswordField(10);
+		textField_registerPassword.setFont(UIManager.getFont("PasswordField.font"));
 		this.textField_registerPassword.setColumns(10);
 		this.textField_registerPassword.setBounds(95, 250, 102, 30);
 		panel_users.add(textField_registerPassword);

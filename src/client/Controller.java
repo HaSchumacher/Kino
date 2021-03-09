@@ -5,6 +5,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.KeyFactory;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
 import java.security.spec.X509EncodedKeySpec;
@@ -76,14 +77,17 @@ public class Controller implements Observer {
 				this.registerUsertoCinema();
 			} catch (PersistenceException | RegisterError e1) {
 				System.out.println(e1);
+			} catch (NoSuchAlgorithmException e1) {
+				e1.printStackTrace();
 			}
 		});
 	}
 
-	private void registerUsertoCinema() throws PersistenceException, RegisterError {
+	private void registerUsertoCinema() throws PersistenceException, RegisterError, NoSuchAlgorithmException {
 		this.model.register(this.view.getTextFieldRegisterName().getText(),
-				this.view.getTextFieldRegisterEmail().getText(), this.view.getTextFieldRegisterUsername().getText(),
-				this.view.getTextFieldRegisterPassword().getText());
+				this.view.getTextFieldRegisterEmail().getText(), createHashValue(this.view.getTextFieldRegisterUsername().getText()),
+				createHashValue(this.view.getTextFieldRegisterPassword().getText()));
+		System.out.println("Registered= " + this.view.getTextFieldRegisterName().getText());
 	}
 
 	private void refreshMovieList() {
@@ -119,41 +123,52 @@ public class Controller implements Observer {
 		Integer id = (Integer) result.get(0);
 		PublicKey publicKey = (PublicKey) result.get(1);
 		String username = this.view.getTextFieldLoginUsername().getText();
-		// verhashen
-		byte[] uscrypt = encrypt(username, publicKey);
+		String userhash = createHashValue(username);
+		byte[] uscrypt = encrypt(userhash, publicKey);
 
 		System.out.println("username login: " + uscrypt);
 		String password = this.view.getTextFieldLoginPassword().getText();
-		// verhashen
-		byte[] pwcrypt = encrypt(password, publicKey);
+		String passwordhash = createHashValue(password);
+		
+		byte[] pwcrypt = encrypt(passwordhash, publicKey);
 		System.out.println("password login: " + pwcrypt);
 		this.loggedUser = this.model.login(uscrypt, pwcrypt, id);
 	}
+	public static String createHashValue(String tohash) throws NoSuchAlgorithmException {
+		MessageDigest md = MessageDigest.getInstance("SHA");
+		byte[] digest = md.digest(tohash.getBytes());
+		StringBuilder hexString = new StringBuilder();
 
+	    for (int i = 0; i < digest.length; i++) {
+	        String hex = Integer.toHexString(0xFF & digest[i]);
+	        if (hex.length() == 1) {
+	            hexString.append('0');
+	        }
+	        hexString.append(hex);
+	    }
+
+	    return hexString.toString();
+		}
 	public static byte[] encrypt(String message, PublicKey pk) {
 		Cipher cipher = null;
 		try {
 			cipher = Cipher.getInstance("RSA");
 			cipher.init(Cipher.ENCRYPT_MODE, pk);
 		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NoSuchPaddingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InvalidKeyException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		byte[] chiffrat = null;
 		try {
 			chiffrat = cipher.doFinal(message.getBytes());
 		} catch (IllegalBlockSizeException | BadPaddingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		return chiffrat;
 	}
+	
 
 	@Override
 	public void update(Command<?> command) {
