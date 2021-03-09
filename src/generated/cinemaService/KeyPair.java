@@ -17,6 +17,9 @@ import exceptions.ConstraintViolation;
 //20 ===== Editable : Your Import Section =========
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.SecureRandom;
 //25 ===== GENERATED:      Header Section =========
 public class KeyPair extends Observable implements java.io.Serializable, IKeyPair
 {
@@ -25,7 +28,7 @@ public class KeyPair extends Observable implements java.io.Serializable, IKeyPai
    private String privateKey;
    private String publicKey;
    //40 ===== Editable : Your Attribute Section ======
-   
+   public java.security.KeyPair keypair;
    //50 ===== GENERATED:      Constructor ============
    private KeyPair(Integer id, String privateKey, String publicKey, boolean objectOnly)
    {
@@ -52,16 +55,19 @@ public class KeyPair extends Observable implements java.io.Serializable, IKeyPai
       return me;
    }
    //60 ===== Editable : Your Constructors ===========
-   public KeyPair() throws NoSuchAlgorithmException, PersistenceException {
+   public KeyPair(boolean own) throws NoSuchAlgorithmException, PersistenceException {
+	   super();
 	   db.executer.DBDMLExecuter dmlExecuter = PersistenceExecuterFactory.getConfiguredFactory().getDBDMLExecuter();
 	   int id = dmlExecuter.getNextId();
+	   this.setId(id);
 	   KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
-       keyGen.initialize(1024);
+	   SecureRandom secure = new SecureRandom();
+       keyGen.initialize(1024, secure);;
        java.security.KeyPair pair = keyGen.generateKeyPair();
-       privateKey = pair.getPrivate().toString();
-       publicKey = pair.getPublic().toString();
-       KeyPair me = new KeyPair(id, privateKey, publicKey, false);
-       CinemaService.getInstance().addKeyPairProxy(new KeyPairProxy(me));
+       this.privateKey = pair.getPrivate().toString();
+       this.publicKey = pair.getPublic().toString();
+       this.keypair = pair;
+       CinemaService.getInstance().addKeyPairProxy(new KeyPairProxy(this));
    }
    
    //70 ===== GENERATED:      Feature Access =========

@@ -3,8 +3,12 @@
  * --- Do not touch section numbering!   
  */
 package generated.cinemaService;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -318,25 +322,26 @@ public class CinemaService extends Observable{
 
 	/**
 	 * Login a User in CinemaService.
+	 * @throws LoginError 
 	 * 
 	 * @throws NoSuchPaddingException
 	 * @throws NoSuchAlgorithmException
 	 * @throws BadPaddingException
 	 * @throws IllegalBlockSizeException
 	 * @throws InvalidKeyException
+	 * @throws UnsupportedEncodingException 
 	 */
-	public User login(String usercrypt, String pwcrypt, Integer id) throws LoginError, InvalidKeyException,
-			IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException {
+	public User login(byte[] uscrypt, byte[] pwcrypt, Integer id) throws LoginError {
 		KeyPairProxy keyPair = this.keyPairCache.get(id);
-		String pkey = keyPair.getPrivateKey();
-		UserProxy loginuser = null;
-		String username = Security.decrypt(usercrypt, pkey);
+		PrivateKey pkey = keyPair.getTheObject().keypair.getPrivate();
+		User loginuser = null;
+		String username = Security.decrypt(uscrypt, pkey );
 		String password = Security.decrypt(pwcrypt, pkey);
 		for (Entry<Integer, UserProxy> user : this.userCache.entrySet()) {
-			UserProxy userEntry = user.getValue();
-			if (userEntry.getUsername() == username && userEntry.getPassword() == password) {
-				loginuser = (UserProxy) user;
-				return loginuser.getTheObject();
+			User userEntry = user.getValue().getTheObject();
+			if (userEntry.getUsername().equals(username) && userEntry.getPassword().equals(password)) {
+				System.out.println("Login got hit");
+				return loginuser = userEntry;
 			}
 		}
 		throw new LoginError();
@@ -560,14 +565,11 @@ public class CinemaService extends Observable{
 	 * @throws NoSuchAlgorithmException
 	 * @throws PersistenceException
 	 */
-	public ArrayList<String> generatePublicKey() throws NoSuchAlgorithmException, PersistenceException {
-		//KeyPair keyPair = new KeyPair();
-		KeyPair keyPair = KeyPair.createFresh("hello", "hello");
-		//this.addKeyPairProxy(new KeyPairProxy(keyPair));
-		ArrayList<String> result = new ArrayList<String>();
-		result.add(keyPair.getId().toString());
-		result.add(keyPair.getPublicKey());
+	public ArrayList<Object> generatePublicKey() throws NoSuchAlgorithmException, PersistenceException {
+		KeyPair keyPair = new KeyPair(true);
+		ArrayList<Object> result = new ArrayList<Object>();
+		result.add(keyPair.getId());
+		result.add( keyPair.keypair.getPublic());
 		return result;
 	}
-//90 ===== GENERATED: End of Your Operations ======
 }

@@ -1,3 +1,4 @@
+package client;
 import generated.cinemaService.CinemaService;
 
 public class Client implements Runnable {

@@ -3,6 +3,11 @@
  * --- Do not touch section numbering!   
  */
 package generated.cinemaService;
+import client.Controller;
+
+
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.security.InvalidKeyException;
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
@@ -28,6 +33,7 @@ import db.executer.PersistenceException;
 import db.executer.PersistenceExecuterFactory;
 import generated.cinemaService.proxies.ISecurity;
 import observation.Observable;
+import observation.Observer;
 //25 ===== GENERATED:      Header Section =========
 public class Security extends Observable implements java.io.Serializable, ISecurity
 {
@@ -89,14 +95,41 @@ public class Security extends Observable implements java.io.Serializable, ISecur
       }catch(SQLException|NoConnectionException e){throw new PersistenceException(e.getMessage());}
    }
    //80 ===== Editable : Your Operations =============
-private static String decrypt(byte[] data, PrivateKey privateKey) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
-       Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
-       cipher.init(Cipher.DECRYPT_MODE, privateKey);
-       return new String(cipher.doFinal(data));
-   }
-public static String decrypt(String data, String base64PrivateKey) throws IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException {
-       return decrypt(Base64.getDecoder().decode(data.getBytes()), getPrivateKey(base64PrivateKey));
-}
+   public static String decrypt(byte[] chiffrat, PrivateKey sk)
+	{
+		byte[] dec = null;
+		Cipher cipher = null;
+		try
+		{
+			cipher = Cipher.getInstance("RSA");
+			cipher.init(Cipher.DECRYPT_MODE, sk);
+		} catch (NoSuchAlgorithmException e1)
+		{
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (NoSuchPaddingException e1)
+		{
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (InvalidKeyException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try
+		{
+			dec = cipher.doFinal(chiffrat);
+		} catch (IllegalBlockSizeException | BadPaddingException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new String(dec);
+	}
+//public static String decrypt(String data, String base64PrivateKey) throws IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException {
+//       return decrypt(Base64.getDecoder().decode(data.getBytes()), base64PrivateKey);
+//}
 
 public static PrivateKey getPrivateKey(String base64PrivateKey){
        PrivateKey privateKey = null;

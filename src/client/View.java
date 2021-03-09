@@ -1,3 +1,4 @@
+package client;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -48,7 +49,7 @@ public class View extends JFrame {
 	 */
 	public View() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1228, 749);
+		setBounds(100, 100, 961, 503);
 		this.contentPane = new JPanel();
 		this.contentPane.setBackground(Color.LIGHT_GRAY);
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -56,7 +57,7 @@ public class View extends JFrame {
 		this.contentPane.setLayout(null);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(25, 10, 1166, 679);
+		tabbedPane.setBounds(25, 10, 922, 455);
 		this.contentPane.add(tabbedPane);
 		
 		JPanel panel_users = new JPanel();
