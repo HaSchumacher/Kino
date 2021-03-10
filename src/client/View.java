@@ -19,6 +19,12 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.List;
 import javax.swing.UIManager;
+import java.awt.Button;
+import javax.swing.JFormattedTextField;
+import javax.swing.JSpinner;
+import java.awt.Choice;
+import java.awt.Label;
+import javax.swing.JTextPane;
 
 public class View extends JFrame {
 
@@ -45,6 +51,10 @@ public class View extends JFrame {
 	private JScrollPane scrollPane_loggedUserBookings;
 	private JList<Reservation> list_loggedUserReservations;
 	private JList<Booking> list_loggedUserBookings;
+	private JScrollPane FilmSelectionGroup;
+	private List category;
+	private JScrollPane CategorySelectionGroup;
+	private JTextField nameforCinemahall;
 
 	/**
 	 * Create the frame.
@@ -137,6 +147,31 @@ public class View extends JFrame {
 		panel_users.add(btn_register);
 		JPanel panel_projections = new JPanel();
 		tabbedPane.addTab("Auff�hrungen", null, panel_projections, null);
+		panel_projections.setLayout(null);
+		
+		FilmSelectionGroup = new JScrollPane();
+		FilmSelectionGroup.setBounds(28, 23, 171, 90);
+		panel_projections.add(FilmSelectionGroup);
+		
+		List Filmliste = new List();
+		FilmSelectionGroup.setViewportView(Filmliste);
+		
+		JLabel selectionfilm = new JLabel("Bitte Wählen Sie einen Film aus.");
+		FilmSelectionGroup.setColumnHeaderView(selectionfilm);
+		
+		CategorySelectionGroup = new JScrollPane();
+		CategorySelectionGroup.setBounds(28, 119, 169, 95);
+		panel_projections.add(CategorySelectionGroup);
+		
+		category = new List();
+		CategorySelectionGroup.setViewportView(category);
+		
+		JLabel lblNewLabel = new JLabel("Wählen Sie nun Ihre Kategory.");
+		CategorySelectionGroup.setColumnHeaderView(lblNewLabel);
+		
+		JButton btnreserveSeat = new JButton("Platz Reservieren");
+		btnreserveSeat.setBounds(67, 219, 130, 21);
+		panel_projections.add(btnreserveSeat);
 		JPanel panel_reservations = new JPanel();
 		tabbedPane.addTab("Tickets", null, panel_reservations, null);
 		panel_reservations.setLayout(null);
@@ -160,10 +195,49 @@ public class View extends JFrame {
 		
 		this.list_loggedUserBookings = new JList<Booking>();
 		this.scrollPane_loggedUserBookings.setViewportView(this.list_loggedUserBookings);
+		
+		JButton btnCancelReservation = new JButton("Reservierung Aufheben");
+		btnCancelReservation.setBounds(297, 39, 139, 21);
+		panel_reservations.add(btnCancelReservation);
+		
+		JButton btnBookReservation = new JButton("Reservierung buchen");
+		btnBookReservation.setBounds(297, 93, 139, 21);
+		panel_reservations.add(btnBookReservation);
 		JPanel panel_movies = new JPanel();
 		tabbedPane.addTab("Filme", null, panel_movies, null);
 		JPanel panel_halls = new JPanel();
 		tabbedPane.addTab("Kinos�le", null, panel_halls, null);
+		panel_halls.setLayout(null);
+		
+		nameforCinemahall = new JTextField();
+		nameforCinemahall.setBounds(155, 23, 96, 19);
+		panel_halls.add(nameforCinemahall);
+		nameforCinemahall.setColumns(10);
+		
+		JSpinner selectRows = new JSpinner();
+		selectRows.setBounds(72, 96, 30, 20);
+		panel_halls.add(selectRows);
+		
+		JSpinner spinner_1 = new JSpinner();
+		spinner_1.setBounds(192, 96, 30, 20);
+		panel_halls.add(spinner_1);
+		
+		JLabel lblNewLabel_1 = new JLabel("Name für den neuen Kinosaal.");
+		lblNewLabel_1.setBounds(10, 26, 158, 13);
+		panel_halls.add(lblNewLabel_1);
+		
+		JLabel lbRows = new JLabel("Reihenanzahl");
+		lbRows.setHorizontalAlignment(SwingConstants.LEFT);
+		lbRows.setBounds(10, 99, 61, 13);
+		panel_halls.add(lbRows);
+		
+		JLabel lbselectSeats = new JLabel("Sitze pro Reihe");
+		lbselectSeats.setBounds(112, 99, 70, 13);
+		panel_halls.add(lbselectSeats);
+		
+		JButton btncreateCinemahall = new JButton("Kinosaal erstellen.");
+		btncreateCinemahall.setBounds(136, 165, 115, 21);
+		panel_halls.add(btncreateCinemahall);
 		panel_movies.setLayout(null);
 		
 		this.textField_movieInput = new JTextField();
@@ -179,7 +253,7 @@ public class View extends JFrame {
 		this.list_movies = new JList<Movie>(this.movieListModel);
 		
 		JScrollPane listScroller_movies = new JScrollPane(this.list_movies);
-		listScroller_movies.setBounds(10, 59, 277, 125);
+		listScroller_movies.setBounds(10, 59, 277, 84);
 		panel_movies.add(listScroller_movies);
 		
 		this.btn_refreshMovieList = new JButton("Aktualisieren");
@@ -189,6 +263,91 @@ public class View extends JFrame {
 		this.btn_deleteSelectedMovies = new JButton("L�schen");
 		this.btn_deleteSelectedMovies.setBounds(297, 87, 142, 21);
 		panel_movies.add(this.btn_deleteSelectedMovies);
+		
+		Label lbselectMovie = new Label("Film Wählen");
+		lbselectMovie.setBounds(10, 164, 114, 21);
+		panel_movies.add(lbselectMovie);
+		
+		Choice SelectMovie = new Choice();
+		SelectMovie.setBounds(10, 191, 142, 18);
+		panel_movies.add(SelectMovie);
+		
+		Label lbCinemahallSelect = new Label("Kinosaal wählen");
+		lbCinemahallSelect.setBounds(162, 164, 125, 21);
+		panel_movies.add(lbCinemahallSelect);
+		
+		Choice SelectCinemahall = new Choice();
+		SelectCinemahall.setBounds(162, 191, 125, 18);
+		panel_movies.add(SelectCinemahall);
+		
+		JButton btnFilmProjection = new JButton("Filmaufführung erstellen");
+		btnFilmProjection.setBounds(140, 239, 147, 21);
+		panel_movies.add(btnFilmProjection);
+		
+		JPanel panel_Roles = new JPanel();
+		tabbedPane.addTab("Rollen", null, panel_Roles, null);
+		panel_Roles.setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 26, 169, 99);
+		panel_Roles.add(scrollPane);
+		
+		JList<Movie> listUsers = new JList();
+		scrollPane.setViewportView(listUsers);
+		
+		Label lbSelectUser = new Label("Benutzer auswählen");
+		scrollPane.setColumnHeaderView(lbSelectUser);
+		
+		Choice chRoles = new Choice();
+		chRoles.setBounds(238, 63, 167, 18);
+		panel_Roles.add(chRoles);
+		
+		Label lbRoleSelection = new Label("Rolle wählen");
+		lbRoleSelection.setBounds(238, 26, 167, 21);
+		panel_Roles.add(lbRoleSelection);
+		
+		Button btnRole = new Button("neue Rolle zuweisen");
+		btnRole.setBounds(175, 149, 197, 21);
+		panel_Roles.add(btnRole);
+		
+		JPanel panel_Outcome = new JPanel();
+		tabbedPane.addTab("Umsätze", null, panel_Outcome, null);
+		panel_Outcome.setLayout(null);
+		
+		Choice chOutcomeOneFilm = new Choice();
+		chOutcomeOneFilm.setBounds(117, 34, 86, 18);
+		panel_Outcome.add(chOutcomeOneFilm);
+		
+		Label lbfilmprojection = new Label("Film auswählen");
+		lbfilmprojection.setBounds(10, 31, 101, 21);
+		panel_Outcome.add(lbfilmprojection);
+		
+		JLabel lbOutcomeOneFilm = new JLabel("Berechnung des Umsatzes für ein Film");
+		lbOutcomeOneFilm.setBounds(10, 58, 175, 13);
+		panel_Outcome.add(lbOutcomeOneFilm);
+		
+		Button btnOutcome = new Button("Berechne Umsatz");
+		btnOutcome.setBounds(228, 34, 175, 21);
+		panel_Outcome.add(btnOutcome);
+		
+		Label lbOutcometotal = new Label("Gesamt Umsatz berechnen");
+		lbOutcometotal.setBounds(10, 106, 176, 21);
+		panel_Outcome.add(lbOutcometotal);
+		
+		Button btnOutcomeTotal = new Button("Berechne Gesamt Umsatz");
+		btnOutcomeTotal.setFont(UIManager.getFont("Button.font"));
+		btnOutcomeTotal.setBounds(228, 106, 203, 21);
+		panel_Outcome.add(btnOutcomeTotal);
+		
+		JTextPane txtforOneOutcome = new JTextPane();
+		txtforOneOutcome.setEditable(false);
+		txtforOneOutcome.setBounds(488, 34, 69, 19);
+		panel_Outcome.add(txtforOneOutcome);
+		
+		JTextPane txtForTotalOutcome = new JTextPane();
+		txtForTotalOutcome.setEditable(false);
+		txtForTotalOutcome.setBounds(488, 106, 69, 19);
+		panel_Outcome.add(txtForTotalOutcome);
 		
 	}
 	
@@ -234,5 +393,4 @@ public class View extends JFrame {
 	public JTextField getTextFieldRegisterPassword() {
 		return this.textField_registerPassword;
 	}
-
 }
