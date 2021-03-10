@@ -1,24 +1,21 @@
 package client;
 
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
-import java.security.KeyFactory;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
-import java.security.spec.X509EncodedKeySpec;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import commands.Command;
 import db.executer.PersistenceException;
@@ -26,10 +23,13 @@ import generated.cinemaService.CinemaService;
 import generated.cinemaService.LoginError;
 import generated.cinemaService.Movie;
 import generated.cinemaService.RegisterError;
+import generated.cinemaService.Role;
+import generated.cinemaService.Unknown;
 import generated.cinemaService.User;
 import generated.cinemaService.commands.addMovie_Command;
 import generated.cinemaService.commands.deleteMovie_Command;
 import generated.cinemaService.proxies.MovieProxy;
+import generated.cinemaService.proxies.UserProxy;
 import observation.Observer;
 
 public class Controller implements Observer {
@@ -39,18 +39,20 @@ public class Controller implements Observer {
 	private User loggedUser;
 	public Cipher cipher;
 
-	public Controller(CinemaService m, View v, Pipe p) throws NoSuchAlgorithmException, NoSuchPaddingException {
+	public Controller(CinemaService m, View v, Pipe p) throws NoSuchAlgorithmException, NoSuchPaddingException, PersistenceException {
 		this.model = m;
 		this.view = v;
 		this.myPipe = p;
 		this.cipher = Cipher.getInstance("RSA");
+		this.loggedUser = this.model.getUser(999);
 		initView();
 	}
 
-	public void initView() {
-
+	public void initView() throws PersistenceException   {
+		
 	}
-
+	
+	
 	public void registerForEvents() {
 		view.getBtnCreateMovie().addActionListener(e -> {
 			this.addMovie();
@@ -123,8 +125,18 @@ public class Controller implements Observer {
 		String password = this.view.getTextFieldLoginPassword().getText();
 		String passwordhash = createHashValue(password);
 		byte[] pwcrypt = encrypt(passwordhash, publicKey);
-		this.loggedUser = this.model.login(uscrypt, pwcrypt, id);
+		this.setLoggedUser(this.model.login(uscrypt, pwcrypt, id));
 		//TODO neue View Laden.... anhand der Roles !
+		updateView();
+	}
+	
+	private void updateView() {
+		this.view.getBtnLogin().getParent().setVisible(false);
+		
+	}
+
+	private void logout() {
+		updateView();
 	}
 	public static String createHashValue(String tohash) throws NoSuchAlgorithmException {
 		MessageDigest md = MessageDigest.getInstance("SHA");
@@ -179,5 +191,13 @@ public class Controller implements Observer {
 				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
+	}
+
+	public User getLoggedUser() {
+		return loggedUser;
+	}
+
+	public void setLoggedUser(User loggedUser) {
+		this.loggedUser = loggedUser;
 	}
 }
