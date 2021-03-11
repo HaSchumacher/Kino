@@ -21,18 +21,28 @@ import commands.Command;
 import db.executer.PersistenceException;
 import generated.cinemaService.Admin;
 import generated.cinemaService.CinemaService;
+import generated.cinemaService.Cinemahall;
 import generated.cinemaService.Customer;
+import generated.cinemaService.Filmprojection;
 import generated.cinemaService.LoginError;
 import generated.cinemaService.Movie;
 import generated.cinemaService.RegisterError;
 import generated.cinemaService.Role;
 import generated.cinemaService.Unknown;
 import generated.cinemaService.User;
+import generated.cinemaService.commands.addCinemahall_Command;
+import generated.cinemaService.commands.addFilmprojection_Command;
 import generated.cinemaService.commands.addMovie_Command;
+import generated.cinemaService.commands.calculateTotalProfit_Command;
+import generated.cinemaService.commands.calulateProfit_Command;
+import generated.cinemaService.commands.deleteCinemahall_Command;
+import generated.cinemaService.commands.deleteFilmprojection_Command;
 import generated.cinemaService.commands.deleteMovie_Command;
 import generated.cinemaService.commands.login_Command;
 import generated.cinemaService.commands.logout_Command;
 import generated.cinemaService.commands.register_Command;
+import generated.cinemaService.proxies.CinemahallProxy;
+import generated.cinemaService.proxies.FilmprojectionProxy;
 import generated.cinemaService.proxies.MovieProxy;
 import generated.cinemaService.proxies.UserProxy;
 import observation.Observer;
@@ -57,7 +67,6 @@ public class Controller implements Observer {
 		updateView();
 	}
 
-	
 	public void registerForEvents() {
 		view.getBtn_createMovie().addActionListener(e -> {
 			this.addMovie();
@@ -67,6 +76,30 @@ public class Controller implements Observer {
 		});
 		view.getBtn_deleteSelectedMovies().addActionListener(e -> {
 			this.deleteSelectedMovies();
+		});
+		view.getBtn_createHall().addActionListener(e -> {
+			this.addHall();
+		});
+		view.getBtn_refreshHallList().addActionListener(e -> {
+			this.refreshHallList();
+		});
+		view.getBtn_deleteSelectedHall().addActionListener(e -> {
+			this.deleteSelectedHall();
+		});
+		view.getBtn_createProjection().addActionListener(e -> {
+			this.addProjection();
+		});
+		view.getBtn_refreshProjectionList().addActionListener(e -> {
+			this.refreshProjectionList();
+		});
+		view.getBtn_deleteProjection().addActionListener(e -> {
+			this.deleteSelectedProjection();
+		});
+		view.getBtn_calculateProfit().addActionListener(e -> {
+			this.calculateProfit();
+		});
+		view.getBtn_calculateTotalProfit().addActionListener(e -> {
+			this.calculateTotalProfit();
 		});
 		view.getBtn_login().addActionListener(e -> {
 			try {
@@ -95,6 +128,25 @@ public class Controller implements Observer {
 		});
 	}
 
+	private void calculateTotalProfit() {
+		try {
+			this.myPipe.put(new calculateTotalProfit_Command());
+		} catch (InterruptedException e) {
+			System.out.println(e);
+		}
+		
+	}
+
+	private void calculateProfit() {
+		try {
+			this.myPipe.put(new calulateProfit_Command(
+					this.view.getList_projections().getSelectedValuesList()
+			));
+		} catch (InterruptedException e) {
+			System.out.println(e);
+		}
+	}
+
 	@SuppressWarnings("deprecation")
 	private void registerUserToCinema() throws PersistenceException, RegisterError, NoSuchAlgorithmException, InterruptedException {
 		this.myPipe.put(
@@ -114,6 +166,20 @@ public class Controller implements Observer {
 			this.view.getMovieListModel().addElement(iterator.next().getTheObject());
 		}
 	}
+	
+	private void refreshHallList() {
+		this.view.getHallListModel().clear();
+		for (Iterator<CinemahallProxy> iterator = this.model.getCinemahallCache().values().iterator(); iterator.hasNext();) {
+			this.view.getHallListModel().addElement(iterator.next().getTheObject());
+		}
+	}
+	
+	private void refreshProjectionList() {
+		this.view.getProjectionListModel().clear();
+		for (Iterator<FilmprojectionProxy> iterator = this.model.getFilmprojectionCache().values().iterator(); iterator.hasNext();) {
+			this.view.getProjectionListModel().addElement(iterator.next().getTheObject());
+		}
+	}
 
 	private void addMovie() {
 		try {
@@ -121,6 +187,39 @@ public class Controller implements Observer {
 		} catch (InterruptedException e) {
 			System.out.println(e);
 		}
+	}
+	
+	private void addHall() {
+		try {
+			this.myPipe.put(new addCinemahall_Command(
+				this.view.getTextField_hallName().getText(),
+				(Integer) this.view.getComboBox_hallRows().getSelectedItem(),
+				(Integer) this.view.getComboBox_hallSeats().getSelectedItem()
+			));
+		} catch (InterruptedException e) {
+			System.out.println(e);
+		}	
+	}
+	
+	private void addProjection() {
+		try {
+			this.myPipe.put(new addFilmprojection_Command(
+				this.view.getList_halls().getSelectedValue(),
+				this.view.getList_movies().getSelectedValue()
+			));
+		} catch (InterruptedException e) {
+			System.out.println(e);
+		}
+		
+	}
+	
+	private void deleteSelectedHall() {
+		try {
+			this.myPipe.put(new deleteCinemahall_Command(this.view.getList_halls().getSelectedValue()));
+		} catch (InterruptedException e) {
+			System.out.println(e);
+		}
+		
 	}
 
 	private void deleteSelectedMovies() {
@@ -132,6 +231,17 @@ public class Controller implements Observer {
 				System.out.println(e);
 			}
 		}
+	}
+	
+	private void deleteSelectedProjection() {
+		try {
+			this.myPipe.put(new deleteFilmprojection_Command(
+				this.view.getList_projections().getSelectedValue()
+			));
+		} catch (InterruptedException e) {
+			System.out.println(e);
+		}
+		
 	}
 
 	@SuppressWarnings("deprecation")
@@ -253,7 +363,6 @@ public class Controller implements Observer {
 		if (command instanceof addMovie_Command) {
 			try {
 				Movie result = (Movie) command.getResult();
-
 				JOptionPane.showMessageDialog(null, "Film erstellt : " + result.getTitle(), "Info",
 						JOptionPane.INFORMATION_MESSAGE);
 				this.view.getTextField_movieInput().setText("");
@@ -265,6 +374,60 @@ public class Controller implements Observer {
 			try {
 				command.getResult();
 				JOptionPane.showMessageDialog(null, "Film gelöscht", "Info", JOptionPane.INFORMATION_MESSAGE);
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		if( command instanceof addCinemahall_Command) {
+			try {
+				Cinemahall result = (Cinemahall) command.getResult();
+				JOptionPane.showMessageDialog(null, "Saal erstellt : " + result.getName(), "Info",
+						JOptionPane.INFORMATION_MESSAGE);
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		if( command instanceof deleteCinemahall_Command) {
+			try {
+				command.getResult();
+				JOptionPane.showMessageDialog(null, "Saal gelöscht", "Info", JOptionPane.INFORMATION_MESSAGE);
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		if (command instanceof addFilmprojection_Command) {
+			try {
+				Filmprojection result = (Filmprojection) command.getResult();
+				JOptionPane
+						.showMessageDialog(
+								null, "Filmaufführung erstellt: " + " Saal -> " + result.getMyHall().getName()
+										+ " Film -> " + result.getMyMovie().getTitle(),
+								"Info", JOptionPane.INFORMATION_MESSAGE);
+
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		if( command instanceof deleteFilmprojection_Command) {
+			try {
+				command.getResult();
+				JOptionPane.showMessageDialog(null, "Filmaufführung gelöscht", "Info", JOptionPane.INFORMATION_MESSAGE);
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		if( command instanceof calulateProfit_Command) {
+			try {
+				Integer result = (Integer) command.getResult();
+				JOptionPane.showMessageDialog(null, "Umsatz: " + result, "Info", JOptionPane.INFORMATION_MESSAGE);
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		if( command instanceof calculateTotalProfit_Command) {
+			try {
+				Integer result = (Integer) command.getResult();
+				JOptionPane.showMessageDialog(null, "Gesamter Umsatz: " + result, "Info", JOptionPane.INFORMATION_MESSAGE);
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 			}

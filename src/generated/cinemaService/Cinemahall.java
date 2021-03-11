@@ -98,5 +98,15 @@ public class Cinemahall extends Observable implements java.io.Serializable, ICin
       }catch(SQLException|NoConnectionException e){throw new PersistenceException(e.getMessage());}
    }
    //80 ===== Editable : Your Operations =============
+	@Override
+	public String toString() {
+		try {
+			return "Name: " + this.name + " Reihen: " + this.getMyRows().size() + " Plaetze pro Reihe: "
+					+ this.getMyRows().iterator().next().getMySeats().size();
+		} catch (PersistenceException e) {
+			System.out.println(e);
+		}
+		return this.name;
+	}
 //90 ===== GENERATED: End of Your Operations ======
 }

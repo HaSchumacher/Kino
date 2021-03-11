@@ -101,4 +101,13 @@ public class Filmprojection extends Observable implements java.io.Serializable, 
 	      return sum;
    }
 //90 ===== GENERATED: End of Your Operations ======
+	@Override
+	public String toString() {
+		try {
+			return "Saal: " + this.getMyHall().getName() + " Film: " + this.getMyMovie().getTitle();
+		} catch (PersistenceException e) {
+			System.out.println(e);
+		}
+		return this.toString();
+	}
 }
