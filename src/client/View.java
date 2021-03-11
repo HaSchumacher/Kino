@@ -81,11 +81,15 @@ public class View extends JFrame {
 	private JButton btn_refreshProjectionList;
 	private JButton btn_calculateTotalProfit;
 	private JButton btn_calculateProfit;
+	private JButton btn_refreshProjections;
+	private DefaultListModel<Filmprojection> projectionListModelCustomer;
+	private JList<Filmprojection> list_projectionsCustomer;
 
 	
 	public View() {
 
 		this.initPanes();
+		this.buildFilmprojectionsPane();
 		this.buildLoginPane();
 		this.buildEditingPane();
 		
@@ -168,6 +172,22 @@ public class View extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setContentPane(this.contentPane);
 		setBounds(100, 100, 1150, 600);
+	}
+	
+	private void buildFilmprojectionsPane() {
+		this.panelFilmprojections.setLayout(null);
+		
+		this.btn_refreshProjections = new JButton("Aktualisieren");
+		this.btn_refreshProjections.setBounds(260, 319, 183, 21);
+		this.panelFilmprojections.add(this.btn_refreshProjections);
+
+		this.projectionListModelCustomer = new DefaultListModel<Filmprojection>();
+		JScrollPane listScroller_projectionsCustomer = new JScrollPane();
+		listScroller_projectionsCustomer.setBounds(260, 64, 341, 230);
+		this.panelFilmprojections.add(listScroller_projectionsCustomer);
+		this.list_projectionsCustomer = new JList<Filmprojection>(this.projectionListModelCustomer);
+		listScroller_projectionsCustomer.setViewportView(list_projectionsCustomer);
+		this.list_projectionsCustomer.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 	}
 
 	private void buildLoginPane() {
@@ -513,13 +533,18 @@ public class View extends JFrame {
 	public JButton getBtn_calculateProfit() {
 		return btn_calculateProfit;
 	}
-	
-	
-	
-	
-	
-	
-	
+
+	public JButton getBtn_refreshProjections() {
+		return btn_refreshProjections;
+	}
+
+	public DefaultListModel<Filmprojection> getProjectionListModelCustomer() {
+		return projectionListModelCustomer;
+	}
+
+	public JList<Filmprojection> getList_projectionsCustomer() {
+		return list_projectionsCustomer;
+	}
 	
 	
 }

@@ -68,6 +68,9 @@ public class Controller implements Observer {
 	}
 
 	public void registerForEvents() {
+		view.getBtn_refreshProjections().addActionListener(e -> {
+			this.refreshProjectionListCustomer();
+		});
 		view.getBtn_createMovie().addActionListener(e -> {
 			this.addMovie();
 		});
@@ -178,6 +181,13 @@ public class Controller implements Observer {
 		this.view.getProjectionListModel().clear();
 		for (Iterator<FilmprojectionProxy> iterator = this.model.getFilmprojectionCache().values().iterator(); iterator.hasNext();) {
 			this.view.getProjectionListModel().addElement(iterator.next().getTheObject());
+		}
+	}
+	
+	private void refreshProjectionListCustomer() {
+		this.view.getProjectionListModelCustomer().clear();
+		for (Iterator<FilmprojectionProxy> iterator = this.model.getFilmprojectionCache().values().iterator(); iterator.hasNext();) {
+			this.view.getProjectionListModelCustomer().addElement(iterator.next().getTheObject());
 		}
 	}
 
