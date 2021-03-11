@@ -118,5 +118,14 @@ public class User extends Observable implements java.io.Serializable, IUser
       }catch(SQLException|NoConnectionException e){throw new PersistenceException(e.getMessage());}
    }
    //80 ===== Editable : Your Operations =============
+   @Override
+   public String toString() {
+	 try {
+		return "Username: " + this.getUsername() + " E-Mail: " + this.getEmail() + " Rollen: " + this.getMyRoles().toString();
+	} catch (PersistenceException e) {
+		System.out.println(e);
+		return this.getUsername();
+	}  
+   }
 //90 ===== GENERATED: End of Your Operations ======
 }

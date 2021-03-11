@@ -1,13 +1,8 @@
 package client;
-import java.awt.Button;
 import java.awt.CardLayout;
-import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Label;
-import java.awt.List;
-
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
@@ -18,23 +13,20 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
-import javax.swing.JSpinner;
-import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
-import javax.swing.border.EmptyBorder;
-
-import generated.cinemaService.Booking;
+import db.executer.PersistenceException;
 import generated.cinemaService.Cinemahall;
 import generated.cinemaService.Filmprojection;
 import generated.cinemaService.Movie;
-import generated.cinemaService.Reservation;
+import generated.cinemaService.User;
+
 import javax.swing.JSplitPane;
 import javax.swing.JComboBox;
 
+@SuppressWarnings("serial")
 public class View extends JFrame {
 	private JSplitPane contentPane;
 	private CardLayout cardLayout;
@@ -84,14 +76,22 @@ public class View extends JFrame {
 	private JButton btn_refreshProjections;
 	private DefaultListModel<Filmprojection> projectionListModelCustomer;
 	private JList<Filmprojection> list_projectionsCustomer;
+	@SuppressWarnings("rawtypes")
+	private JComboBox comboBox_roles;
+	private JButton btn_removeRole;
+	private JButton btn_addRole;
+	private DefaultListModel<User> usersListModel;
+	private JList<User> list_users;
+	private JButton btn_refreshUserList;
 
 	
-	public View() {
+	public View() throws PersistenceException {
 
 		this.initPanes();
 		this.buildFilmprojectionsPane();
 		this.buildLoginPane();
 		this.buildEditingPane();
+		this.buildUsersPane();
 		
 	}
 	
@@ -267,6 +267,7 @@ public class View extends JFrame {
 		this.panelLogin.add(this.btn_logout);
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private void buildEditingPane() {
 		this.panelEditing.setLayout(null);
 		
@@ -388,6 +389,46 @@ public class View extends JFrame {
 		this.btn_calculateProfit = new JButton("Umsatz für ausgewählte Filmaufführung berechnen");
 		this.btn_calculateProfit.setBounds(370, 321, 577, 21);
 		this.panelEditing.add(this.btn_calculateProfit);
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	private void buildUsersPane() throws PersistenceException {
+		panelUsers.setLayout(null);
+		
+		JLabel label_userList = new JLabel("Alle User:");
+		label_userList.setBounds(28, 31, 90, 13);
+		this.panelUsers.add(label_userList);
+		
+		this.usersListModel = new DefaultListModel<User>();
+		JScrollPane listScroller_users = new JScrollPane();
+		listScroller_users.setBounds(28, 54, 474, 293);
+		this.panelUsers.add(listScroller_users);
+		this.list_users = new JList<User>(this.usersListModel);
+		listScroller_users.setViewportView(list_users);
+		this.list_users.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		String[] rowOptions = { "Customer", "Admin" };
+		this.comboBox_roles = new JComboBox(rowOptions);
+		
+		this.comboBox_roles.setBounds(512, 84, 187, 21);
+		this.panelUsers.add(this.comboBox_roles);
+		
+		this.btn_removeRole = new JButton("Berechtigung entfernen");
+		this.btn_removeRole.setBounds(512, 129, 187, 21);
+		this.panelUsers.add(this.btn_removeRole);
+		
+		this.btn_addRole = new JButton("Berechtigung geben");
+		this.btn_addRole.setBounds(512, 160, 187, 21);
+		this.panelUsers.add(this.btn_addRole);
+		
+		JLabel label_roles = new JLabel("Berechtigungen:");
+		label_roles.setBounds(512, 54, 145, 13);
+		this.panelUsers.add(label_roles);
+		
+		this.btn_refreshUserList = new JButton("Aktualisieren");
+		this.btn_refreshUserList.setBounds(28, 357, 178, 21);
+		this.panelUsers.add(this.btn_refreshUserList);
+	
 	}
 	
 	public JButton getBtnNavFilmprojections() {
@@ -545,6 +586,33 @@ public class View extends JFrame {
 	public JList<Filmprojection> getList_projectionsCustomer() {
 		return list_projectionsCustomer;
 	}
+
+	@SuppressWarnings("rawtypes")
+	public JComboBox getComboBox_roles() {
+		return comboBox_roles;
+	}
+
+	public JButton getBtn_addRole() {
+		return btn_addRole;
+	}
+
+	public DefaultListModel<User> getUsersListModel() {
+		return usersListModel;
+	}
+
+	public JList<User> getList_users() {
+		return list_users;
+	}
+
+	public JButton getBtn_removeRole() {
+		return btn_removeRole;
+	}
+
+	public JButton getBtn_refreshUserList() {
+		return btn_refreshUserList;
+	}
+	
+	
 	
 	
 }

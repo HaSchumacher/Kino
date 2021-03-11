@@ -5,18 +5,18 @@ import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
+import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
 import commands.Command;
 import db.executer.PersistenceException;
 import generated.cinemaService.Admin;
@@ -28,16 +28,17 @@ import generated.cinemaService.LoginError;
 import generated.cinemaService.Movie;
 import generated.cinemaService.RegisterError;
 import generated.cinemaService.Role;
-import generated.cinemaService.Unknown;
 import generated.cinemaService.User;
 import generated.cinemaService.commands.addCinemahall_Command;
 import generated.cinemaService.commands.addFilmprojection_Command;
 import generated.cinemaService.commands.addMovie_Command;
+import generated.cinemaService.commands.addRoleToUser_Command;
 import generated.cinemaService.commands.calculateTotalProfit_Command;
 import generated.cinemaService.commands.calulateProfit_Command;
 import generated.cinemaService.commands.deleteCinemahall_Command;
 import generated.cinemaService.commands.deleteFilmprojection_Command;
 import generated.cinemaService.commands.deleteMovie_Command;
+import generated.cinemaService.commands.deleteRoleFromUser_Command;
 import generated.cinemaService.commands.login_Command;
 import generated.cinemaService.commands.logout_Command;
 import generated.cinemaService.commands.register_Command;
@@ -104,6 +105,15 @@ public class Controller implements Observer {
 		view.getBtn_calculateTotalProfit().addActionListener(e -> {
 			this.calculateTotalProfit();
 		});
+		view.getBtn_refreshUserList().addActionListener(e -> {
+			this.refreshUserList();
+		});
+		view.getBtn_addRole().addActionListener(e -> {
+			this.addRoleToUser();
+		});
+		view.getBtn_removeRole().addActionListener(e -> {
+			this.removeRoleFromUser();
+		});
 		view.getBtn_login().addActionListener(e -> {
 			try {
 				this.login();
@@ -161,6 +171,57 @@ public class Controller implements Observer {
 
 			)
 		);
+	}
+	
+	private void addRoleToUser() {
+		Map<String, Role> roles = new HashMap<String,Role>();
+		try {
+			roles.put("Admin", Admin.getInstance());
+		} catch (PersistenceException e2) {
+			System.out.println(e2);
+		}
+		try {
+			roles.put("Customer", Customer.getInstance());
+		} catch (PersistenceException e1) {
+			System.out.println(e1);
+		}
+		try {
+			this.myPipe.put(new addRoleToUser_Command(
+					this.view.getList_users().getSelectedValue(),
+					roles.get(this.view.getComboBox_roles().getSelectedItem().toString())
+			));
+		} catch (InterruptedException e) {
+			System.out.println(e);
+		}
+	}
+	
+	private void removeRoleFromUser() {
+		Map<String, Role> roles = new HashMap<String,Role>();
+		try {
+			roles.put("Admin", Admin.getInstance());
+		} catch (PersistenceException e2) {
+			System.out.println(e2);
+		}
+		try {
+			roles.put("Customer", Customer.getInstance());
+		} catch (PersistenceException e1) {
+			System.out.println(e1);
+		}
+		try {
+			this.myPipe.put(new deleteRoleFromUser_Command(
+					this.view.getList_users().getSelectedValue(),
+					roles.get(this.view.getComboBox_roles().getSelectedItem().toString())
+			));
+		} catch (InterruptedException e) {
+			System.out.println(e);
+		}
+	}
+	
+	private void refreshUserList() {
+		this.view.getUsersListModel().clear();
+		for (Iterator<UserProxy> iterator = this.model.getUserCache().values().iterator(); iterator.hasNext();) {
+			this.view.getUsersListModel().addElement(iterator.next().getTheObject());
+		}
 	}
 
 	private void refreshMovieList() {
@@ -438,6 +499,22 @@ public class Controller implements Observer {
 			try {
 				Integer result = (Integer) command.getResult();
 				JOptionPane.showMessageDialog(null, "Gesamter Umsatz: " + result, "Info", JOptionPane.INFORMATION_MESSAGE);
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		if( command instanceof addRoleToUser_Command) {
+			try {
+				command.getResult();
+				JOptionPane.showMessageDialog(null, "Rolle hinzugefügt", "Info", JOptionPane.INFORMATION_MESSAGE);
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		if( command instanceof deleteRoleFromUser_Command) {
+			try {
+				command.getResult();
+				JOptionPane.showMessageDialog(null, "Rolle entfernt", "Info", JOptionPane.INFORMATION_MESSAGE);
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 			}
