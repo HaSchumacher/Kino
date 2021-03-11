@@ -1,10 +1,15 @@
 package client;
 import java.awt.Button;
+import java.awt.CardLayout;
 import java.awt.Choice;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Label;
 import java.awt.List;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,60 +29,128 @@ import javax.swing.border.EmptyBorder;
 import generated.cinemaService.Booking;
 import generated.cinemaService.Movie;
 import generated.cinemaService.Reservation;
+import javax.swing.JSplitPane;
 
 public class View extends JFrame {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-	private JTextField textField_movieInput;
-	private JButton btn_createMovie;
-	private JButton btn_refreshMovieList;
-	private JButton btn_deleteSelectedMovies;
-	private JList<Movie> list_movies;
-	private DefaultListModel<Movie> movieListModel;
+	private JSplitPane contentPane;
+	private CardLayout cardLayout;
+	private JPanel panelLeft;
+	private JPanel panelRight;
+	private JPanel panelFilmprojections;
+	private JPanel panelLogin;
+	private JPanel panelTickets;
+	private JPanel panelEditing;
+	private JPanel panelUsers;
+	private JButton btnNavFilmprojections;
+	private JButton btnNavLogin;
+	private JButton btnNavTickets;
+	private JButton btnNavEditing;
+	private JButton btnNavUsers;
 	private JTextField textField_loginUsername;
 	private JPasswordField textField_loginPassword;
 	private JButton btn_login;
+	private JButton btn_logout;
 	private JTextField textField_registerUsername;
 	private JPasswordField textField_registerPassword;
 	private JTextField textField_registerEmail;
 	private JTextField textField_registerName;
 	private JButton btn_register;
-	private JScrollPane scrollPane_loggedUserReservations;
-	private JScrollPane scrollPane_loggedUserBookings;
-	private JList<Reservation> list_loggedUserReservations;
-	private JList<Booking> list_loggedUserBookings;
-	private JScrollPane FilmSelectionGroup;
-	private List category;
-	private JScrollPane CategorySelectionGroup;
-	private JTextField nameforCinemahall;
-	private JTabbedPane tabbedPane;
-	
-	
+	private JTextField textField_movieInput;
+	private JButton btn_createMovie;
+	private DefaultListModel<Movie> movieListModel;
+	private JList<Movie> list_movies;
+	private JButton btn_refreshMovieList;
+	private JButton btn_deleteSelectedMovies;
+	private JLabel label_currentUser;
 
-	/**
-	 * Create the frame.
-	 */
+	
 	public View() {
-		setTitle("CinemaClient");
+
+		this.initPanes();
+		this.buildLoginPane();
+		this.buildEditingPane();
+		
+	}
+	
+	private void initPanes() {
+		this.cardLayout = new CardLayout();
+		this.panelRight = new JPanel();
+		this.panelRight.setLayout(this.cardLayout);
+		this.panelLeft = new JPanel();
+		this.panelLeft.setLayout(new BoxLayout(this.panelLeft, BoxLayout.Y_AXIS));
+
+		this.panelFilmprojections = new JPanel();
+		this.panelFilmprojections.setBackground(Color.BLUE);
+		this.panelLogin = new JPanel();
+		this.panelLogin.setBackground(Color.GREEN);
+		this.panelTickets = new JPanel();
+		this.panelTickets.setBackground(Color.CYAN);
+		this.panelEditing = new JPanel();
+		this.panelEditing.setBackground(Color.LIGHT_GRAY);
+		this.panelUsers = new JPanel();
+		this.panelEditing.setBackground(Color.GRAY);
+		
+		this.btnNavFilmprojections = new JButton("Filmaufführungen");
+		this.btnNavFilmprojections.setAlignmentX(Component.LEFT_ALIGNMENT);
+		this.btnNavLogin = new JButton("Login");
+		this.btnNavLogin.setAlignmentX(Component.LEFT_ALIGNMENT);
+		this.btnNavTickets = new JButton("Tickets");
+		this.btnNavTickets.setAlignmentX(Component.LEFT_ALIGNMENT);
+		this.btnNavTickets.setVisible(false);
+		this.btnNavEditing = new JButton("Kino-Bearbeitung");
+		this.btnNavEditing.setAlignmentX(Component.LEFT_ALIGNMENT);
+		this.btnNavEditing.setVisible(false);
+		this.btnNavUsers = new JButton("Users");
+		this.btnNavUsers.setAlignmentX(Component.LEFT_ALIGNMENT);
+		this.btnNavUsers.setVisible(false);
+		
+		this.panelLeft.add(Box.createRigidArea(new Dimension(0, 5)));
+		this.panelLeft.add(this.btnNavFilmprojections);
+		this.panelLeft.add(Box.createRigidArea(new Dimension(0, 5)));
+		this.panelLeft.add(this.btnNavLogin);
+		this.panelLeft.add(Box.createRigidArea(new Dimension(0, 5)));
+		this.panelLeft.add(this.btnNavTickets);
+		this.panelLeft.add(Box.createRigidArea(new Dimension(0, 5)));
+		this.panelLeft.add(this.btnNavEditing);
+		this.panelLeft.add(Box.createRigidArea(new Dimension(0, 5)));
+		this.panelLeft.add(this.btnNavUsers);
+		
+		this.panelRight.add(this.panelFilmprojections,"panelFilmprojections");
+		this.panelRight.add(this.panelLogin, "panelLogin");
+		this.panelRight.add(this.panelTickets, "panelTickets");
+		this.panelRight.add(this.panelEditing, "panelEditing");
+		this.panelRight.add(this.panelUsers, "panelUsers");
+		this.cardLayout.show(this.panelRight, "panelFilmprojections");
+		
+		this.btnNavFilmprojections.addActionListener(e -> {
+			this.cardLayout.show(this.panelRight,"panelFilmprojections");
+		});
+		this.btnNavLogin.addActionListener(e -> {
+			this.cardLayout.show(this.panelRight,"panelLogin");
+		});
+		this.btnNavTickets.addActionListener(e -> {
+			this.cardLayout.show(this.panelRight,"panelTickets");
+		});
+		this.btnNavEditing.addActionListener(e -> {
+			this.cardLayout.show(this.panelRight,"panelEditing");
+		});
+		this.btnNavUsers.addActionListener(e -> {
+			this.cardLayout.show(this.panelRight,"panelUsers");
+		});
+		
+		this.label_currentUser = new JLabel();
+		panelLeft.add(this.label_currentUser);
+		this.label_currentUser.setText("");
+		
+		this.contentPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, this.panelLeft, this.panelRight);
+
+		setTitle("Cinema Client");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 619, 487);
-		this.contentPane = new JPanel();
-		this.contentPane.setBackground(Color.LIGHT_GRAY);
-		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(this.contentPane);
-		this.contentPane.setLayout(null);
-		
-		this.tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(10, 10, 595, 430);
-		this.contentPane.add(tabbedPane);
-		
-		JPanel panel_users = new JPanel();
-		tabbedPane.addTab("User", null, panel_users, null);
-				
+		setBounds(100, 100, 1000, 600);
+	}
+
+	private void buildLoginPane() {
 		JLabel label_loginUsername = new JLabel("Username");
 		label_loginUsername.setBounds(10, 8, 81, 32);
 		
@@ -97,63 +170,201 @@ public class View extends JFrame {
 		this.textField_loginPassword.setHorizontalAlignment(SwingConstants.LEFT);
 		this.textField_loginPassword.setToolTipText("Please Insert your Password here.");
 		this.textField_loginPassword.setColumns(10);
-		panel_users.setLayout(null);
-		panel_users.add(label_loginUsername);
-		panel_users.add(textField_loginUsername);
+		this.panelLogin.setLayout(null);
+		this.panelLogin.add(label_loginUsername);
+		this.panelLogin.add(textField_loginUsername);
 		
-		panel_users.add(label_loginPassword);
-		panel_users.add(textField_loginPassword);
+		this.panelLogin.add(label_loginPassword);
+		this.panelLogin.add(textField_loginPassword);
 		
 		this.btn_login = new JButton("Login");
 		this.btn_login.setBounds(112, 128, 85, 21);
-		panel_users.add(this.btn_login);
+		this.panelLogin.add(this.btn_login);
 		
 		this.textField_registerUsername = new JTextField();
 		this.textField_registerUsername.setBounds(305, 250, 102, 30);
 		this.textField_registerUsername.setColumns(10);
-		panel_users.add(textField_registerUsername);
+		this.panelLogin.add(textField_registerUsername);
 
 		JLabel label_registerUsername = new JLabel("Username");
 		label_registerUsername.setBounds(220, 250, 75, 30);
-		panel_users.add(label_registerUsername);
+		this.panelLogin.add(label_registerUsername);
 		
 		JLabel label_registerPassword = new JLabel("Password");
 		label_registerPassword.setBounds(10, 250, 75, 30);
-		panel_users.add(label_registerPassword);
+		this.panelLogin.add(label_registerPassword);
 		
 		this.textField_registerPassword = new JPasswordField(10);
 		textField_registerPassword.setFont(UIManager.getFont("PasswordField.font"));
 		this.textField_registerPassword.setColumns(10);
 		this.textField_registerPassword.setBounds(95, 250, 102, 30);
-		panel_users.add(textField_registerPassword);
+		this.panelLogin.add(textField_registerPassword);
 		
 		JLabel label_registerEmail = new JLabel("Email");
 		label_registerEmail.setBounds(220, 203, 75, 30);
-		panel_users.add(label_registerEmail);
+		this.panelLogin.add(label_registerEmail);
 		
 		this.textField_registerEmail = new JTextField();
 		this.textField_registerEmail.setColumns(10);
 		this.textField_registerEmail.setBounds(305, 203, 102, 30);
-		panel_users.add(textField_registerEmail);
+		this.panelLogin.add(textField_registerEmail);
 		
 		JLabel label_registerName = new JLabel("Name");
 		label_registerName.setBounds(10, 210, 75, 30);
-		panel_users.add(label_registerName);
+		this.panelLogin.add(label_registerName);
 		
 		this.textField_registerName = new JTextField();
 		this.textField_registerName.setColumns(10);
 		this.textField_registerName.setBounds(95, 210, 102, 30);
-		panel_users.add(textField_registerName);
+		this.panelLogin.add(textField_registerName);
 		
 		this.btn_register = new JButton("Register");
 		this.btn_register.setBounds(192, 330, 85, 21);
-		panel_users.add(btn_register);
+		this.panelLogin.add(btn_register);
 		
-		JButton btnLogout = new JButton("Logout");
-		btnLogout.setBounds(322, 128, 85, 21);
-		panel_users.add(btnLogout);
-		JPanel panel_projections = new JPanel();
-		tabbedPane.addTab("Auff�hrungen", null, panel_projections, null);
+		this.btn_logout = new JButton("Logout");
+		this.btn_logout.setBounds(322, 128, 85, 21);
+		this.panelLogin.add(this.btn_logout);
+	}
+	
+	private void buildEditingPane() {
+		this.panelEditing.setLayout(null);
+		
+		this.textField_movieInput = new JTextField();
+		this.textField_movieInput.setBounds(10, 10, 142, 19);
+		this.panelEditing.add(this.textField_movieInput);
+		this.textField_movieInput.setColumns(10);
+		
+		this.btn_createMovie = new JButton("Film erstellen");
+		this.btn_createMovie.setBounds(162, 9, 125, 21);
+		this.textField_movieInput.add(this.btn_createMovie);
+		
+		this.movieListModel = new DefaultListModel<Movie>();
+		this.list_movies = new JList<Movie>(this.movieListModel);
+		
+		JScrollPane listScroller_movies = new JScrollPane(this.list_movies);
+		listScroller_movies.setBounds(10, 59, 277, 84);
+		this.panelEditing.add(listScroller_movies);
+		
+		this.btn_refreshMovieList = new JButton("Aktualisieren");
+		this.btn_refreshMovieList.setBounds(297, 56, 142, 21);
+		this.panelEditing.add(this.btn_refreshMovieList);
+		
+		this.btn_deleteSelectedMovies = new JButton("L�schen");
+		this.btn_deleteSelectedMovies.setBounds(297, 87, 142, 21);
+		this.panelEditing.add(this.btn_deleteSelectedMovies);
+		
+		Label lbselectMovie = new Label("Film Wählen");
+		lbselectMovie.setBounds(10, 164, 114, 21);
+		this.panelEditing.add(lbselectMovie);
+		
+		Choice SelectMovie = new Choice();
+		SelectMovie.setBounds(10, 191, 142, 18);
+		this.panelEditing.add(SelectMovie);
+		
+		Label lbCinemahallSelect = new Label("Kinosaal wählen");
+		lbCinemahallSelect.setBounds(162, 164, 125, 21);
+		this.panelEditing.add(lbCinemahallSelect);
+		
+		Choice SelectCinemahall = new Choice();
+		SelectCinemahall.setBounds(162, 191, 125, 18);
+		this.panelEditing.add(SelectCinemahall);
+		
+		JButton btnFilmProjection = new JButton("Filmaufführung erstellen");
+		btnFilmProjection.setBounds(140, 239, 299, 21);
+		this.panelEditing.add(btnFilmProjection);
+	}
+	
+	public JButton getBtnNavFilmprojections() {
+		return btnNavFilmprojections;
+	}
+
+	public JButton getBtnNavLogin() {
+		return btnNavLogin;
+	}
+
+	public JButton getBtnNavTickets() {
+		return btnNavTickets;
+	}
+
+	public JButton getBtnNavEditing() {
+		return btnNavEditing;
+	}
+
+	public JButton getBtnNavUsers() {
+		return btnNavUsers;
+	}
+
+	public JTextField getTextField_loginUsername() {
+		return textField_loginUsername;
+	}
+
+	public JPasswordField getTextField_loginPassword() {
+		return textField_loginPassword;
+	}
+
+	public JButton getBtn_login() {
+		return btn_login;
+	}
+	
+	public JButton getBtn_logout() {
+		return btn_logout;
+	}
+
+	public JTextField getTextField_registerUsername() {
+		return textField_registerUsername;
+	}
+
+	public JPasswordField getTextField_registerPassword() {
+		return textField_registerPassword;
+	}
+
+	public JTextField getTextField_registerEmail() {
+		return textField_registerEmail;
+	}
+
+	public JTextField getTextField_registerName() {
+		return textField_registerName;
+	}
+
+	public JButton getBtn_register() {
+		return btn_register;
+	}
+
+	public JTextField getTextField_movieInput() {
+		return textField_movieInput;
+	}
+
+	public JButton getBtn_createMovie() {
+		return btn_createMovie;
+	}
+
+	public DefaultListModel<Movie> getMovieListModel() {
+		return movieListModel;
+	}
+
+	public JList<Movie> getList_movies() {
+		return list_movies;
+	}
+
+	public JButton getBtn_refreshMovieList() {
+		return btn_refreshMovieList;
+	}
+
+	public JButton getBtn_deleteSelectedMovies() {
+		return btn_deleteSelectedMovies;
+	}
+	
+	public JLabel getLabel_currentUser() {
+		return label_currentUser;
+	}
+
+
+	/**
+
+	public View() {
+
+
 		panel_projections.setLayout(null);
 		
 		FilmSelectionGroup = new JScrollPane();
@@ -245,51 +456,7 @@ public class View extends JFrame {
 		JButton btncreateCinemahall = new JButton("Kinosaal erstellen");
 		btncreateCinemahall.setBounds(10, 165, 241, 21);
 		panel_halls.add(btncreateCinemahall);
-		panel_movies.setLayout(null);
-		
-		this.textField_movieInput = new JTextField();
-		this.textField_movieInput.setBounds(10, 10, 142, 19);
-		panel_movies.add(this.textField_movieInput);
-		this.textField_movieInput.setColumns(10);
-		
-		this.btn_createMovie = new JButton("Film erstellen");
-		this.btn_createMovie.setBounds(162, 9, 125, 21);
-		panel_movies.add(this.btn_createMovie);
-		
-		this.movieListModel = new DefaultListModel<Movie>();
-		this.list_movies = new JList<Movie>(this.movieListModel);
-		
-		JScrollPane listScroller_movies = new JScrollPane(this.list_movies);
-		listScroller_movies.setBounds(10, 59, 277, 84);
-		panel_movies.add(listScroller_movies);
-		
-		this.btn_refreshMovieList = new JButton("Aktualisieren");
-		this.btn_refreshMovieList.setBounds(297, 56, 142, 21);
-		panel_movies.add(this.btn_refreshMovieList);
-		
-		this.btn_deleteSelectedMovies = new JButton("L�schen");
-		this.btn_deleteSelectedMovies.setBounds(297, 87, 142, 21);
-		panel_movies.add(this.btn_deleteSelectedMovies);
-		
-		Label lbselectMovie = new Label("Film Wählen");
-		lbselectMovie.setBounds(10, 164, 114, 21);
-		panel_movies.add(lbselectMovie);
-		
-		Choice SelectMovie = new Choice();
-		SelectMovie.setBounds(10, 191, 142, 18);
-		panel_movies.add(SelectMovie);
-		
-		Label lbCinemahallSelect = new Label("Kinosaal wählen");
-		lbCinemahallSelect.setBounds(162, 164, 125, 21);
-		panel_movies.add(lbCinemahallSelect);
-		
-		Choice SelectCinemahall = new Choice();
-		SelectCinemahall.setBounds(162, 191, 125, 18);
-		panel_movies.add(SelectCinemahall);
-		
-		JButton btnFilmProjection = new JButton("Filmaufführung erstellen");
-		btnFilmProjection.setBounds(140, 239, 299, 21);
-		panel_movies.add(btnFilmProjection);
+
 		
 		JPanel panel_roles = new JPanel();
 		tabbedPane.addTab("Rollen", null, panel_roles, null);
@@ -497,5 +664,7 @@ public class View extends JFrame {
 	public JTextField getNameforCinemahall() {
 		return nameforCinemahall;
 	}
+	
+	**/
 
 }

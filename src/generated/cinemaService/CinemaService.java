@@ -472,8 +472,8 @@ public class CinemaService extends Observable{
 	 * Logout the given User from Cinema Service.
 	 */
 	public Boolean logout(User user) {
-		// TODO: Logout - REferenz Keypair...
-		return null;
+		// TODO: Logout - Referenz Keypair...
+		return true;
 	}
 
 	/**
@@ -524,7 +524,9 @@ public class CinemaService extends Observable{
 	 */
 	public User register(String name, String email, String username, String passwort)
 			throws RegisterError, PersistenceException {
-		return User.createFresh(name, email, username, passwort);
+		User user = User.createFresh(name, email, username, passwort);
+		user.addToMyRoles(Customer.getInstance());
+		return user;
 	}
 
 	/**

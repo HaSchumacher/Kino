@@ -19,7 +19,9 @@ import javax.swing.JPanel;
 
 import commands.Command;
 import db.executer.PersistenceException;
+import generated.cinemaService.Admin;
 import generated.cinemaService.CinemaService;
+import generated.cinemaService.Customer;
 import generated.cinemaService.LoginError;
 import generated.cinemaService.Movie;
 import generated.cinemaService.RegisterError;
@@ -28,6 +30,9 @@ import generated.cinemaService.Unknown;
 import generated.cinemaService.User;
 import generated.cinemaService.commands.addMovie_Command;
 import generated.cinemaService.commands.deleteMovie_Command;
+import generated.cinemaService.commands.login_Command;
+import generated.cinemaService.commands.logout_Command;
+import generated.cinemaService.commands.register_Command;
 import generated.cinemaService.proxies.MovieProxy;
 import generated.cinemaService.proxies.UserProxy;
 import observation.Observer;
@@ -44,47 +49,63 @@ public class Controller implements Observer {
 		this.view = v;
 		this.myPipe = p;
 		this.cipher = Cipher.getInstance("RSA");
-		this.loggedUser = this.model.getUser(999);
+		this.loggedUser = null;
 		initView();
 	}
 
 	public void initView() throws PersistenceException   {
-		
+		updateView();
 	}
-	
+
 	
 	public void registerForEvents() {
-		view.getBtnCreateMovie().addActionListener(e -> {
+		view.getBtn_createMovie().addActionListener(e -> {
 			this.addMovie();
 		});
-		view.getBtnRefreshMovieList().addActionListener(e -> {
+		view.getBtn_refreshMovieList().addActionListener(e -> {
 			this.refreshMovieList();
 		});
-		view.getBtnDeleteSelectedMovie().addActionListener(e -> {
+		view.getBtn_deleteSelectedMovies().addActionListener(e -> {
 			this.deleteSelectedMovies();
 		});
-		view.getBtnLogin().addActionListener(e -> {
+		view.getBtn_login().addActionListener(e -> {
 			try {
 				this.login();
 			} catch (InvalidKeyException | NoSuchAlgorithmException | PersistenceException | IllegalBlockSizeException
-					| BadPaddingException | NoSuchPaddingException | LoginError | UnsupportedEncodingException e1) {
+					| BadPaddingException | NoSuchPaddingException | LoginError | UnsupportedEncodingException | InterruptedException e1) {
 				System.out.println(e1);
+				JOptionPane.showMessageDialog(null, e1, "Error", JOptionPane.ERROR_MESSAGE);
 			} 
 		});
-		view.getBtnRegister().addActionListener(e -> {
+		view.getBtn_register().addActionListener(e -> {
 			try {
-				this.registerUsertoCinema();
-			} catch (PersistenceException | RegisterError | NoSuchAlgorithmException e1) {
-				e1.printStackTrace();
+				this.registerUserToCinema();
+			} catch (PersistenceException | RegisterError | NoSuchAlgorithmException | InterruptedException e1) {
+				System.out.println(e1);
+				JOptionPane.showMessageDialog(null, e1, "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		});
+		view.getBtn_logout().addActionListener(e -> {
+			try {
+				this.logout();
+			} catch (PersistenceException | InterruptedException e1) {
+				System.out.println(e1);
+				JOptionPane.showMessageDialog(null, e1, "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		});
 	}
 
-	private void registerUsertoCinema() throws PersistenceException, RegisterError, NoSuchAlgorithmException {
-		this.model.register(this.view.getTextFieldRegisterName().getText(),
-				this.view.getTextFieldRegisterEmail().getText(), createHashValue(this.view.getTextFieldRegisterUsername().getText()),
-				createHashValue(this.view.getTextFieldRegisterPassword().getText()));
-		System.out.println("Registered= " + this.view.getTextFieldRegisterName().getText());
+	@SuppressWarnings("deprecation")
+	private void registerUserToCinema() throws PersistenceException, RegisterError, NoSuchAlgorithmException, InterruptedException {
+		this.myPipe.put(
+			new register_Command(
+					this.view.getTextField_registerName().getText(),
+					this.view.getTextField_registerEmail().getText(), 
+					createHashValue(this.view.getTextField_registerUsername().getText()),
+					createHashValue(this.view.getTextField_registerPassword().getText())
+
+			)
+		);
 	}
 
 	private void refreshMovieList() {
@@ -96,14 +117,14 @@ public class Controller implements Observer {
 
 	private void addMovie() {
 		try {
-			this.myPipe.put(new addMovie_Command(this.view.getTextFieldMovieInput().getText()));
+			this.myPipe.put(new addMovie_Command(this.view.getTextField_movieInput().getText()));
 		} catch (InterruptedException e) {
 			System.out.println(e);
 		}
 	}
 
 	private void deleteSelectedMovies() {
-		List<Movie> movies = this.view.getListMovies().getSelectedValuesList();
+		List<Movie> movies = this.view.getList_movies().getSelectedValuesList();
 		for (Iterator<Movie> iterator = movies.iterator(); iterator.hasNext();) {
 			try {
 				this.myPipe.put(new deleteMovie_Command(iterator.next()));
@@ -113,31 +134,30 @@ public class Controller implements Observer {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	private void login()
 			throws NoSuchAlgorithmException, PersistenceException, InvalidKeyException, IllegalBlockSizeException,
-			BadPaddingException, NoSuchPaddingException, LoginError, UnsupportedEncodingException {
+			BadPaddingException, NoSuchPaddingException, LoginError, UnsupportedEncodingException, InterruptedException {
 		ArrayList<Object> result = this.model.generatePublicKey();
 		Integer id = (Integer) result.get(0);
 		PublicKey publicKey = (PublicKey) result.get(1);
-		String username = this.view.getTextFieldLoginUsername().getText();
+		String username = this.view.getTextField_loginUsername().getText();
 		String userhash = createHashValue(username);
 		byte[] uscrypt = encrypt(userhash, publicKey);
-		String password = this.view.getTextFieldLoginPassword().getText();
+		String password = this.view.getTextField_loginPassword().getText();
 		String passwordhash = createHashValue(password);
 		byte[] pwcrypt = encrypt(passwordhash, publicKey);
-		this.setLoggedUser(this.model.login(uscrypt, pwcrypt, id));
-		//TODO neue View Laden.... anhand der Roles !
-		updateView();
-	}
-	
-	private void updateView() {
-		this.view.getBtnLogin().getParent().setVisible(false);
-		
+		this.myPipe.put(new login_Command(uscrypt, pwcrypt, id));
 	}
 
-	private void logout() {
-		updateView();
+	private void logout() throws PersistenceException, InterruptedException {
+		if(this.loggedUser != null) {
+			this.myPipe.put(new logout_Command(this.loggedUser));
+		} else {
+			JOptionPane.showMessageDialog(null, "Kein User angemeldet...", "Error", JOptionPane.ERROR_MESSAGE);
+		}
 	}
+	
 	public static String createHashValue(String tohash) throws NoSuchAlgorithmException {
 		MessageDigest md = MessageDigest.getInstance("SHA");
 		byte[] digest = md.digest(tohash.getBytes());
@@ -152,7 +172,7 @@ public class Controller implements Observer {
 	    }
 
 	    return hexString.toString();
-		}
+	}
 	
 	public static byte[] encrypt(String message, PublicKey pk) {
 		Cipher cipher = null;
@@ -170,15 +190,73 @@ public class Controller implements Observer {
 		return chiffrat;
 	}
 	
+	private void updateView() throws PersistenceException {
+		String currentUserName = "Nicht angemeldet";
+		boolean showTickets = false;
+		boolean showEditing = false;
+		boolean showUsers = false;
+		if(this.loggedUser != null) {
+			currentUserName = "Angemeldet: " + this.loggedUser.getName();
+			if(this.loggedUser.getMyRoles().contains(Customer.getInstance())) {
+				showTickets = true;
+				showEditing = false;
+				showUsers = false;
+			}
+			if(this.loggedUser.getMyRoles().contains(Admin.getInstance())) {
+				showTickets = true;
+				showEditing = true;
+				showUsers = true;
+			}
+		}
+		this.view.getLabel_currentUser().setText(currentUserName);
+		this.view.getBtnNavTickets().setVisible(showTickets);
+		this.view.getBtnNavEditing().setVisible(showEditing);
+		this.view.getBtnNavUsers().setVisible(showUsers);
+	}
+	
 	@Override
 	public void update(Command<?> command) {
+		if( command instanceof login_Command) {
+			try {
+				this.setLoggedUser((User) command.getResult());
+				this.updateView();
+				this.view.getTextField_loginUsername().setText("");
+				this.view.getTextField_loginPassword().setText("");
+				JOptionPane.showMessageDialog(null, "Anmelden erfolgreich!", "Info", JOptionPane.INFORMATION_MESSAGE);
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		if( command instanceof logout_Command) {
+			try {
+				command.getResult();
+				this.loggedUser = null;
+				updateView();
+				JOptionPane.showMessageDialog(null, "Ausloggen erfolgreich!", "Info", JOptionPane.INFORMATION_MESSAGE);
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		if( command instanceof register_Command) {
+			try {
+				this.setLoggedUser((User) command.getResult());
+				this.updateView();
+				this.view.getTextField_registerEmail().setText("");
+				this.view.getTextField_registerName().setText("");
+				this.view.getTextField_registerPassword().setText("");
+				this.view.getTextField_registerUsername().setText("");
+				JOptionPane.showMessageDialog(null, "Registrieren erfolgreich!", "Info", JOptionPane.INFORMATION_MESSAGE);
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		}
 		if (command instanceof addMovie_Command) {
 			try {
 				Movie result = (Movie) command.getResult();
 
 				JOptionPane.showMessageDialog(null, "Film erstellt : " + result.getTitle(), "Info",
 						JOptionPane.INFORMATION_MESSAGE);
-				this.view.getTextFieldMovieInput().setText("");
+				this.view.getTextField_movieInput().setText("");
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 			}
@@ -200,4 +278,6 @@ public class Controller implements Observer {
 	public void setLoggedUser(User loggedUser) {
 		this.loggedUser = loggedUser;
 	}
+	
+
 }
