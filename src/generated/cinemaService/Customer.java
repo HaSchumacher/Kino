@@ -11,15 +11,13 @@ import java.util.Optional;
 import java.sql.ResultSet;
 import db.executer.DBExecuterFactory;
 import db.executer.PersistenceException;
-import db.executer.PersistenceExecuterFactory;
 import generated.cinemaService.proxies.ICustomer;
-import exceptions.ConstraintViolation;
-//20 ===== Editable : Your Import Section =========
 
 //25 ===== GENERATED:      Header Section =========
 public class Customer extends Role implements java.io.Serializable, ICustomer
 {
-   //30 ===== GENERATED:      Attribute Section ======
+   private static final long serialVersionUID = -5947005426257227822L;
+//30 ===== GENERATED:      Attribute Section ======
    private static Optional<Customer> theInstance = Optional.empty();
    //40 ===== Editable : Your Attribute Section ======
    
@@ -53,5 +51,9 @@ public class Customer extends Role implements java.io.Serializable, ICustomer
       return this;
    }
    //80 ===== Editable : Your Operations =============
+   @Override
+   public String toString() {
+   	return "Customer";
+   }
 //90 ===== GENERATED: End of Your Operations ======
 }

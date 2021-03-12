@@ -5,22 +5,22 @@
 package generated.cinemaService;
 //10 ===== GENERATED:      Import Section =========
 import java.sql.SQLException;
+
 import db.connection.NoConnectionException;
 import db.connection.TypeKeyManager;
+import db.executer.PersistenceException;
 import db.executer.PersistenceExecuterFactory;
 import generated.cinemaService.proxies.BookingProxy;
-import observation.Observable;
 import generated.cinemaService.proxies.IBooking;
-import generated.cinemaService.relationControl.*;
-import generated.cinemaService.proxies.*;
-import db.executer.PersistenceException;
-import exceptions.ConstraintViolation;
+import generated.cinemaService.relationControl.Booking_ReservationSupervisor;
+import observation.Observable;
 //20 ===== Editable : Your Import Section =========
 
 //25 ===== GENERATED:      Header Section =========
 public class Booking extends Observable implements java.io.Serializable, IBooking
 {
-   //30 ===== GENERATED:      Attribute Section ======
+   private static final long serialVersionUID = -5317472923721924044L;
+//30 ===== GENERATED:      Attribute Section ======
    private Integer id;
    //40 ===== Editable : Your Attribute Section ======
    

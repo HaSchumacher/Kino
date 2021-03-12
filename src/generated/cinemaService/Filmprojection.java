@@ -15,15 +15,13 @@ import generated.cinemaService.proxies.FilmprojectionProxy;
 import observation.Observable;
 import generated.cinemaService.proxies.IFilmprojection;
 import generated.cinemaService.relationControl.*;
-import generated.cinemaService.proxies.*;
 import db.executer.PersistenceException;
-import exceptions.ConstraintViolation;
-//20 ===== Editable : Your Import Section =========
 
 //25 ===== GENERATED:      Header Section =========
 public class Filmprojection extends Observable implements java.io.Serializable, IFilmprojection
 {
-   //30 ===== GENERATED:      Attribute Section ======
+	private static final long serialVersionUID = -7497683603820005761L;
+//30 ===== GENERATED:      Attribute Section ======
    private Integer id;
    //40 ===== Editable : Your Attribute Section ======
    

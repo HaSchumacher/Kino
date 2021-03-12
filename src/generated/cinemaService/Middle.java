@@ -3,23 +3,23 @@
  * --- Do not touch section numbering!   
  */
 package generated.cinemaService;
+import java.sql.ResultSet;
 //10 ===== GENERATED:      Import Section =========
 import java.sql.SQLException;
+import java.util.Optional;
+
 import db.connection.NoConnectionException;
 import db.connection.TypeKeyManager;
-import java.util.Optional;
-import java.sql.ResultSet;
 import db.executer.DBExecuterFactory;
 import db.executer.PersistenceException;
-import db.executer.PersistenceExecuterFactory;
 import generated.cinemaService.proxies.IMiddle;
-import exceptions.ConstraintViolation;
 //20 ===== Editable : Your Import Section =========
 
 //25 ===== GENERATED:      Header Section =========
 public class Middle extends PriceCategory implements java.io.Serializable, IMiddle
 {
-   //30 ===== GENERATED:      Attribute Section ======
+   private static final long serialVersionUID = 6085707041544503621L;
+//30 ===== GENERATED:      Attribute Section ======
    private static Optional<Middle> theInstance = Optional.empty();
    //40 ===== Editable : Your Attribute Section ======
    
@@ -54,5 +54,10 @@ public class Middle extends PriceCategory implements java.io.Serializable, IMidd
       return this;
    }
    //80 ===== Editable : Your Operations =============
+@Override
+public String toString() {
+	return "Middle Kategorie mit " + getPrice() + "€ pro Sitz";
+}
+   
 //90 ===== GENERATED: End of Your Operations ======
 }

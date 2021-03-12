@@ -3,23 +3,23 @@
  * --- Do not touch section numbering!   
  */
 package generated.cinemaService;
+import java.sql.ResultSet;
 //10 ===== GENERATED:      Import Section =========
 import java.sql.SQLException;
+import java.util.Optional;
+
 import db.connection.NoConnectionException;
 import db.connection.TypeKeyManager;
-import java.util.Optional;
-import java.sql.ResultSet;
 import db.executer.DBExecuterFactory;
 import db.executer.PersistenceException;
-import db.executer.PersistenceExecuterFactory;
 import generated.cinemaService.proxies.IFront;
-import exceptions.ConstraintViolation;
 //20 ===== Editable : Your Import Section =========
 
 //25 ===== GENERATED:      Header Section =========
 public class Front extends PriceCategory implements java.io.Serializable, IFront
 {
-   //30 ===== GENERATED:      Attribute Section ======
+  private static final long serialVersionUID = 1179487352596471766L;
+//30 ===== GENERATED:      Attribute Section ======
    private static Optional<Front> theInstance = Optional.empty();
    //40 ===== Editable : Your Attribute Section ======
    
@@ -54,5 +54,9 @@ public class Front extends PriceCategory implements java.io.Serializable, IFront
       return this;
    }
    //80 ===== Editable : Your Operations =============
+   @Override
+   public String toString() {
+   	return "Front Kategorie mit " + getPrice() + "€ pro Sitz";
+   }
 //90 ===== GENERATED: End of Your Operations ======
 }

@@ -3,23 +3,23 @@
  * --- Do not touch section numbering!   
  */
 package generated.cinemaService;
+import java.sql.ResultSet;
 //10 ===== GENERATED:      Import Section =========
 import java.sql.SQLException;
+import java.util.Optional;
+
 import db.connection.NoConnectionException;
 import db.connection.TypeKeyManager;
-import java.util.Optional;
-import java.sql.ResultSet;
 import db.executer.DBExecuterFactory;
 import db.executer.PersistenceException;
-import db.executer.PersistenceExecuterFactory;
 import generated.cinemaService.proxies.IUnknown;
-import exceptions.ConstraintViolation;
 //20 ===== Editable : Your Import Section =========
 
 //25 ===== GENERATED:      Header Section =========
 public class Unknown extends Role implements java.io.Serializable, IUnknown
 {
-   //30 ===== GENERATED:      Attribute Section ======
+	private static final long serialVersionUID = -1313633160889667531L;
+//30 ===== GENERATED:      Attribute Section ======
    private static Optional<Unknown> theInstance = Optional.empty();
    //40 ===== Editable : Your Attribute Section ======
    
@@ -53,5 +53,9 @@ public class Unknown extends Role implements java.io.Serializable, IUnknown
       return this;
    }
    //80 ===== Editable : Your Operations =============
+   @Override
+   public String toString() {
+   	return "Unknown";
+   }
 //90 ===== GENERATED: End of Your Operations ======
 }

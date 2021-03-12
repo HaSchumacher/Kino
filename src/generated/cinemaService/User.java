@@ -22,7 +22,8 @@ import exceptions.ConstraintViolation;
 //25 ===== GENERATED:      Header Section =========
 public class User extends Observable implements java.io.Serializable, IUser
 {
-   //30 ===== GENERATED:      Attribute Section ======
+  private static final long serialVersionUID = -4635155190543033966L;
+//30 ===== GENERATED:      Attribute Section ======
    private Integer id;
    private String name;
    private String email;
@@ -121,7 +122,7 @@ public class User extends Observable implements java.io.Serializable, IUser
    @Override
    public String toString() {
 	 try {
-		return "Username: " + this.getUsername() + " E-Mail: " + this.getEmail() + " Rollen: " + this.getMyRoles().toString();
+		return "Name: " + this.getName() + " E-Mail: " + this.getEmail() + " Rollen: " + this.getMyRoles().toString();
 	} catch (PersistenceException e) {
 		System.out.println(e);
 		return this.getUsername();
