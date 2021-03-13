@@ -55,13 +55,11 @@ public class View extends JFrame {
 	private JButton btn_createMovie;
 	private DefaultListModel<Movie> movieListModel;
 	private JList<Movie> list_movies;
-	private JButton btn_refreshMovieList;
 	private JButton btn_deleteSelectedMovies;
 	private JLabel label_currentUser;
 	private JList<Cinemahall> list_halls;
 	private DefaultListModel<Cinemahall> hallListModel;
 	private JButton btn_deleteSelectedHall;
-	private JButton btn_refreshHallList;
 	private JTextField textField_hallName;
 	private JComboBox<Integer> comboBox_hallRows;
 	private JComboBox<Integer> comboBox_hallSeats;
@@ -70,11 +68,8 @@ public class View extends JFrame {
 	private JButton btn_createProjection;
 	private DefaultListModel<Filmprojection> projectionListModel;
 	private JList<Filmprojection> list_projections;
-	private JButton btn_refreshProjectionList;
 	private JButton btn_calculateTotalProfit;
 	private JButton btn_calculateProfit;
-	private JButton btn_refreshProjections;
-	private DefaultListModel<Filmprojection> projectionListModelCustomer;
 	private JList<Filmprojection> list_projectionsCustomer;
 	@SuppressWarnings("rawtypes")
 	private JComboBox comboBox_roles;
@@ -82,12 +77,14 @@ public class View extends JFrame {
 	private JButton btn_addRole;
 	private DefaultListModel<User> usersListModel;
 	private JList<User> list_users;
-	private JButton btn_refreshUserList;
 
 	
 	public View() throws PersistenceException {
 
 		this.initPanes();
+		
+		this.projectionListModel = new DefaultListModel<Filmprojection>();
+		
 		this.buildFilmprojectionsPane();
 		this.buildLoginPane();
 		this.buildEditingPane();
@@ -176,16 +173,11 @@ public class View extends JFrame {
 	
 	private void buildFilmprojectionsPane() {
 		this.panelFilmprojections.setLayout(null);
-		
-		this.btn_refreshProjections = new JButton("Aktualisieren");
-		this.btn_refreshProjections.setBounds(260, 319, 183, 21);
-		this.panelFilmprojections.add(this.btn_refreshProjections);
 
-		this.projectionListModelCustomer = new DefaultListModel<Filmprojection>();
 		JScrollPane listScroller_projectionsCustomer = new JScrollPane();
 		listScroller_projectionsCustomer.setBounds(260, 64, 341, 230);
 		this.panelFilmprojections.add(listScroller_projectionsCustomer);
-		this.list_projectionsCustomer = new JList<Filmprojection>(this.projectionListModelCustomer);
+		this.list_projectionsCustomer = new JList<Filmprojection>(this.projectionListModel);
 		listScroller_projectionsCustomer.setViewportView(list_projectionsCustomer);
 		this.list_projectionsCustomer.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 	}
@@ -288,10 +280,6 @@ public class View extends JFrame {
 		listScroller_movies.setViewportView(list_movies);
 		this.list_movies.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		this.btn_refreshMovieList = new JButton("Aktualisieren");
-		this.btn_refreshMovieList.setBounds(198, 64, 171, 21);
-		this.panelEditing.add(this.btn_refreshMovieList);
-		
 		this.btn_deleteSelectedMovies = new JButton("Film loeschen");
 		this.btn_deleteSelectedMovies.setBounds(9, 64, 170, 21);
 		this.panelEditing.add(this.btn_deleteSelectedMovies);
@@ -315,10 +303,6 @@ public class View extends JFrame {
 		this.btn_deleteSelectedHall = new JButton("Saal loeschen");
 		this.btn_deleteSelectedHall.setBounds(402, 64, 201, 21);
 		this.panelEditing.add(this.btn_deleteSelectedHall);
-		
-		this.btn_refreshHallList = new JButton("Aktualisieren");
-		this.btn_refreshHallList.setBounds(621, 64, 188, 21);
-		this.panelEditing.add(this.btn_refreshHallList);
 		
 		this.textField_hallName = new JTextField();
 		this.textField_hallName.setBounds(402, 35, 88, 19);
@@ -358,7 +342,6 @@ public class View extends JFrame {
 		label_seatNumber.setBounds(639, 11, 156, 13);
 		this.panelEditing.add(label_seatNumber);
 		
-		this.projectionListModel = new DefaultListModel<Filmprojection>();
 		JScrollPane listScroller_projections = new JScrollPane();
 		listScroller_projections.setBounds(9, 391, 938, 147);
 		this.panelEditing.add(listScroller_projections);
@@ -377,10 +360,6 @@ public class View extends JFrame {
 		this.btn_createProjection = new JButton("Filmaufführung erstellen");
 		this.btn_createProjection.setBounds(370, 290, 295, 21);
 		this.panelEditing.add(this.btn_createProjection);
-		
-		this.btn_refreshProjectionList = new JButton("Aktualisieren");
-		this.btn_refreshProjectionList.setBounds(682, 290, 265, 21);
-		this.panelEditing.add(this.btn_refreshProjectionList);
 		
 		this.btn_calculateTotalProfit = new JButton("Gesamtumsatz berechnen");
 		this.btn_calculateTotalProfit.setBounds(9, 321, 338, 21);
@@ -425,10 +404,6 @@ public class View extends JFrame {
 		label_roles.setBounds(512, 54, 145, 13);
 		this.panelUsers.add(label_roles);
 		
-		this.btn_refreshUserList = new JButton("Aktualisieren");
-		this.btn_refreshUserList.setBounds(28, 357, 178, 21);
-		this.panelUsers.add(this.btn_refreshUserList);
-	
 	}
 	
 	public JButton getBtnNavFilmprojections() {
@@ -503,10 +478,6 @@ public class View extends JFrame {
 		return list_movies;
 	}
 
-	public JButton getBtn_refreshMovieList() {
-		return btn_refreshMovieList;
-	}
-
 	public JButton getBtn_deleteSelectedMovies() {
 		return btn_deleteSelectedMovies;
 	}
@@ -517,10 +488,6 @@ public class View extends JFrame {
 	
 	public JButton getBtn_deleteSelectedHall() {
 		return btn_deleteSelectedHall;
-	}
-
-	public JButton getBtn_refreshHallList() {
-		return btn_refreshHallList;
 	}
 
 	public JComboBox<Integer> getComboBox_hallRows() {
@@ -563,24 +530,12 @@ public class View extends JFrame {
 		return list_projections;
 	}
 
-	public JButton getBtn_refreshProjectionList() {
-		return btn_refreshProjectionList;
-	}
-
 	public JButton getBtn_calculateTotalProfit() {
 		return btn_calculateTotalProfit;
 	}
 
 	public JButton getBtn_calculateProfit() {
 		return btn_calculateProfit;
-	}
-
-	public JButton getBtn_refreshProjections() {
-		return btn_refreshProjections;
-	}
-
-	public DefaultListModel<Filmprojection> getProjectionListModelCustomer() {
-		return projectionListModelCustomer;
 	}
 
 	public JList<Filmprojection> getList_projectionsCustomer() {
@@ -607,12 +562,5 @@ public class View extends JFrame {
 	public JButton getBtn_removeRole() {
 		return btn_removeRole;
 	}
-
-	public JButton getBtn_refreshUserList() {
-		return btn_refreshUserList;
-	}
-	
-	
-	
 	
 }

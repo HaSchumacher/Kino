@@ -65,18 +65,24 @@ public class Controller implements Observer {
 	}
 
 	public void initView() throws PersistenceException   {
+		this.refreshProjectionList();
 		updateView();
 	}
 
 	public void registerForEvents() {
-		view.getBtn_refreshProjections().addActionListener(e -> {
-			this.refreshProjectionListCustomer();
+		view.getBtnNavEditing().addActionListener(e -> {
+			if (view.getMovieListModel().getSize() == 0 || view.getHallListModel().getSize() == 0
+					|| view.getProjectionListModel().getSize() == 0) {
+				this.refreshMovieList();
+				this.refreshHallList();
+				this.refreshProjectionList();
+			}
+		});
+		view.getBtnNavUsers().addActionListener(e -> {
+			this.refreshUserList();
 		});
 		view.getBtn_createMovie().addActionListener(e -> {
 			this.addMovie();
-		});
-		view.getBtn_refreshMovieList().addActionListener(e -> {
-			this.refreshMovieList();
 		});
 		view.getBtn_deleteSelectedMovies().addActionListener(e -> {
 			this.deleteSelectedMovies();
@@ -84,17 +90,11 @@ public class Controller implements Observer {
 		view.getBtn_createHall().addActionListener(e -> {
 			this.addHall();
 		});
-		view.getBtn_refreshHallList().addActionListener(e -> {
-			this.refreshHallList();
-		});
 		view.getBtn_deleteSelectedHall().addActionListener(e -> {
 			this.deleteSelectedHall();
 		});
 		view.getBtn_createProjection().addActionListener(e -> {
 			this.addProjection();
-		});
-		view.getBtn_refreshProjectionList().addActionListener(e -> {
-			this.refreshProjectionList();
 		});
 		view.getBtn_deleteProjection().addActionListener(e -> {
 			this.deleteSelectedProjection();
@@ -104,9 +104,6 @@ public class Controller implements Observer {
 		});
 		view.getBtn_calculateTotalProfit().addActionListener(e -> {
 			this.calculateTotalProfit();
-		});
-		view.getBtn_refreshUserList().addActionListener(e -> {
-			this.refreshUserList();
 		});
 		view.getBtn_addRole().addActionListener(e -> {
 			this.addRoleToUser();
@@ -242,13 +239,6 @@ public class Controller implements Observer {
 		this.view.getProjectionListModel().clear();
 		for (Iterator<FilmprojectionProxy> iterator = this.model.getFilmprojectionCache().values().iterator(); iterator.hasNext();) {
 			this.view.getProjectionListModel().addElement(iterator.next().getTheObject());
-		}
-	}
-	
-	private void refreshProjectionListCustomer() {
-		this.view.getProjectionListModelCustomer().clear();
-		for (Iterator<FilmprojectionProxy> iterator = this.model.getFilmprojectionCache().values().iterator(); iterator.hasNext();) {
-			this.view.getProjectionListModelCustomer().addElement(iterator.next().getTheObject());
 		}
 	}
 
@@ -434,6 +424,7 @@ public class Controller implements Observer {
 		if (command instanceof addMovie_Command) {
 			try {
 				Movie result = (Movie) command.getResult();
+				this.view.getMovieListModel().addElement(result);
 				JOptionPane.showMessageDialog(null, "Film erstellt : " + result.getTitle(), "Info",
 						JOptionPane.INFORMATION_MESSAGE);
 				this.view.getTextField_movieInput().setText("");
@@ -444,6 +435,7 @@ public class Controller implements Observer {
 		if (command instanceof deleteMovie_Command) {
 			try {
 				command.getResult();
+				this.refreshMovieList();
 				JOptionPane.showMessageDialog(null, "Film gelöscht", "Info", JOptionPane.INFORMATION_MESSAGE);
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
@@ -452,6 +444,7 @@ public class Controller implements Observer {
 		if( command instanceof addCinemahall_Command) {
 			try {
 				Cinemahall result = (Cinemahall) command.getResult();
+				this.view.getHallListModel().addElement(result);
 				JOptionPane.showMessageDialog(null, "Saal erstellt : " + result.getName(), "Info",
 						JOptionPane.INFORMATION_MESSAGE);
 			} catch (Exception e) {
@@ -461,6 +454,7 @@ public class Controller implements Observer {
 		if( command instanceof deleteCinemahall_Command) {
 			try {
 				command.getResult();
+				this.refreshHallList();
 				JOptionPane.showMessageDialog(null, "Saal gelöscht", "Info", JOptionPane.INFORMATION_MESSAGE);
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
@@ -469,12 +463,12 @@ public class Controller implements Observer {
 		if (command instanceof addFilmprojection_Command) {
 			try {
 				Filmprojection result = (Filmprojection) command.getResult();
+				this.view.getProjectionListModel().addElement(result);
 				JOptionPane
 						.showMessageDialog(
 								null, "Filmaufführung erstellt: " + " Saal -> " + result.getMyHall().getName()
 										+ " Film -> " + result.getMyMovie().getTitle(),
 								"Info", JOptionPane.INFORMATION_MESSAGE);
-
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 			}
@@ -482,6 +476,7 @@ public class Controller implements Observer {
 		if( command instanceof deleteFilmprojection_Command) {
 			try {
 				command.getResult();
+				this.refreshProjectionList();
 				JOptionPane.showMessageDialog(null, "Filmaufführung gelöscht", "Info", JOptionPane.INFORMATION_MESSAGE);
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
@@ -506,6 +501,7 @@ public class Controller implements Observer {
 		if( command instanceof addRoleToUser_Command) {
 			try {
 				command.getResult();
+				this.refreshUserList();
 				JOptionPane.showMessageDialog(null, "Rolle hinzugefügt", "Info", JOptionPane.INFORMATION_MESSAGE);
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
@@ -514,6 +510,7 @@ public class Controller implements Observer {
 		if( command instanceof deleteRoleFromUser_Command) {
 			try {
 				command.getResult();
+				this.refreshUserList();
 				JOptionPane.showMessageDialog(null, "Rolle entfernt", "Info", JOptionPane.INFORMATION_MESSAGE);
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
