@@ -20,12 +20,16 @@ import javax.swing.JOptionPane;
 import commands.Command;
 import db.executer.PersistenceException;
 import generated.cinemaService.Admin;
+import generated.cinemaService.Back;
 import generated.cinemaService.CinemaService;
 import generated.cinemaService.Cinemahall;
 import generated.cinemaService.Customer;
 import generated.cinemaService.Filmprojection;
+import generated.cinemaService.Front;
 import generated.cinemaService.LoginError;
+import generated.cinemaService.Middle;
 import generated.cinemaService.Movie;
+import generated.cinemaService.PriceCategory;
 import generated.cinemaService.RegisterError;
 import generated.cinemaService.Role;
 import generated.cinemaService.User;
@@ -35,6 +39,7 @@ import generated.cinemaService.commands.addMovie_Command;
 import generated.cinemaService.commands.addRoleToUser_Command;
 import generated.cinemaService.commands.calculateTotalProfit_Command;
 import generated.cinemaService.commands.calulateProfit_Command;
+import generated.cinemaService.commands.changePriceCategory_Command;
 import generated.cinemaService.commands.deleteCinemahall_Command;
 import generated.cinemaService.commands.deleteFilmprojection_Command;
 import generated.cinemaService.commands.deleteMovie_Command;
@@ -105,6 +110,12 @@ public class Controller implements Observer {
 		view.getBtn_calculateTotalProfit().addActionListener(e -> {
 			this.calculateTotalProfit();
 		});
+		view.getBtnChangeCategory().addActionListener(e -> {
+			this.changeCategory();
+		});
+		view.getButton_showCategories().addActionListener(e -> {
+			this.showCategories();
+		});
 		view.getBtn_addRole().addActionListener(e -> {
 			this.addRoleToUser();
 		});
@@ -136,6 +147,45 @@ public class Controller implements Observer {
 				JOptionPane.showMessageDialog(null, e1, "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		});
+	}
+
+	private void showCategories() {
+		String frontPrice = "Parkett: ";
+		String middlePrice = "Mitte: ";
+		String backPrice = "Hinten: ";
+		try {
+			if (Front.getInstance().getPrice().isPresent()) {
+				frontPrice += Front.getInstance().getPrice().get().toString();
+			}
+			if (Middle.getInstance().getPrice().isPresent()) {
+				middlePrice += Middle.getInstance().getPrice().get().toString();
+			}
+			if (Back.getInstance().getPrice().isPresent()) {
+				backPrice += Back.getInstance().getPrice().get().toString();
+			}
+			JOptionPane.showMessageDialog(null, frontPrice + " " + middlePrice + " " + backPrice, "Info",
+					JOptionPane.INFORMATION_MESSAGE);
+		} catch (PersistenceException e) {
+			JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	private void changeCategory() {
+		Map<String, PriceCategory> categories = new HashMap<String, PriceCategory>();
+		try {
+			categories.put("Parkett", Front.getInstance());
+			categories.put("Mitte", Middle.getInstance());
+			categories.put("Hinten", Back.getInstance());
+		} catch (PersistenceException e) {
+			System.out.println(e);
+		}
+		try {
+			this.myPipe.put(
+					new changePriceCategory_Command(categories.get(this.view.getComboBox_category().getSelectedItem()),
+							Integer.parseInt(this.view.getTextField_price().getText())));
+		} catch (InterruptedException e) {
+			System.out.println(e);
+		}
 	}
 
 	private void calculateTotalProfit() {
@@ -174,13 +224,9 @@ public class Controller implements Observer {
 		Map<String, Role> roles = new HashMap<String,Role>();
 		try {
 			roles.put("Admin", Admin.getInstance());
-		} catch (PersistenceException e2) {
-			System.out.println(e2);
-		}
-		try {
 			roles.put("Customer", Customer.getInstance());
-		} catch (PersistenceException e1) {
-			System.out.println(e1);
+		} catch (PersistenceException e) {
+			System.out.println(e);
 		}
 		try {
 			this.myPipe.put(new addRoleToUser_Command(
@@ -494,6 +540,14 @@ public class Controller implements Observer {
 			try {
 				Integer result = (Integer) command.getResult();
 				JOptionPane.showMessageDialog(null, "Gesamter Umsatz: " + result, "Info", JOptionPane.INFORMATION_MESSAGE);
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		if( command instanceof changePriceCategory_Command) {
+			try {
+				command.getResult();
+				JOptionPane.showMessageDialog(null, "Preiskategorie erfolgreich geändert!", "Info", JOptionPane.INFORMATION_MESSAGE);
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 			}

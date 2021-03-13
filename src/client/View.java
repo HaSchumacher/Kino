@@ -77,6 +77,10 @@ public class View extends JFrame {
 	private JButton btn_addRole;
 	private DefaultListModel<User> usersListModel;
 	private JList<User> list_users;
+	private JTextField textField_price;
+	private JButton btn_changeCategory;
+	private JComboBox<String> comboBox_category;
+	private JButton button_showCategories;
 
 	
 	public View() throws PersistenceException {
@@ -100,11 +104,11 @@ public class View extends JFrame {
 		this.panelLeft.setLayout(new BoxLayout(this.panelLeft, BoxLayout.Y_AXIS));
 
 		this.panelFilmprojections = new JPanel();
-		this.panelFilmprojections.setBackground(Color.BLUE);
+		this.panelFilmprojections.setBackground(Color.GRAY);
 		this.panelLogin = new JPanel();
-		this.panelLogin.setBackground(Color.GREEN);
+		this.panelLogin.setBackground(Color.LIGHT_GRAY);
 		this.panelTickets = new JPanel();
-		this.panelTickets.setBackground(Color.CYAN);
+		this.panelTickets.setBackground(Color.GRAY);
 		this.panelEditing = new JPanel();
 		this.panelEditing.setBackground(Color.LIGHT_GRAY);
 		this.panelUsers = new JPanel();
@@ -180,6 +184,10 @@ public class View extends JFrame {
 		this.list_projectionsCustomer = new JList<Filmprojection>(this.projectionListModel);
 		listScroller_projectionsCustomer.setViewportView(list_projectionsCustomer);
 		this.list_projectionsCustomer.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+		
+		JLabel label_currentFilmprojections = new JLabel("Aktuelle Filmaufführungen:");
+		label_currentFilmprojections.setBounds(260, 39, 206, 13);
+		panelFilmprojections.add(label_currentFilmprojections);
 	}
 
 	private void buildLoginPane() {
@@ -301,7 +309,7 @@ public class View extends JFrame {
 		this.panelEditing.add(label_hallList);
 		
 		this.btn_deleteSelectedHall = new JButton("Saal loeschen");
-		this.btn_deleteSelectedHall.setBounds(402, 64, 201, 21);
+		this.btn_deleteSelectedHall.setBounds(402, 64, 170, 21);
 		this.panelEditing.add(this.btn_deleteSelectedHall);
 		
 		this.textField_hallName = new JTextField();
@@ -354,20 +362,46 @@ public class View extends JFrame {
 		this.panelEditing.add(label_projections);
 		
 		this.btn_deleteProjection = new JButton("Filmaufführung loeschen");
-		this.btn_deleteProjection.setBounds(10, 290, 337, 21);
+		this.btn_deleteProjection.setBounds(8, 322, 274, 21);
 		this.panelEditing.add(btn_deleteProjection);
 		
 		this.btn_createProjection = new JButton("Filmaufführung erstellen");
-		this.btn_createProjection.setBounds(370, 290, 295, 21);
+		this.btn_createProjection.setBounds(9, 291, 274, 21);
 		this.panelEditing.add(this.btn_createProjection);
 		
 		this.btn_calculateTotalProfit = new JButton("Gesamtumsatz berechnen");
-		this.btn_calculateTotalProfit.setBounds(9, 321, 338, 21);
+		this.btn_calculateTotalProfit.setBounds(303, 322, 252, 21);
 		this.panelEditing.add(this.btn_calculateTotalProfit);
 		
 		this.btn_calculateProfit = new JButton("Umsatz für ausgewählte Filmaufführung berechnen");
-		this.btn_calculateProfit.setBounds(370, 321, 577, 21);
+		this.btn_calculateProfit.setBounds(578, 322, 369, 21);
 		this.panelEditing.add(this.btn_calculateProfit);
+		
+		this.btn_changeCategory = new JButton("Kategorie anpassen");
+		this.btn_changeCategory.setBounds(791, 291, 156, 21);
+		this.panelEditing.add(this.btn_changeCategory);
+		
+		String[] categoryOptions = { "Parkett", "Mitte", "Hinten" };
+		this.comboBox_category = new JComboBox(categoryOptions);
+		this.comboBox_category.setBounds(578, 291, 105, 21);
+		this.panelEditing.add(this.comboBox_category);
+		
+		this.textField_price = new JTextField();
+		this.textField_price.setBounds(690, 292, 96, 19);
+		this.panelEditing.add(this.textField_price);
+		this.textField_price.setColumns(10);
+		
+		this.button_showCategories = new JButton("Preiskategorien zeigen");
+		this.button_showCategories.setBounds(303, 291, 252, 21);
+		this.panelEditing.add(this.button_showCategories);
+		
+		JLabel label_category = new JLabel("Kategorie:");
+		label_category.setBounds(578, 268, 69, 13);
+		this.panelEditing.add(label_category);
+		
+		JLabel label_price = new JLabel("Preis:");
+		label_price.setBounds(690, 269, 45, 13);
+		this.panelEditing.add(label_price);
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -562,5 +596,22 @@ public class View extends JFrame {
 	public JButton getBtn_removeRole() {
 		return btn_removeRole;
 	}
+
+	public JTextField getTextField_price() {
+		return textField_price;
+	}
+
+	public JButton getBtnChangeCategory() {
+		return btn_changeCategory;
+	}
+
+	public JComboBox<String> getComboBox_category() {
+		return comboBox_category;
+	}
+
+	public JButton getButton_showCategories() {
+		return button_showCategories;
+	}
+	
 	
 }
