@@ -7,7 +7,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -262,29 +261,29 @@ public class Controller implements Observer {
 	
 	private void refreshUserList() {
 		this.view.getUsersListModel().clear();
-		for (Iterator<UserProxy> iterator = this.model.getUserCache().values().iterator(); iterator.hasNext();) {
-			this.view.getUsersListModel().addElement(iterator.next().getTheObject());
+		for (UserProxy userProxy : this.model.getUserCache().values()) {
+			this.view.getUsersListModel().addElement(userProxy.getTheObject());
 		}
 	}
 
 	private void refreshMovieList() {
 		this.view.getMovieListModel().clear();
-		for (Iterator<MovieProxy> iterator = this.model.getMovieCache().values().iterator(); iterator.hasNext();) {
-			this.view.getMovieListModel().addElement(iterator.next().getTheObject());
+		for (MovieProxy movieProxy : this.model.getMovieCache().values()) {
+			this.view.getMovieListModel().addElement(movieProxy.getTheObject());
 		}
 	}
 	
 	private void refreshHallList() {
 		this.view.getHallListModel().clear();
-		for (Iterator<CinemahallProxy> iterator = this.model.getCinemahallCache().values().iterator(); iterator.hasNext();) {
-			this.view.getHallListModel().addElement(iterator.next().getTheObject());
+		for (CinemahallProxy hallProxy : this.model.getCinemahallCache().values()) {
+			this.view.getHallListModel().addElement(hallProxy.getTheObject());
 		}
 	}
 	
 	private void refreshProjectionList() {
 		this.view.getProjectionListModel().clear();
-		for (Iterator<FilmprojectionProxy> iterator = this.model.getFilmprojectionCache().values().iterator(); iterator.hasNext();) {
-			this.view.getProjectionListModel().addElement(iterator.next().getTheObject());
+		for (FilmprojectionProxy fpProxy : this.model.getFilmprojectionCache().values()) {
+			this.view.getProjectionListModel().addElement(fpProxy.getTheObject());
 		}
 	}
 
@@ -331,9 +330,9 @@ public class Controller implements Observer {
 
 	private void deleteSelectedMovies() {
 		List<Movie> movies = this.view.getList_movies().getSelectedValuesList();
-		for (Iterator<Movie> iterator = movies.iterator(); iterator.hasNext();) {
+		for (Movie movie : movies) {
 			try {
-				this.myPipe.put(new deleteMovie_Command(iterator.next()));
+				this.myPipe.put(new deleteMovie_Command(movie));
 			} catch (InterruptedException e) {
 				System.out.println(e);
 			}
@@ -547,6 +546,7 @@ public class Controller implements Observer {
 		if( command instanceof changePriceCategory_Command) {
 			try {
 				command.getResult();
+				this.view.getTextField_price().setText("");
 				JOptionPane.showMessageDialog(null, "Preiskategorie erfolgreich geändert!", "Info", JOptionPane.INFORMATION_MESSAGE);
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);

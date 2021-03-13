@@ -192,10 +192,10 @@ public class View extends JFrame {
 
 	private void buildLoginPane() {
 		JLabel label_loginUsername = new JLabel("Username");
-		label_loginUsername.setBounds(10, 8, 81, 32);
+		label_loginUsername.setBounds(10, 21, 81, 32);
 		
 		this.textField_loginUsername = new JTextField();
-		this.textField_loginUsername.setBounds(95, 10, 102, 30);
+		this.textField_loginUsername.setBounds(95, 23, 102, 30);
 		this.textField_loginUsername.setHorizontalAlignment(SwingConstants.LEFT);
 		this.textField_loginUsername.setToolTipText("Please insert your Username");
 		this.textField_loginUsername.setColumns(10);
@@ -222,44 +222,44 @@ public class View extends JFrame {
 		this.panelLogin.add(this.btn_login);
 		
 		this.textField_registerUsername = new JTextField();
-		this.textField_registerUsername.setBounds(305, 250, 102, 30);
+		this.textField_registerUsername.setBounds(305, 314, 102, 30);
 		this.textField_registerUsername.setColumns(10);
 		this.panelLogin.add(textField_registerUsername);
 
 		JLabel label_registerUsername = new JLabel("Username");
-		label_registerUsername.setBounds(220, 250, 75, 30);
+		label_registerUsername.setBounds(220, 313, 75, 30);
 		this.panelLogin.add(label_registerUsername);
 		
 		JLabel label_registerPassword = new JLabel("Password");
-		label_registerPassword.setBounds(10, 250, 75, 30);
+		label_registerPassword.setBounds(10, 313, 75, 30);
 		this.panelLogin.add(label_registerPassword);
 		
 		this.textField_registerPassword = new JPasswordField(10);
 		textField_registerPassword.setFont(UIManager.getFont("PasswordField.font"));
 		this.textField_registerPassword.setColumns(10);
-		this.textField_registerPassword.setBounds(95, 250, 102, 30);
+		this.textField_registerPassword.setBounds(87, 314, 102, 30);
 		this.panelLogin.add(textField_registerPassword);
 		
 		JLabel label_registerEmail = new JLabel("Email");
-		label_registerEmail.setBounds(220, 203, 75, 30);
+		label_registerEmail.setBounds(220, 273, 75, 30);
 		this.panelLogin.add(label_registerEmail);
 		
 		this.textField_registerEmail = new JTextField();
 		this.textField_registerEmail.setColumns(10);
-		this.textField_registerEmail.setBounds(305, 203, 102, 30);
+		this.textField_registerEmail.setBounds(305, 274, 102, 30);
 		this.panelLogin.add(textField_registerEmail);
 		
 		JLabel label_registerName = new JLabel("Name");
-		label_registerName.setBounds(10, 210, 75, 30);
+		label_registerName.setBounds(10, 273, 75, 30);
 		this.panelLogin.add(label_registerName);
 		
 		this.textField_registerName = new JTextField();
 		this.textField_registerName.setColumns(10);
-		this.textField_registerName.setBounds(95, 210, 102, 30);
+		this.textField_registerName.setBounds(87, 274, 102, 30);
 		this.panelLogin.add(textField_registerName);
 		
 		this.btn_register = new JButton("Register");
-		this.btn_register.setBounds(95, 305, 320, 32);
+		this.btn_register.setBounds(87, 354, 320, 32);
 		this.panelLogin.add(btn_register);
 		
 		this.btn_logout = new JButton("Logout");
