@@ -86,10 +86,10 @@ public class Filmprojection extends Observable implements java.io.Serializable, 
  */
    public Integer calculateProfit() throws PersistenceException{
 	      Integer sum = 0;
-	      for(Iterator<CinemaRow> rowIterator = this.getMyHall().getMyRows().iterator(); rowIterator.hasNext();) {
-	    	  for(Iterator<Seat> seatIterator = rowIterator.next().getMySeats().iterator(); seatIterator.hasNext();) {
-	    		  if(seatIterator.next().getMyReservation() != null) {
-	    			  Optional<Integer> opPrice = seatIterator.next().getMyRow().getPriceCategory().getPrice();
+	      for(CinemaRow row : this.getMyHall().getMyRows()) {
+	    	  for(Seat seat : row.getMySeats()) {
+	    		  if(!seat.getMyReservation().isEmpty()) {
+	    			  Optional<Integer> opPrice = seat.getMyRow().getPriceCategory().getPrice();
 	    			  if(opPrice.isPresent()) {
 	    				  sum += opPrice.get();
 	    			  }
