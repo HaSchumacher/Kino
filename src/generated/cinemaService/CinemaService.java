@@ -510,6 +510,7 @@ public class CinemaService extends Observable{
 				}
 				hall.addToMyRows(currentRow);
 			}
+			hall.setOpen(true);
 			return hall;
 		} else {
 			throw new CinemaHallCreation();
