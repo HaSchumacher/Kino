@@ -305,7 +305,7 @@ public class View extends JFrame {
 		this.panelTickets.setLayout(null);
 		
 		JScrollPane listScroller_projectionsTickets = new JScrollPane();
-		listScroller_projectionsTickets.setBounds(54, 60, 309, 148);
+		listScroller_projectionsTickets.setBounds(54, 60, 470, 148);
 		this.panelTickets.add(listScroller_projectionsTickets);
 		
 		this.list_projectionsTickets = new JList<Filmprojection>(this.projectionListModel);
@@ -317,19 +317,19 @@ public class View extends JFrame {
 		this.panelTickets.add(label_projectionsTickets);
 		
 		this.comboBox_categoryTickets = new JComboBox(this.categoryOptions);
-		this.comboBox_categoryTickets.setBounds(408, 60, 107, 21);
+		this.comboBox_categoryTickets.setBounds(586, 58, 107, 21);
 		this.panelTickets.add(this.comboBox_categoryTickets);
 		
 		JLabel label_categoryTickets = new JLabel("Kategorie:");
-		label_categoryTickets.setBounds(408, 37, 81, 13);
+		label_categoryTickets.setBounds(586, 37, 81, 13);
 		this.panelTickets.add(label_categoryTickets);
 		
 		this.btn_reserve = new JButton("Reservieren");
-		this.btn_reserve.setBounds(408, 91, 107, 21);
+		this.btn_reserve.setBounds(586, 89, 107, 21);
 		this.panelTickets.add(this.btn_reserve);
 		
 		JScrollPane listScroller_reservations = new JScrollPane();
-		listScroller_reservations.setBounds(54, 253, 309, 116);
+		listScroller_reservations.setBounds(54, 253, 470, 116);
 		this.panelTickets.add(listScroller_reservations);
 		
 		this.reservationListModel = new DefaultListModel<Reservation>();
@@ -338,7 +338,7 @@ public class View extends JFrame {
 		this.list_reservations.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		JScrollPane listScroller_bookings = new JScrollPane();
-		listScroller_bookings.setBounds(53, 417, 310, 116);
+		listScroller_bookings.setBounds(53, 417, 471, 116);
 		this.panelTickets.add(listScroller_bookings);
 		
 		this.bookingListModel = new DefaultListModel<Booking>();
@@ -355,11 +355,11 @@ public class View extends JFrame {
 		this.panelTickets.add(label_bookings);
 		
 		this.btn_book = new JButton("Buchen");
-		this.btn_book.setBounds(408, 254, 107, 21);
+		this.btn_book.setBounds(586, 251, 107, 21);
 		this.panelTickets.add(this.btn_book);
 		
 		this.btn_cancelReservation = new JButton("Stornieren");
-		this.btn_cancelReservation.setBounds(408, 285, 107, 21);
+		this.btn_cancelReservation.setBounds(586, 282, 107, 21);
 		this.panelTickets.add(this.btn_cancelReservation);
 	}
 	

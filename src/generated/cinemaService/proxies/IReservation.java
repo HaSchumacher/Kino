@@ -1,4 +1,4 @@
-/**--- Generated at Fri Mar 05 17:39:16 CET 2021 
+/**--- Generated at Sun Mar 14 13:22:12 CET 2021 
  * --- No Change Allowed!  
  */
 package generated.cinemaService.proxies;
@@ -19,5 +19,9 @@ public interface IReservation extends Identifiable{
    public void setMyFilmprojection(Filmprojection newMyFilmprojection)throws PersistenceException;
    public User getMyCustomer() throws PersistenceException;
    public void setMyCustomer(User newMyCustomer)throws PersistenceException;
+   public Boolean getDeleted() ;
+   public void setDeleted(Boolean newDeleted) throws PersistenceException;
+   public Boolean getBooked() ;
+   public void setBooked(Boolean newBooked) throws PersistenceException;
    public Set<Booking> getMyBooking() throws PersistenceException;
 }

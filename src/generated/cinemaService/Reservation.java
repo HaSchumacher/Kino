@@ -1,4 +1,4 @@
-/**--- Generated at Fri Mar 05 17:39:16 CET 2021 
+/**--- Generated at Sun Mar 14 13:22:12 CET 2021 
  * --- Change only in Editable Sections!  
  * --- Do not touch section numbering!   
  */
@@ -25,31 +25,35 @@ public class Reservation extends Observable implements java.io.Serializable, IRe
 {
    //30 ===== GENERATED:      Attribute Section ======
    private Integer id;
+   private Boolean deleted;
+   private Boolean booked;
    //40 ===== Editable : Your Attribute Section ======
    
    //50 ===== GENERATED:      Constructor ============
-   private Reservation(Integer id, Seat mySeat, Filmprojection myFilmprojection, User myCustomer, boolean objectOnly)
+   private Reservation(Integer id, Seat mySeat, Filmprojection myFilmprojection, User myCustomer, Boolean deleted, Boolean booked, boolean objectOnly)
    throws PersistenceException{
       super();
       this.setId(id);
       Reservation_SeatSupervisor.getInstance().set(this, mySeat);
       Reservation_FpSupervisor.getInstance().set(this, myFilmprojection);
       Reservation_UserSupervisor.getInstance().set(this, myCustomer);
+      this.deleted = deleted;
+      this.booked = booked;
       if(objectOnly) return;
    }
    /** Caution: A Call to this Method Requires to add any newly instantiated Object to its Cache! */
-   public static Reservation createAlreadyPersistent(ReservationProxy proxy, Seat mySeat, Filmprojection myFilmprojection, User myCustomer)throws PersistenceException{
+   public static Reservation createAlreadyPersistent(ReservationProxy proxy, Seat mySeat, Filmprojection myFilmprojection, User myCustomer, Boolean deleted, Boolean booked)throws PersistenceException{
       if(proxy.isObjectPresent()) return proxy.getTheObject();
-      return new Reservation(proxy.getId(), mySeat, myFilmprojection, myCustomer, true);
+      return new Reservation(proxy.getId(), mySeat, myFilmprojection, myCustomer, deleted, booked, true);
    }
-   public static Reservation createFresh(Seat mySeat, Filmprojection myFilmprojection, User myCustomer)throws PersistenceException{
+   public static Reservation createFresh(Seat mySeat, Filmprojection myFilmprojection, User myCustomer, Boolean deleted, Boolean booked)throws PersistenceException{
       db.executer.DBDMLExecuter dmlExecuter = PersistenceExecuterFactory.getConfiguredFactory().getDBDMLExecuter();
       Integer id = dmlExecuter.getNextId();
       try{
-         dmlExecuter.insertInto("Reservation", "id, typeKey", 
-         id.toString() + ", " + TypeKeyManager.getTheInstance().getTypeKey("CinemaService", "Reservation").toString());
+         dmlExecuter.insertInto("Reservation", "id, typeKey, deleted, booked", 
+         id.toString() + ", " + TypeKeyManager.getTheInstance().getTypeKey("CinemaService", "Reservation").toString() + ", " + deleted.toString() + ", " + booked.toString());
       }catch(SQLException|NoConnectionException e){throw new PersistenceException(e.getMessage());}
-      Reservation me = new Reservation(id, mySeat, myFilmprojection, myCustomer, false);
+      Reservation me = new Reservation(id, mySeat, myFilmprojection, myCustomer, deleted, booked, false);
       CinemaService.getInstance().addReservationProxy(new ReservationProxy(me));
       return me;
    }
@@ -88,21 +92,36 @@ public class Reservation extends Observable implements java.io.Serializable, IRe
    public void setMyCustomer(User newMyCustomer)throws PersistenceException{
       Reservation_UserSupervisor.getInstance().change(this, this.getMyCustomer(), newMyCustomer);
    }
+   public Boolean getDeleted() {
+      return this.deleted;
+   }
+   public void setDeleted(Boolean newDeleted) throws PersistenceException{
+      this.deleted = newDeleted;
+      try{PersistenceExecuterFactory.getConfiguredFactory().getDBDMLExecuter().update("Reservation", "deleted", newDeleted.toString(), this.getId());
+      }catch(SQLException|NoConnectionException e){throw new PersistenceException(e.getMessage());}
+   }
+   public Boolean getBooked() {
+      return this.booked;
+   }
+   public void setBooked(Boolean newBooked) throws PersistenceException{
+      this.booked = newBooked;
+      try{PersistenceExecuterFactory.getConfiguredFactory().getDBDMLExecuter().update("Reservation", "booked", newBooked.toString(), this.getId());
+      }catch(SQLException|NoConnectionException e){throw new PersistenceException(e.getMessage());}
+   }
    public Set<Booking> getMyBooking() throws PersistenceException{
       Set<Booking> result = new HashSet<>();
       for (IBooking i : Booking_ReservationSupervisor.getInstance().getMyBooking(this)) result.add(i.getTheObject());
       return result;
    }
    //80 ===== Editable : Your Operations =============
-@Override
-public String toString() {
-	try {
-		return "Film: \"" + getMyFilmprojection().getMyMovie().toString() + "\" Platz: " +getMySeat().toString();
-	} catch (PersistenceException e) {
-		e.printStackTrace();
-	}
-	return "";
-}
-   
+   @Override
+   public String toString() {
+   	try {
+   		return "Film: \"" + getMyFilmprojection().getMyMovie().toString() + "\" Platz: " +getMySeat().toString();
+   	} catch (PersistenceException e) {
+   		e.printStackTrace();
+   	}
+   	return "";
+   }
 //90 ===== GENERATED: End of Your Operations ======
 }

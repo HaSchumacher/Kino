@@ -1,4 +1,4 @@
-/**--- Generated at Fri Mar 05 17:39:16 CET 2021 
+/**--- Generated at Sun Mar 14 13:22:12 CET 2021 
  * --- No Change Allowed!  
  */
 package generated.cinemaService.proxies;
@@ -50,7 +50,9 @@ public class ReservationProxy implements IReservation{
          Seat mySeat = Reservation_SeatSupervisor.getInstance().getMySeat(this).getTheObject();
          Filmprojection myFilmprojection = Reservation_FpSupervisor.getInstance().getMyFilmprojection(this).getTheObject();
          User myCustomer = Reservation_UserSupervisor.getInstance().getMyCustomer(this).getTheObject();
-         return Reservation.createAlreadyPersistent(this, mySeat, myFilmprojection, myCustomer);
+         Boolean deleted = rs.getBoolean("deleted");
+         Boolean booked = rs.getBoolean("booked");
+         return Reservation.createAlreadyPersistent(this, mySeat, myFilmprojection, myCustomer, deleted, booked);
       } catch (Exception e) {throw new PersistenceException(e.getMessage());}
    }
    public Seat getMySeat() throws PersistenceException{
@@ -70,6 +72,18 @@ public class ReservationProxy implements IReservation{
    }
    public void setMyCustomer(User newMyCustomer)throws PersistenceException{
       this.getTheObject().setMyCustomer(newMyCustomer);
+   }
+   public Boolean getDeleted() {
+      return this.getTheObject().getDeleted();
+   }
+   public void setDeleted(Boolean newDeleted) throws PersistenceException{
+      this.getTheObject().setDeleted(newDeleted);
+   }
+   public Boolean getBooked() {
+      return this.getTheObject().getBooked();
+   }
+   public void setBooked(Boolean newBooked) throws PersistenceException{
+      this.getTheObject().setBooked(newBooked);
    }
    public Set<Booking> getMyBooking() throws PersistenceException{
       return this.getTheObject().getMyBooking();

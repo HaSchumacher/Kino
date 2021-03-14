@@ -361,7 +361,7 @@ public class CinemaService extends Observable{
 					for (int j = 0; j < currSeatList.size(); j++) {
 						Seat currSeat = currSeatList.get(j);
 						if (currSeat.getMyReservation().isEmpty()) {
-							return Reservation.createFresh(currSeat, fp, u);
+							return Reservation.createFresh(currSeat, fp, u, false, false);
 						}
 					}
 				}
@@ -387,6 +387,7 @@ public class CinemaService extends Observable{
 	 */
 	public Booking book(Reservation r) throws BookingError, PersistenceException {
 		if (r.getMyBooking().isEmpty()) {
+			r.setBooked(true);
 			return Booking.createFresh(r);
 		}
 		return null;
@@ -446,10 +447,11 @@ public class CinemaService extends Observable{
 	/**
 	 * Cancel the given Reservation.
 	 * only cache do not infect Database!
+	 * @throws PersistenceException 
 	 */
-	public Boolean cancelReservation(Reservation r) throws DeleteError {
+	public Boolean cancelReservation(Reservation r) throws DeleteError, PersistenceException {
 		if (this.getReservationCache().containsKey(r.getId())) {
-			this.getReservationCache().remove(r.getId());
+			r.setDeleted(true);
 			return true;
 		} else {
 			throw new DeleteError();

@@ -344,7 +344,8 @@ public class Controller implements Observer {
 		this.view.getBookingListModel().clear();
 		for(ReservationProxy resProxy : this.model.getReservationCache().values()) {
 			try {
-				if(resProxy.getTheObject().getMyBooking().isEmpty()) {
+				//TODO Check for logged User == reservation User / Booking User
+				if(resProxy.getTheObject().getMyBooking().isEmpty() && !resProxy.getTheObject().getDeleted()) {
 					this.view.getReservationListModel().addElement(resProxy.getTheObject());
 				} else {
 					for(Booking b : resProxy.getTheObject().getMyBooking()) {
