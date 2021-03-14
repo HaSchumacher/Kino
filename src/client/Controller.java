@@ -20,6 +20,7 @@ import commands.Command;
 import db.executer.PersistenceException;
 import generated.cinemaService.Admin;
 import generated.cinemaService.Back;
+import generated.cinemaService.Booking;
 import generated.cinemaService.CinemaService;
 import generated.cinemaService.Cinemahall;
 import generated.cinemaService.Customer;
@@ -30,14 +31,17 @@ import generated.cinemaService.Middle;
 import generated.cinemaService.Movie;
 import generated.cinemaService.PriceCategory;
 import generated.cinemaService.RegisterError;
+import generated.cinemaService.Reservation;
 import generated.cinemaService.Role;
 import generated.cinemaService.User;
 import generated.cinemaService.commands.addCinemahall_Command;
 import generated.cinemaService.commands.addFilmprojection_Command;
 import generated.cinemaService.commands.addMovie_Command;
 import generated.cinemaService.commands.addRoleToUser_Command;
+import generated.cinemaService.commands.book_Command;
 import generated.cinemaService.commands.calculateTotalProfit_Command;
 import generated.cinemaService.commands.calulateProfit_Command;
+import generated.cinemaService.commands.cancelReservation_Command;
 import generated.cinemaService.commands.changePriceCategory_Command;
 import generated.cinemaService.commands.deleteCinemahall_Command;
 import generated.cinemaService.commands.deleteFilmprojection_Command;
@@ -46,9 +50,11 @@ import generated.cinemaService.commands.deleteRoleFromUser_Command;
 import generated.cinemaService.commands.login_Command;
 import generated.cinemaService.commands.logout_Command;
 import generated.cinemaService.commands.register_Command;
+import generated.cinemaService.commands.reserve_Command;
 import generated.cinemaService.proxies.CinemahallProxy;
 import generated.cinemaService.proxies.FilmprojectionProxy;
 import generated.cinemaService.proxies.MovieProxy;
+import generated.cinemaService.proxies.ReservationProxy;
 import generated.cinemaService.proxies.UserProxy;
 import observation.Observer;
 
@@ -82,8 +88,20 @@ public class Controller implements Observer {
 				this.refreshProjectionList();
 			}
 		});
+		view.getBtnNavTickets().addActionListener(e -> {
+			this.refreshReservationsAndBookings();
+		});
 		view.getBtnNavUsers().addActionListener(e -> {
 			this.refreshUserList();
+		});
+		view.getBtn_reserve().addActionListener(e -> {
+			this.reserve();
+		});
+		view.getButton_book().addActionListener(e -> {
+			this.book();
+		});
+		view.getBtn_cancelReservation().addActionListener(e -> {
+			this.cancelReservation();
 		});
 		view.getBtn_createMovie().addActionListener(e -> {
 			this.addMovie();
@@ -146,6 +164,40 @@ public class Controller implements Observer {
 				JOptionPane.showMessageDialog(null, e1, "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		});
+	}
+
+	private void cancelReservation() {
+		try {
+			this.myPipe.put(new cancelReservation_Command(this.view.getList_reservations().getSelectedValue()));
+		} catch (InterruptedException e) {
+			System.out.println(e);
+		}
+	}
+
+	private void book() {
+		try {
+			this.myPipe.put(new book_Command(this.view.getList_reservations().getSelectedValue()));
+		} catch (InterruptedException e) {
+			System.out.println(e);
+		}
+	}
+
+	private void reserve() {
+		Map<String, PriceCategory> categories = new HashMap<String, PriceCategory>();
+		try {
+			categories.put("Parkett", Front.getInstance());
+			categories.put("Mitte", Middle.getInstance());
+			categories.put("Hinten", Back.getInstance());
+		} catch (PersistenceException e) {
+			System.out.println(e);
+		}
+		try {
+			this.myPipe
+					.put(new reserve_Command(this.loggedUser, this.view.getList_projectionsTickets().getSelectedValue(),
+							categories.get(this.view.getComboBox_categoryTickets().getSelectedItem().toString())));
+		} catch (InterruptedException e) {
+			System.out.println(e);
+		}
 	}
 
 	private void showCategories() {
@@ -284,6 +336,24 @@ public class Controller implements Observer {
 		this.view.getProjectionListModel().clear();
 		for (FilmprojectionProxy fpProxy : this.model.getFilmprojectionCache().values()) {
 			this.view.getProjectionListModel().addElement(fpProxy.getTheObject());
+		}
+	}
+	
+	private void refreshReservationsAndBookings() {
+		this.view.getReservationListModel().clear();
+		this.view.getBookingListModel().clear();
+		for(ReservationProxy resProxy : this.model.getReservationCache().values()) {
+			try {
+				if(resProxy.getTheObject().getMyBooking().isEmpty()) {
+					this.view.getReservationListModel().addElement(resProxy.getTheObject());
+				} else {
+					for(Booking b : resProxy.getTheObject().getMyBooking()) {
+						this.view.getBookingListModel().addElement(b);
+					}
+				}
+			} catch (PersistenceException e) {
+				System.out.println(e);
+			}
 		}
 	}
 
@@ -432,7 +502,7 @@ public class Controller implements Observer {
 	
 	@Override
 	public void update(Command<?> command) {
-		if( command instanceof login_Command) {
+		if(command instanceof login_Command) {
 			try {
 				this.setLoggedUser((User) command.getResult());
 				this.updateView();
@@ -443,7 +513,7 @@ public class Controller implements Observer {
 				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		if( command instanceof logout_Command) {
+		if(command instanceof logout_Command) {
 			try {
 				command.getResult();
 				this.loggedUser = null;
@@ -453,7 +523,7 @@ public class Controller implements Observer {
 				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		if( command instanceof register_Command) {
+		if(command instanceof register_Command) {
 			try {
 				this.setLoggedUser((User) command.getResult());
 				this.updateView();
@@ -466,7 +536,7 @@ public class Controller implements Observer {
 				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		if (command instanceof addMovie_Command) {
+		if(command instanceof addMovie_Command) {
 			try {
 				Movie result = (Movie) command.getResult();
 				this.view.getMovieListModel().addElement(result);
@@ -477,7 +547,7 @@ public class Controller implements Observer {
 				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		if (command instanceof deleteMovie_Command) {
+		if(command instanceof deleteMovie_Command) {
 			try {
 				command.getResult();
 				this.refreshMovieList();
@@ -486,7 +556,7 @@ public class Controller implements Observer {
 				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		if( command instanceof addCinemahall_Command) {
+		if(command instanceof addCinemahall_Command) {
 			try {
 				Cinemahall result = (Cinemahall) command.getResult();
 				this.view.getHallListModel().addElement(result);
@@ -496,7 +566,7 @@ public class Controller implements Observer {
 				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		if( command instanceof deleteCinemahall_Command) {
+		if(command instanceof deleteCinemahall_Command) {
 			try {
 				command.getResult();
 				this.refreshHallList();
@@ -505,7 +575,7 @@ public class Controller implements Observer {
 				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		if (command instanceof addFilmprojection_Command) {
+		if(command instanceof addFilmprojection_Command) {
 			try {
 				Filmprojection result = (Filmprojection) command.getResult();
 				this.view.getProjectionListModel().addElement(result);
@@ -518,7 +588,7 @@ public class Controller implements Observer {
 				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		if( command instanceof deleteFilmprojection_Command) {
+		if(command instanceof deleteFilmprojection_Command) {
 			try {
 				command.getResult();
 				this.refreshProjectionList();
@@ -527,7 +597,7 @@ public class Controller implements Observer {
 				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		if( command instanceof calulateProfit_Command) {
+		if(command instanceof calulateProfit_Command) {
 			try {
 				Integer result = (Integer) command.getResult();
 				JOptionPane.showMessageDialog(null, "Umsatz: " + result, "Info", JOptionPane.INFORMATION_MESSAGE);
@@ -535,7 +605,7 @@ public class Controller implements Observer {
 				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		if( command instanceof calculateTotalProfit_Command) {
+		if(command instanceof calculateTotalProfit_Command) {
 			try {
 				Integer result = (Integer) command.getResult();
 				JOptionPane.showMessageDialog(null, "Gesamter Umsatz: " + result, "Info", JOptionPane.INFORMATION_MESSAGE);
@@ -543,7 +613,7 @@ public class Controller implements Observer {
 				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		if( command instanceof changePriceCategory_Command) {
+		if(command instanceof changePriceCategory_Command) {
 			try {
 				command.getResult();
 				this.view.getTextField_price().setText("");
@@ -552,7 +622,7 @@ public class Controller implements Observer {
 				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		if( command instanceof addRoleToUser_Command) {
+		if(command instanceof addRoleToUser_Command) {
 			try {
 				command.getResult();
 				this.refreshUserList();
@@ -561,11 +631,38 @@ public class Controller implements Observer {
 				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		if( command instanceof deleteRoleFromUser_Command) {
+		if(command instanceof deleteRoleFromUser_Command) {
 			try {
 				command.getResult();
 				this.refreshUserList();
 				JOptionPane.showMessageDialog(null, "Rolle entfernt", "Info", JOptionPane.INFORMATION_MESSAGE);
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		if(command instanceof reserve_Command) {
+			try {
+				Reservation result = (Reservation) command.getResult();
+				this.refreshReservationsAndBookings();
+				JOptionPane.showMessageDialog(null, "Reservierung erfolgreich: " + result, "Info", JOptionPane.INFORMATION_MESSAGE);
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		if (command instanceof book_Command) {
+			try {
+				Booking result = (Booking) command.getResult();
+				this.refreshReservationsAndBookings();
+				JOptionPane.showMessageDialog(null, "Buchung erfolgreich: " + result, "Info", JOptionPane.INFORMATION_MESSAGE);
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		if(command instanceof cancelReservation_Command) {
+			try {
+				command.getResult();
+				this.refreshReservationsAndBookings();
+				JOptionPane.showMessageDialog(null, "Reservierung erfolgreich storniert", "Info", JOptionPane.INFORMATION_MESSAGE);
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 			}

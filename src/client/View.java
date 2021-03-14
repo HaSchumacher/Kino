@@ -18,16 +18,21 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import db.executer.PersistenceException;
+import generated.cinemaService.Booking;
 import generated.cinemaService.Cinemahall;
 import generated.cinemaService.Filmprojection;
 import generated.cinemaService.Movie;
+import generated.cinemaService.Reservation;
 import generated.cinemaService.User;
 
 import javax.swing.JSplitPane;
 import javax.swing.JComboBox;
 
-@SuppressWarnings("serial")
 public class View extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JSplitPane contentPane;
 	private CardLayout cardLayout;
 	private JPanel panelLeft;
@@ -61,8 +66,10 @@ public class View extends JFrame {
 	private DefaultListModel<Cinemahall> hallListModel;
 	private JButton btn_deleteSelectedHall;
 	private JTextField textField_hallName;
-	private JComboBox<Integer> comboBox_hallRows;
-	private JComboBox<Integer> comboBox_hallSeats;
+	@SuppressWarnings("rawtypes")
+	private JComboBox comboBox_hallRows;
+	@SuppressWarnings("rawtypes")
+	private JComboBox comboBox_hallSeats;
 	private JButton btn_createHall;
 	private JButton btn_deleteProjection;
 	private JButton btn_createProjection;
@@ -79,18 +86,42 @@ public class View extends JFrame {
 	private JList<User> list_users;
 	private JTextField textField_price;
 	private JButton btn_changeCategory;
-	private JComboBox<String> comboBox_category;
+	@SuppressWarnings("rawtypes")
+	private JComboBox comboBox_category;
 	private JButton button_showCategories;
+	private JList<Reservation> list_reservations;
+	private JList<Booking> list_bookings;
+	private JList<Filmprojection> list_projectionsTickets;
+	@SuppressWarnings("rawtypes")
+	private JComboBox comboBox_categoryTickets;
+	private JButton btn_reserve;
+	private JButton btn_book;
+	private String[] categoryOptions;
+	private Integer[] seatOptions;
+	private String[] roleOptions;
+	private Integer[] rowOptions;
+	private DefaultListModel<Reservation> reservationListModel;
+	private DefaultListModel<Booking> bookingListModel;
+	private JButton btn_cancelReservation;
 
 	
 	public View() throws PersistenceException {
-
-		this.initPanes();
 		
-		this.projectionListModel = new DefaultListModel<Filmprojection>();
+		// TODO options parameter an client übergeben
+		this.categoryOptions = new String[] { "Parkett", "Mitte", "Hinten" };
+		this.roleOptions = new String[] { "Customer", "Admin" };
+		this.rowOptions = new Integer[] { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36 };
+		Integer[] seats = new Integer[50];
+		for (int i = 0;i <50;i++){
+		seats[i]=i+1;
+		}
+		this.seatOptions = seats;
+		
+		this.initPanes();
 		
 		this.buildFilmprojectionsPane();
 		this.buildLoginPane();
+		this.buildTicketsPane();
 		this.buildEditingPane();
 		this.buildUsersPane();
 		
@@ -166,6 +197,8 @@ public class View extends JFrame {
 		panelLeft.add(this.label_currentUser);
 		this.label_currentUser.setText("Nicht angemeldet");
 		
+		this.projectionListModel = new DefaultListModel<Filmprojection>();
+		
 		this.contentPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, this.panelLeft, this.panelRight);
 		this.contentPane.setResizeWeight(0.03);
 
@@ -192,21 +225,21 @@ public class View extends JFrame {
 
 	private void buildLoginPane() {
 		JLabel label_loginUsername = new JLabel("Username");
-		label_loginUsername.setBounds(10, 21, 81, 32);
+		label_loginUsername.setBounds(10, 33, 81, 32);
 		
 		this.textField_loginUsername = new JTextField();
-		this.textField_loginUsername.setBounds(95, 23, 102, 30);
+		this.textField_loginUsername.setBounds(95, 35, 102, 30);
 		this.textField_loginUsername.setHorizontalAlignment(SwingConstants.LEFT);
 		this.textField_loginUsername.setToolTipText("Please insert your Username");
 		this.textField_loginUsername.setColumns(10);
 		this.textField_loginUsername.setColumns(2);
 		
 		JLabel label_loginPassword = new JLabel("Password");
-		label_loginPassword.setBounds(10, 64, 81, 32);
+		label_loginPassword.setBounds(10, 74, 81, 32);
 		label_loginPassword.setHorizontalAlignment(SwingConstants.LEFT);
 		
 		this.textField_loginPassword = new JPasswordField(10);
-		this.textField_loginPassword.setBounds(95, 65, 102, 32);
+		this.textField_loginPassword.setBounds(95, 75, 102, 32);
 		this.textField_loginPassword.setHorizontalAlignment(SwingConstants.LEFT);
 		this.textField_loginPassword.setToolTipText("Please Insert your Password here.");
 		this.textField_loginPassword.setColumns(10);
@@ -267,6 +300,69 @@ public class View extends JFrame {
 		this.panelLogin.add(this.btn_logout);
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private void buildTicketsPane() {
+		this.panelTickets.setLayout(null);
+		
+		JScrollPane listScroller_projectionsTickets = new JScrollPane();
+		listScroller_projectionsTickets.setBounds(54, 60, 309, 148);
+		this.panelTickets.add(listScroller_projectionsTickets);
+		
+		this.list_projectionsTickets = new JList<Filmprojection>(this.projectionListModel);
+		listScroller_projectionsTickets.setViewportView(this.list_projectionsTickets);
+		this.list_projectionsTickets.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		JLabel label_projectionsTickets = new JLabel("Filmaufführungen:");
+		label_projectionsTickets.setBounds(54, 37, 143, 13);
+		this.panelTickets.add(label_projectionsTickets);
+		
+		this.comboBox_categoryTickets = new JComboBox(this.categoryOptions);
+		this.comboBox_categoryTickets.setBounds(408, 60, 107, 21);
+		this.panelTickets.add(this.comboBox_categoryTickets);
+		
+		JLabel label_categoryTickets = new JLabel("Kategorie:");
+		label_categoryTickets.setBounds(408, 37, 81, 13);
+		this.panelTickets.add(label_categoryTickets);
+		
+		this.btn_reserve = new JButton("Reservieren");
+		this.btn_reserve.setBounds(408, 91, 107, 21);
+		this.panelTickets.add(this.btn_reserve);
+		
+		JScrollPane listScroller_reservations = new JScrollPane();
+		listScroller_reservations.setBounds(54, 253, 309, 116);
+		this.panelTickets.add(listScroller_reservations);
+		
+		this.reservationListModel = new DefaultListModel<Reservation>();
+		this.list_reservations = new JList<Reservation>(this.reservationListModel);
+		listScroller_reservations.setViewportView(this.list_reservations);
+		this.list_reservations.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		JScrollPane listScroller_bookings = new JScrollPane();
+		listScroller_bookings.setBounds(53, 417, 310, 116);
+		this.panelTickets.add(listScroller_bookings);
+		
+		this.bookingListModel = new DefaultListModel<Booking>();
+		this.list_bookings = new JList<Booking>(this.bookingListModel);
+		listScroller_bookings.setViewportView(this.list_bookings);
+		this.list_bookings.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		JLabel label_reservations = new JLabel("Meine Reservierungen:");
+		label_reservations.setBounds(54, 230, 143, 13);
+		this.panelTickets.add(label_reservations);
+		
+		JLabel label_bookings = new JLabel("Meine Buchungen:");
+		label_bookings.setBounds(54, 392, 118, 13);
+		this.panelTickets.add(label_bookings);
+		
+		this.btn_book = new JButton("Buchen");
+		this.btn_book.setBounds(408, 254, 107, 21);
+		this.panelTickets.add(this.btn_book);
+		
+		this.btn_cancelReservation = new JButton("Stornieren");
+		this.btn_cancelReservation.setBounds(408, 285, 107, 21);
+		this.panelTickets.add(this.btn_cancelReservation);
+	}
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private void buildEditingPane() {
 		this.panelEditing.setLayout(null);
@@ -317,16 +413,11 @@ public class View extends JFrame {
 		this.panelEditing.add(this.textField_hallName);
 		this.textField_hallName.setColumns(10);
 		
-		Integer[] rowOptions = { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36 };
-		this.comboBox_hallRows = new JComboBox(rowOptions);
+		this.comboBox_hallRows = new JComboBox(this.rowOptions);
 		this.comboBox_hallRows.setBounds(502, 34, 127, 21);
 		this.panelEditing.add(this.comboBox_hallRows);
 		
-		Integer[] seatOptions = new Integer[50];
-		for (int i = 0;i <50;i++){
-		seatOptions[i]=i+1;
-		}
-		this.comboBox_hallSeats = new JComboBox(seatOptions);
+		this.comboBox_hallSeats = new JComboBox(this.seatOptions);
 		this.comboBox_hallSeats.setBounds(639, 34, 128, 21);
 		this.panelEditing.add(this.comboBox_hallSeats);
 		
@@ -381,8 +472,7 @@ public class View extends JFrame {
 		this.btn_changeCategory.setBounds(791, 291, 156, 21);
 		this.panelEditing.add(this.btn_changeCategory);
 		
-		String[] categoryOptions = { "Parkett", "Mitte", "Hinten" };
-		this.comboBox_category = new JComboBox(categoryOptions);
+		this.comboBox_category = new JComboBox(this.categoryOptions);
 		this.comboBox_category.setBounds(578, 291, 105, 21);
 		this.panelEditing.add(this.comboBox_category);
 		
@@ -419,9 +509,8 @@ public class View extends JFrame {
 		this.list_users = new JList<User>(this.usersListModel);
 		listScroller_users.setViewportView(list_users);
 		this.list_users.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		
-		String[] rowOptions = { "Customer", "Admin" };
-		this.comboBox_roles = new JComboBox(rowOptions);
+
+		this.comboBox_roles = new JComboBox(this.roleOptions);
 		
 		this.comboBox_roles.setBounds(512, 84, 187, 21);
 		this.panelUsers.add(this.comboBox_roles);
@@ -524,11 +613,13 @@ public class View extends JFrame {
 		return btn_deleteSelectedHall;
 	}
 
-	public JComboBox<Integer> getComboBox_hallRows() {
+	@SuppressWarnings("rawtypes")
+	public JComboBox getComboBox_hallRows() {
 		return comboBox_hallRows;
 	}
 
-	public JComboBox<Integer> getComboBox_hallSeats() {
+	@SuppressWarnings("rawtypes")
+	public JComboBox getComboBox_hallSeats() {
 		return comboBox_hallSeats;
 	}
 
@@ -605,13 +696,50 @@ public class View extends JFrame {
 		return btn_changeCategory;
 	}
 
-	public JComboBox<String> getComboBox_category() {
+	@SuppressWarnings("rawtypes")
+	public JComboBox getComboBox_category() {
 		return comboBox_category;
 	}
 
 	public JButton getButton_showCategories() {
 		return button_showCategories;
 	}
-	
+
+	public JList<Reservation> getList_reservations() {
+		return list_reservations;
+	}
+
+	public JList<Booking> getList_bookings() {
+		return list_bookings;
+	}
+
+	public JList<Filmprojection> getList_projectionsTickets() {
+		return list_projectionsTickets;
+	}
+
+	@SuppressWarnings("rawtypes")
+	public JComboBox getComboBox_categoryTickets() {
+		return comboBox_categoryTickets;
+	}
+
+	public JButton getBtn_reserve() {
+		return btn_reserve;
+	}
+
+	public JButton getButton_book() {
+		return btn_book;
+	}
+
+	public DefaultListModel<Reservation> getReservationListModel() {
+		return reservationListModel;
+	}
+
+	public DefaultListModel<Booking> getBookingListModel() {
+		return bookingListModel;
+	}
+
+	public JButton getBtn_cancelReservation() {
+		return btn_cancelReservation;
+	}
 	
 }
