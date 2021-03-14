@@ -5,20 +5,20 @@
 package generated.cinemaService;
 //10 ===== GENERATED:      Import Section =========
 import java.sql.SQLException;
+
 import db.connection.NoConnectionException;
 import db.connection.TypeKeyManager;
+import db.executer.PersistenceException;
 import db.executer.PersistenceExecuterFactory;
+import generated.cinemaService.proxies.IMovie;
 import generated.cinemaService.proxies.MovieProxy;
 import observation.Observable;
-import generated.cinemaService.proxies.IMovie;
-import db.executer.PersistenceException;
-import exceptions.ConstraintViolation;
-//20 ===== Editable : Your Import Section =========
 
 //25 ===== GENERATED:      Header Section =========
 public class Movie extends Observable implements java.io.Serializable, IMovie
 {
-   //30 ===== GENERATED:      Attribute Section ======
+   private static final long serialVersionUID = -605349864272395921L;
+//30 ===== GENERATED:      Attribute Section ======
    private Integer id;
    private String title;
    //40 ===== Editable : Your Attribute Section ======

@@ -94,5 +94,15 @@ public class Reservation extends Observable implements java.io.Serializable, IRe
       return result;
    }
    //80 ===== Editable : Your Operations =============
+@Override
+public String toString() {
+	try {
+		return "Film: \"" + getMyFilmprojection().getMyMovie().toString() + "\" Platz: " +getMySeat().toString();
+	} catch (PersistenceException e) {
+		e.printStackTrace();
+	}
+	return "";
+}
+   
 //90 ===== GENERATED: End of Your Operations ======
 }

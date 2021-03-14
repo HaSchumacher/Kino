@@ -22,9 +22,10 @@ public class Booking extends Observable implements java.io.Serializable, IBookin
    private static final long serialVersionUID = -5317472923721924044L;
 //30 ===== GENERATED:      Attribute Section ======
    private Integer id;
-   //40 ===== Editable : Your Attribute Section ======
+//40 ===== Editable : Your Attribute Section ======
    
-   //50 ===== GENERATED:      Constructor ============
+   
+//50 ===== GENERATED:      Constructor ============
    private Booking(Integer id, Reservation myReservation, boolean objectOnly)
    throws PersistenceException{
       super();
@@ -48,9 +49,9 @@ public class Booking extends Observable implements java.io.Serializable, IBookin
       CinemaService.getInstance().addBookingProxy(new BookingProxy(me));
       return me;
    }
-   //60 ===== Editable : Your Constructors ===========
+//60 ===== Editable : Your Constructors ===========
    
-   //70 ===== GENERATED:      Feature Access =========
+//70 ===== GENERATED:      Feature Access =========
    public Booking getTheObject(){
       return this;
    }
@@ -71,6 +72,16 @@ public class Booking extends Observable implements java.io.Serializable, IBookin
    public void setMyReservation(Reservation newMyReservation)throws PersistenceException{
       Booking_ReservationSupervisor.getInstance().change(this, this.getMyReservation(), newMyReservation);
    }
-   //80 ===== Editable : Your Operations =============
+//80 ===== Editable : Your Operations =============
+@Override
+public String toString() {
+	try {
+		return "Buchung für "+ getMyReservation().toString();
+	} catch (PersistenceException e) {
+		e.printStackTrace();
+	}
+	return "";
+}
+   
 //90 ===== GENERATED: End of Your Operations ======
 }

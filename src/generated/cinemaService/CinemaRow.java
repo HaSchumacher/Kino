@@ -22,7 +22,8 @@ import exceptions.ConstraintViolation;
 //25 ===== GENERATED:      Header Section =========
 public class CinemaRow extends Observable implements java.io.Serializable, ICinemaRow
 {
-   //30 ===== GENERATED:      Attribute Section ======
+  private static final long serialVersionUID = -7046096788564896954L;
+//30 ===== GENERATED:      Attribute Section ======
    private Integer id;
    private Integer number;
    private Boolean bookedUp;
@@ -105,5 +106,10 @@ public class CinemaRow extends Observable implements java.io.Serializable, ICine
       }catch(SQLException|NoConnectionException e){throw new PersistenceException(e.getMessage());}
    }
    //80 ===== Editable : Your Operations =============
+@Override
+public String toString() {
+	return "\"" + number.toString() + "\"" ;
+}
+   
 //90 ===== GENERATED: End of Your Operations ======
 }
