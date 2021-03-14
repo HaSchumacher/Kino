@@ -7,6 +7,7 @@ package generated.cinemaService;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.Optional;
+import java.util.Set;
 
 import db.connection.NoConnectionException;
 import db.connection.TypeKeyManager;
@@ -84,20 +85,27 @@ public class Filmprojection extends Observable implements java.io.Serializable, 
  * Calculate the Profit on this Filmprojection
  * @throws PersistenceException 
  */
-   public Integer calculateProfit() throws PersistenceException{
-	      Integer sum = 0;
-	      for(CinemaRow row : this.getMyHall().getMyRows()) {
-	    	  for(Seat seat : row.getMySeats()) {
-	    		  if(!seat.getMyReservation().isEmpty()) {
-	    			  Optional<Integer> opPrice = seat.getMyRow().getPriceCategory().getPrice();
-	    			  if(opPrice.isPresent()) {
-	    				  sum += opPrice.get();
-	    			  }
-	    		  }
-	    	  }
-	      }
-	      return sum;
-   }
+public Integer calculateProfit() throws PersistenceException {
+	Integer sum = 0;
+	for (CinemaRow row : this.getMyHall().getMyRows()) {
+		for (Seat seat : row.getMySeats()) {
+			if (!seat.getMyReservation().isEmpty()) {
+				Set<Reservation> reservations = seat.getMyReservation();
+				for (Reservation currentRes : reservations) {
+					if (currentRes.getMyFilmprojection().equals(this)) {
+						if (!currentRes.getMyBooking().isEmpty()) {
+							Optional<Integer> opPrice = seat.getMyRow().getPriceCategory().getPrice();
+							if (opPrice.isPresent()) {
+								sum += opPrice.get();
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	return sum;
+}
 //90 ===== GENERATED: End of Your Operations ======
 	@Override
 	public String toString() {
