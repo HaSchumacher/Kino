@@ -344,12 +344,13 @@ public class Controller implements Observer {
 		this.view.getBookingListModel().clear();
 		for(ReservationProxy resProxy : this.model.getReservationCache().values()) {
 			try {
-				//TODO Check for logged User == reservation User / Booking User
-				if(resProxy.getTheObject().getMyBooking().isEmpty() && !resProxy.getTheObject().getDeleted()) {
-					this.view.getReservationListModel().addElement(resProxy.getTheObject());
-				} else {
-					for(Booking b : resProxy.getTheObject().getMyBooking()) {
-						this.view.getBookingListModel().addElement(b);
+				if(resProxy.getMyCustomer().equals(this.loggedUser)) {
+					if(resProxy.getTheObject().getMyBooking().isEmpty() && !resProxy.getTheObject().getDeleted()) {
+						this.view.getReservationListModel().addElement(resProxy.getTheObject());
+					} else {
+						for(Booking b : resProxy.getTheObject().getMyBooking()) {
+							this.view.getBookingListModel().addElement(b);
+						}
 					}
 				}
 			} catch (PersistenceException e) {
@@ -644,7 +645,7 @@ public class Controller implements Observer {
 		if(command instanceof reserve_Command) {
 			try {
 				Reservation result = (Reservation) command.getResult();
-				this.refreshReservationsAndBookings();
+				this.view.getReservationListModel().addElement(result);;
 				JOptionPane.showMessageDialog(null, "Reservierung erfolgreich: " + result, "Info", JOptionPane.INFORMATION_MESSAGE);
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
@@ -653,7 +654,8 @@ public class Controller implements Observer {
 		if (command instanceof book_Command) {
 			try {
 				Booking result = (Booking) command.getResult();
-				this.refreshReservationsAndBookings();
+				this.view.getReservationListModel().removeElement(result.getMyReservation());
+				this.view.getBookingListModel().addElement(result);
 				JOptionPane.showMessageDialog(null, "Buchung erfolgreich: " + result, "Info", JOptionPane.INFORMATION_MESSAGE);
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
