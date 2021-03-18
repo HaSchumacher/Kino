@@ -144,7 +144,6 @@ public class Controller implements Observer {
 				this.login();
 			} catch (InvalidKeyException | NoSuchAlgorithmException | PersistenceException | IllegalBlockSizeException
 					| BadPaddingException | NoSuchPaddingException | LoginError | UnsupportedEncodingException | InterruptedException e1) {
-				System.out.println(e1);
 				JOptionPane.showMessageDialog(null, e1, "Error", JOptionPane.ERROR_MESSAGE);
 			} 
 		});
@@ -152,7 +151,6 @@ public class Controller implements Observer {
 			try {
 				this.registerUserToCinema();
 			} catch (PersistenceException | RegisterError | NoSuchAlgorithmException | InterruptedException e1) {
-				System.out.println(e1);
 				JOptionPane.showMessageDialog(null, e1, "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		});
@@ -160,7 +158,6 @@ public class Controller implements Observer {
 			try {
 				this.logout();
 			} catch (PersistenceException | InterruptedException e1) {
-				System.out.println(e1);
 				JOptionPane.showMessageDialog(null, e1, "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		});
@@ -170,7 +167,7 @@ public class Controller implements Observer {
 		try {
 			this.myPipe.put(new cancelReservation_Command(this.view.getList_reservations().getSelectedValue()));
 		} catch (InterruptedException e) {
-			System.out.println(e);
+			JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -178,7 +175,7 @@ public class Controller implements Observer {
 		try {
 			this.myPipe.put(new book_Command(this.view.getList_reservations().getSelectedValue()));
 		} catch (InterruptedException e) {
-			System.out.println(e);
+			JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -189,14 +186,14 @@ public class Controller implements Observer {
 			categories.put("Mitte", Middle.getInstance());
 			categories.put("Hinten", Back.getInstance());
 		} catch (PersistenceException e) {
-			System.out.println(e);
+			JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 		}
 		try {
 			this.myPipe
 					.put(new reserve_Command(this.loggedUser, this.view.getList_projectionsTickets().getSelectedValue(),
 							categories.get(this.view.getComboBox_categoryTickets().getSelectedItem().toString())));
 		} catch (InterruptedException e) {
-			System.out.println(e);
+			JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -228,14 +225,14 @@ public class Controller implements Observer {
 			categories.put("Mitte", Middle.getInstance());
 			categories.put("Hinten", Back.getInstance());
 		} catch (PersistenceException e) {
-			System.out.println(e);
+			JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 		}
 		try {
 			this.myPipe.put(
 					new changePriceCategory_Command(categories.get(this.view.getComboBox_category().getSelectedItem()),
 							Integer.parseInt(this.view.getTextField_price().getText())));
 		} catch (InterruptedException e) {
-			System.out.println(e);
+			JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -243,7 +240,7 @@ public class Controller implements Observer {
 		try {
 			this.myPipe.put(new calculateTotalProfit_Command());
 		} catch (InterruptedException e) {
-			System.out.println(e);
+			JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 		}
 		
 	}
@@ -254,7 +251,7 @@ public class Controller implements Observer {
 					this.view.getList_projections().getSelectedValuesList()
 			));
 		} catch (InterruptedException e) {
-			System.out.println(e);
+			JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -277,7 +274,7 @@ public class Controller implements Observer {
 			roles.put("Admin", Admin.getInstance());
 			roles.put("Customer", Customer.getInstance());
 		} catch (PersistenceException e) {
-			System.out.println(e);
+			JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 		}
 		try {
 			this.myPipe.put(new addRoleToUser_Command(
@@ -285,7 +282,7 @@ public class Controller implements Observer {
 					roles.get(this.view.getComboBox_roles().getSelectedItem().toString())
 			));
 		} catch (InterruptedException e) {
-			System.out.println(e);
+			JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -293,13 +290,9 @@ public class Controller implements Observer {
 		Map<String, Role> roles = new HashMap<String,Role>();
 		try {
 			roles.put("Admin", Admin.getInstance());
-		} catch (PersistenceException e2) {
-			System.out.println(e2);
-		}
-		try {
 			roles.put("Customer", Customer.getInstance());
-		} catch (PersistenceException e1) {
-			System.out.println(e1);
+		} catch (PersistenceException e2) {
+			JOptionPane.showMessageDialog(null, e2, "Error", JOptionPane.ERROR_MESSAGE);
 		}
 		try {
 			this.myPipe.put(new deleteRoleFromUser_Command(
@@ -307,7 +300,7 @@ public class Controller implements Observer {
 					roles.get(this.view.getComboBox_roles().getSelectedItem().toString())
 			));
 		} catch (InterruptedException e) {
-			System.out.println(e);
+			JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -354,7 +347,7 @@ public class Controller implements Observer {
 					}
 				}
 			} catch (PersistenceException e) {
-				System.out.println(e);
+				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}
@@ -363,7 +356,7 @@ public class Controller implements Observer {
 		try {
 			this.myPipe.put(new addMovie_Command(this.view.getTextField_movieInput().getText()));
 		} catch (InterruptedException e) {
-			System.out.println(e);
+			JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -375,7 +368,7 @@ public class Controller implements Observer {
 				(Integer) this.view.getComboBox_hallSeats().getSelectedItem()
 			));
 		} catch (InterruptedException e) {
-			System.out.println(e);
+			JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 		}	
 	}
 	
@@ -386,7 +379,7 @@ public class Controller implements Observer {
 				this.view.getList_movies().getSelectedValue()
 			));
 		} catch (InterruptedException e) {
-			System.out.println(e);
+			JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 		}
 		
 	}
@@ -395,7 +388,7 @@ public class Controller implements Observer {
 		try {
 			this.myPipe.put(new deleteCinemahall_Command(this.view.getList_halls().getSelectedValue()));
 		} catch (InterruptedException e) {
-			System.out.println(e);
+			JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 		}
 		
 	}
@@ -406,7 +399,7 @@ public class Controller implements Observer {
 			try {
 				this.myPipe.put(new deleteMovie_Command(movie));
 			} catch (InterruptedException e) {
-				System.out.println(e);
+				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}
@@ -417,7 +410,7 @@ public class Controller implements Observer {
 				this.view.getList_projections().getSelectedValue()
 			));
 		} catch (InterruptedException e) {
-			System.out.println(e);
+			JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 		}
 		
 	}
@@ -458,7 +451,6 @@ public class Controller implements Observer {
 	        }
 	        hexString.append(hex);
 	    }
-
 	    return hexString.toString();
 	}
 	
