@@ -107,7 +107,7 @@ public class View extends JFrame {
 	
 	public View() throws PersistenceException {
 		
-		// TODO options parameter an client übergeben
+		// TODO options parameter als input an die view geben, damit in der view keine Logik ist.
 		this.categoryOptions = new String[] { "Parkett", "Mitte", "Hinten" };
 		this.roleOptions = new String[] { "Customer", "Admin" };
 		this.rowOptions = new Integer[] { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36 };

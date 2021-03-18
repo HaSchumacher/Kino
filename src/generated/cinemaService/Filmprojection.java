@@ -104,8 +104,7 @@ public Integer calculateProfit() throws PersistenceException {
 			}
 		}
 	}
-	// TODO workaround with /2 because for each loop is processed twice for each element...
-	return sum/2;
+	return sum;
 }
 //90 ===== GENERATED: End of Your Operations ======
 	@Override

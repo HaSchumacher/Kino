@@ -494,21 +494,21 @@ public class CinemaService extends Observable{
 			for (int i = 1; i <= getEqualRows; i++) {
 				CinemaRow currentRow = CinemaRow.createFresh(Front.getInstance(), i, false);
 				for (int j = 1; j <= Seats; j++) {
-					currentRow.addToMySeats(Seat.createFresh(j, currentRow));
+					Seat.createFresh(j, currentRow);
 				}
 				hall.addToMyRows(currentRow);
 			}
 			for (int i = 1; i <= getEqualRows; i++) {
 				CinemaRow currentRow = CinemaRow.createFresh(Middle.getInstance(), getEqualRows + i, false);
 				for (int j = 1; j <= Seats; j++) {
-					currentRow.addToMySeats(Seat.createFresh(j, currentRow));
+					Seat.createFresh(j, currentRow);
 				}
 				hall.addToMyRows(currentRow);
 			}
 			for (int i = 1; i <= getEqualRows; i++) {
 				CinemaRow currentRow = CinemaRow.createFresh(Back.getInstance(), getEqualRows * 2 + i, false);
 				for (int j = 1; j <= Seats; j++) {
-					currentRow.addToMySeats(Seat.createFresh(j, currentRow));
+					Seat.createFresh(j, currentRow);
 				}
 				hall.addToMyRows(currentRow);
 			}
