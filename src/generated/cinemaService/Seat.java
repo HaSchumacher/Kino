@@ -88,12 +88,7 @@ public class Seat extends Observable implements java.io.Serializable, ISeat
    //80 ===== Editable : Your Operations =============
 @Override
 public String toString() {
-	try {
-		return " \"( Reihe: "+ getMyRow().toString() + " Nummer : \"" + number.toString() + "\" \")"  ;
-	} catch (PersistenceException e) {
-		e.printStackTrace();
-	}
-	return "";
+	return "Sitz: " + this.number.toString();
 }
    
 //90 ===== GENERATED: End of Your Operations ======

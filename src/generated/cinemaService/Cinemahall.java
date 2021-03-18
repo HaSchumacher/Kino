@@ -101,7 +101,7 @@ public class Cinemahall extends Observable implements java.io.Serializable, ICin
 	@Override
 	public String toString() {
 		try {
-			return "Name: " + this.name + " Reihen: " + this.getMyRows().size() + " Plaetze pro Reihe: "
+			return "Name: " + this.name + ", Reihen: " + this.getMyRows().size() + ", Plätze pro Reihe: "
 					+ this.getMyRows().iterator().next().getMySeats().size();
 		} catch (PersistenceException e) {
 			System.out.println(e);

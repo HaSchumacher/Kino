@@ -108,7 +108,7 @@ public class CinemaRow extends Observable implements java.io.Serializable, ICine
    //80 ===== Editable : Your Operations =============
 @Override
 public String toString() {
-	return "\"" + number.toString() + "\"" ;
+	return "Reihe: " + this.number.toString() ;
 }
    
 //90 ===== GENERATED: End of Your Operations ======

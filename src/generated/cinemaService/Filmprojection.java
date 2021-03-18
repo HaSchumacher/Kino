@@ -110,10 +110,10 @@ public Integer calculateProfit() throws PersistenceException {
 	@Override
 	public String toString() {
 		try {
-			return "Saal: " + this.getMyHall().getName() + " Film: " + this.getMyMovie().getTitle();
+			return "Saal: " + this.getMyHall().getName() + ", Film: " + this.getMyMovie().getTitle();
 		} catch (PersistenceException e) {
 			System.out.println(e);
 		}
-		return this.toString();
+		return this.id.toString();
 	}
 }
