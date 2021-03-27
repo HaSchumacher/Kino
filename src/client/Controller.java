@@ -519,13 +519,11 @@ public class Controller implements Observer {
 		}
 		if(command instanceof register_Command) {
 			try {
-				this.setLoggedUser((User) command.getResult());
-				this.updateView();
 				this.view.getTextField_registerEmail().setText("");
 				this.view.getTextField_registerName().setText("");
 				this.view.getTextField_registerPassword().setText("");
 				this.view.getTextField_registerUsername().setText("");
-				JOptionPane.showMessageDialog(null, "Registrieren erfolgreich!", "Info", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Registrieren erfolgreich. Eine Anmeldung ist nun möglich.", "Info", JOptionPane.INFORMATION_MESSAGE);
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 			}
