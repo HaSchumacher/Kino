@@ -11,7 +11,7 @@ public class Pipe {
 	private Semaphore freeSpace;
 	private Semaphore mutex;
 	
-	Pipe(Integer capacity) {
+	public Pipe(Integer capacity) {
 		this.data = new ArrayList<Command<?>>();
 		this.usedSpace = new Semaphore(0);
 		this.freeSpace = new Semaphore(capacity);

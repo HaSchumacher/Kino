@@ -6,7 +6,7 @@ public class Client implements Runnable {
 	private Thread t;
 	private String threadName;
 	
-	Client(Pipe p, String name) {
+	public Client(Pipe p, String name) {
 		this.myPipe = p;
 		this.threadName = name;
 		System.out.println("Creating " + this.threadName);

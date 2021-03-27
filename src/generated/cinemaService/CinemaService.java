@@ -394,7 +394,7 @@ private Integer currentUserID;
 			r.setBooked(true);
 			return Booking.createFresh(r);
 		}
-		return null;
+		throw new BookingError();
 	}
 
 	/**

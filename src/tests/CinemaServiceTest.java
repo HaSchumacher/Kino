@@ -1,20 +1,13 @@
 package tests;
 
-import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.UUID;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import com.mysql.cj.exceptions.AssertionFailedException;
 
 import db.executer.PersistenceException;
 import generated.cinemaService.Back;
@@ -59,22 +52,6 @@ class CinemaServiceTest {
 
 	}
 
-	@AfterAll
-	static void tearDownAfterClass() throws Exception {
-	}
-
-	@BeforeEach
-	void setUp() throws Exception {
-	}
-
-	@AfterEach
-	void tearDown() throws Exception {
-	}
-
-	@Test
-	void testLogin() {
-		fail("Not yet implemented");
-	}
 	@Test
 	public void testChangePriceCategory() throws PersistenceException {
 		Integer front = 3;
@@ -111,8 +88,11 @@ class CinemaServiceTest {
 		 Assertions.assertThrows(ReservationError.class, () -> {
 				service.reserve(TestUser1, fp, priceCategory);
 			});
-		
-		
+	}
+	@Test
+	void testReserve3() throws PersistenceException, ReservationError {
+		Reservation reserve = service.reserve(TestUser3, fp2, Back.getInstance());
+		assertEquals(Back.getInstance(), reserve.getMySeat().getMyRow().getPriceCategory());
 	}
 
 	@Test
@@ -147,23 +127,6 @@ class CinemaServiceTest {
 		service.book(t3book1);// 3
 		service.book(t3book2);// 9
 		assertEquals(result, service.calculateTotalProfit());// 27
-		// TODO TRUNCATE USED Items from DATABASE
+	
 	}
-
-	@Test
-	void testLogout() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testRegister() {
-		fail("Not yet implemented");
-	}
-
-
-	@Test
-	void testGeneratePublicKey() {
-		fail("Not yet implemented");
-	}
-
 }
