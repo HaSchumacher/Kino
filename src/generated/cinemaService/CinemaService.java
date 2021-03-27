@@ -354,6 +354,7 @@ private Integer currentUserID;
 	 */
 	public Reservation reserve(User u, Filmprojection fp, PriceCategory c)
 			throws ReservationError, PersistenceException {
+		if(u==null || fp==null || c == null) {throw new ReservationError();}
 		List<CinemaRow> currRowlist = fp.getMyHall().getMyRows();
 		for (int i = 0; i < currRowlist.size(); i++) {
 			CinemaRow currRow = currRowlist.get(i);
@@ -369,6 +370,7 @@ private Integer currentUserID;
 				}
 			}
 		}
+		
 		throw new ReservationError();
 	}
 

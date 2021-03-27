@@ -11,11 +11,7 @@ public class ReservationError extends Exception
 {
    //30 ===== GENERATED:      Attribute Section ======
    //40 ===== Editable : Your Attribute Section ======
-   
-   /**
-	 * 
-	 */
-	private static final long serialVersionUID = 6154184326379403327L;
+   private static final long serialVersionUID = 6154184326379403327L;
 
 //50 ===== GENERATED:      Constructor ============
    public ReservationError(){
