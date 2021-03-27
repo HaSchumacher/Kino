@@ -35,9 +35,9 @@ class CinemaServiceTest {
 
 	private static CinemaService service;
 	private static String id;
-	private static Filmprojection fp;
+	private static Filmprojection fp1;
 	private static Filmprojection fp2;
-	private static Movie movie;
+	private static Movie movie1;
 	private static Movie movie2;
 	private static User u1;
 	private static User u2;
@@ -48,10 +48,10 @@ class CinemaServiceTest {
 		service = CinemaService.getInstance();
 		u1 = service.register("CinemaServiceTestUser1", "test@mail.de", "CinemaServiceTestUser1" + id, "password");
 		u2 = service.register("CinemaServiceTestUser2", "test@mail.de", "CinemaServiceTestUser2" + id, "password");
-		movie = service.addMovie("CalculateProfitTestMovie1" + id);
+		movie1 = service.addMovie("CalculateProfitTestMovie1" + id);
 		movie2 = service.addMovie("CalculateProfitTestMovie2" + id);
-		fp = service.addFilmprojection(service.addCinemahall("CinemaServiceTestHall" + id, 9, 6), movie);
-		fp2 = service.addFilmprojection(service.addCinemahall("CinemaServiceTestHall" + id, 9, 6), movie2);
+		fp1 = service.addFilmprojection(service.addCinemahall("CinemaServiceTestHall1" + id, 9, 6), movie1);
+		fp2 = service.addFilmprojection(service.addCinemahall("CinemaServiceTestHall2" + id, 9, 6), movie2);
 	}
 
 	@Test
@@ -75,21 +75,21 @@ class CinemaServiceTest {
 	@Test
 	void testReserve1() throws PersistenceException, ReservationError {
 		Assertions.assertThrows(ReservationError.class, () -> {
-			service.reserve(null, fp, Front.getInstance());
+			service.reserve(null, fp1, Front.getInstance());
 		});
 	}
 
 	@Test
 	void testReserve2() throws PersistenceException, ReservationError {
-		final PriceCategory priceCategory = fp.getMyHall().getMyRows().get(fp.getMyHall().getMyRows().size() - 1)
+		final PriceCategory priceCategory = fp1.getMyHall().getMyRows().get(fp1.getMyHall().getMyRows().size() - 1)
 				.getPriceCategory();
-		int priceCategoryRows = fp.getMyHall().getMyRows().size() - 1 / 3;
+		int priceCategoryRows = fp1.getMyHall().getMyRows().size() - 1 / 3;
 		for (int i = 1; i < priceCategoryRows; i++) {
-			CinemaRow currRow = fp.getMyHall().getMyRows().get(fp.getMyHall().getMyRows().size() - i);
+			CinemaRow currRow = fp1.getMyHall().getMyRows().get(fp1.getMyHall().getMyRows().size() - i);
 			currRow.setBookedUp(true);
 		}
 		Assertions.assertThrows(ReservationError.class, () -> {
-			service.reserve(u1, fp, priceCategory);
+			service.reserve(u1, fp1, priceCategory);
 		});
 	}
 
@@ -101,7 +101,7 @@ class CinemaServiceTest {
 
 	@Test
 	void testBook1() throws ReservationError, PersistenceException, BookingError {
-		Reservation res = service.reserve(u1, fp, Middle.getInstance());
+		Reservation res = service.reserve(u1, fp1, Middle.getInstance());
 		Booking expected = service.book(res);
 		assertEquals(expected, res.getMyBooking().iterator().next());
 		assertTrue(res.getBooked());
@@ -109,14 +109,14 @@ class CinemaServiceTest {
 
 	@Test
 	void testBook2() throws ReservationError, PersistenceException, BookingError {
-		Reservation res = service.reserve(u1, fp, Front.getInstance());
+		Reservation res = service.reserve(u1, fp1, Front.getInstance());
 		assertTrue(res.getMyBooking().isEmpty());
 		assertFalse(res.getBooked());
 	}
 
 	@Test
 	void testBook3() throws ReservationError, PersistenceException, BookingError {
-		Reservation res = service.reserve(u1, fp, Back.getInstance());
+		Reservation res = service.reserve(u1, fp2, Back.getInstance());
 		service.book(res);
 		Assertions.assertThrows(BookingError.class, () -> {
 			service.book(res);
