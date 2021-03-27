@@ -14,7 +14,7 @@ import db.executer.PersistenceException;
 import exceptions.ConstraintViolation;
 import generated.cinemaService.Back;
 import generated.cinemaService.BookingError;
-import generated.cinemaService.CinemaHallCreation;
+import generated.cinemaService.CinemaHallCreationError;
 import generated.cinemaService.CinemaService;
 import generated.cinemaService.Filmprojection;
 import generated.cinemaService.Front;
@@ -35,12 +35,12 @@ public class FilmprojectionTest {
 	
 
     @BeforeAll
-    public void setUp() throws PersistenceException, CinemaHallCreation, ConstraintViolation, RegisterError {
+    public void setUp() throws PersistenceException, CinemaHallCreationError, ConstraintViolation, RegisterError {
     	this.service = CinemaService.getInstance();
     }
 	
     @BeforeEach 
-    public void init() throws PersistenceException, CinemaHallCreation, ConstraintViolation, RegisterError {
+    public void init() throws PersistenceException, CinemaHallCreationError, ConstraintViolation, RegisterError {
 		this.id = UUID.randomUUID().toString();
 		this.fp = service.addFilmprojection(service.addCinemahall("CalculateProfitTestHall" + this.id, 9, 6),
 				service.addMovie("CalculateProfitTestMovie" + this.id));

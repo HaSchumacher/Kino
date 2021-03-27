@@ -17,7 +17,7 @@ import generated.cinemaService.Admin;
 import generated.cinemaService.Back;
 import generated.cinemaService.Booking;
 import generated.cinemaService.BookingError;
-import generated.cinemaService.CinemaHallCreation;
+import generated.cinemaService.CinemaHallCreationError;
 import generated.cinemaService.CinemaRow;
 import generated.cinemaService.CinemaService;
 import generated.cinemaService.Cinemahall;
@@ -139,18 +139,18 @@ class CinemaServiceTest {
 
 	@Test
 	void testAddCinemahall1()
-			throws PersistenceException, ReservationError, DeleteError, CinemaHallCreation, ConstraintViolation {
-		Assertions.assertThrows(CinemaHallCreation.class, () -> {
+			throws PersistenceException, ReservationError, DeleteError, CinemaHallCreationError, ConstraintViolation {
+		Assertions.assertThrows(CinemaHallCreationError.class, () -> {
 			service.addCinemahall("CinemaServiceTestHallShouldNotBeCreated", 4, 2);
 		});
-		Assertions.assertThrows(CinemaHallCreation.class, () -> {
+		Assertions.assertThrows(CinemaHallCreationError.class, () -> {
 			service.addCinemahall("CinemaServiceTestHallShouldNotBeCreated", -6, 2);
 		});
 	}
 
 	@Test
 	void testAddCinemahall2()
-			throws PersistenceException, ReservationError, DeleteError, CinemaHallCreation, ConstraintViolation {
+			throws PersistenceException, ReservationError, DeleteError, CinemaHallCreationError, ConstraintViolation {
 		Cinemahall hall = service.addCinemahall("CinemaServiceTestHall" + id, 6, 4);
 		List<CinemaRow> rows = hall.getMyRows();
 		assertEquals(6, rows.size());

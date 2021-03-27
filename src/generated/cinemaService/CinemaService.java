@@ -489,7 +489,7 @@ private Integer currentUserID;
 	 * @throws ConstraintViolation
 	 */
 	public Cinemahall addCinemahall(String name, Integer rows, Integer Seats)
-			throws CinemaHallCreation, PersistenceException, ConstraintViolation {
+			throws CinemaHallCreationError, PersistenceException, ConstraintViolation {
 		Integer getEqualRows = rows / 3;
 		if (getEqualRows * 3 == rows && rows > 0 && Seats > 0) {
 			Cinemahall hall = Cinemahall.createFresh(false, name);
@@ -517,7 +517,7 @@ private Integer currentUserID;
 			hall.setOpen(true);
 			return hall;
 		} else {
-			throw new CinemaHallCreation();
+			throw new CinemaHallCreationError();
 		}
 
 	}

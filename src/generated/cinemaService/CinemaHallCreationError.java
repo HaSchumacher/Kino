@@ -1,4 +1,4 @@
-/**--- Generated at Fri Mar 05 17:39:17 CET 2021 
+/**--- Generated at Sat Mar 27 18:41:46 CET 2021 
  * --- Change only in Editable Sections!  
  * --- Do not touch section numbering!   
  */
@@ -7,19 +7,15 @@ package generated.cinemaService;
 //20 ===== Editable : Your Import Section =========
 
 //25 ===== GENERATED:      Header Section =========
-public class CinemaHallCreation extends Exception
+public class CinemaHallCreationError extends Exception
 {
-   //30 ===== GENERATED:      Attribute Section ======
-   //40 ===== Editable : Your Attribute Section ======
-   
-   /**
-	 * 
-	 */
-	private static final long serialVersionUID = 5049292983999356542L;
-
-//50 ===== GENERATED:      Constructor ============
-   public CinemaHallCreation(){
-      super("The Cinemahall you tried to create is already given.");
+	//30 ===== GENERATED:      Attribute Section ======
+	//40 ===== Editable : Your Attribute Section ======
+	private static final long serialVersionUID = -7632014677433042750L;
+	
+   //50 ===== GENERATED:      Constructor ============
+   public CinemaHallCreationError(){
+      super("The Cinemahall you tried to create is already given or the given parameters are not valid.");
    }
    //60 ===== Editable : Your Constructors ===========
    
