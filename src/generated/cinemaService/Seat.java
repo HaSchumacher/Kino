@@ -22,7 +22,11 @@ import generated.cinemaService.proxies.IReservation;
 //25 ===== GENERATED:      Header Section =========
 public class Seat extends Observable implements java.io.Serializable, ISeat
 {
-   //30 ===== GENERATED:      Attribute Section ======
+   /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4628263884342686932L;
+//30 ===== GENERATED:      Attribute Section ======
    private Integer id;
    private Integer number;
    //40 ===== Editable : Your Attribute Section ======

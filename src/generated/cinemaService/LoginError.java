@@ -12,7 +12,12 @@ public class LoginError extends Exception
    //30 ===== GENERATED:      Attribute Section ======
    //40 ===== Editable : Your Attribute Section ======
    
-   //50 ===== GENERATED:      Constructor ============
+   /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6177802616365462059L;
+
+//50 ===== GENERATED:      Constructor ============
    public LoginError(){
       super("Something went wrong. Please check your credentials.");
    }

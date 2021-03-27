@@ -2,9 +2,8 @@
  * --- No Change Allowed!  
  */
 package generated.cinemaService.proxies;
-import idManagement.Identifiable;
-import db.executer.PersistenceException;
 import generated.cinemaService.Role;
+import idManagement.Identifiable;
 public interface IRole extends Identifiable{
    public Role getTheObject();
 }

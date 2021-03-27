@@ -5,18 +5,18 @@
 package generated.cinemaService;
 //10 ===== GENERATED:      Import Section =========
 import java.sql.SQLException;
-import java.util.Iterator;
 import java.util.Optional;
 import java.util.Set;
 
 import db.connection.NoConnectionException;
 import db.connection.TypeKeyManager;
+import db.executer.PersistenceException;
 import db.executer.PersistenceExecuterFactory;
 import generated.cinemaService.proxies.FilmprojectionProxy;
-import observation.Observable;
 import generated.cinemaService.proxies.IFilmprojection;
-import generated.cinemaService.relationControl.*;
-import db.executer.PersistenceException;
+import generated.cinemaService.relationControl.fp_CinemahallSupervisor;
+import generated.cinemaService.relationControl.fp_movieSupervisor;
+import observation.Observable;
 
 //25 ===== GENERATED:      Header Section =========
 public class Filmprojection extends Observable implements java.io.Serializable, IFilmprojection

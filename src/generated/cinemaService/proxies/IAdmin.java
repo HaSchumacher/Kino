@@ -2,8 +2,6 @@
  * --- No Change Allowed!  
  */
 package generated.cinemaService.proxies;
-import idManagement.Identifiable;
-import db.executer.PersistenceException;
 import generated.cinemaService.Admin;
 public interface IAdmin extends IRole{
    public Admin getTheObject();

@@ -2,17 +2,16 @@
  * --- No Change Allowed!  
  */
 package generated.cinemaService.proxies;
-import db.executer.PersistenceException;
 import java.util.Optional;
-import db.executer.*;
+
+import db.executer.DBExecuterFactory;
+import db.executer.PersistenceException;
 import generated.cinemaService.Booking;
-import java.sql.ResultSet;
 import generated.cinemaService.Reservation;
 import generated.cinemaService.relationControl.Booking_ReservationSupervisor;
 public class BookingProxy implements IBooking{
    private Integer id;
    private Optional<Booking> theObject;
-   private DBDMLExecuter dmlExecuter = PersistenceExecuterFactory.getConfiguredFactory().getDBDMLExecuter();
    public BookingProxy(Integer id){
       this.id = id;
       this.theObject = Optional.empty();
@@ -38,9 +37,8 @@ public class BookingProxy implements IBooking{
    }
    public int hashCode() {return this.getId().hashCode();}
    private Booking load() throws PersistenceException {
-      ResultSet rs = null;
       try {
-         rs = DBExecuterFactory.getConfiguredFactory().getDBDMLExecuter().selectIdSpecifiedCursorAleadyAtFirstRow("Booking", this.id);
+         DBExecuterFactory.getConfiguredFactory().getDBDMLExecuter().selectIdSpecifiedCursorAleadyAtFirstRow("Booking", this.id);
          Reservation myReservation = Booking_ReservationSupervisor.getInstance().getMyReservation(this).getTheObject();
          return Booking.createAlreadyPersistent(this, myReservation);
       } catch (Exception e) {throw new PersistenceException(e.getMessage());}

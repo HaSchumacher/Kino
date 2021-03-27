@@ -33,7 +33,7 @@ public class fp_movieSupervisor
       this.elements.change(owner, targetOld, targetNew);
    }
    public void setAlreadyPersistent(IFilmprojection owner, IMovie target) {
-      IMovie targetOld = null; IMovie targetNew = target;
+      IMovie targetNew = target;
       this.elements.setAlreadyPersistent(owner, targetNew);
    }
    public void change(IFilmprojection owner, IMovie targetOld, IMovie targetNew) throws PersistenceException{

@@ -12,7 +12,12 @@ public class ReservationError extends Exception
    //30 ===== GENERATED:      Attribute Section ======
    //40 ===== Editable : Your Attribute Section ======
    
-   //50 ===== GENERATED:      Constructor ============
+   /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6154184326379403327L;
+
+//50 ===== GENERATED:      Constructor ============
    public ReservationError(){
       super("The reservation was not possible. The given category is full for this filmprojection.");
    }

@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 public class MovieProxy implements IMovie{
    private Integer id;
    private Optional<Movie> theObject;
-   private DBDMLExecuter dmlExecuter = PersistenceExecuterFactory.getConfiguredFactory().getDBDMLExecuter();
    public MovieProxy(Integer id){
       this.id = id;
       this.theObject = Optional.empty();

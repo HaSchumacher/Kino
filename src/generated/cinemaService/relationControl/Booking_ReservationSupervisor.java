@@ -3,14 +3,15 @@
  * --- Do not touch section numbering!   
  */
 package generated.cinemaService.relationControl;
-//10 ===== GENERATED:      Import Section =========
-import relationManagement.Relation;
-import db.executer.PersistenceException;
-import generated.cinemaService.proxies.*;
-import exceptions.ConstraintViolation;
 import java.util.Set;
 import java.util.stream.Collectors;
 //20 ===== Editable : Your Import Section =========
+
+import db.executer.PersistenceException;
+import generated.cinemaService.proxies.IBooking;
+import generated.cinemaService.proxies.IReservation;
+//10 ===== GENERATED:      Import Section =========
+import relationManagement.Relation;
 
 //25 ===== GENERATED:      Header Section =========
 public class Booking_ReservationSupervisor
@@ -36,7 +37,7 @@ public class Booking_ReservationSupervisor
       this.elements.change(owner, targetOld, targetNew);
    }
    public void setAlreadyPersistent(IBooking owner, IReservation target) {
-      IReservation targetOld = null; IReservation targetNew = target;
+      IReservation targetNew = target;
       this.elements.setAlreadyPersistent(owner, targetNew);
    }
    public void change(IBooking owner, IReservation targetOld, IReservation targetNew) throws PersistenceException{

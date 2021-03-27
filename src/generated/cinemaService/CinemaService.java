@@ -72,6 +72,8 @@ public class CinemaService extends Observable{
    private Map<Integer,BookingProxy> bookingCache;
    private Map<Integer,UserProxy> userCache;
    private Map<Integer,KeyPairProxy> keyPairCache;
+private User currentUser;
+private Integer currentUserID;
    private static CinemaService theInstance = new CinemaService();
    private CinemaService(){
       try{DBConnectionManager.getTheInstance().openDBConnection(new DBConnectionData("jdbc:mysql://localhost:3306", "CinemaService", "root" , ""));
@@ -332,14 +334,14 @@ public class CinemaService extends Observable{
 	public User login(byte[] uscrypt, byte[] pwcrypt, Integer id) throws LoginError {
 		KeyPairProxy keyPair = this.keyPairCache.get(id);
 		PrivateKey pkey = keyPair.getTheObject().keypair.getPrivate();
-		User loginuser = null;
 		String username = Security.decrypt(uscrypt, pkey );
 		String password = Security.decrypt(pwcrypt, pkey);
 		for (Entry<Integer, UserProxy> user : this.userCache.entrySet()) {
 			User userEntry = user.getValue().getTheObject();
 			if (userEntry.getUsername().equals(username) && userEntry.getPassword().equals(password)) {
-				System.out.println("Login got hit");
-				return loginuser = userEntry;
+				this.currentUser = userEntry;
+				this.currentUserID = id;
+				return currentUser;
 			}
 		}
 		throw new LoginError();
@@ -401,15 +403,7 @@ public class CinemaService extends Observable{
 		return result;
 	}
 
-	/**
-	 * Check if the User has the role to use the Command.
-	 */
-	public Boolean checkPriviliges(User u) {
-		// TODO: Implement Operation checkPriviliges
-		return null;
-	}
-
-	/**
+		/**
 	 * Adding a Filmprojection to the CinemaService.
 	 * 
 	 * @throws PersistenceException
@@ -473,9 +467,16 @@ public class CinemaService extends Observable{
 	/**
 	 * Logout the given User from Cinema Service.
 	 */
-	public Boolean logout(User user) {
-		// TODO: Logout - Referenz Keypair...
-		return true;
+	public Boolean logout(User user) throws DeleteError {
+		if (this.currentUser.equals(user)) {
+			 keyPairCache.remove(this.currentUserID);
+			 this.currentUser = null;
+			 return true;
+		}
+		else {
+			return false;
+		}
+		
 	}
 
 	/**

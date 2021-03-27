@@ -12,7 +12,12 @@ public class RegisterError extends Exception
    //30 ===== GENERATED:      Attribute Section ======
    //40 ===== Editable : Your Attribute Section ======
    
-   //50 ===== GENERATED:      Constructor ============
+   /**
+	 * 
+	 */
+	private static final long serialVersionUID = -872255159606152638L;
+
+//50 ===== GENERATED:      Constructor ============
    public RegisterError(){
       super("The user you want to register is already in the System. If you forgot your password please follow the instructions in the given section.");
    }

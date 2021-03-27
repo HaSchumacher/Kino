@@ -14,7 +14,6 @@ import java.util.Set;
 public class SeatProxy implements ISeat{
    private Integer id;
    private Optional<Seat> theObject;
-   private DBDMLExecuter dmlExecuter = PersistenceExecuterFactory.getConfiguredFactory().getDBDMLExecuter();
    public SeatProxy(Integer id){
       this.id = id;
       this.theObject = Optional.empty();

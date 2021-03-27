@@ -4,20 +4,14 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
-import java.util.SortedSet;
 import java.util.TreeMap;
-import java.util.TreeSet;
-
-import javax.management.monitor.StringMonitor;
 
 import db.connection.NoConnectionException;
 import db.connection.TypeKeyManager;
 import db.executer.DBDMLExecuter;
-import db.executer.PersistenceExecuterFactory;
 import db.executer.PersistenceException;
+import db.executer.PersistenceExecuterFactory;
 import idManagement.Identifiable;
 
 /**
@@ -42,7 +36,7 @@ public class InitialProxyLoader<T extends Identifiable> {
 	}
 	public Map<Integer,T> perform() throws PersistenceException{
 		Map<Integer,T> result = new TreeMap<Integer,T>();
-		Constructor constructor = null;
+		Constructor<?> constructor = null;
 		ResultSet resultSet = null;
 		String completeProxyClassName = this.packageGenerated + "." + this.packageName + "." + "proxies." + this.typeName + "Proxy";
 		try {
@@ -50,6 +44,7 @@ public class InitialProxyLoader<T extends Identifiable> {
 			constructor = Class.forName(completeProxyClassName).getConstructor(new Class[]{java.lang.Integer.class});
 			resultSet = this.dmlExecuter.selectIdsOfEntriesOfTable(tableName, typeKey);
 			while(resultSet.next()) {
+				@SuppressWarnings("unchecked")
 				T t = (T)constructor.newInstance(new Object[] {resultSet.getInt(1)});
 				result.put(t.getId(), t);
 			}

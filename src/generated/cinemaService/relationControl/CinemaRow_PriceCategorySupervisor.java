@@ -33,7 +33,7 @@ public class CinemaRow_PriceCategorySupervisor
       this.elements.change(owner, targetOld, targetNew);
    }
    public void setAlreadyPersistent(ICinemaRow owner, IPriceCategory target) {
-      IPriceCategory targetOld = null; IPriceCategory targetNew = target;
+      IPriceCategory targetNew = target;
       this.elements.setAlreadyPersistent(owner, targetNew);
    }
    public void change(ICinemaRow owner, IPriceCategory targetOld, IPriceCategory targetNew) throws PersistenceException{

@@ -33,7 +33,7 @@ public class Reservation_FpSupervisor
       this.elements.change(owner, targetOld, targetNew);
    }
    public void setAlreadyPersistent(IReservation owner, IFilmprojection target) {
-      IFilmprojection targetOld = null; IFilmprojection targetNew = target;
+      IFilmprojection targetNew = target;
       this.elements.setAlreadyPersistent(owner, targetNew);
    }
    public void change(IReservation owner, IFilmprojection targetOld, IFilmprojection targetNew) throws PersistenceException{

@@ -16,6 +16,7 @@ public class XStreamManager<T> {
 		XStream xstream = XStreamGenSetup.getXStreamObject();
 		this.fm.createFile(new File(XStreamGenSetup.assembleFileName(fileNamePostfix)),xstream.toXML(object));
 	}
+	@SuppressWarnings("unchecked")
 	public T read(String fileNamePostfix) throws IOException {
 		XStream xstream = XStreamGenSetup.getXStreamObject();
 		return (T)xstream.fromXML(this.fm.readAsString(XStreamGenSetup.assembleFileName(fileNamePostfix)));

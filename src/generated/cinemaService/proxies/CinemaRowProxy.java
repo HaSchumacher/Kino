@@ -15,7 +15,6 @@ import generated.cinemaService.relationControl.CinemaRow_PriceCategorySupervisor
 public class CinemaRowProxy implements ICinemaRow{
    private Integer id;
    private Optional<CinemaRow> theObject;
-   private DBDMLExecuter dmlExecuter = PersistenceExecuterFactory.getConfiguredFactory().getDBDMLExecuter();
    public CinemaRowProxy(Integer id){
       this.id = id;
       this.theObject = Optional.empty();

@@ -18,7 +18,6 @@ import java.util.Set;
 public class ReservationProxy implements IReservation{
    private Integer id;
    private Optional<Reservation> theObject;
-   private DBDMLExecuter dmlExecuter = PersistenceExecuterFactory.getConfiguredFactory().getDBDMLExecuter();
    public ReservationProxy(Integer id){
       this.id = id;
       this.theObject = Optional.empty();

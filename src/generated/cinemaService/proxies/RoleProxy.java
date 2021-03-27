@@ -2,7 +2,6 @@
  * --- No Change Allowed!  
  */
 package generated.cinemaService.proxies;
-import db.executer.PersistenceException;
 import generated.cinemaService.Role;
 public abstract class RoleProxy implements IRole{
    public abstract Role getTheObject();

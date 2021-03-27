@@ -33,7 +33,7 @@ public class Reservation_UserSupervisor
       this.elements.change(owner, targetOld, targetNew);
    }
    public void setAlreadyPersistent(IReservation owner, IUser target) {
-      IUser targetOld = null; IUser targetNew = target;
+      IUser targetNew = target;
       this.elements.setAlreadyPersistent(owner, targetNew);
    }
    public void change(IReservation owner, IUser targetOld, IUser targetNew) throws PersistenceException{

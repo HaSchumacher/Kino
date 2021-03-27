@@ -5,24 +5,27 @@
 package generated.cinemaService;
 //10 ===== GENERATED:      Import Section =========
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import db.connection.NoConnectionException;
 import db.connection.TypeKeyManager;
+import db.executer.PersistenceException;
 import db.executer.PersistenceExecuterFactory;
 import generated.cinemaService.proxies.CinemahallProxy;
-import observation.Observable;
+import generated.cinemaService.proxies.ICinemaRow;
 import generated.cinemaService.proxies.ICinemahall;
-import generated.cinemaService.relationControl.*;
-import generated.cinemaService.proxies.*;
-import db.executer.PersistenceException;
-import java.util.List;
-import java.util.ArrayList;
-import exceptions.ConstraintViolation;
-//20 ===== Editable : Your Import Section =========
+import generated.cinemaService.relationControl.Cinemahall_CinemaRowSupervisor;
+import observation.Observable;
 
 //25 ===== GENERATED:      Header Section =========
 public class Cinemahall extends Observable implements java.io.Serializable, ICinemahall
 {
-   //30 ===== GENERATED:      Attribute Section ======
+   /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1697545576096979015L;
+//30 ===== GENERATED:      Attribute Section ======
    private Integer id;
    private Boolean open;
    private String name;

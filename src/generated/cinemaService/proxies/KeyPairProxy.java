@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 public class KeyPairProxy implements IKeyPair{
    private Integer id;
    private Optional<KeyPair> theObject;
-   private DBDMLExecuter dmlExecuter = PersistenceExecuterFactory.getConfiguredFactory().getDBDMLExecuter();
    public KeyPairProxy(Integer id){
       this.id = id;
       this.theObject = Optional.empty();

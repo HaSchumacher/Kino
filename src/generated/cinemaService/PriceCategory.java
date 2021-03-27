@@ -5,20 +5,22 @@
 package generated.cinemaService;
 //10 ===== GENERATED:      Import Section =========
 import java.sql.SQLException;
-import db.connection.NoConnectionException;
-import db.connection.TypeKeyManager;
-import observation.Observable;
-import generated.cinemaService.proxies.IPriceCategory;
 import java.util.Optional;
-import db.executer.PersistenceExecuterFactory;
+
+import db.connection.NoConnectionException;
 import db.executer.PersistenceException;
-import exceptions.ConstraintViolation;
-//20 ===== Editable : Your Import Section =========
+import db.executer.PersistenceExecuterFactory;
+import generated.cinemaService.proxies.IPriceCategory;
+import observation.Observable;
 
 //25 ===== GENERATED:      Header Section =========
 public abstract class PriceCategory extends Observable implements java.io.Serializable, IPriceCategory
 {
-   //30 ===== GENERATED:      Attribute Section ======
+   /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4448385052810040738L;
+//30 ===== GENERATED:      Attribute Section ======
    private Integer id;
    private Optional<Integer> price;
    //40 ===== Editable : Your Attribute Section ======

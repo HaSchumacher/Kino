@@ -16,8 +16,6 @@ import generated.cinemaService.proxies.*;
 import db.executer.PersistenceException;
 import java.util.Set;
 import java.util.HashSet;
-import exceptions.ConstraintViolation;
-//20 ===== Editable : Your Import Section =========
 
 //25 ===== GENERATED:      Header Section =========
 public class User extends Observable implements java.io.Serializable, IUser

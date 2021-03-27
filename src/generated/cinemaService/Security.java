@@ -5,16 +5,12 @@
 package generated.cinemaService;
 
 import java.security.InvalidKeyException;
-import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
 //20 ===== Editable : Your Import Section =========
 import java.security.PrivateKey;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.PKCS8EncodedKeySpec;
 import java.sql.ResultSet;
 //10 ===== GENERATED:      Import Section =========
 import java.sql.SQLException;
-import java.util.Base64;
 import java.util.Optional;
 
 import javax.crypto.BadPaddingException;

@@ -12,7 +12,6 @@ import java.util.List;
 public class CinemahallProxy implements ICinemahall{
    private Integer id;
    private Optional<Cinemahall> theObject;
-   private DBDMLExecuter dmlExecuter = PersistenceExecuterFactory.getConfiguredFactory().getDBDMLExecuter();
    public CinemahallProxy(Integer id){
       this.id = id;
       this.theObject = Optional.empty();

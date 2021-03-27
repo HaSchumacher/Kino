@@ -2,19 +2,18 @@
  * --- No Change Allowed!  
  */
 package generated.cinemaService.proxies;
-import db.executer.PersistenceException;
 import java.util.Optional;
-import db.executer.*;
-import generated.cinemaService.Filmprojection;
-import java.sql.ResultSet;
+
+import db.executer.DBExecuterFactory;
+import db.executer.PersistenceException;
 import generated.cinemaService.Cinemahall;
-import generated.cinemaService.relationControl.fp_CinemahallSupervisor;
+import generated.cinemaService.Filmprojection;
 import generated.cinemaService.Movie;
+import generated.cinemaService.relationControl.fp_CinemahallSupervisor;
 import generated.cinemaService.relationControl.fp_movieSupervisor;
 public class FilmprojectionProxy implements IFilmprojection{
    private Integer id;
    private Optional<Filmprojection> theObject;
-   private DBDMLExecuter dmlExecuter = PersistenceExecuterFactory.getConfiguredFactory().getDBDMLExecuter();
    public FilmprojectionProxy(Integer id){
       this.id = id;
       this.theObject = Optional.empty();
@@ -40,9 +39,8 @@ public class FilmprojectionProxy implements IFilmprojection{
    }
    public int hashCode() {return this.getId().hashCode();}
    private Filmprojection load() throws PersistenceException {
-      ResultSet rs = null;
       try {
-         rs = DBExecuterFactory.getConfiguredFactory().getDBDMLExecuter().selectIdSpecifiedCursorAleadyAtFirstRow("Filmprojection", this.id);
+         DBExecuterFactory.getConfiguredFactory().getDBDMLExecuter().selectIdSpecifiedCursorAleadyAtFirstRow("Filmprojection", this.id);
          Cinemahall myHall = fp_CinemahallSupervisor.getInstance().getMyHall(this).getTheObject();
          Movie myMovie = fp_movieSupervisor.getInstance().getMyMovie(this).getTheObject();
          return Filmprojection.createAlreadyPersistent(this, myHall, myMovie);

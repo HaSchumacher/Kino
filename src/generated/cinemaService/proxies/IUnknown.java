@@ -2,8 +2,6 @@
  * --- No Change Allowed!  
  */
 package generated.cinemaService.proxies;
-import idManagement.Identifiable;
-import db.executer.PersistenceException;
 import generated.cinemaService.Unknown;
 public interface IUnknown extends IRole{
    public Unknown getTheObject();

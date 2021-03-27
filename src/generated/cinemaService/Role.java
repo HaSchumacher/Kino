@@ -3,20 +3,17 @@
  * --- Do not touch section numbering!   
  */
 package generated.cinemaService;
-//10 ===== GENERATED:      Import Section =========
-import java.sql.SQLException;
-import db.connection.NoConnectionException;
-import db.connection.TypeKeyManager;
-import observation.Observable;
 import generated.cinemaService.proxies.IRole;
-import db.executer.PersistenceException;
-import exceptions.ConstraintViolation;
-//20 ===== Editable : Your Import Section =========
+import observation.Observable;
 
 //25 ===== GENERATED:      Header Section =========
 public abstract class Role extends Observable implements java.io.Serializable, IRole
 {
-   //30 ===== GENERATED:      Attribute Section ======
+   /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+//30 ===== GENERATED:      Attribute Section ======
    private Integer id;
    //40 ===== Editable : Your Attribute Section ======
    

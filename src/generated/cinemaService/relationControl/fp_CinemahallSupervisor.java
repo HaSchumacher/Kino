@@ -33,7 +33,7 @@ public class fp_CinemahallSupervisor
       this.elements.change(owner, targetOld, targetNew);
    }
    public void setAlreadyPersistent(IFilmprojection owner, ICinemahall target) {
-      ICinemahall targetOld = null; ICinemahall targetNew = target;
+      ICinemahall targetNew = target;
       this.elements.setAlreadyPersistent(owner, targetNew);
    }
    public void change(IFilmprojection owner, ICinemahall targetOld, ICinemahall targetNew) throws PersistenceException{

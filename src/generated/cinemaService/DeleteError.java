@@ -12,7 +12,12 @@ public class DeleteError extends Exception
    //30 ===== GENERATED:      Attribute Section ======
    //40 ===== Editable : Your Attribute Section ======
    
-   //50 ===== GENERATED:      Constructor ============
+   /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2112628374350686042L;
+
+//50 ===== GENERATED:      Constructor ============
    public DeleteError(){
       super("The Deletion was canceled due to an error.");
    }

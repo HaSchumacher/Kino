@@ -5,25 +5,30 @@
 package generated.cinemaService;
 //10 ===== GENERATED:      Import Section =========
 import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Set;
+
 import db.connection.NoConnectionException;
 import db.connection.TypeKeyManager;
-import db.executer.PersistenceExecuterFactory;
-import generated.cinemaService.proxies.ReservationProxy;
-import observation.Observable;
-import generated.cinemaService.proxies.IReservation;
-import generated.cinemaService.relationControl.*;
-import generated.cinemaService.proxies.*;
 import db.executer.PersistenceException;
-import java.util.Set;
-import java.util.HashSet;
+import db.executer.PersistenceExecuterFactory;
 import generated.cinemaService.proxies.IBooking;
-import exceptions.ConstraintViolation;
-//20 ===== Editable : Your Import Section =========
+import generated.cinemaService.proxies.IReservation;
+import generated.cinemaService.proxies.ReservationProxy;
+import generated.cinemaService.relationControl.Booking_ReservationSupervisor;
+import generated.cinemaService.relationControl.Reservation_FpSupervisor;
+import generated.cinemaService.relationControl.Reservation_SeatSupervisor;
+import generated.cinemaService.relationControl.Reservation_UserSupervisor;
+import observation.Observable;
 
 //25 ===== GENERATED:      Header Section =========
 public class Reservation extends Observable implements java.io.Serializable, IReservation
 {
-   //30 ===== GENERATED:      Attribute Section ======
+   /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3046322515974490371L;
+//30 ===== GENERATED:      Attribute Section ======
    private Integer id;
    private Boolean deleted;
    private Boolean booked;

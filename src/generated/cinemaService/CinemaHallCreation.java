@@ -12,7 +12,12 @@ public class CinemaHallCreation extends Exception
    //30 ===== GENERATED:      Attribute Section ======
    //40 ===== Editable : Your Attribute Section ======
    
-   //50 ===== GENERATED:      Constructor ============
+   /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5049292983999356542L;
+
+//50 ===== GENERATED:      Constructor ============
    public CinemaHallCreation(){
       super("The Cinemahall you tried to create is already given.");
    }

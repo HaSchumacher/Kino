@@ -5,6 +5,10 @@ import java.io.Serializable;
  * @param <R>
  */
 public abstract class Command<R> implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6974630575859675043L;
 	protected R result;
 	protected Exception e;
 	public abstract void execute();
