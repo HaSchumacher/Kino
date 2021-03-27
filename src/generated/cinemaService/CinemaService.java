@@ -490,10 +490,9 @@ private Integer currentUserID;
 	 */
 	public Cinemahall addCinemahall(String name, Integer rows, Integer Seats)
 			throws CinemaHallCreation, PersistenceException, ConstraintViolation {
-		Cinemahall hall = Cinemahall.createFresh(false, name);
 		Integer getEqualRows = rows / 3;
 		if (getEqualRows * 3 == rows && rows > 0 && Seats > 0) {
-
+			Cinemahall hall = Cinemahall.createFresh(false, name);
 			for (int i = 1; i <= getEqualRows; i++) {
 				CinemaRow currentRow = CinemaRow.createFresh(Front.getInstance(), i, false);
 				for (int j = 1; j <= Seats; j++) {

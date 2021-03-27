@@ -48,8 +48,8 @@ class CinemaServiceTest {
 		service = CinemaService.getInstance();
 		u1 = service.register("CinemaServiceTestUser1", "test@mail.de", "CinemaServiceTestUser1" + id, "password");
 		u2 = service.register("CinemaServiceTestUser2", "test@mail.de", "CinemaServiceTestUser2" + id, "password");
-		movie1 = service.addMovie("CalculateProfitTestMovie1" + id);
-		movie2 = service.addMovie("CalculateProfitTestMovie2" + id);
+		movie1 = service.addMovie("CinemaServiceTestMovie1" + id);
+		movie2 = service.addMovie("CinemaServiceTestMovie2" + id);
 		fp1 = service.addFilmprojection(service.addCinemahall("CinemaServiceTestHall1" + id, 9, 6), movie1);
 		fp2 = service.addFilmprojection(service.addCinemahall("CinemaServiceTestHall2" + id, 9, 6), movie2);
 	}
@@ -141,17 +141,17 @@ class CinemaServiceTest {
 	void testAddCinemahall1()
 			throws PersistenceException, ReservationError, DeleteError, CinemaHallCreation, ConstraintViolation {
 		Assertions.assertThrows(CinemaHallCreation.class, () -> {
-			service.addCinemahall("Test", 4, 2);
+			service.addCinemahall("CinemaServiceTestHallShouldNotBeCreated", 4, 2);
 		});
 		Assertions.assertThrows(CinemaHallCreation.class, () -> {
-			service.addCinemahall("Test", -6, 2);
+			service.addCinemahall("CinemaServiceTestHallShouldNotBeCreated", -6, 2);
 		});
 	}
 
 	@Test
 	void testAddCinemahall2()
 			throws PersistenceException, ReservationError, DeleteError, CinemaHallCreation, ConstraintViolation {
-		Cinemahall hall = service.addCinemahall("Test", 6, 4);
+		Cinemahall hall = service.addCinemahall("CinemaServiceTestHall" + id, 6, 4);
 		List<CinemaRow> rows = hall.getMyRows();
 		assertEquals(6, rows.size());
 		assertTrue(hall.getOpen());
