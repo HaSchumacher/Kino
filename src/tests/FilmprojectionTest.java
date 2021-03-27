@@ -16,7 +16,6 @@ import generated.cinemaService.Back;
 import generated.cinemaService.BookingError;
 import generated.cinemaService.CinemaHallCreation;
 import generated.cinemaService.CinemaService;
-import generated.cinemaService.Cinemahall;
 import generated.cinemaService.Filmprojection;
 import generated.cinemaService.Front;
 import generated.cinemaService.Middle;
