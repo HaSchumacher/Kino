@@ -378,7 +378,7 @@ public class View extends JFrame {
 		
 		this.movieListModel = new DefaultListModel<Movie>();
 		JScrollPane listScroller_movies = new JScrollPane();
-		listScroller_movies.setBounds(8, 135, 360, 84);
+		listScroller_movies.setBounds(8, 135, 360, 117);
 		this.panelEditing.add(listScroller_movies);
 		this.list_movies = new JList<Movie>(this.movieListModel);
 		listScroller_movies.setViewportView(list_movies);
@@ -394,7 +394,7 @@ public class View extends JFrame {
 		
 		this.hallListModel = new DefaultListModel<Cinemahall>();
 		JScrollPane listScroller_halls = new JScrollPane();
-		listScroller_halls.setBounds(402, 135, 545, 84);
+		listScroller_halls.setBounds(402, 135, 545, 117);
 		this.panelEditing.add(listScroller_halls);
 		this.list_halls = new JList<Cinemahall>(this.hallListModel);
 		listScroller_halls.setViewportView(list_halls);
